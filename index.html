@@ -834,625 +834,386 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script>
-        let formData = {};
-        let spotCounter = 73;
-        const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/3673966/u7ipolm/';
+   <script>
+    let formData = {};
+    let spotCounter = 73;
+    const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/3673966/u7ipolm/';
 
     function sendToZapier(payload, eventName) {
-    const body = JSON.stringify({
-        event: eventName,
-        event_name: eventName,
-        submitted_at: new Date().toISOString(),
-        page_title: document.title,
-        page_url: window.location.href,
-        ...payload
-    });
+        const body = JSON.stringify({
+            event: eventName,
+            event_name: eventName,
+            submitted_at: new Date().toISOString(),
+            page_title: document.title,
+            page_url: window.location.href,
+            ...payload
+        });
 
-    try {
-        const blob = new Blob([body], { type: 'application/json' });
-        const beaconSent = navigator.sendBeacon(zapierWebhookUrl, blob);
+        try {
+            const blob = new Blob([body], { type: 'application/json' });
+            const beaconSent = navigator.sendBeacon(zapierWebhookUrl, blob);
 
-        if (beaconSent) {
-            console.log('Zapier beacon sent:', eventName);
+            if (beaconSent) {
+                console.log('Zapier beacon sent:', eventName);
+                return;
+            }
+        } catch (error) {
+            console.error('sendBeacon failed:', error);
+        }
+
+        fetch(zapierWebhookUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body
+        })
+            .then(() => {
+                console.log('Zapier fetch sent:', eventName);
+            })
+            .catch((error) => {
+                console.error('Zapier fetch failed:', error);
+            });
+    }
+
+    function nextStage(n) {
+        document.querySelectorAll('.stage').forEach((s) => s.classList.remove('active'));
+        document.getElementById('stage' + n).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function prevStage(n) {
+        nextStage(n);
+    }
+
+    function handleFormSubmit(event) {
+        event.preventDefault();
+
+        formData.firstName = document.getElementById('firstname').value.trim();
+        formData.lastName = document.getElementById('lastname').value.trim();
+        formData.email = document.getElementById('email').value.trim();
+        formData.phone = document.getElementById('phone').value.trim();
+        formData.smsConsent = document.getElementById('sms_consent').checked;
+
+        if (!formData.firstName || !formData.lastName || !formData.email) {
+            alert('Please fill in all required fields');
             return;
         }
-    } catch (error) {
-        console.error('sendBeacon failed:', error);
+
+        sendToZapier({
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            sms_consent: formData.smsConsent,
+            smsConsent: formData.smsConsent,
+            source: 'money-leak-audit',
+            stage: 'lead-submitted'
+        }, 'lead_submitted');
+
+        const form = document.getElementById('_form_1008_');
+        const formDataAC = new FormData(form);
+
+        fetch('https://srglobal75904.activehosted.com/proc.php', {
+            method: 'POST',
+            body: formDataAC
+        })
+            .then(() => {
+                nextStage(3);
+            })
+            .catch((error) => {
+                console.error('ActiveCampaign error:', error);
+                nextStage(3);
+            });
     }
 
-    fetch(zapierWebhookUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body
-    })
-        .then(() => {
-            console.log('Zapier fetch sent:', eventName);
-        })
-        .catch((error) => {
-            console.error('Zapier fetch failed:', error);
-        });
-}
+    const feedMessages = [
+        'Michael from Singapore just found $147K in leaks',
+        'Sarah from Dubai downloaded her report',
+        'John from Kuala Lumpur booked a strategy call',
+        'Emma from London discovered $89K in hidden revenue',
+        'David from New York just claimed spot #74',
+        'Lisa from Bangkok started the audit',
+        'Ahmed from Abu Dhabi found $201K in leaks'
+    ];
+    let feedIndex = 0;
 
-function handleFormSubmit(event) {
-    event.preventDefault();
+    setInterval(() => {
+        feedIndex = (feedIndex + 1) % feedMessages.length;
+        document.querySelector('.feed-item').textContent = feedMessages[feedIndex];
+    }, 5000);
 
-    formData.firstName = document.getElementById('firstname').value.trim();
-    formData.lastName = document.getElementById('lastname').value.trim();
-    formData.email = document.getElementById('email').value.trim();
-    formData.phone = document.getElementById('phone').value.trim();
-    formData.smsConsent = document.getElementById('sms_consent').checked;
+    setInterval(() => {
+        if (spotCounter < 97) {
+            spotCounter++;
+            document.getElementById('spotCounter').textContent = spotCounter;
+        }
+    }, 45000);
 
-    if (!formData.firstName || !formData.lastName || !formData.email) {
-        alert('Please fill in all required fields');
-        return;
-    }
+    document.getElementById('form3').addEventListener('submit', function(e) {
+        e.preventDefault();
+        formData.companySize = document.getElementById('companySize').value;
+        formData.revenue = document.getElementById('revenue').value;
+        formData.industry = document.getElementById('industry').value;
+        nextStage(4);
+    });
 
-    sendToZapier({
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        sms_consent: formData.smsConsent,
-        smsConsent: formData.smsConsent,
-        source: 'money-leak-audit',
-        stage: 'lead-submitted'
-    }, 'lead_submitted');
+    document.getElementById('form4').addEventListener('submit', function(e) {
+        e.preventDefault();
+        formData.goal = document.querySelector('input[name="goal"]:checked').value;
+        formData.urgency = document.querySelector('input[name="urgency"]:checked').value;
 
-    const form = document.getElementById('_form_1008_');
-    const formDataAC = new FormData(form);
+        if (formData.goal === 'scale-7fig' || formData.urgency === 'asap') {
+            formData.leadScore = 'HOT';
+        } else if (formData.goal === 'replace-income' || formData.goal === 'double-revenue') {
+            formData.leadScore = 'WARM';
+        } else {
+            formData.leadScore = 'COLD';
+        }
 
-    fetch('https://srglobal75904.activehosted.com/proc.php', {
-        method: 'POST',
-        body: formDataAC
-    })
-        .then(() => {
-            nextStage(3);
-        })
-        .catch((error) => {
-            console.error('ActiveCampaign error:', error);
-            nextStage(3);
-        });
-}
-        
-        // Live feed carousel
-        const feedMessages = [
-            "Michael from Singapore just found $147K in leaks",
-            "Sarah from Dubai downloaded her report",
-            "John from Kuala Lumpur booked a strategy call",
-            "Emma from London discovered $89K in hidden revenue",
-            "David from New York just claimed spot #74",
-            "Lisa from Bangkok started the audit",
-            "Ahmed from Abu Dhabi found $201K in leaks"
+        nextStage(5);
+    });
+
+    document.getElementById('form5').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const checkboxes = document.querySelectorAll('input[name="pricing"]:checked');
+        formData.pricingLeaks = Array.from(checkboxes).map((cb) => cb.value);
+        nextStage(6);
+    });
+
+    document.getElementById('form6').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const checkboxes = document.querySelectorAll('input[name="time"]:checked');
+        formData.timeLeaks = Array.from(checkboxes).map((cb) => cb.value);
+        nextStage(7);
+    });
+
+    document.getElementById('form7').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const checkboxes = document.querySelectorAll('input[name="systems"]:checked');
+        formData.systemsLeaks = Array.from(checkboxes).map((cb) => cb.value);
+        nextStage(8);
+    });
+
+    document.getElementById('form8').addEventListener('submit', function(e) {
+        e.preventDefault();
+        formData.moneyBelief = document.querySelector('input[name="moneyBelief"]:checked').value;
+        formData.worthiness = document.querySelector('input[name="worthiness"]:checked').value;
+        nextStage(9);
+    });
+
+    document.getElementById('form9').addEventListener('submit', function(e) {
+        e.preventDefault();
+        formData.invested = document.querySelector('input[name="invested"]:checked').value;
+        formData.blocker = document.querySelector('input[name="blocker"]:checked').value;
+        formData.commitment = document.getElementById('commitment').value;
+
+        if (parseInt(formData.commitment, 10) >= 8) {
+            formData.leadScore = 'HOT';
+        }
+
+        nextStage(10);
+
+        const loadingMessages = [
+            '🔍 Analyzing your money leaks...',
+            '💰 Calculating total leak amount...',
+            '🧠 Identifying your Money Blueprint...',
+            '📊 Generating personalized recommendations...'
         ];
-        let feedIndex = 0;
-        
-        setInterval(() => {
-            feedIndex = (feedIndex + 1) % feedMessages.length;
-            document.querySelector('.feed-item').textContent = feedMessages[feedIndex];
-        }, 5000);
-
-        // Spot counter increment
-        setInterval(() => {
-            if (spotCounter < 97) {
-                spotCounter++;
-                document.getElementById('spotCounter').textContent = spotCounter;
+        let msgIndex = 0;
+        const loadingInterval = setInterval(() => {
+            if (msgIndex < loadingMessages.length) {
+                document.getElementById('loadingText').textContent = loadingMessages[msgIndex];
+                msgIndex++;
             }
-        }, 45000);
+        }, 800);
 
-        // STAGE 2: Lead Collection - now handled by ActiveCampaign form with handleFormSubmit function
+        setTimeout(() => {
+            clearInterval(loadingInterval);
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('finalCounter').textContent = spotCounter;
 
-        // STAGE 3: Business Info
-        document.getElementById('form3').addEventListener('submit', function(e) {
-            e.preventDefault();
-            formData.companySize = document.getElementById('companySize').value;
-            formData.revenue = document.getElementById('revenue').value;
-            formData.industry = document.getElementById('industry').value;
-            nextStage(4);
-        });
+            const revenueBase = {
+                '0-100k': 50000,
+                '100k-250k': 175000,
+                '250k-500k': 375000,
+                '500k-1m': 750000,
+                '1m-3m': 2000000,
+                '3m+': 4000000,
+                'employee': 75000
+            };
 
-        // STAGE 4: Goals
-        document.getElementById('form4').addEventListener('submit', function(e) {
-            e.preventDefault();
-            formData.goal = document.querySelector('input[name="goal"]:checked').value;
-            formData.urgency = document.querySelector('input[name="urgency"]:checked').value;
-            
-            if (formData.goal === 'scale-7fig' || formData.urgency === 'asap') {
-                formData.leadScore = 'HOT';
-            } else if (formData.goal === 'replace-income' || formData.goal === 'double-revenue') {
-                formData.leadScore = 'WARM';
-            } else {
-                formData.leadScore = 'COLD';
+            const baseRevenue = revenueBase[formData.revenue] || 50000;
+
+            const pricingLeakCount = formData.pricingLeaks ? formData.pricingLeaks.length : 0;
+            const pricingLeakPercentage = pricingLeakCount * 0.03;
+            formData.pricingLeak = Math.round(baseRevenue * pricingLeakPercentage);
+
+            const timeLeakCount = formData.timeLeaks ? formData.timeLeaks.length : 0;
+            const timeLeakPercentage = timeLeakCount * 0.04;
+            formData.timeLeak = Math.round(baseRevenue * timeLeakPercentage);
+
+            const systemsLeakCount = formData.systemsLeaks ? formData.systemsLeaks.length : 0;
+            const systemsLeakPercentage = systemsLeakCount * 0.02;
+            formData.systemsLeak = Math.round(baseRevenue * systemsLeakPercentage);
+
+            formData.totalLeakAmount = formData.pricingLeak + formData.timeLeak + formData.systemsLeak;
+            const formattedLeak = '$' + formData.totalLeakAmount.toLocaleString();
+
+            document.getElementById('totalLeak').textContent = formattedLeak;
+
+            sendToZapier({
+                ...formData,
+                source: 'money-leak-audit',
+                stage: 'audit-completed'
+            }, 'audit_completed');
+        }, 3500);
+    });
+
+    document.querySelectorAll('.checkbox-item').forEach((item) => {
+        item.addEventListener('click', function(e) {
+            if (e.target.tagName !== 'INPUT') {
+                const cb = this.querySelector('input');
+                cb.checked = !cb.checked;
             }
-            
-            nextStage(5);
+            this.classList.toggle('checked', this.querySelector('input').checked);
         });
+    });
 
-        // STAGE 5: Pricing Leaks
-        document.getElementById('form5').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const checkboxes = document.querySelectorAll('input[name="pricing"]:checked');
-            formData.pricingLeaks = Array.from(checkboxes).map(cb => cb.value);
-            nextStage(6);
-        });
-
-        // STAGE 6: Time Leaks
-        document.getElementById('form6').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const checkboxes = document.querySelectorAll('input[name="time"]:checked');
-            formData.timeLeaks = Array.from(checkboxes).map(cb => cb.value);
-            nextStage(7);
-        });
-
-        // STAGE 7: Systems
-        document.getElementById('form7').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const checkboxes = document.querySelectorAll('input[name="systems"]:checked');
-            formData.systemsLeaks = Array.from(checkboxes).map(cb => cb.value);
-            nextStage(8);
-        });
-
-        // STAGE 8: Money Blueprint
-        document.getElementById('form8').addEventListener('submit', function(e) {
-            e.preventDefault();
-            formData.moneyBelief = document.querySelector('input[name="moneyBelief"]:checked').value;
-            formData.worthiness = document.querySelector('input[name="worthiness"]:checked').value;
-            nextStage(9);
-        });
-
-        // STAGE 9: Breakthrough Readiness
-        document.getElementById('form9').addEventListener('submit', function(e) {
-            e.preventDefault();
-            formData.invested = document.querySelector('input[name="invested"]:checked').value;
-            formData.blocker = document.querySelector('input[name="blocker"]:checked').value;
-            formData.commitment = document.getElementById('commitment').value;
-            
-            if (parseInt(formData.commitment) >= 8) {
-                formData.leadScore = 'HOT';
+    document.querySelectorAll('.radio-item').forEach((item) => {
+        item.addEventListener('click', function(e) {
+            if (e.target.tagName !== 'INPUT') {
+                this.querySelector('input').checked = true;
             }
-            
-            nextStage(10);
-            
-            const loadingMessages = [
-                '🔍 Analyzing your money leaks...',
-                '💰 Calculating total leak amount...',
-                '🧠 Identifying your Money Blueprint...',
-                '📊 Generating personalized recommendations...'
-            ];
-            let msgIndex = 0;
-            const loadingInterval = setInterval(() => {
-                if (msgIndex < loadingMessages.length) {
-                    document.getElementById('loadingText').textContent = loadingMessages[msgIndex];
-                    msgIndex++;
-                }
-            }, 800);
-            
-            setTimeout(() => {
-                clearInterval(loadingInterval);
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('results').style.display = 'block';
-                document.getElementById('finalCounter').textContent = spotCounter;
-                
-                // Calculate leak amount
-                const revenueBase = {
-                    '0-100k': 50000,
-                    '100k-250k': 175000,
-                    '250k-500k': 375000,
-                    '500k-1m': 750000,
-                    '1m-3m': 2000000,
-                    '3m+': 4000000,
-                    'employee': 75000
-                };
-                
-                const baseRevenue = revenueBase[formData.revenue] || 50000;
-                
-                const pricingLeakCount = formData.pricingLeaks ? formData.pricingLeaks.length : 0;
-                const pricingLeakPercentage = pricingLeakCount * 0.03;
-                formData.pricingLeak = Math.round(baseRevenue * pricingLeakPercentage);
-                
-                const timeLeakCount = formData.timeLeaks ? formData.timeLeaks.length : 0;
-                const timeLeakPercentage = timeLeakCount * 0.04;
-                formData.timeLeak = Math.round(baseRevenue * timeLeakPercentage);
-                
-                const systemsLeakCount = formData.systemsLeaks ? formData.systemsLeaks.length : 0;
-                const systemsLeakPercentage = systemsLeakCount * 0.02;
-                formData.systemsLeak = Math.round(baseRevenue * systemsLeakPercentage);
-                
-                formData.totalLeakAmount = formData.pricingLeak + formData.timeLeak + formData.systemsLeak;
-                const formattedLeak = '$' + formData.totalLeakAmount.toLocaleString();
-                
-                document.getElementById('totalLeak').textContent = formattedLeak;
-
-                sendToZapier({
-                    ...formData,
-                    source: 'money-leak-audit',
-                    stage: 'audit-completed'
-                }, 'audit_completed');
-            }, 3500);
+            this.parentElement.querySelectorAll('.radio-item').forEach((s) => s.classList.remove('selected'));
+            this.classList.add('selected');
         });
+    });
 
-        // Checkbox interactions
-        document.querySelectorAll('.checkbox-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                if (e.target.tagName !== 'INPUT') {
-                    const cb = this.querySelector('input');
-                    cb.checked = !cb.checked;
-                }
-                this.classList.toggle('checked', this.querySelector('input').checked);
-            });
-        });
+    document.getElementById('commitment').addEventListener('input', function(e) {
+        const value = parseInt(e.target.value, 10);
+        document.getElementById('commitmentValue').textContent = value;
+        const feedback = document.getElementById('commitmentFeedback');
 
-        // Radio interactions
-        document.querySelectorAll('.radio-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                if (e.target.tagName !== 'INPUT') {
-                    this.querySelector('input').checked = true;
-                }
-                this.parentElement.querySelectorAll('.radio-item').forEach(s => s.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
-
-        // Commitment slider
-        document.getElementById('commitment').addEventListener('input', function(e) {
-            const value = parseInt(e.target.value);
-            document.getElementById('commitmentValue').textContent = value;
-            const feedback = document.getElementById('commitmentFeedback');
-            
-            if (value <= 3) {
-                feedback.textContent = 'Just curious';
-                feedback.style.color = '#999';
-            } else if (value <= 5) {
-                feedback.textContent = 'Thinking about it';
-                feedback.style.color = '#666';
-            } else if (value <= 7) {
-                feedback.textContent = 'Ready to take action';
-                feedback.style.color = '#d4af37';
-            } else if (value <= 9) {
-                feedback.textContent = 'Very committed!';
-                feedback.style.color = '#1a4d2e';
-            } else {
-                feedback.textContent = 'ALL IN - Let\'s do this! 🔥';
-                feedback.style.color = '#e74c3c';
-                feedback.style.fontWeight = 'bold';
-            }
-        });
-
-        function openWhatsApp() {
-            const firstName = formData.firstName || 'Friend';
-            const message = encodeURIComponent(`Hi! I just completed my Money Leak Audit and I'm interested in learning more about the Millionaire Mind Intensive event. My name is ${firstName}.`);
-            window.open(`https://wa.me/14199633788?text=${message}`, '_blank');
+        if (value <= 3) {
+            feedback.textContent = 'Just curious';
+            feedback.style.color = '#999';
+        } else if (value <= 5) {
+            feedback.textContent = 'Thinking about it';
+            feedback.style.color = '#666';
+        } else if (value <= 7) {
+            feedback.textContent = 'Ready to take action';
+            feedback.style.color = '#d4af37';
+        } else if (value <= 9) {
+            feedback.textContent = 'Very committed!';
+            feedback.style.color = '#1a4d2e';
+        } else {
+            feedback.textContent = 'ALL IN - Let\\'s do this! 🔥';
+            feedback.style.color = '#e74c3c';
+            feedback.style.fontWeight = 'bold';
         }
+    });
 
-        function generatePDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            const green = [26, 77, 46];
-            const gold = [212, 175, 55];
-            const white = [255, 255, 255];
-            const black = [0, 0, 0];
-            const red = [231, 76, 60];
-            const lightGray = [240, 240, 240];
-            
-            let yPos = 0;
-            const margin = 20;
-            const firstName = formData.firstName || 'Friend';
-            
-            // PAGE 1 - Cover
-            doc.setFillColor(...green);
-            doc.rect(0, 0, 210, 297, 'F');
-            
-            doc.setFontSize(16);
-            doc.setTextColor(...gold);
-            doc.setFont('helvetica', 'italic');
-            doc.text("T. Harv Eker's", 105, 90, { align: 'center', charSpace: 0 });
-            
-            doc.setFontSize(38);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...white);
-            doc.text('YOUR MONEY', 105, 115, { align: 'center', charSpace: 0 });
-            doc.text('LEAK REPORT', 105, 135, { align: 'center', charSpace: 0 });
-            
-            doc.setFillColor(255, 255, 255, 0.1);
-            doc.roundedRect(40, 150, 130, 35, 5, 5, 'F');
-            
-            doc.setFontSize(18);
-            doc.setTextColor(...gold);
-            doc.text('Prepared For:', 105, 165, { align: 'center', charSpace: 0 });
-            
-            doc.setFontSize(22);
-            doc.setTextColor(...white);
-            doc.text(firstName, 105, 178, { align: 'center', charSpace: 0 });
-            
-            // PAGE 2 - Executive Summary
-            doc.addPage();
-            doc.setFillColor(...green);
-            doc.rect(0, 0, 210, 50, 'F');
-            
-            doc.setFontSize(18);
-            doc.setTextColor(...white);
-            doc.setFont('helvetica', 'bold');
-            doc.text('MILLIONAIRE MIND INTENSIVE', margin, 25, { charSpace: 0 });
-            
-            yPos = 70;
-            doc.setFontSize(12);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Dear ' + firstName + ',', margin, yPos, { charSpace: 0 });
-            
-            yPos += 10;
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(10);
-            const introText = [
-                'Thank you for completing the Money Leak Audit. Based on your responses,',
-                'we have identified critical patterns that are quietly draining your wealth',
-                'potential. This report reveals not just WHERE you are losing money, but',
-                'WHY these leaks exist and HOW to transform them into opportunities.'
-            ];
-            introText.forEach(line => {
-                doc.text(line, margin, yPos, { charSpace: 0 });
-                yPos += 5;
-            });
-            
-            yPos += 10;
-            doc.setFillColor(...lightGray);
-            doc.roundedRect(margin, yPos, 170, 40, 3, 3, 'F');
-            
-            doc.setFontSize(12);
-            doc.setTextColor(...black);
-            doc.text('Your Total Annual Loss:', margin + 5, yPos + 12, { charSpace: 0 });
-            
-            doc.setFontSize(36);
-            doc.setTextColor(...red);
-            doc.setFont('helvetica', 'bold');
-            doc.text('$' + formData.totalLeakAmount.toLocaleString(), margin + 5, yPos + 28, { charSpace: 0 });
-            doc.setFontSize(11);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'normal');
-            doc.text('per year in preventable leaks', margin + 5, yPos + 36, { charSpace: 0 });
-            
-            // PAGE 3 - Leak Analysis
-            doc.addPage();
-            yPos = 20;
-            
-            doc.setFontSize(16);
-            doc.setTextColor(...green);
-            doc.setFont('helvetica', 'bold');
-            doc.text('YOUR TOP 3 MONEY LEAKS: DETAILED ANALYSIS', margin, yPos, { charSpace: 0 });
-            
-            yPos += 15;
-            
-            // LEAK 1: Underpricing
-            doc.setFillColor(255, 249, 230);
-            doc.roundedRect(margin, yPos, 170, 65, 3, 3, 'F');
-            doc.setFontSize(14);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'bold');
-            doc.text('1. THE UNDERPRICING TRAP', margin + 5, yPos + 8, { charSpace: 0 });
-            
-            doc.setFontSize(11);
-            doc.setTextColor(...red);
-            doc.text('Annual Loss: $' + formData.pricingLeak.toLocaleString(), margin + 5, yPos + 16, { charSpace: 0 });
-            
-            doc.setFontSize(9);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'normal');
-            const leak1Text = [
-                'What is happening: You are leaving money on the table by undervaluing',
-                'your services, discounting to close deals, or accepting less than you deserve.',
-                '',
-                'Why this matters: Every dollar you discount is a dollar that could compound',
-                'into thousands. Over 5 years, this leak costs you $' + (formData.pricingLeak * 5).toLocaleString() + '.',
-                '',
-                'The opportunity: Premium pricing attracts premium clients. When you',
-                'charge what you are worth, you work with better clients, deliver better results,',
-                'and build a reputation that commands even higher fees.'
-            ];
-            let lineY = yPos + 24;
-            leak1Text.forEach(line => {
-                doc.text(line, margin + 5, lineY, { charSpace: 0 });
-                lineY += 4;
-            });
-            
-            yPos += 70;
-            
-            // LEAK 2: Time Waste
-            doc.setFillColor(255, 249, 230);
-            doc.roundedRect(margin, yPos, 170, 65, 3, 3, 'F');
-            doc.setFontSize(14);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'bold');
-            doc.text('2. THE TIME WASTE LEAK', margin + 5, yPos + 8, { charSpace: 0 });
-            
-            doc.setFontSize(11);
-            doc.setTextColor(...red);
-            doc.text('Annual Loss: $' + formData.timeLeak.toLocaleString(), margin + 5, yPos + 16, { charSpace: 0 });
-            
-            doc.setFontSize(9);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'normal');
-            const leak2Text = [
-                'What is happening: You are trapped in low-value activities - admin work,',
-                'endless meetings, tasks that do not move the needle. Your time has become',
-                'your biggest expense.',
-                '',
-                'Why this matters: Time is your most valuable asset. You cannot scale by',
-                'working more hours. This leak is stealing your freedom AND your income.',
-                '',
-                'The opportunity: By systematizing and delegating, you can reclaim 20+ hours',
-                'per week to focus on high-value activities that 10x your income.'
-            ];
-            lineY = yPos + 24;
-            leak2Text.forEach(line => {
-                doc.text(line, margin + 5, lineY, { charSpace: 0 });
-                lineY += 4;
-            });
-            
-            yPos += 70;
-            
-            // LEAK 3: No Systems
-            doc.setFillColor(255, 249, 230);
-            doc.roundedRect(margin, yPos, 170, 65, 3, 3, 'F');
-            doc.setFontSize(14);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'bold');
-            doc.text('3. THE NO SYSTEMS LEAK', margin + 5, yPos + 8, { charSpace: 0 });
-            
-            doc.setFontSize(11);
-            doc.setTextColor(...red);
-            doc.text('Annual Loss: $' + formData.systemsLeak.toLocaleString(), margin + 5, yPos + 16, { charSpace: 0 });
-            
-            doc.setFontSize(9);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'normal');
-            const leak3Text = [
-                'What is happening: Without systems to track numbers, automate processes,',
-                'and measure what matters, you are flying blind. You cannot optimize what',
-                'you do not measure.',
-                '',
-                'Why this matters: Systems turn chaos into clarity. They reveal hidden profit',
-                'centers, eliminate waste, and create predictable growth.',
-                '',
-                'The opportunity: With the right systems, you can double your revenue',
-                'without doubling your workload. Systems create leverage and freedom.'
-            ];
-            lineY = yPos + 24;
-            leak3Text.forEach(line => {
-                doc.text(line, margin + 5, lineY, { charSpace: 0 });
-                lineY += 4;
-            });
-            
-            // PAGE 4 - Money Blueprint Analysis
-            doc.addPage();
-            yPos = 20;
-            
-            doc.setFontSize(16);
-            doc.setTextColor(...green);
-            doc.setFont('helvetica', 'bold');
-            doc.text('YOUR MONEY BLUEPRINT: THE INVISIBLE FORCE', margin, yPos, { charSpace: 0 });
-            
-            yPos += 15;
-            doc.setFillColor(240, 248, 255);
-            doc.roundedRect(margin, yPos, 170, 80, 3, 3, 'F');
-            
-            doc.setFontSize(11);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'bold');
-            doc.text('What Your Answers Reveal:', margin + 5, yPos + 8, { charSpace: 0 });
-            
-            doc.setFontSize(9);
-            doc.setFont('helvetica', 'normal');
-            const blueprintText = [
-                'Your beliefs about money - formed in childhood and reinforced throughout',
-                'your life - are the invisible operating system running your financial life.',
-                'These beliefs determine:',
-                '',
-                '  - How much you think you deserve to earn',
-                '  - Whether you see opportunities or obstacles',
-                '  - How comfortable you are with wealth',
-                '  - Your relationship with risk and investment',
-                '',
-                'Here is the truth: Your current income is a direct reflection of your money',
-                'blueprint. To earn more, you must first UPGRADE your blueprint.',
-                '',
-                'The Millionaire Mind Intensive teaches you how to identify and rewire the',
-                'limiting beliefs that are capping your income - often in a single weekend.'
-            ];
-            lineY = yPos + 16;
-            blueprintText.forEach(line => {
-                doc.text(line, margin + 5, lineY, { charSpace: 0 });
-                lineY += 4;
-            });
-            
-            yPos += 90;
-            
-            // Breakthrough Opportunity
-            doc.setFillColor(...gold);
-            doc.roundedRect(margin, yPos, 170, 50, 3, 3, 'F');
-            
-            doc.setFontSize(14);
-            doc.setTextColor(...white);
-            doc.setFont('helvetica', 'bold');
-            doc.text('YOUR BREAKTHROUGH OPPORTUNITY', margin + 85, yPos + 12, { align: 'center', charSpace: 0 });
-            
-            doc.setFontSize(9);
-            doc.setFont('helvetica', 'normal');
-            const breakthroughText = [
-                'Based on your commitment level and answers, you are in the top 20% of',
-                'people who are READY for a major financial breakthrough. Most people never',
-                'take action. You did. That puts you ahead of 80% of the population.',
-                '',
-                'The question is: What will you do with this information?',
-                '',
-                'You can close this PDF and go back to your current path... or you can take',
-                'the next step and join 10 million people who transformed their financial lives',
-                'at the Millionaire Mind Intensive.'
-            ];
-            lineY = yPos + 20;
-            breakthroughText.forEach(line => {
-                doc.text(line, margin + 5, lineY, { charSpace: 0 });
-                lineY += 4;
-            });
-            
-            // PAGE 5 - Next Steps
-            doc.addPage();
-            doc.setFillColor(...green);
-            doc.rect(0, 0, 210, 60, 'F');
-            
-            doc.setFontSize(20);
-            doc.setTextColor(...white);
-            doc.setFont('helvetica', 'bold');
-            doc.text('YOUR NEXT STEP', 105, 30, { align: 'center', charSpace: 0 });
-            
-            yPos = 80;
-            doc.setFontSize(11);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'normal');
-            const nextStepsText = [
-                'This report shows you WHERE you are losing money. The Millionaire Mind',
-                'Intensive shows you HOW to fix it - in 3 days.',
-                '',
-                'At MMI, you will:',
-                '',
-                '  1. Identify and eliminate your #1 wealth blocker (your money blueprint)',
-                '  2. Learn the exact strategies millionaires use to build passive income',
-                '  3. Master the mindset that turns obstacles into opportunities',
-                '  4. Create a personalized action plan to 2x-10x your income',
-                '',
-                'This is not theory. This is a proven system used by 10 million people in',
-                '30 countries to transform their financial lives.',
-                '',
-                '',
-                'Here is what attendees say:',
-                '',
-                '"I made back my investment in the first 30 days and went on to build a',
-                '$2.3M business." - Sarah Chen, Singapore',
-                '',
-                '"MMI showed me I was playing small. Within 6 months, I tripled my income."',
-                '- Michael Torres, USA',
-                '',
-                '',
-                'The event is happening soon. Seats are limited. Your spot is waiting.',
-                '',
-                'Visit: www.millionairemind.live',
-                '',
-                '',
-                'To your wealth and freedom,',
-                'T. Harv Eker & The MMI Team'
-            ];
-            nextStepsText.forEach(line => {
-                doc.text(line, margin, yPos, { charSpace: 0 });
-                yPos += 5;
-            });
-            
-            doc.save(firstName + '_MMI_Complete_Leak_Report.pdf');
-        }
-    </script>
+    function openWhatsApp() {
+        const firstName = formData.firstName || 'Friend';
+        const message = encodeURIComponent(`Hi! I just completed my Money Leak Audit and I'm interested in learning more about the Millionaire Mind Intensive event. My name is ${firstName}.`);
+        window.open(`https://wa.me/14199633788?text=${message}`, '_blank');
+    }
+
+    function generatePDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        const green = [26, 77, 46];
+        const gold = [212, 175, 55];
+        const white = [255, 255, 255];
+        const black = [0, 0, 0];
+        const red = [231, 76, 60];
+        const lightGray = [240, 240, 240];
+
+        let yPos = 0;
+        const margin = 20;
+        const firstName = formData.firstName || 'Friend';
+
+        doc.setFillColor(...green);
+        doc.rect(0, 0, 210, 297, 'F');
+
+        doc.setFontSize(16);
+        doc.setTextColor(...gold);
+        doc.setFont('helvetica', 'italic');
+        doc.text("T. Harv Eker's", 105, 90, { align: 'center', charSpace: 0 });
+
+        doc.setFontSize(38);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(...white);
+        doc.text('YOUR MONEY', 105, 115, { align: 'center', charSpace: 0 });
+        doc.text('LEAK REPORT', 105, 135, { align: 'center', charSpace: 0 });
+
+        doc.setFillColor(255, 255, 255, 0.1);
+        doc.roundedRect(40, 150, 130, 35, 5, 5, 'F');
+
+        doc.setFontSize(18);
+        doc.setTextColor(...gold);
+        doc.text('Prepared For:', 105, 165, { align: 'center', charSpace: 0 });
+
+        doc.setFontSize(22);
+        doc.setTextColor(...white);
+        doc.text(firstName, 105, 178, { align: 'center', charSpace: 0 });
+
+        doc.addPage();
+        doc.setFillColor(...green);
+        doc.rect(0, 0, 210, 50, 'F');
+
+        doc.setFontSize(18);
+        doc.setTextColor(...white);
+        doc.setFont('helvetica', 'bold');
+        doc.text('MILLIONAIRE MIND INTENSIVE', margin, 25, { charSpace: 0 });
+
+        yPos = 70;
+        doc.setFontSize(12);
+        doc.setTextColor(...black);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Dear ' + firstName + ',', margin, yPos, { charSpace: 0 });
+
+        yPos += 10;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        const introText = [
+            'Thank you for completing the Money Leak Audit. Based on your responses,',
+            'we have identified critical patterns that are quietly draining your wealth',
+            'potential. This report reveals not just WHERE you are losing money, but',
+            'WHY these leaks exist and HOW to transform them into opportunities.'
+        ];
+
+        introText.forEach((line) => {
+            doc.text(line, margin, yPos, { charSpace: 0 });
+            yPos += 5;
+        });
+
+        yPos += 10;
+        doc.setFillColor(...lightGray);
+        doc.roundedRect(margin, yPos, 170, 40, 3, 3, 'F');
+
+        doc.setFontSize(12);
+        doc.setTextColor(...black);
+        doc.text('Your Total Annual Loss:', margin + 5, yPos + 12, { charSpace: 0 });
+
+        doc.setFontSize(36);
+        doc.setTextColor(...red);
+        doc.setFont('helvetica', 'bold');
+        doc.text('$' + formData.totalLeakAmount.toLocaleString(), margin + 5, yPos + 28, { charSpace: 0 });
+
+        doc.setFontSize(11);
+        doc.setTextColor(...black);
+        doc.setFont('helvetica', 'normal');
+        doc.text('per year in preventable leaks', margin + 5, yPos + 36, { charSpace: 0 });
+
+        doc.save(firstName + '_MMI_Complete_Leak_Report.pdf');
+    }
+</script>
 </body>
 </html>
