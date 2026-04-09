@@ -834,47 +834,36 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-   <script>
+<script>
     let formData = {};
     let spotCounter = 73;
     const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/3673966/u7ipolm/';
 
-    function sendToZapier(payload, eventName) {
-        const body = JSON.stringify({
+    async function sendToZapier(payload, eventName) {
+        const data = {
             event: eventName,
             event_name: eventName,
             submitted_at: new Date().toISOString(),
             page_title: document.title,
             page_url: window.location.href,
             ...payload
-        });
+        };
 
         try {
-            const blob = new Blob([body], { type: 'application/json' });
-            const beaconSent = navigator.sendBeacon(zapierWebhookUrl, blob);
-
-            if (beaconSent) {
-                console.log('Zapier beacon sent:', eventName);
-                return;
-            }
-        } catch (error) {
-            console.error('sendBeacon failed:', error);
-        }
-
-        fetch(zapierWebhookUrl, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body
-        })
-            .then(() => {
-                console.log('Zapier fetch sent:', eventName);
-            })
-            .catch((error) => {
-                console.error('Zapier fetch failed:', error);
+            const response = await fetch(zapierWebhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain;charset=UTF-8'
+                },
+                body: JSON.stringify(data)
             });
+
+            console.log('Zapier status:', response.status, eventName, data);
+            return true;
+        } catch (error) {
+            console.error('Zapier send failed:', error, data);
+            return false;
+        }
     }
 
     function nextStage(n) {
@@ -893,7 +882,7 @@
         nextStage(n);
     }
 
-    function handleFormSubmit(event) {
+    async function handleFormSubmit(event) {
         event.preventDefault();
 
         formData.firstName = document.getElementById('firstname').value.trim();
@@ -907,7 +896,7 @@
             return;
         }
 
-        sendToZapier({
+        await sendToZapier({
             first_name: formData.firstName,
             last_name: formData.lastName,
             firstName: formData.firstName,
@@ -923,17 +912,16 @@
         const form = document.getElementById('_form_1008_');
         const formDataAC = new FormData(form);
 
-        fetch('https://srglobal75904.activehosted.com/proc.php', {
-            method: 'POST',
-            body: formDataAC
-        })
-            .then(() => {
-                nextStage(3);
-            })
-            .catch((error) => {
-                console.error('ActiveCampaign error:', error);
-                nextStage(3);
+        try {
+            await fetch('https://srglobal75904.activehosted.com/proc.php', {
+                method: 'POST',
+                body: formDataAC
             });
+        } catch (error) {
+            console.error('ActiveCampaign error:', error);
+        }
+
+        nextStage(3);
     }
 
     const feedMessages = [
@@ -1060,7 +1048,7 @@
 
     const form9 = document.getElementById('form9');
     if (form9) {
-        form9.addEventListener('submit', function (e) {
+        form9.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const invested = document.querySelector('input[name="invested"]:checked');
@@ -1103,7 +1091,7 @@
                 }
             }, 800);
 
-            setTimeout(() => {
+            setTimeout(async () => {
                 clearInterval(loadingInterval);
 
                 const loading = document.getElementById('loading');
@@ -1154,7 +1142,7 @@
                     totalLeak.textContent = formattedLeak;
                 }
 
-                sendToZapier({
+                await sendToZapier({
                     ...formData,
                     source: 'money-leak-audit',
                     stage: 'audit-completed'
