@@ -878,9 +878,15 @@
     }
 
     function nextStage(n) {
-        document.querySelectorAll('.stage').forEach((s) => s.classList.remove('active'));
-        document.getElementById('stage' + n).classList.add('active');
-        window.scrollTo(0, 0);
+        document.querySelectorAll('.stage').forEach((stage) => {
+            stage.classList.remove('active');
+        });
+
+        const next = document.getElementById('stage' + n);
+        if (next) {
+            next.classList.add('active');
+            window.scrollTo(0, 0);
+        }
     }
 
     function prevStage(n) {
@@ -939,188 +945,291 @@
         'Lisa from Bangkok started the audit',
         'Ahmed from Abu Dhabi found $201K in leaks'
     ];
+
     let feedIndex = 0;
 
     setInterval(() => {
+        const feedItem = document.querySelector('.feed-item');
+        if (!feedItem) {
+            return;
+        }
+
         feedIndex = (feedIndex + 1) % feedMessages.length;
-        document.querySelector('.feed-item').textContent = feedMessages[feedIndex];
+        feedItem.textContent = feedMessages[feedIndex];
     }, 5000);
 
     setInterval(() => {
+        const counter = document.getElementById('spotCounter');
+        if (!counter) {
+            return;
+        }
+
         if (spotCounter < 97) {
-            spotCounter++;
-            document.getElementById('spotCounter').textContent = spotCounter;
+            spotCounter += 1;
+            counter.textContent = spotCounter;
         }
     }, 45000);
 
-    document.getElementById('form3').addEventListener('submit', function(e) {
-        e.preventDefault();
-        formData.companySize = document.getElementById('companySize').value;
-        formData.revenue = document.getElementById('revenue').value;
-        formData.industry = document.getElementById('industry').value;
-        nextStage(4);
-    });
+    const form3 = document.getElementById('form3');
+    if (form3) {
+        form3.addEventListener('submit', function (e) {
+            e.preventDefault();
+            formData.companySize = document.getElementById('companySize').value;
+            formData.revenue = document.getElementById('revenue').value;
+            formData.industry = document.getElementById('industry').value;
+            nextStage(4);
+        });
+    }
 
-    document.getElementById('form4').addEventListener('submit', function(e) {
-        e.preventDefault();
-        formData.goal = document.querySelector('input[name="goal"]:checked').value;
-        formData.urgency = document.querySelector('input[name="urgency"]:checked').value;
+    const form4 = document.getElementById('form4');
+    if (form4) {
+        form4.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        if (formData.goal === 'scale-7fig' || formData.urgency === 'asap') {
-            formData.leadScore = 'HOT';
-        } else if (formData.goal === 'replace-income' || formData.goal === 'double-revenue') {
-            formData.leadScore = 'WARM';
-        } else {
-            formData.leadScore = 'COLD';
-        }
+            const goal = document.querySelector('input[name="goal"]:checked');
+            const urgency = document.querySelector('input[name="urgency"]:checked');
 
-        nextStage(5);
-    });
-
-    document.getElementById('form5').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const checkboxes = document.querySelectorAll('input[name="pricing"]:checked');
-        formData.pricingLeaks = Array.from(checkboxes).map((cb) => cb.value);
-        nextStage(6);
-    });
-
-    document.getElementById('form6').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const checkboxes = document.querySelectorAll('input[name="time"]:checked');
-        formData.timeLeaks = Array.from(checkboxes).map((cb) => cb.value);
-        nextStage(7);
-    });
-
-    document.getElementById('form7').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const checkboxes = document.querySelectorAll('input[name="systems"]:checked');
-        formData.systemsLeaks = Array.from(checkboxes).map((cb) => cb.value);
-        nextStage(8);
-    });
-
-    document.getElementById('form8').addEventListener('submit', function(e) {
-        e.preventDefault();
-        formData.moneyBelief = document.querySelector('input[name="moneyBelief"]:checked').value;
-        formData.worthiness = document.querySelector('input[name="worthiness"]:checked').value;
-        nextStage(9);
-    });
-
-    document.getElementById('form9').addEventListener('submit', function(e) {
-        e.preventDefault();
-        formData.invested = document.querySelector('input[name="invested"]:checked').value;
-        formData.blocker = document.querySelector('input[name="blocker"]:checked').value;
-        formData.commitment = document.getElementById('commitment').value;
-
-        if (parseInt(formData.commitment, 10) >= 8) {
-            formData.leadScore = 'HOT';
-        }
-
-        nextStage(10);
-
-        const loadingMessages = [
-            '🔍 Analyzing your money leaks...',
-            '💰 Calculating total leak amount...',
-            '🧠 Identifying your Money Blueprint...',
-            '📊 Generating personalized recommendations...'
-        ];
-        let msgIndex = 0;
-        const loadingInterval = setInterval(() => {
-            if (msgIndex < loadingMessages.length) {
-                document.getElementById('loadingText').textContent = loadingMessages[msgIndex];
-                msgIndex++;
+            if (!goal || !urgency) {
+                alert('Please select your goal and urgency.');
+                return;
             }
-        }, 800);
 
-        setTimeout(() => {
-            clearInterval(loadingInterval);
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('results').style.display = 'block';
-            document.getElementById('finalCounter').textContent = spotCounter;
+            formData.goal = goal.value;
+            formData.urgency = urgency.value;
 
-            const revenueBase = {
-                '0-100k': 50000,
-                '100k-250k': 175000,
-                '250k-500k': 375000,
-                '500k-1m': 750000,
-                '1m-3m': 2000000,
-                '3m+': 4000000,
-                'employee': 75000
-            };
+            if (formData.goal === 'scale-7fig' || formData.urgency === 'asap') {
+                formData.leadScore = 'HOT';
+            } else if (formData.goal === 'replace-income' || formData.goal === 'double-revenue') {
+                formData.leadScore = 'WARM';
+            } else {
+                formData.leadScore = 'COLD';
+            }
 
-            const baseRevenue = revenueBase[formData.revenue] || 50000;
+            nextStage(5);
+        });
+    }
 
-            const pricingLeakCount = formData.pricingLeaks ? formData.pricingLeaks.length : 0;
-            const pricingLeakPercentage = pricingLeakCount * 0.03;
-            formData.pricingLeak = Math.round(baseRevenue * pricingLeakPercentage);
+    const form5 = document.getElementById('form5');
+    if (form5) {
+        form5.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="pricing"]:checked');
+            formData.pricingLeaks = Array.from(checkboxes).map((cb) => cb.value);
+            nextStage(6);
+        });
+    }
 
-            const timeLeakCount = formData.timeLeaks ? formData.timeLeaks.length : 0;
-            const timeLeakPercentage = timeLeakCount * 0.04;
-            formData.timeLeak = Math.round(baseRevenue * timeLeakPercentage);
+    const form6 = document.getElementById('form6');
+    if (form6) {
+        form6.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="time"]:checked');
+            formData.timeLeaks = Array.from(checkboxes).map((cb) => cb.value);
+            nextStage(7);
+        });
+    }
 
-            const systemsLeakCount = formData.systemsLeaks ? formData.systemsLeaks.length : 0;
-            const systemsLeakPercentage = systemsLeakCount * 0.02;
-            formData.systemsLeak = Math.round(baseRevenue * systemsLeakPercentage);
+    const form7 = document.getElementById('form7');
+    if (form7) {
+        form7.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="systems"]:checked');
+            formData.systemsLeaks = Array.from(checkboxes).map((cb) => cb.value);
+            nextStage(8);
+        });
+    }
 
-            formData.totalLeakAmount = formData.pricingLeak + formData.timeLeak + formData.systemsLeak;
-            const formattedLeak = '$' + formData.totalLeakAmount.toLocaleString();
+    const form8 = document.getElementById('form8');
+    if (form8) {
+        form8.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-            document.getElementById('totalLeak').textContent = formattedLeak;
+            const moneyBelief = document.querySelector('input[name="moneyBelief"]:checked');
+            const worthiness = document.querySelector('input[name="worthiness"]:checked');
 
-            sendToZapier({
-                ...formData,
-                source: 'money-leak-audit',
-                stage: 'audit-completed'
-            }, 'audit_completed');
-        }, 3500);
-    });
+            if (!moneyBelief || !worthiness) {
+                alert('Please answer both questions.');
+                return;
+            }
+
+            formData.moneyBelief = moneyBelief.value;
+            formData.worthiness = worthiness.value;
+            nextStage(9);
+        });
+    }
+
+    const form9 = document.getElementById('form9');
+    if (form9) {
+        form9.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const invested = document.querySelector('input[name="invested"]:checked');
+            const blocker = document.querySelector('input[name="blocker"]:checked');
+            const commitmentInput = document.getElementById('commitment');
+
+            if (!invested || !blocker || !commitmentInput) {
+                alert('Please complete all required fields.');
+                return;
+            }
+
+            formData.invested = invested.value;
+            formData.blocker = blocker.value;
+            formData.commitment = commitmentInput.value;
+
+            if (parseInt(formData.commitment, 10) >= 8) {
+                formData.leadScore = 'HOT';
+            }
+
+            nextStage(10);
+
+            const loadingMessages = [
+                '🔍 Analyzing your money leaks...',
+                '💰 Calculating total leak amount...',
+                '🧠 Identifying your Money Blueprint...',
+                '📊 Generating personalized recommendations...'
+            ];
+
+            let msgIndex = 0;
+            const loadingInterval = setInterval(() => {
+                const loadingText = document.getElementById('loadingText');
+                if (!loadingText) {
+                    clearInterval(loadingInterval);
+                    return;
+                }
+
+                if (msgIndex < loadingMessages.length) {
+                    loadingText.textContent = loadingMessages[msgIndex];
+                    msgIndex += 1;
+                }
+            }, 800);
+
+            setTimeout(() => {
+                clearInterval(loadingInterval);
+
+                const loading = document.getElementById('loading');
+                const results = document.getElementById('results');
+                const finalCounter = document.getElementById('finalCounter');
+                const totalLeak = document.getElementById('totalLeak');
+
+                if (loading) {
+                    loading.style.display = 'none';
+                }
+
+                if (results) {
+                    results.style.display = 'block';
+                }
+
+                if (finalCounter) {
+                    finalCounter.textContent = spotCounter;
+                }
+
+                const revenueBase = {
+                    '0-100k': 50000,
+                    '100k-250k': 175000,
+                    '250k-500k': 375000,
+                    '500k-1m': 750000,
+                    '1m-3m': 2000000,
+                    '3m+': 4000000,
+                    'employee': 75000
+                };
+
+                const baseRevenue = revenueBase[formData.revenue] || 50000;
+
+                const pricingLeakCount = formData.pricingLeaks ? formData.pricingLeaks.length : 0;
+                const pricingLeakPercentage = pricingLeakCount * 0.03;
+                formData.pricingLeak = Math.round(baseRevenue * pricingLeakPercentage);
+
+                const timeLeakCount = formData.timeLeaks ? formData.timeLeaks.length : 0;
+                const timeLeakPercentage = timeLeakCount * 0.04;
+                formData.timeLeak = Math.round(baseRevenue * timeLeakPercentage);
+
+                const systemsLeakCount = formData.systemsLeaks ? formData.systemsLeaks.length : 0;
+                const systemsLeakPercentage = systemsLeakCount * 0.02;
+                formData.systemsLeak = Math.round(baseRevenue * systemsLeakPercentage);
+
+                formData.totalLeakAmount = formData.pricingLeak + formData.timeLeak + formData.systemsLeak;
+                const formattedLeak = '$' + formData.totalLeakAmount.toLocaleString();
+
+                if (totalLeak) {
+                    totalLeak.textContent = formattedLeak;
+                }
+
+                sendToZapier({
+                    ...formData,
+                    source: 'money-leak-audit',
+                    stage: 'audit-completed'
+                }, 'audit_completed');
+            }, 3500);
+        });
+    }
 
     document.querySelectorAll('.checkbox-item').forEach((item) => {
-        item.addEventListener('click', function(e) {
+        item.addEventListener('click', function (e) {
             if (e.target.tagName !== 'INPUT') {
                 const cb = this.querySelector('input');
                 cb.checked = !cb.checked;
             }
-            this.classList.toggle('checked', this.querySelector('input').checked);
+
+            const input = this.querySelector('input');
+            this.classList.toggle('checked', input.checked);
         });
     });
 
     document.querySelectorAll('.radio-item').forEach((item) => {
-        item.addEventListener('click', function(e) {
+        item.addEventListener('click', function (e) {
             if (e.target.tagName !== 'INPUT') {
-                this.querySelector('input').checked = true;
+                const input = this.querySelector('input');
+                input.checked = true;
             }
-            this.parentElement.querySelectorAll('.radio-item').forEach((s) => s.classList.remove('selected'));
+
+            this.parentElement.querySelectorAll('.radio-item').forEach((radio) => {
+                radio.classList.remove('selected');
+            });
+
             this.classList.add('selected');
         });
     });
 
-    document.getElementById('commitment').addEventListener('input', function(e) {
-        const value = parseInt(e.target.value, 10);
-        document.getElementById('commitmentValue').textContent = value;
-        const feedback = document.getElementById('commitmentFeedback');
+    const commitment = document.getElementById('commitment');
+    if (commitment) {
+        commitment.addEventListener('input', function (e) {
+            const value = parseInt(e.target.value, 10);
+            const valueEl = document.getElementById('commitmentValue');
+            const feedback = document.getElementById('commitmentFeedback');
 
-        if (value <= 3) {
-            feedback.textContent = 'Just curious';
-            feedback.style.color = '#999';
-        } else if (value <= 5) {
-            feedback.textContent = 'Thinking about it';
-            feedback.style.color = '#666';
-        } else if (value <= 7) {
-            feedback.textContent = 'Ready to take action';
-            feedback.style.color = '#d4af37';
-        } else if (value <= 9) {
-            feedback.textContent = 'Very committed!';
-            feedback.style.color = '#1a4d2e';
-        } else {
-            feedback.textContent = 'ALL IN - Let\\'s do this! 🔥';
-            feedback.style.color = '#e74c3c';
-            feedback.style.fontWeight = 'bold';
-        }
-    });
+            if (valueEl) {
+                valueEl.textContent = value;
+            }
+
+            if (!feedback) {
+                return;
+            }
+
+            if (value <= 3) {
+                feedback.textContent = 'Just curious';
+                feedback.style.color = '#999';
+            } else if (value <= 5) {
+                feedback.textContent = 'Thinking about it';
+                feedback.style.color = '#666';
+            } else if (value <= 7) {
+                feedback.textContent = 'Ready to take action';
+                feedback.style.color = '#d4af37';
+            } else if (value <= 9) {
+                feedback.textContent = 'Very committed!';
+                feedback.style.color = '#1a4d2e';
+            } else {
+                feedback.textContent = "ALL IN - Let's do this! 🔥";
+                feedback.style.color = '#e74c3c';
+                feedback.style.fontWeight = 'bold';
+            }
+        });
+    }
 
     function openWhatsApp() {
         const firstName = formData.firstName || 'Friend';
-        const message = encodeURIComponent(`Hi! I just completed my Money Leak Audit and I'm interested in learning more about the Millionaire Mind Intensive event. My name is ${firstName}.`);
+        const message = encodeURIComponent(
+            `Hi! I just completed my Money Leak Audit and I'm interested in learning more about the Millionaire Mind Intensive event. My name is ${firstName}.`
+        );
         window.open(`https://wa.me/14199633788?text=${message}`, '_blank');
     }
 
@@ -1182,6 +1291,7 @@
         yPos += 10;
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(10);
+
         const introText = [
             'Thank you for completing the Money Leak Audit. Based on your responses,',
             'we have identified critical patterns that are quietly draining your wealth',
