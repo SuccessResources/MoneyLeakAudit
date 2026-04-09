@@ -836,6 +836,40 @@
     <script>
         let formData = {};
         let spotCounter = 73;
+        const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/3673966/u7iqln2/';
+
+        function sendToZapier(payload, eventName) {
+            const body = JSON.stringify({
+                event: eventName,
+                submittedAt: new Date().toISOString(),
+                pageTitle: document.title,
+                pageUrl: window.location.href,
+                ...payload
+            });
+
+            try {
+                const blob = new Blob([body], { type: 'application/json' });
+                const beaconSent = navigator.sendBeacon(zapierWebhookUrl, blob);
+
+                if (beaconSent) {
+                    console.log('Zapier beacon sent');
+                    return;
+                }
+            } catch (error) {
+                console.error('sendBeacon failed:', error);
+            }
+
+            fetch(zapierWebhookUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body
+            }).catch((error) => {
+                console.error('Zapier fetch failed:', error);
+            });
+        }
 
         function nextStage(n) {
             document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
