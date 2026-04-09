@@ -882,37 +882,43 @@
             nextStage(n);
         }
 
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            
-            // Get form values from ActiveCampaign form
-            formData.firstName = document.getElementById('firstname').value;
-            formData.lastName = document.getElementById('lastname').value;
-            formData.email = document.getElementById('email').value;
-            formData.phone = document.getElementById('phone').value;
-            
-            // Basic validation
-            if (!formData.firstName || !formData.lastName || !formData.email) {
-                alert('Please fill in all required fields');
-                return;
-            }
-            
-            // Submit to ActiveCampaign
-            const form = document.getElementById('_form_1008_');
-            const formDataAC = new FormData(form);
-            
-            fetch('https://srglobal75904.activehosted.com/proc.php', {
-                method: 'POST',
-                body: formDataAC
-            }).then(() => {
-                // After successful submission, move to next stage
-                nextStage(3);
-            }).catch((error) => {
-                console.error('Error:', error);
-                // Still move to next stage even if AC submission fails
-                nextStage(3);
-            });
-        }
+function handleFormSubmit(event) {
+    event.preventDefault();
+
+    formData.firstName = document.getElementById('firstname').value;
+    formData.lastName = document.getElementById('lastname').value;
+    formData.email = document.getElementById('email').value;
+    formData.phone = document.getElementById('phone').value;
+    formData.smsConsent = document.getElementById('sms_consent').checked;
+
+    if (!formData.firstName || !formData.lastName || !formData.email) {
+        alert('Please fill in all required fields');
+        return;
+    }
+
+    sendToZapier({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        smsConsent: formData.smsConsent,
+        source: 'money-leak-audit',
+        stage: 'lead-submitted'
+    }, 'lead_submitted');
+
+    const form = document.getElementById('_form_1008_');
+    const formDataAC = new FormData(form);
+
+    fetch('https://srglobal75904.activehosted.com/proc.php', {
+        method: 'POST',
+        body: formDataAC
+    }).then(() => {
+        nextStage(3);
+    }).catch((error) => {
+        console.error('Error:', error);
+        nextStage(3);
+    });
+}
         
         // Live feed carousel
         const feedMessages = [
