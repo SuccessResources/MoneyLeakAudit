@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The 3-Minute Audit That Found $234K in Hidden Revenue</title>
     <style>
-        * { 
-            margin: 0 !important; 
-            padding: 0 !important; 
+        * {
+            margin: 0 !important;
+            padding: 0 !important;
             box-sizing: border-box !important;
         }
-        
-        html, body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; 
-            background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important; 
-            color: #333 !important; 
-            line-height: 1.6 !important; 
-            position: relative !important; 
+
+        html, body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important;
+            color: #333 !important;
+            line-height: 1.6 !important;
+            position: relative !important;
             overflow-x: hidden !important;
             width: 100% !important;
             height: auto !important;
@@ -31,129 +31,129 @@
             z-index: 1 !important;
         }
 
-        .container { 
-            max-width: 800px !important; 
-            margin: 0 auto !important; 
-            padding: 20px !important; 
-            position: relative !important; 
+        .container {
+            max-width: 800px !important;
+            margin: 0 auto !important;
+            padding: 20px !important;
+            position: relative !important;
             z-index: 1 !important;
         }
 
-        .header { 
-            text-align: center !important; 
-            color: white !important; 
-            padding: 40px 20px !important; 
+        .header {
+            text-align: center !important;
+            color: white !important;
+            padding: 40px 20px !important;
             position: relative !important;
             background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important;
         }
 
-        .logo { 
-            font-family: 'Brush Script MT', cursive !important; 
-            font-size: 36px !important; 
-            color: #d4af37 !important; 
-            margin-bottom: 10px !important; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
+        .logo {
+            font-family: 'Brush Script MT', cursive !important;
+            font-size: 36px !important;
+            color: #d4af37 !important;
+            margin-bottom: 10px !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
         }
 
-        .tagline { 
-            font-size: 14px !important; 
-            color: #d4af37 !important; 
-            text-transform: uppercase !important; 
+        .tagline {
+            font-size: 14px !important;
+            color: #d4af37 !important;
+            text-transform: uppercase !important;
             letter-spacing: 2px !important;
         }
 
-        .live-feed { 
-            background: rgba(255,255,255,0.95) !important; 
-            border-radius: 8px !important; 
-            padding: 15px !important; 
-            margin: 20px auto !important; 
-            max-width: 600px !important; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+        .live-feed {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 8px !important;
+            padding: 15px !important;
+            margin: 20px auto !important;
+            max-width: 600px !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
         }
 
-        .feed-item { 
-            padding: 8px !important; 
-            font-size: 14px !important; 
-            color: #1a4d2e !important; 
-            display: flex !important; 
-            align-items: center !important; 
+        .feed-item {
+            padding: 8px !important;
+            font-size: 14px !important;
+            color: #1a4d2e !important;
+            display: flex !important;
+            align-items: center !important;
             animation: slideIn 0.5s ease !important;
         }
 
-        .feed-item::before { 
-            content: "🔴" !important; 
-            margin-right: 8px !important; 
+        .feed-item::before {
+            content: "🔴" !important;
+            margin-right: 8px !important;
             animation: pulse 2s infinite !important;
         }
 
-        @keyframes slideIn { 
-            from { opacity: 0; transform: translateX(-20px); } 
-            to { opacity: 1; transform: translateX(0); } 
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        @keyframes pulse { 
-            0%, 100% { opacity: 1; } 
-            50% { opacity: 0.5; } 
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
-        .card { 
-            background: white !important; 
-            border-radius: 12px !important; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important; 
-            padding: 40px !important; 
-            margin: 20px 0 !important; 
-            position: relative !important; 
+        .card {
+            background: white !important;
+            border-radius: 12px !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
+            padding: 40px !important;
+            margin: 20px 0 !important;
+            position: relative !important;
             overflow: hidden !important;
         }
 
-        .card::before { 
-            content: "" !important; 
-            position: absolute !important; 
-            top: -5px !important; 
-            left: -5px !important; 
-            right: -5px !important; 
-            bottom: -5px !important; 
-            background: linear-gradient(45deg, #d4af37, #1a4d2e, #d4af37) !important; 
-            z-index: -1 !important; 
-            opacity: 0.3 !important; 
+        .card::before {
+            content: "" !important;
+            position: absolute !important;
+            top: -5px !important;
+            left: -5px !important;
+            right: -5px !important;
+            bottom: -5px !important;
+            background: linear-gradient(45deg, #d4af37, #1a4d2e, #d4af37) !important;
+            z-index: -1 !important;
+            opacity: 0.3 !important;
             filter: blur(10px) !important;
         }
 
-        .card-decoration { 
-            position: absolute !important; 
-            top: 20px !important; 
-            right: 20px !important; 
-            font-size: 80px !important; 
-            opacity: 0.05 !important; 
+        .card-decoration {
+            position: absolute !important;
+            top: 20px !important;
+            right: 20px !important;
+            font-size: 80px !important;
+            opacity: 0.05 !important;
             z-index: 0 !important;
         }
 
-        .stage { 
-            display: none !important; 
-            position: relative !important; 
+        .stage {
+            display: none !important;
+            position: relative !important;
             z-index: 1 !important;
         }
 
-        .stage.active { 
-            display: block !important; 
+        .stage.active {
+            display: block !important;
             animation: fadeIn 0.5s ease-in !important;
         }
 
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(20px); } 
-            to { opacity: 1; transform: translateY(0); } 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 { 
-            color: #1a4d2e !important; 
-            font-size: 32px !important; 
-            margin-bottom: 15px !important; 
+        h1 {
+            color: #1a4d2e !important;
+            font-size: 32px !important;
+            margin-bottom: 15px !important;
             line-height: 1.2 !important;
         }
 
-        h2 { 
-            color: #1a4d2e !important; 
-            font-size: 24px !important; 
+        h2 {
+            color: #1a4d2e !important;
+            font-size: 24px !important;
             margin-bottom: 20px !important;
         }
 
@@ -162,320 +162,320 @@
             margin-bottom: 15px !important;
         }
 
-        .subtitle { 
-            color: #666 !important; 
-            font-size: 18px !important; 
+        .subtitle {
+            color: #666 !important;
+            font-size: 18px !important;
             margin-bottom: 30px !important;
         }
 
-        .trust-badges { 
-            display: flex !important; 
-            justify-content: center !important; 
-            gap: 20px !important; 
-            margin: 20px 0 !important; 
-            font-size: 12px !important; 
-            color: #666 !important; 
+        .trust-badges {
+            display: flex !important;
+            justify-content: center !important;
+            gap: 20px !important;
+            margin: 20px 0 !important;
+            font-size: 12px !important;
+            color: #666 !important;
             flex-wrap: wrap !important;
         }
 
-        .urgency-banner { 
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important; 
-            color: white !important; 
-            padding: 12px !important; 
-            text-align: center !important; 
-            border-radius: 8px !important; 
-            margin-bottom: 20px !important; 
-            font-weight: 600 !important; 
+        .urgency-banner {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+            color: white !important;
+            padding: 12px !important;
+            text-align: center !important;
+            border-radius: 8px !important;
+            margin-bottom: 20px !important;
+            font-weight: 600 !important;
             animation: glow 2s infinite !important;
         }
 
-        @keyframes glow { 
-            0%, 100% { box-shadow: 0 0 5px rgba(231,76,60,0.5); } 
-            50% { box-shadow: 0 0 20px rgba(231,76,60,0.8); } 
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(231, 76, 60, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(231, 76, 60, 0.8); }
         }
 
-        .form-group { 
+        .form-group {
             margin-bottom: 20px !important;
         }
 
-        label { 
-            display: block !important; 
-            margin-bottom: 8px !important; 
-            color: #333 !important; 
+        label {
+            display: block !important;
+            margin-bottom: 8px !important;
+            color: #333 !important;
             font-weight: 600 !important;
         }
 
-        input[type="text"], 
-        input[type="email"], 
-        input[type="tel"], 
-        select { 
-            width: 100% !important; 
-            padding: 12px !important; 
-            border: 2px solid #ddd !important; 
-            border-radius: 6px !important; 
-            font-size: 16px !important; 
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100% !important;
+            padding: 12px !important;
+            border: 2px solid #ddd !important;
+            border-radius: 6px !important;
+            font-size: 16px !important;
             transition: border-color 0.3s !important;
             background: white !important;
             color: #333 !important;
         }
 
-        input:focus, 
-        select:focus { 
-            outline: none !important; 
+        input:focus,
+        select:focus {
+            outline: none !important;
             border-color: #d4af37 !important;
         }
 
-        .helper-text { 
-            font-size: 13px !important; 
-            color: #666 !important; 
+        .helper-text {
+            font-size: 13px !important;
+            color: #666 !important;
             margin-top: 5px !important;
         }
 
-        .checkbox-grid { 
-            display: grid !important; 
-            grid-template-columns: 1fr !important; 
-            gap: 12px !important; 
+        .checkbox-grid {
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+            gap: 12px !important;
             margin: 20px 0 !important;
         }
 
-        .checkbox-item { 
-            display: flex !important; 
-            align-items: flex-start !important; 
-            padding: 15px !important; 
-            border: 2px solid #e0e0e0 !important; 
-            border-radius: 8px !important; 
-            cursor: pointer !important; 
+        .checkbox-item {
+            display: flex !important;
+            align-items: flex-start !important;
+            padding: 15px !important;
+            border: 2px solid #e0e0e0 !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
             transition: all 0.3s !important;
             background: white !important;
         }
 
-        .checkbox-item:hover { 
-            border-color: #d4af37 !important; 
+        .checkbox-item:hover {
+            border-color: #d4af37 !important;
             background: #f9f9f9 !important;
         }
 
-        .checkbox-item.checked { 
-            border-color: #1a4d2e !important; 
+        .checkbox-item.checked {
+            border-color: #1a4d2e !important;
             background: #f0f8f4 !important;
         }
 
-        .checkbox-item input[type="checkbox"] { 
-            margin-right: 12px !important; 
-            margin-top: 2px !important; 
-            width: 20px !important; 
-            height: 20px !important; 
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 12px !important;
+            margin-top: 2px !important;
+            width: 20px !important;
+            height: 20px !important;
             cursor: pointer !important;
         }
 
-        .checkbox-label { 
-            flex: 1 !important; 
-            cursor: pointer !important; 
+        .checkbox-label {
+            flex: 1 !important;
+            cursor: pointer !important;
             font-size: 15px !important;
         }
 
-        .radio-group { 
+        .radio-group {
             margin: 20px 0 !important;
         }
 
-        .radio-item { 
-            display: flex !important; 
-            align-items: center !important; 
-            padding: 12px !important; 
-            margin-bottom: 10px !important; 
-            border: 2px solid #e0e0e0 !important; 
-            border-radius: 8px !important; 
-            cursor: pointer !important; 
+        .radio-item {
+            display: flex !important;
+            align-items: center !important;
+            padding: 12px !important;
+            margin-bottom: 10px !important;
+            border: 2px solid #e0e0e0 !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
             transition: all 0.3s !important;
             background: white !important;
         }
 
-        .radio-item:hover { 
-            border-color: #d4af37 !important; 
+        .radio-item:hover {
+            border-color: #d4af37 !important;
             background: #f9f9f9 !important;
         }
 
-        .radio-item.selected { 
-            border-color: #1a4d2e !important; 
+        .radio-item.selected {
+            border-color: #1a4d2e !important;
             background: #f0f8f4 !important;
         }
 
-        .radio-item input[type="radio"] { 
-            margin-right: 12px !important; 
-            width: 18px !important; 
-            height: 18px !important; 
+        .radio-item input[type="radio"] {
+            margin-right: 12px !important;
+            width: 18px !important;
+            height: 18px !important;
             cursor: pointer !important;
         }
 
-        .slider-container { 
+        .slider-container {
             margin: 30px 0 !important;
         }
 
-        .slider-value { 
-            text-align: center !important; 
-            font-size: 24px !important; 
-            color: #1a4d2e !important; 
-            font-weight: bold !important; 
+        .slider-value {
+            text-align: center !important;
+            font-size: 24px !important;
+            color: #1a4d2e !important;
+            font-weight: bold !important;
             margin-bottom: 15px !important;
         }
 
-        input[type="range"] { 
-            width: 100% !important; 
-            height: 8px !important; 
-            border-radius: 5px !important; 
-            background: #ddd !important; 
-            outline: none !important; 
+        input[type="range"] {
+            width: 100% !important;
+            height: 8px !important;
+            border-radius: 5px !important;
+            background: #ddd !important;
+            outline: none !important;
             -webkit-appearance: none !important;
         }
 
-        input[type="range"]::-webkit-slider-thumb { 
-            -webkit-appearance: none !important; 
-            appearance: none !important; 
-            width: 24px !important; 
-            height: 24px !important; 
-            border-radius: 50% !important; 
-            background: #d4af37 !important; 
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none !important;
+            appearance: none !important;
+            width: 24px !important;
+            height: 24px !important;
+            border-radius: 50% !important;
+            background: #d4af37 !important;
             cursor: pointer !important;
         }
 
-        input[type="range"]::-moz-range-thumb { 
-            width: 24px !important; 
-            height: 24px !important; 
-            border-radius: 50% !important; 
-            background: #d4af37 !important; 
+        input[type="range"]::-moz-range-thumb {
+            width: 24px !important;
+            height: 24px !important;
+            border-radius: 50% !important;
+            background: #d4af37 !important;
             cursor: pointer !important;
         }
 
-        .slider-feedback { 
-            text-align: center !important; 
-            margin-top: 10px !important; 
-            font-size: 16px !important; 
+        .slider-feedback {
+            text-align: center !important;
+            margin-top: 10px !important;
+            font-size: 16px !important;
             font-weight: 600 !important;
         }
 
-        .btn { 
-            width: 100% !important; 
-            padding: 16px !important; 
-            background: linear-gradient(135deg, #d4af37 0%, #f0d068 100%) !important; 
-            color: #1a4d2e !important; 
-            border: none !important; 
-            border-radius: 8px !important; 
-            font-size: 18px !important; 
-            font-weight: bold !important; 
-            cursor: pointer !important; 
-            transition: transform 0.2s, box-shadow 0.2s !important; 
-            text-transform: uppercase !important; 
+        .btn {
+            width: 100% !important;
+            padding: 16px !important;
+            background: linear-gradient(135deg, #d4af37 0%, #f0d068 100%) !important;
+            color: #1a4d2e !important;
+            border: none !important;
+            border-radius: 8px !important;
+            font-size: 18px !important;
+            font-weight: bold !important;
+            cursor: pointer !important;
+            transition: transform 0.2s, box-shadow 0.2s !important;
+            text-transform: uppercase !important;
             letter-spacing: 1px !important;
         }
 
-        .btn:hover { 
-            transform: translateY(-2px) !important; 
+        .btn:hover {
+            transform: translateY(-2px) !important;
             box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4) !important;
         }
 
-        .btn:active { 
+        .btn:active {
             transform: translateY(0) !important;
         }
 
-        .btn-green { 
-            background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important; 
+        .btn-green {
+            background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important;
             color: white !important;
         }
 
-        .progress-bar { 
-            width: 100% !important; 
-            height: 6px !important; 
-            background: #e0e0e0 !important; 
-            border-radius: 3px !important; 
-            margin: 30px 0 !important; 
+        .progress-bar {
+            width: 100% !important;
+            height: 6px !important;
+            background: #e0e0e0 !important;
+            border-radius: 3px !important;
+            margin: 30px 0 !important;
             overflow: hidden !important;
         }
 
-        .progress-fill { 
-            height: 100% !important; 
-            background: linear-gradient(90deg, #1a4d2e 0%, #d4af37 100%) !important; 
+        .progress-fill {
+            height: 100% !important;
+            background: linear-gradient(90deg, #1a4d2e 0%, #d4af37 100%) !important;
             transition: width 0.5s ease !important;
         }
 
-        .progress-text { 
-            text-align: center !important; 
-            color: #666 !important; 
-            font-size: 14px !important; 
+        .progress-text {
+            text-align: center !important;
+            color: #666 !important;
+            font-size: 14px !important;
             margin-top: 10px !important;
         }
 
-        .loading { 
-            text-align: center !important; 
+        .loading {
+            text-align: center !important;
             padding: 40px !important;
         }
 
-        .spinner { 
-            border: 4px solid #f3f3f3 !important; 
-            border-top: 4px solid #d4af37 !important; 
-            border-radius: 50% !important; 
-            width: 50px !important; 
-            height: 50px !important; 
-            animation: spin 1s linear infinite !important; 
+        .spinner {
+            border: 4px solid #f3f3f3 !important;
+            border-top: 4px solid #d4af37 !important;
+            border-radius: 50% !important;
+            width: 50px !important;
+            height: 50px !important;
+            animation: spin 1s linear infinite !important;
             margin: 20px auto !important;
         }
 
-        @keyframes spin { 
-            0% { transform: rotate(0deg); } 
-            100% { transform: rotate(360deg); } 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .leak-amount { 
-            font-size: 64px !important; 
-            color: #e74c3c !important; 
-            font-weight: bold !important; 
-            margin: 30px 0 !important; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1) !important;
+        .leak-amount {
+            font-size: 64px !important;
+            color: #e74c3c !important;
+            font-weight: bold !important;
+            margin: 30px 0 !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1) !important;
         }
 
-        .bonus-box { 
-            background: #fff9e6 !important; 
-            border: 3px dashed #d4af37 !important; 
-            padding: 20px !important; 
-            border-radius: 8px !important; 
-            margin: 20px 0 !important; 
+        .bonus-box {
+            background: #fff9e6 !important;
+            border: 3px dashed #d4af37 !important;
+            padding: 20px !important;
+            border-radius: 8px !important;
+            margin: 20px 0 !important;
             text-align: center !important;
         }
 
-        .bonus-counter { 
-            font-size: 24px !important; 
-            color: #e74c3c !important; 
-            font-weight: bold !important; 
+        .bonus-counter {
+            font-size: 24px !important;
+            color: #e74c3c !important;
+            font-weight: bold !important;
             margin: 10px 0 !important;
         }
 
-        .cta-box { 
-            background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important; 
-            color: white !important; 
-            padding: 30px !important; 
-            border-radius: 12px !important; 
-            margin: 30px 0 !important; 
+        .cta-box {
+            background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important;
+            color: white !important;
+            padding: 30px !important;
+            border-radius: 12px !important;
+            margin: 30px 0 !important;
             text-align: center !important;
         }
 
-        .cta-box h3 { 
-            color: #d4af37 !important; 
+        .cta-box h3 {
+            color: #d4af37 !important;
             margin-bottom: 15px !important;
         }
 
-        .hot-badge { 
-            display: inline-block !important; 
-            background: #e74c3c !important; 
-            color: white !important; 
-            padding: 2px 8px !important; 
-            border-radius: 4px !important; 
-            font-size: 11px !important; 
-            font-weight: bold !important; 
+        .hot-badge {
+            display: inline-block !important;
+            background: #e74c3c !important;
+            color: white !important;
+            padding: 2px 8px !important;
+            border-radius: 4px !important;
+            font-size: 11px !important;
+            font-weight: bold !important;
             margin-left: 8px !important;
         }
 
-        @media (max-width: 768px) { 
-            h1 { font-size: 24px !important; } 
-            .leak-amount { font-size: 48px !important; } 
-            .card { padding: 25px !important; } 
+        @media (max-width: 768px) {
+            h1 { font-size: 24px !important; }
+            .leak-amount { font-size: 48px !important; }
+            .card { padding: 25px !important; }
         }
     </style>
 </head>
@@ -493,7 +493,6 @@
             </div>
 
             <div class="card">
-                <!-- STAGE 1: Landing Page -->
                 <div class="stage active" id="stage1">
                     <h1>The 3-Minute Audit That Found $234,000 in Hidden Revenue for 10,000+ Entrepreneurs</h1>
                     <p class="subtitle">Discover the exact money leaks draining your business right now</p>
@@ -509,18 +508,17 @@
                     <button type="button" class="btn" onclick="nextStage(2)">Continue to Audit →</button>
                 </div>
 
-                <!-- STAGE 2: Lead Collection -->
                 <div class="stage" id="stage2">
                     <div class="card-decoration">📋</div>
                     <h2>Get Your Free Money Leak Report</h2>
                     <p class="subtitle">Enter your details to receive your personalized audit results</p>
                     <div class="progress-bar"><div class="progress-fill" style="width: 10% !important;"></div></div>
                     <div class="progress-text">Step 1 of 9 • 10% Complete</div>
-                    
+
                     <style>
                         #_form_1008_{font-size:14px;line-height:1.6;font-family:arial, helvetica, sans-serif;margin:0;box-shadow:none}._form_hide{display:none;visibility:hidden}._form_show{display:block;visibility:visible}#_form_1008_._form-top{top:0}#_form_1008_._form-bottom{bottom:0}#_form_1008_._form-left{left:0}#_form_1008_._form-right{right:0}#_form_1008_ input[type="text"],#_form_1008_ input[type="tel"],#_form_1008_ input[type="date"],#_form_1008_ textarea{padding:12px !important;height:auto;border:#ddd 2px solid !important;border-radius:6px !important;color:#333 !important;font-size:16px !important;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}#_form_1008_ textarea{resize:none}#_form_1008_ input::placeholder{color:#999}#_form_1008_ ._submit{cursor:pointer;font-family:arial, sans-serif;font-size:18px;text-align:center;background:linear-gradient(135deg, #d4af37 0%, #f0d068 100%) !important;border:none !important;-moz-border-radius:8px !important;-webkit-border-radius:8px !important;border-radius:8px !important;width:100%;color:#1a4d2e !important;padding:16px !important;font-weight:bold;text-transform:uppercase;letter-spacing:1px;transition:all 0.3s}#_form_1008_ ._submit:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212, 175, 55, 0.4)}#_form_1008_ ._form_element{position:relative;margin-bottom:15px;font-size:0;max-width:100%}#_form_1008_ ._form_element *{font-size:14px}#_form_1008_ ._form-label{font-weight:bold;margin-bottom:8px;display:block;color:#333}#_form_1008_ ._form_element input[type="text"],#_form_1008_ ._form_element input[type="date"],#_form_1008_ ._form_element select,#_form_1008_ ._form_element textarea:not(.g-recaptcha-response){display:block;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-family:inherit}#_form_1008_ ._field-wrapper{position:relative}#_form_1008_{position:relative;text-align:left;margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;background:transparent !important;border:none !important;color:#000000}#_form_1008_ ._form-content{margin:0;width:100%}#_form_1008_ .sms_consent_checkbox{position:relative;width:100%;display:flex;align-items:flex-start;padding:15px 0}#_form_1008_ .sms_consent_checkbox input[type="checkbox"]{margin:5px 10px 10px 0}#_form_1008_ .sms_consent_checkbox .sms_consent_message{display:inline;text-align:left;margin-bottom:10px;font-size:12px;color:#666}
                     </style>
-                    
+
                     <form method="POST" action="https://srglobal75904.activehosted.com/proc.php" id="_form_1008_" class="_form _form_1008 _inline-form _dark" novalidate data-styles-version="5">
                         <input type="hidden" name="u" value="1008" />
                         <input type="hidden" name="f" value="1008" />
@@ -571,7 +569,6 @@
                     </form>
                 </div>
 
-                <!-- STAGE 3: Business Information -->
                 <div class="stage" id="stage3">
                     <div class="card-decoration">💼</div>
                     <h2>Tell Us About Your Business</h2>
@@ -624,7 +621,6 @@
                     </form>
                 </div>
 
-                <!-- STAGE 4: Goals -->
                 <div class="stage" id="stage4">
                     <div class="card-decoration">🎯</div>
                     <h2>What's Your #1 Goal Right Now?</h2>
@@ -656,7 +652,6 @@
                     </form>
                 </div>
 
-                <!-- STAGE 5: Pricing Leaks -->
                 <div class="stage" id="stage5">
                     <div class="card-decoration">💸</div>
                     <h2>Let's Identify Your Pricing Leaks</h2>
@@ -677,7 +672,6 @@
                     </form>
                 </div>
 
-                <!-- STAGE 6: Time Leaks -->
                 <div class="stage" id="stage6">
                     <div class="card-decoration">⏰</div>
                     <h2>Let's Find Your Time Leaks</h2>
@@ -698,7 +692,6 @@
                     </form>
                 </div>
 
-                <!-- STAGE 7: Systems -->
                 <div class="stage" id="stage7">
                     <div class="card-decoration">📈</div>
                     <h2>Let's Check Your Systems</h2>
@@ -719,7 +712,6 @@
                     </form>
                 </div>
 
-                <!-- STAGE 8: Money Blueprint -->
                 <div class="stage" id="stage8">
                     <div class="card-decoration">🧠</div>
                     <h2>Let's Uncover Your Money Blueprint</h2>
@@ -749,7 +741,6 @@
                     </form>
                 </div>
 
-                <!-- STAGE 9: Breakthrough Readiness -->
                 <div class="stage" id="stage9">
                     <div class="card-decoration">💪</div>
                     <h2>Assess Your Breakthrough Readiness</h2>
@@ -788,7 +779,6 @@
                     </form>
                 </div>
 
-                <!-- STAGE 10: Results -->
                 <div class="stage" id="stage10">
                     <div class="card-decoration">🎉</div>
                     <div class="loading" id="loading">
@@ -802,7 +792,7 @@
                             <div class="leak-amount" id="totalLeak">$234,000</div>
                             <p style="color: #666 !important;">per year in preventable leaks</p>
                         </div>
-                        
+
                         <div class="bonus-box">
                             <div style="font-size: 20px !important; font-weight: bold !important; color: #1a4d2e !important; margin-bottom: 10px !important;">🎁 BONUS UNLOCKED!</div>
                             <p style="margin: 0 !important;">You qualified for the <strong>7 Money Blueprints Cheatsheet</strong> ($47 value)</p>
@@ -834,484 +824,682 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script>
-    let formData = {};
-    let spotCounter = 73;
-    const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/3673966/u7ipolm/';
+    <script>
+        let formData = {};
+        let spotCounter = 73;
+        const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/3673966/u7ipolm/';
 
-    async function sendToZapier(payload, eventName) {
-        const data = {
-            event: eventName,
-            event_name: eventName,
-            submitted_at: new Date().toISOString(),
-            page_title: document.title,
-            page_url: window.location.href,
-            ...payload
-        };
+        async function sendToZapier(payload, eventName) {
+            const data = {
+                event: eventName,
+                event_name: eventName,
+                submitted_at: new Date().toISOString(),
+                page_title: document.title,
+                page_url: window.location.href,
+                ...payload
+            };
 
-        try {
-            const response = await fetch(zapierWebhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'text/plain;charset=UTF-8'
-                },
-                body: JSON.stringify(data)
+            try {
+                const response = await fetch(zapierWebhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain;charset=UTF-8'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                console.log('Zapier status:', response.status, eventName, data);
+                return true;
+            } catch (error) {
+                console.error('Zapier send failed:', error, data);
+                return false;
+            }
+        }
+
+        function nextStage(n) {
+            document.querySelectorAll('.stage').forEach((stage) => {
+                stage.classList.remove('active');
             });
 
-            console.log('Zapier status:', response.status, eventName, data);
-            return true;
-        } catch (error) {
-            console.error('Zapier send failed:', error, data);
-            return false;
-        }
-    }
-
-    function nextStage(n) {
-        document.querySelectorAll('.stage').forEach((stage) => {
-            stage.classList.remove('active');
-        });
-
-        const next = document.getElementById('stage' + n);
-        if (next) {
-            next.classList.add('active');
-            window.scrollTo(0, 0);
-        }
-    }
-
-    function prevStage(n) {
-        nextStage(n);
-    }
-
-    async function handleFormSubmit(event) {
-        event.preventDefault();
-
-        formData.firstName = document.getElementById('firstname').value.trim();
-        formData.lastName = document.getElementById('lastname').value.trim();
-        formData.email = document.getElementById('email').value.trim();
-        formData.phone = document.getElementById('phone').value.trim();
-        formData.smsConsent = document.getElementById('sms_consent').checked;
-
-        if (!formData.firstName || !formData.lastName || !formData.email) {
-            alert('Please fill in all required fields');
-            return;
+            const next = document.getElementById('stage' + n);
+            if (next) {
+                next.classList.add('active');
+                window.scrollTo(0, 0);
+            }
         }
 
-        await sendToZapier({
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            phone: formData.phone,
-            sms_consent: formData.smsConsent,
-            smsConsent: formData.smsConsent,
-            source: 'money-leak-audit',
-            stage: 'lead-submitted'
-        }, 'lead_submitted');
+        function prevStage(n) {
+            nextStage(n);
+        }
 
-        const form = document.getElementById('_form_1008_');
-        const formDataAC = new FormData(form);
+        async function handleFormSubmit(event) {
+            event.preventDefault();
 
-        try {
-            await fetch('https://srglobal75904.activehosted.com/proc.php', {
-                method: 'POST',
-                body: formDataAC
+            formData.firstName = document.getElementById('firstname').value.trim();
+            formData.lastName = document.getElementById('lastname').value.trim();
+            formData.email = document.getElementById('email').value.trim();
+            formData.phone = document.getElementById('phone').value.trim();
+            formData.smsConsent = document.getElementById('sms_consent').checked;
+
+            if (!formData.firstName || !formData.lastName || !formData.email) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            await sendToZapier({
+                first_name: formData.firstName,
+                last_name: formData.lastName,
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                phone: formData.phone,
+                sms_consent: formData.smsConsent,
+                smsConsent: formData.smsConsent,
+                source: 'money-leak-audit',
+                stage: 'lead-submitted'
+            }, 'lead_submitted');
+
+            const form = document.getElementById('_form_1008_');
+            const formDataAC = new FormData(form);
+
+            try {
+                await fetch('https://srglobal75904.activehosted.com/proc.php', {
+                    method: 'POST',
+                    body: formDataAC
+                });
+            } catch (error) {
+                console.error('ActiveCampaign error:', error);
+            }
+
+            nextStage(3);
+        }
+
+        const feedMessages = [
+            'Michael from Singapore just found $147K in leaks',
+            'Sarah from Dubai downloaded her report',
+            'John from Kuala Lumpur booked a strategy call',
+            'Emma from London discovered $89K in hidden revenue',
+            'David from New York just claimed spot #74',
+            'Lisa from Bangkok started the audit',
+            'Ahmed from Abu Dhabi found $201K in leaks'
+        ];
+
+        let feedIndex = 0;
+
+        setInterval(() => {
+            const feedItem = document.querySelector('.feed-item');
+            if (!feedItem) {
+                return;
+            }
+
+            feedIndex = (feedIndex + 1) % feedMessages.length;
+            feedItem.textContent = feedMessages[feedIndex];
+        }, 5000);
+
+        setInterval(() => {
+            const counter = document.getElementById('spotCounter');
+            if (!counter) {
+                return;
+            }
+
+            if (spotCounter < 97) {
+                spotCounter += 1;
+                counter.textContent = spotCounter;
+            }
+        }, 45000);
+
+        const form3 = document.getElementById('form3');
+        if (form3) {
+            form3.addEventListener('submit', function (e) {
+                e.preventDefault();
+                formData.companySize = document.getElementById('companySize').value;
+                formData.revenue = document.getElementById('revenue').value;
+                formData.industry = document.getElementById('industry').value;
+                nextStage(4);
             });
-        } catch (error) {
-            console.error('ActiveCampaign error:', error);
         }
 
-        nextStage(3);
-    }
+        const form4 = document.getElementById('form4');
+        if (form4) {
+            form4.addEventListener('submit', function (e) {
+                e.preventDefault();
 
-    const feedMessages = [
-        'Michael from Singapore just found $147K in leaks',
-        'Sarah from Dubai downloaded her report',
-        'John from Kuala Lumpur booked a strategy call',
-        'Emma from London discovered $89K in hidden revenue',
-        'David from New York just claimed spot #74',
-        'Lisa from Bangkok started the audit',
-        'Ahmed from Abu Dhabi found $201K in leaks'
-    ];
+                const goal = document.querySelector('input[name="goal"]:checked');
+                const urgency = document.querySelector('input[name="urgency"]:checked');
 
-    let feedIndex = 0;
-
-    setInterval(() => {
-        const feedItem = document.querySelector('.feed-item');
-        if (!feedItem) {
-            return;
-        }
-
-        feedIndex = (feedIndex + 1) % feedMessages.length;
-        feedItem.textContent = feedMessages[feedIndex];
-    }, 5000);
-
-    setInterval(() => {
-        const counter = document.getElementById('spotCounter');
-        if (!counter) {
-            return;
-        }
-
-        if (spotCounter < 97) {
-            spotCounter += 1;
-            counter.textContent = spotCounter;
-        }
-    }, 45000);
-
-    const form3 = document.getElementById('form3');
-    if (form3) {
-        form3.addEventListener('submit', function (e) {
-            e.preventDefault();
-            formData.companySize = document.getElementById('companySize').value;
-            formData.revenue = document.getElementById('revenue').value;
-            formData.industry = document.getElementById('industry').value;
-            nextStage(4);
-        });
-    }
-
-    const form4 = document.getElementById('form4');
-    if (form4) {
-        form4.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const goal = document.querySelector('input[name="goal"]:checked');
-            const urgency = document.querySelector('input[name="urgency"]:checked');
-
-            if (!goal || !urgency) {
-                alert('Please select your goal and urgency.');
-                return;
-            }
-
-            formData.goal = goal.value;
-            formData.urgency = urgency.value;
-
-            if (formData.goal === 'scale-7fig' || formData.urgency === 'asap') {
-                formData.leadScore = 'HOT';
-            } else if (formData.goal === 'replace-income' || formData.goal === 'double-revenue') {
-                formData.leadScore = 'WARM';
-            } else {
-                formData.leadScore = 'COLD';
-            }
-
-            nextStage(5);
-        });
-    }
-
-    const form5 = document.getElementById('form5');
-    if (form5) {
-        form5.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const checkboxes = document.querySelectorAll('input[name="pricing"]:checked');
-            formData.pricingLeaks = Array.from(checkboxes).map((cb) => cb.value);
-            nextStage(6);
-        });
-    }
-
-    const form6 = document.getElementById('form6');
-    if (form6) {
-        form6.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const checkboxes = document.querySelectorAll('input[name="time"]:checked');
-            formData.timeLeaks = Array.from(checkboxes).map((cb) => cb.value);
-            nextStage(7);
-        });
-    }
-
-    const form7 = document.getElementById('form7');
-    if (form7) {
-        form7.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const checkboxes = document.querySelectorAll('input[name="systems"]:checked');
-            formData.systemsLeaks = Array.from(checkboxes).map((cb) => cb.value);
-            nextStage(8);
-        });
-    }
-
-    const form8 = document.getElementById('form8');
-    if (form8) {
-        form8.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const moneyBelief = document.querySelector('input[name="moneyBelief"]:checked');
-            const worthiness = document.querySelector('input[name="worthiness"]:checked');
-
-            if (!moneyBelief || !worthiness) {
-                alert('Please answer both questions.');
-                return;
-            }
-
-            formData.moneyBelief = moneyBelief.value;
-            formData.worthiness = worthiness.value;
-            nextStage(9);
-        });
-    }
-
-    const form9 = document.getElementById('form9');
-    if (form9) {
-        form9.addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const invested = document.querySelector('input[name="invested"]:checked');
-            const blocker = document.querySelector('input[name="blocker"]:checked');
-            const commitmentInput = document.getElementById('commitment');
-
-            if (!invested || !blocker || !commitmentInput) {
-                alert('Please complete all required fields.');
-                return;
-            }
-
-            formData.invested = invested.value;
-            formData.blocker = blocker.value;
-            formData.commitment = commitmentInput.value;
-
-            if (parseInt(formData.commitment, 10) >= 8) {
-                formData.leadScore = 'HOT';
-            }
-
-            nextStage(10);
-
-            const loadingMessages = [
-                '🔍 Analyzing your money leaks...',
-                '💰 Calculating total leak amount...',
-                '🧠 Identifying your Money Blueprint...',
-                '📊 Generating personalized recommendations...'
-            ];
-
-            let msgIndex = 0;
-            const loadingInterval = setInterval(() => {
-                const loadingText = document.getElementById('loadingText');
-                if (!loadingText) {
-                    clearInterval(loadingInterval);
+                if (!goal || !urgency) {
+                    alert('Please select your goal and urgency.');
                     return;
                 }
 
-                if (msgIndex < loadingMessages.length) {
-                    loadingText.textContent = loadingMessages[msgIndex];
-                    msgIndex += 1;
-                }
-            }, 800);
+                formData.goal = goal.value;
+                formData.urgency = urgency.value;
 
-            setTimeout(async () => {
-                clearInterval(loadingInterval);
-
-                const loading = document.getElementById('loading');
-                const results = document.getElementById('results');
-                const finalCounter = document.getElementById('finalCounter');
-                const totalLeak = document.getElementById('totalLeak');
-
-                if (loading) {
-                    loading.style.display = 'none';
+                if (formData.goal === 'scale-7fig' || formData.urgency === 'asap') {
+                    formData.leadScore = 'HOT';
+                } else if (formData.goal === 'replace-income' || formData.goal === 'double-revenue') {
+                    formData.leadScore = 'WARM';
+                } else {
+                    formData.leadScore = 'COLD';
                 }
 
-                if (results) {
-                    results.style.display = 'block';
-                }
-
-                if (finalCounter) {
-                    finalCounter.textContent = spotCounter;
-                }
-
-                const revenueBase = {
-                    '0-100k': 50000,
-                    '100k-250k': 175000,
-                    '250k-500k': 375000,
-                    '500k-1m': 750000,
-                    '1m-3m': 2000000,
-                    '3m+': 4000000,
-                    'employee': 75000
-                };
-
-                const baseRevenue = revenueBase[formData.revenue] || 50000;
-
-                const pricingLeakCount = formData.pricingLeaks ? formData.pricingLeaks.length : 0;
-                const pricingLeakPercentage = pricingLeakCount * 0.03;
-                formData.pricingLeak = Math.round(baseRevenue * pricingLeakPercentage);
-
-                const timeLeakCount = formData.timeLeaks ? formData.timeLeaks.length : 0;
-                const timeLeakPercentage = timeLeakCount * 0.04;
-                formData.timeLeak = Math.round(baseRevenue * timeLeakPercentage);
-
-                const systemsLeakCount = formData.systemsLeaks ? formData.systemsLeaks.length : 0;
-                const systemsLeakPercentage = systemsLeakCount * 0.02;
-                formData.systemsLeak = Math.round(baseRevenue * systemsLeakPercentage);
-
-                formData.totalLeakAmount = formData.pricingLeak + formData.timeLeak + formData.systemsLeak;
-                const formattedLeak = '$' + formData.totalLeakAmount.toLocaleString();
-
-                if (totalLeak) {
-                    totalLeak.textContent = formattedLeak;
-                }
-
-                await sendToZapier({
-                    ...formData,
-                    source: 'money-leak-audit',
-                    stage: 'audit-completed'
-                }, 'audit_completed');
-            }, 3500);
-        });
-    }
-
-    document.querySelectorAll('.checkbox-item').forEach((item) => {
-        item.addEventListener('click', function (e) {
-            if (e.target.tagName !== 'INPUT') {
-                const cb = this.querySelector('input');
-                cb.checked = !cb.checked;
-            }
-
-            const input = this.querySelector('input');
-            this.classList.toggle('checked', input.checked);
-        });
-    });
-
-    document.querySelectorAll('.radio-item').forEach((item) => {
-        item.addEventListener('click', function (e) {
-            if (e.target.tagName !== 'INPUT') {
-                const input = this.querySelector('input');
-                input.checked = true;
-            }
-
-            this.parentElement.querySelectorAll('.radio-item').forEach((radio) => {
-                radio.classList.remove('selected');
+                nextStage(5);
             });
+        }
 
-            this.classList.add('selected');
+        const form5 = document.getElementById('form5');
+        if (form5) {
+            form5.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const checkboxes = document.querySelectorAll('input[name="pricing"]:checked');
+                formData.pricingLeaks = Array.from(checkboxes).map((cb) => cb.value);
+                nextStage(6);
+            });
+        }
+
+        const form6 = document.getElementById('form6');
+        if (form6) {
+            form6.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const checkboxes = document.querySelectorAll('input[name="time"]:checked');
+                formData.timeLeaks = Array.from(checkboxes).map((cb) => cb.value);
+                nextStage(7);
+            });
+        }
+
+        const form7 = document.getElementById('form7');
+        if (form7) {
+            form7.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const checkboxes = document.querySelectorAll('input[name="systems"]:checked');
+                formData.systemsLeaks = Array.from(checkboxes).map((cb) => cb.value);
+                nextStage(8);
+            });
+        }
+
+        const form8 = document.getElementById('form8');
+        if (form8) {
+            form8.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const moneyBelief = document.querySelector('input[name="moneyBelief"]:checked');
+                const worthiness = document.querySelector('input[name="worthiness"]:checked');
+
+                if (!moneyBelief || !worthiness) {
+                    alert('Please answer both questions.');
+                    return;
+                }
+
+                formData.moneyBelief = moneyBelief.value;
+                formData.worthiness = worthiness.value;
+                nextStage(9);
+            });
+        }
+
+        const form9 = document.getElementById('form9');
+        if (form9) {
+            form9.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const invested = document.querySelector('input[name="invested"]:checked');
+                const blocker = document.querySelector('input[name="blocker"]:checked');
+                const commitmentInput = document.getElementById('commitment');
+
+                if (!invested || !blocker || !commitmentInput) {
+                    alert('Please complete all required fields.');
+                    return;
+                }
+
+                formData.invested = invested.value;
+                formData.blocker = blocker.value;
+                formData.commitment = commitmentInput.value;
+
+                if (parseInt(formData.commitment, 10) >= 8) {
+                    formData.leadScore = 'HOT';
+                }
+
+                nextStage(10);
+
+                const loadingMessages = [
+                    '🔍 Analyzing your money leaks...',
+                    '💰 Calculating total leak amount...',
+                    '🧠 Identifying your Money Blueprint...',
+                    '📊 Generating personalized recommendations...'
+                ];
+
+                let msgIndex = 0;
+                const loadingInterval = setInterval(() => {
+                    const loadingText = document.getElementById('loadingText');
+                    if (!loadingText) {
+                        clearInterval(loadingInterval);
+                        return;
+                    }
+
+                    if (msgIndex < loadingMessages.length) {
+                        loadingText.textContent = loadingMessages[msgIndex];
+                        msgIndex += 1;
+                    }
+                }, 800);
+
+                setTimeout(async () => {
+                    clearInterval(loadingInterval);
+
+                    const loading = document.getElementById('loading');
+                    const results = document.getElementById('results');
+                    const finalCounter = document.getElementById('finalCounter');
+                    const totalLeak = document.getElementById('totalLeak');
+
+                    if (loading) {
+                        loading.style.display = 'none';
+                    }
+
+                    if (results) {
+                        results.style.display = 'block';
+                    }
+
+                    if (finalCounter) {
+                        finalCounter.textContent = spotCounter;
+                    }
+
+                    const revenueBase = {
+                        '0-100k': 50000,
+                        '100k-250k': 175000,
+                        '250k-500k': 375000,
+                        '500k-1m': 750000,
+                        '1m-3m': 2000000,
+                        '3m+': 4000000,
+                        'employee': 75000
+                    };
+
+                    const baseRevenue = revenueBase[formData.revenue] || 50000;
+
+                    const pricingLeakCount = formData.pricingLeaks ? formData.pricingLeaks.length : 0;
+                    const pricingLeakPercentage = pricingLeakCount * 0.03;
+                    formData.pricingLeak = Math.round(baseRevenue * pricingLeakPercentage);
+
+                    const timeLeakCount = formData.timeLeaks ? formData.timeLeaks.length : 0;
+                    const timeLeakPercentage = timeLeakCount * 0.04;
+                    formData.timeLeak = Math.round(baseRevenue * timeLeakPercentage);
+
+                    const systemsLeakCount = formData.systemsLeaks ? formData.systemsLeaks.length : 0;
+                    const systemsLeakPercentage = systemsLeakCount * 0.02;
+                    formData.systemsLeak = Math.round(baseRevenue * systemsLeakPercentage);
+
+                    formData.totalLeakAmount = formData.pricingLeak + formData.timeLeak + formData.systemsLeak;
+                    const formattedLeak = '$' + formData.totalLeakAmount.toLocaleString();
+
+                    if (totalLeak) {
+                        totalLeak.textContent = formattedLeak;
+                    }
+
+                    await sendToZapier({
+                        ...formData,
+                        source: 'money-leak-audit',
+                        stage: 'audit-completed'
+                    }, 'audit_completed');
+                }, 3500);
+            });
+        }
+
+        document.querySelectorAll('.checkbox-item').forEach((item) => {
+            item.addEventListener('click', function (e) {
+                if (e.target.tagName !== 'INPUT') {
+                    const cb = this.querySelector('input');
+                    cb.checked = !cb.checked;
+                }
+
+                const input = this.querySelector('input');
+                this.classList.toggle('checked', input.checked);
+            });
         });
-    });
 
-    const commitment = document.getElementById('commitment');
-    if (commitment) {
-        commitment.addEventListener('input', function (e) {
-            const value = parseInt(e.target.value, 10);
-            const valueEl = document.getElementById('commitmentValue');
-            const feedback = document.getElementById('commitmentFeedback');
+        document.querySelectorAll('.radio-item').forEach((item) => {
+            item.addEventListener('click', function (e) {
+                if (e.target.tagName !== 'INPUT') {
+                    const input = this.querySelector('input');
+                    input.checked = true;
+                }
 
-            if (valueEl) {
-                valueEl.textContent = value;
+                this.parentElement.querySelectorAll('.radio-item').forEach((radio) => {
+                    radio.classList.remove('selected');
+                });
+
+                this.classList.add('selected');
+            });
+        });
+
+        const commitment = document.getElementById('commitment');
+        if (commitment) {
+            commitment.addEventListener('input', function (e) {
+                const value = parseInt(e.target.value, 10);
+                const valueEl = document.getElementById('commitmentValue');
+                const feedback = document.getElementById('commitmentFeedback');
+
+                if (valueEl) {
+                    valueEl.textContent = value;
+                }
+
+                if (!feedback) {
+                    return;
+                }
+
+                if (value <= 3) {
+                    feedback.textContent = 'Just curious';
+                    feedback.style.color = '#999';
+                } else if (value <= 5) {
+                    feedback.textContent = 'Thinking about it';
+                    feedback.style.color = '#666';
+                } else if (value <= 7) {
+                    feedback.textContent = 'Ready to take action';
+                    feedback.style.color = '#d4af37';
+                } else if (value <= 9) {
+                    feedback.textContent = 'Very committed!';
+                    feedback.style.color = '#1a4d2e';
+                } else {
+                    feedback.textContent = "ALL IN - Let's do this! 🔥";
+                    feedback.style.color = '#e74c3c';
+                    feedback.style.fontWeight = 'bold';
+                }
+            });
+        }
+
+        function openWhatsApp() {
+            const firstName = formData.firstName || 'Friend';
+            const message = encodeURIComponent(
+                `Hi! I just completed my Money Leak Audit and I'm interested in learning more about the Millionaire Mind Intensive event. My name is ${firstName}.`
+            );
+            window.open(`https://wa.me/14199633788?text=${message}`, '_blank');
+        }
+
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const green = [26, 77, 46];
+            const gold = [212, 175, 55];
+            const white = [255, 255, 255];
+            const black = [0, 0, 0];
+            const red = [231, 76, 60];
+            const lightGray = [240, 240, 240];
+            const paleGold = [255, 249, 230];
+            const paleBlue = [240, 248, 255];
+
+            const pageWidth = 210;
+            const pageHeight = 297;
+            const margin = 20;
+            const contentWidth = 170;
+            const firstName = formData.firstName || 'Friend';
+
+            function addWrappedText(lines, x, y, lineHeight) {
+                lines.forEach((line) => {
+                    doc.text(line, x, y, { charSpace: 0 });
+                    y += lineHeight;
+                });
+                return y;
             }
 
-            if (!feedback) {
-                return;
+            function splitParagraphs(paragraphs, maxWidth) {
+                return paragraphs.map((paragraph) =>
+                    paragraph === '' ? [''] : doc.splitTextToSize(paragraph, maxWidth)
+                );
             }
 
-            if (value <= 3) {
-                feedback.textContent = 'Just curious';
-                feedback.style.color = '#999';
-            } else if (value <= 5) {
-                feedback.textContent = 'Thinking about it';
-                feedback.style.color = '#666';
-            } else if (value <= 7) {
-                feedback.textContent = 'Ready to take action';
-                feedback.style.color = '#d4af37';
-            } else if (value <= 9) {
-                feedback.textContent = 'Very committed!';
-                feedback.style.color = '#1a4d2e';
-            } else {
-                feedback.textContent = "ALL IN - Let's do this! 🔥";
-                feedback.style.color = '#e74c3c';
-                feedback.style.fontWeight = 'bold';
+            function getParagraphBlockHeight(paragraphs, lineHeight, paragraphGap) {
+                return paragraphs.reduce((total, lines, index) => {
+                    const linesHeight = lines.length * lineHeight;
+                    const gap = index < paragraphs.length - 1 ? paragraphGap : 0;
+                    return total + linesHeight + gap;
+                }, 0);
             }
-        });
-    }
 
-    function openWhatsApp() {
-        const firstName = formData.firstName || 'Friend';
-        const message = encodeURIComponent(
-            `Hi! I just completed my Money Leak Audit and I'm interested in learning more about the Millionaire Mind Intensive event. My name is ${firstName}.`
-        );
-        window.open(`https://wa.me/14199633788?text=${message}`, '_blank');
-    }
+            function addParagraphBlock(paragraphs, x, y, lineHeight, paragraphGap) {
+                paragraphs.forEach((lines, index) => {
+                    y = addWrappedText(lines, x, y, lineHeight);
+                    if (index < paragraphs.length - 1) {
+                        y += paragraphGap;
+                    }
+                });
+                return y;
+            }
 
-    function generatePDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+            function drawFilledBox(boxX, boxY, boxW, boxH, fillColor) {
+                doc.setFillColor(...fillColor);
+                doc.roundedRect(boxX, boxY, boxW, boxH, 3, 3, 'F');
+            }
 
-        const green = [26, 77, 46];
-        const gold = [212, 175, 55];
-        const white = [255, 255, 255];
-        const black = [0, 0, 0];
-        const red = [231, 76, 60];
-        const lightGray = [240, 240, 240];
+            doc.setFillColor(...green);
+            doc.rect(0, 0, pageWidth, pageHeight, 'F');
 
-        let yPos = 0;
-        const margin = 20;
-        const firstName = formData.firstName || 'Friend';
+            doc.setFontSize(16);
+            doc.setTextColor(...gold);
+            doc.setFont('helvetica', 'italic');
+            doc.text("T. Harv Eker's", 105, 90, { align: 'center', charSpace: 0 });
 
-        doc.setFillColor(...green);
-        doc.rect(0, 0, 210, 297, 'F');
+            doc.setFontSize(38);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...white);
+            doc.text('YOUR MONEY', 105, 115, { align: 'center', charSpace: 0 });
+            doc.text('LEAK REPORT', 105, 135, { align: 'center', charSpace: 0 });
 
-        doc.setFontSize(16);
-        doc.setTextColor(...gold);
-        doc.setFont('helvetica', 'italic');
-        doc.text("T. Harv Eker's", 105, 90, { align: 'center', charSpace: 0 });
+            doc.setFillColor(255, 255, 255, 0.1);
+            doc.roundedRect(40, 150, 130, 35, 5, 5, 'F');
 
-        doc.setFontSize(38);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...white);
-        doc.text('YOUR MONEY', 105, 115, { align: 'center', charSpace: 0 });
-        doc.text('LEAK REPORT', 105, 135, { align: 'center', charSpace: 0 });
+            doc.setFontSize(18);
+            doc.setTextColor(...gold);
+            doc.text('Prepared For:', 105, 165, { align: 'center', charSpace: 0 });
 
-        doc.setFillColor(255, 255, 255, 0.1);
-        doc.roundedRect(40, 150, 130, 35, 5, 5, 'F');
+            doc.setFontSize(22);
+            doc.setTextColor(...white);
+            doc.text(firstName, 105, 178, { align: 'center', charSpace: 0 });
 
-        doc.setFontSize(18);
-        doc.setTextColor(...gold);
-        doc.text('Prepared For:', 105, 165, { align: 'center', charSpace: 0 });
+            doc.addPage();
+            doc.setFillColor(...green);
+            doc.rect(0, 0, pageWidth, 50, 'F');
 
-        doc.setFontSize(22);
-        doc.setTextColor(...white);
-        doc.text(firstName, 105, 178, { align: 'center', charSpace: 0 });
+            doc.setFontSize(18);
+            doc.setTextColor(...white);
+            doc.setFont('helvetica', 'bold');
+            doc.text('MILLIONAIRE MIND INTENSIVE', margin, 25, { charSpace: 0 });
 
-        doc.addPage();
-        doc.setFillColor(...green);
-        doc.rect(0, 0, 210, 50, 'F');
+            let yPos = 70;
 
-        doc.setFontSize(18);
-        doc.setTextColor(...white);
-        doc.setFont('helvetica', 'bold');
-        doc.text('MILLIONAIRE MIND INTENSIVE', margin, 25, { charSpace: 0 });
+            doc.setFontSize(12);
+            doc.setTextColor(...black);
+            doc.setFont('helvetica', 'bold');
+            doc.text(`Dear ${firstName},`, margin, yPos, { charSpace: 0 });
 
-        yPos = 70;
-        doc.setFontSize(12);
-        doc.setTextColor(...black);
-        doc.setFont('helvetica', 'bold');
-        doc.text('Dear ' + firstName + ',', margin, yPos, { charSpace: 0 });
+            yPos += 10;
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
 
-        yPos += 10;
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10);
+            const introText = [
+                'Thank you for completing the Money Leak Audit. Based on your responses,',
+                'we have identified critical patterns that are quietly draining your wealth',
+                'potential. This report reveals not just WHERE you are losing money, but',
+                'WHY these leaks exist and HOW to transform them into opportunities.'
+            ];
+            yPos = addWrappedText(introText, margin, yPos, 5);
 
-        const introText = [
-            'Thank you for completing the Money Leak Audit. Based on your responses,',
-            'we have identified critical patterns that are quietly draining your wealth',
-            'potential. This report reveals not just WHERE you are losing money, but',
-            'WHY these leaks exist and HOW to transform them into opportunities.'
-        ];
+            yPos += 10;
+            drawFilledBox(margin, yPos, contentWidth, 40, lightGray);
 
-        introText.forEach((line) => {
-            doc.text(line, margin, yPos, { charSpace: 0 });
-            yPos += 5;
-        });
+            doc.setFontSize(12);
+            doc.setTextColor(...black);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Your Total Annual Loss:', margin + 5, yPos + 12, { charSpace: 0 });
 
-        yPos += 10;
-        doc.setFillColor(...lightGray);
-        doc.roundedRect(margin, yPos, 170, 40, 3, 3, 'F');
+            doc.setFontSize(36);
+            doc.setTextColor(...red);
+            doc.setFont('helvetica', 'bold');
+            doc.text(`$${formData.totalLeakAmount.toLocaleString()}`, margin + 5, yPos + 28, { charSpace: 0 });
 
-        doc.setFontSize(12);
-        doc.setTextColor(...black);
-        doc.text('Your Total Annual Loss:', margin + 5, yPos + 12, { charSpace: 0 });
+            doc.setFontSize(11);
+            doc.setTextColor(...black);
+            doc.setFont('helvetica', 'normal');
+            doc.text('per year in preventable leaks', margin + 5, yPos + 36, { charSpace: 0 });
 
-        doc.setFontSize(36);
-        doc.setTextColor(...red);
-        doc.setFont('helvetica', 'bold');
-        doc.text('$' + formData.totalLeakAmount.toLocaleString(), margin + 5, yPos + 28, { charSpace: 0 });
+            doc.addPage();
+            yPos = 20;
 
-        doc.setFontSize(11);
-        doc.setTextColor(...black);
-        doc.setFont('helvetica', 'normal');
-        doc.text('per year in preventable leaks', margin + 5, yPos + 36, { charSpace: 0 });
+            doc.setFontSize(16);
+            doc.setTextColor(...green);
+            doc.setFont('helvetica', 'bold');
+            doc.text('YOUR TOP 3 MONEY LEAKS: DETAILED ANALYSIS', margin, yPos, { charSpace: 0 });
 
-        doc.save(firstName + '_MMI_Complete_Leak_Report.pdf');
-    }
-</script>
+            yPos += 15;
+
+            function drawLeakBox(title, annualLoss, paragraphs) {
+                const lineHeight = 4;
+                const paragraphGap = 4;
+                const wrapped = splitParagraphs(paragraphs, 158);
+                const textHeight = getParagraphBlockHeight(wrapped, lineHeight, paragraphGap);
+                const boxHeight = 24 + textHeight + 6;
+
+                drawFilledBox(margin, yPos, contentWidth, boxHeight, paleGold);
+
+                doc.setFontSize(14);
+                doc.setTextColor(...black);
+                doc.setFont('helvetica', 'bold');
+                doc.text(title, margin + 5, yPos + 8, { charSpace: 0 });
+
+                doc.setFontSize(11);
+                doc.setTextColor(...red);
+                doc.text(`Annual Loss: $${annualLoss.toLocaleString()}`, margin + 5, yPos + 16, { charSpace: 0 });
+
+                doc.setFontSize(9);
+                doc.setTextColor(...black);
+                doc.setFont('helvetica', 'normal');
+
+                let lineY = yPos + 24;
+                lineY = addParagraphBlock(wrapped, margin + 5, lineY, lineHeight, paragraphGap);
+
+                yPos += boxHeight + 5;
+            }
+
+            drawLeakBox('1. THE UNDERPRICING TRAP', formData.pricingLeak, [
+                'What is happening: You are leaving money on the table by undervaluing your services, discounting to close deals, or accepting less than you deserve.',
+                `Why this matters: Every dollar you discount is a dollar that could compound into thousands. Over 5 years, this leak costs you $${(formData.pricingLeak * 5).toLocaleString()}.`,
+                'The opportunity: Premium pricing attracts premium clients. When you charge what you are worth, you work with better clients, deliver better results, and build a reputation that commands even higher fees.'
+            ]);
+
+            drawLeakBox('2. THE TIME WASTE LEAK', formData.timeLeak, [
+                'What is happening: You are trapped in low-value activities - admin work, endless meetings, tasks that do not move the needle. Your time has become your biggest expense.',
+                'Why this matters: Time is your most valuable asset. You cannot scale by working more hours. This leak is stealing your freedom AND your income.',
+                'The opportunity: By systematizing and delegating, you can reclaim 20+ hours per week to focus on high-value activities that 10x your income.'
+            ]);
+
+            drawLeakBox('3. THE NO SYSTEMS LEAK', formData.systemsLeak, [
+                'What is happening: Without systems to track numbers, automate processes, and measure what matters, you are flying blind. You cannot optimize what you do not measure.',
+                'Why this matters: Systems turn chaos into clarity. They reveal hidden profit centers, eliminate waste, and create predictable growth.',
+                'The opportunity: With the right systems, you can double your revenue without doubling your workload. Systems create leverage and freedom.'
+            ]);
+
+            doc.addPage();
+            yPos = 20;
+
+            doc.setFontSize(16);
+            doc.setTextColor(...green);
+            doc.setFont('helvetica', 'bold');
+            doc.text('YOUR MONEY BLUEPRINT: THE INVISIBLE FORCE', margin, yPos, { charSpace: 0 });
+
+            yPos += 15;
+
+            const blueprintParagraphs = splitParagraphs([
+                'What Your Answers Reveal:',
+                'Your beliefs about money - formed in childhood and reinforced throughout your life - are the invisible operating system running your financial life.',
+                'These beliefs determine:',
+                '  - How much you think you deserve to earn',
+                '  - Whether you see opportunities or obstacles',
+                '  - How comfortable you are with wealth',
+                '  - Your relationship with risk and investment',
+                'Here is the truth: Your current income is a direct reflection of your money blueprint. To earn more, you must first UPGRADE your blueprint.',
+                'The Millionaire Mind Intensive teaches you how to identify and rewire the limiting beliefs that are capping your income - often in a single weekend.'
+            ], 158);
+
+            const blueprintLineHeight = 4;
+            const blueprintGap = 3;
+            const blueprintHeight = getParagraphBlockHeight(blueprintParagraphs, blueprintLineHeight, blueprintGap);
+            const blueprintBoxHeight = 12 + blueprintHeight + 8;
+
+            drawFilledBox(margin, yPos, contentWidth, blueprintBoxHeight, paleBlue);
+
+            doc.setFontSize(11);
+            doc.setTextColor(...black);
+            doc.setFont('helvetica', 'bold');
+            doc.text('What Your Answers Reveal:', margin + 5, yPos + 8, { charSpace: 0 });
+
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'normal');
+
+            let lineY = yPos + 16;
+            lineY = addParagraphBlock(blueprintParagraphs.slice(1), margin + 5, lineY, blueprintLineHeight, blueprintGap);
+
+            yPos += blueprintBoxHeight + 10;
+
+            const breakthroughTitle = 'YOUR BREAKTHROUGH OPPORTUNITY';
+            const breakthroughParagraphs = splitParagraphs([
+                'Based on your commitment level and answers, you are in the top 20% of people who are READY for a major financial breakthrough. Most people never take action. You did. That puts you ahead of 80% of the population.',
+                'The question is: What will you do with this information?',
+                'You can close this PDF and go back to your current path... or you can take the next step and join 10 million people who transformed their financial lives at the Millionaire Mind Intensive.'
+            ], 158);
+
+            const breakthroughLineHeight = 4;
+            const breakthroughGap = 4;
+            const breakthroughTextHeight = getParagraphBlockHeight(
+                breakthroughParagraphs,
+                breakthroughLineHeight,
+                breakthroughGap
+            );
+            const breakthroughBoxHeight = 20 + breakthroughTextHeight + 8;
+
+            drawFilledBox(margin, yPos, contentWidth, breakthroughBoxHeight, gold);
+
+            doc.setFontSize(14);
+            doc.setTextColor(...white);
+            doc.setFont('helvetica', 'bold');
+            doc.text(breakthroughTitle, margin + 85, yPos + 12, { align: 'center', charSpace: 0 });
+
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'normal');
+
+            lineY = yPos + 22;
+            addParagraphBlock(breakthroughParagraphs, margin + 5, lineY, breakthroughLineHeight, breakthroughGap);
+
+            doc.addPage();
+            doc.setFillColor(...green);
+            doc.rect(0, 0, pageWidth, 60, 'F');
+
+            doc.setFontSize(20);
+            doc.setTextColor(...white);
+            doc.setFont('helvetica', 'bold');
+            doc.text('YOUR NEXT STEP', 105, 30, { align: 'center', charSpace: 0 });
+
+            yPos = 80;
+            doc.setFontSize(11);
+            doc.setTextColor(...black);
+            doc.setFont('helvetica', 'normal');
+
+            const nextStepsParagraphs = splitParagraphs([
+                'This report shows you WHERE you are losing money. The Millionaire Mind Intensive shows you HOW to fix it - in 3 days.',
+                'At MMI, you will:',
+                '  1. Identify and eliminate your #1 wealth blocker (your money blueprint)',
+                '  2. Learn the exact strategies millionaires use to build passive income',
+                '  3. Master the mindset that turns obstacles into opportunities',
+                '  4. Create a personalized action plan to 2x-10x your income',
+                'This is not theory. This is a proven system used by 10 million people in 30 countries to transform their financial lives.',
+                'Here is what attendees say:',
+                '"I made back my investment in the first 30 days and went on to build a $2.3M business." - Sarah Chen, Singapore',
+                '"MMI showed me I was playing small. Within 6 months, I tripled my income." - Michael Torres, USA',
+                'The event is happening soon. Seats are limited. Your spot is waiting.',
+                'Visit: www.millionairemind.live',
+                'To your wealth and freedom,',
+                'T. Harv Eker & The MMI Team'
+            ], 170);
+
+            yPos = addParagraphBlock(nextStepsParagraphs, margin, yPos, 5, 3);
+
+            doc.save(firstName + '_MMI_Complete_Leak_Report.pdf');
+        }
+    </script>
 </body>
 </html>
