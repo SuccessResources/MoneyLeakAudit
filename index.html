@@ -47,6 +47,36 @@
             background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important;
         }
 
+        .brand-strip {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 18px !important;
+            margin-bottom: 18px !important;
+            flex-wrap: wrap !important;
+        }
+
+        .sr-logo {
+            max-width: 220px !important;
+            width: 100% !important;
+            height: auto !important;
+            opacity: 0.95 !important;
+        }
+
+        .brand-divider {
+            width: 1px !important;
+            height: 34px !important;
+            background: rgba(255, 255, 255, 0.25) !important;
+        }
+
+        .mmi-kicker {
+            color: #d4af37 !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            letter-spacing: 2px !important;
+            text-transform: uppercase !important;
+        }
+
         .logo {
             font-family: 'Brush Script MT', cursive !important;
             font-size: 36px !important;
@@ -62,13 +92,33 @@
             letter-spacing: 2px !important;
         }
 
+        .hero-proof {
+            display: flex !important;
+            justify-content: center !important;
+            gap: 10px !important;
+            margin-top: 18px !important;
+            flex-wrap: wrap !important;
+        }
+
+        .proof-pill {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            color: white !important;
+            padding: 8px 14px !important;
+            border-radius: 999px !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.4px !important;
+        }
+
         .live-feed {
-            background: rgba(255, 255, 255, 0.95) !important;
+            background: rgba(255, 255, 255, 0.98) !important;
             border-radius: 8px !important;
             padding: 15px !important;
             margin: 20px auto !important;
             max-width: 600px !important;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+            border-left: 5px solid #d4af37 !important;
         }
 
         .feed-item {
@@ -78,6 +128,7 @@
             display: flex !important;
             align-items: center !important;
             animation: slideIn 0.5s ease !important;
+            font-weight: 600 !important;
         }
 
         .feed-item::before {
@@ -476,20 +527,40 @@
             h1 { font-size: 24px !important; }
             .leak-amount { font-size: 48px !important; }
             .card { padding: 25px !important; }
+            .sr-logo { max-width: 180px !important; }
+            .brand-divider { display: none !important; }
+            .hero-proof { gap: 8px !important; }
+            .proof-pill { font-size: 11px !important; }
         }
     </style>
 </head>
 <body>
     <div class="mmi-wrapper">
         <div class="header">
+            <div class="brand-strip">
+                <img
+                    class="sr-logo"
+                    src="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/ff96df6f1fde9_b0cbdd4d2f0ff-605c893fed0f4-sr-percent-20logo-percent-20white.png"
+                    alt="Success Resources"
+                />
+                <div class="brand-divider"></div>
+                <div class="mmi-kicker">3-Day Live In Person</div>
+            </div>
+
             <div class="logo">💎 T. Harv Eker's 💰</div>
             <h1 style="color: white !important; margin: 10px 0 !important;">MILLIONAIRE MIND INTENSIVE</h1>
-            <div class="tagline">First Be Free, Then Be Rich</div>
+            <div class="tagline">Unlock Your True Financial Freedom</div>
+
+            <div class="hero-proof">
+                <div class="proof-pill">10 Million+ Attendees</div>
+                <div class="proof-pill">30 Countries</div>
+                <div class="proof-pill">World's No. 1 Seminar Company</div>
+            </div>
         </div>
 
         <div class="container">
             <div class="live-feed" id="liveFeed">
-                <div class="feed-item">Michael from Singapore just found $147K in leaks</div>
+                <div class="feed-item">John D. from Texas just secured 2 VIP MMI tickets</div>
             </div>
 
             <div class="card">
@@ -497,7 +568,7 @@
                     <h1>The 3-Minute Audit That Found $234,000 in Hidden Revenue for 10,000+ Entrepreneurs</h1>
                     <p class="subtitle">Discover the exact money leaks draining your business right now</p>
                     <div class="urgency-banner">
-                        ⏰ LIMITED: First 100 people get FREE "7 Money Blueprints Cheatsheet" ($47 value)
+                        ⏰ HIGH DEMAND: First 100 attendees get the FREE "7 Money Blueprints Cheatsheet" ($47 value)
                         <div id="counterDisplay" style="margin-top: 5px !important;">Currently: <span id="spotCounter">73</span>/100 claimed</div>
                     </div>
                     <div class="trust-badges">
@@ -537,7 +608,7 @@
                             </div>
                             <div class="_form_element _x64619065 _full_width">
                                 <label for="lastname" class="_form-label">Last Name<span class="field-required">*</span></label>
-                                <div class="_field-wrapper">
+                                <div class="._field-wrapper">
                                     <input type="text" id="lastname" name="lastname" placeholder="Type your last name" required/>
                                 </div>
                             </div>
@@ -761,7 +832,7 @@
                             <div class="radio-group">
                                 <div class="radio-item"><input type="radio" id="b1" name="blocker" value="mindset" required><label for="b1" style="margin: 0 !important;">My mindset/beliefs about money</label></div>
                                 <div class="radio-item"><input type="radio" id="b2" name="blocker" value="skills"><label for="b2" style="margin: 0 !important;">Lack of skills/knowledge</label></div>
-                                <div class="radio-item"><input type="radio" id="b3" name="blocker" value="time"><label for="b3" style="margin: 0 !important;">Not enough time/overwhelmed</label></div>
+                                <div class="radio-item"><input type="radio" id="b3" name="blocker" value="time" required><label for="b3" style="margin: 0 !important;">Not enough time/overwhelmed</label></div>
                                 <div class="radio-item"><input type="radio" id="b4" name="blocker" value="capital"><label for="b4" style="margin: 0 !important;">Lack of capital/resources</label></div>
                                 <div class="radio-item"><input type="radio" id="b5" name="blocker" value="unsure"><label for="b5" style="margin: 0 !important;">Honestly not sure - that's why I'm here</label></div>
                             </div>
@@ -799,7 +870,7 @@
                             <div class="bonus-counter">Spot #<span id="finalCounter">73</span> claimed ✓</div>
                         </div>
 
-                        <div class="cta-box" id="finalCta" style="margin-top: 30px !important;">
+                        <div class="cta-box" id="finalCtaPrimary" style="margin-top: 30px !important;">
                             <h3>Ready to Transform Your Financial Life?</h3>
                             <p style="margin-bottom: 20px !important;">Join us at the Millionaire Mind Intensive live event and discover which date and location works best for you</p>
                             <button class="btn" onclick="window.open('https://www.millionairemind.live/', '_blank')" style="margin-top: 15px !important;">
@@ -807,7 +878,7 @@
                             </button>
                         </div>
 
-                        <div class="cta-box" id="finalCta" style="margin-top: 30px !important;">
+                        <div class="cta-box" id="finalCtaSecondary" style="margin-top: 30px !important;">
                             <h3>Download Your Personalized PDF Report</h3>
                             <p style="margin-bottom: 20px !important;">Get your full Money Leak Audit in one downloadable report, then take the next step with Millionaire Mind Intensive to start transforming your financial future.</p>
                             <button class="btn btn-green" onclick="generatePDF()" style="margin-top: 15px !important; background: white !important; color: #1a4d2e !important;">📥 Download PDF Report</button>
@@ -915,18 +986,31 @@
         }
 
         const feedMessages = [
-            'Michael from Singapore just found $147K in leaks',
-            'Sarah from Dubai downloaded her report',
-            'John from Kuala Lumpur booked a strategy call',
-            'Emma from London discovered $89K in hidden revenue',
-            'David from New York just claimed spot #74',
-            'Lisa from Bangkok started the audit',
-            'Ahmed from Abu Dhabi found $201K in leaks'
+            'John D. from Texas just secured 2 VIP MMI tickets',
+            'Amelia from Singapore completed her Money Leak Audit',
+            'Marcus from London just upgraded to VIP',
+            'Priya from Kuala Lumpur found $118K in hidden leaks',
+            'Daniel from Sydney just booked 2 MMI passes',
+            'Rachel from Dubai downloaded her personalized report',
+            'Chris from California just secured a VIP seat',
+            'Nadia from Johannesburg started her free audit',
+            'Michael from New York just bought 2 VIP MMI tickets',
+            'Samantha from Zurich discovered $94K in hidden revenue',
+            'Ethan from Toronto just claimed his event seat',
+            'Farah from Abu Dhabi downloaded her leak report',
+            'Kevin from Cape Town just bought 1 VIP MMI ticket',
+            'Olivia from Melbourne completed her audit',
+            'Jason from Frankfurt just secured 2 event passes',
+            'Alicia from Brussels found $76K in preventable leaks',
+            'Ryan from Durban just upgraded to VIP',
+            'Mei from Singapore just booked her MMI ticket',
+            'Andre from Warsaw started the audit',
+            'Sophia from Dubai just secured 2 VIP MMI tickets'
         ];
 
         let feedIndex = 0;
 
-        setInterval(() => {
+        function rotateFeed() {
             const feedItem = document.querySelector('.feed-item');
             if (!feedItem) {
                 return;
@@ -934,7 +1018,9 @@
 
             feedIndex = (feedIndex + 1) % feedMessages.length;
             feedItem.textContent = feedMessages[feedIndex];
-        }, 5000);
+        }
+
+        setInterval(rotateFeed, 6500);
 
         setInterval(() => {
             const counter = document.getElementById('spotCounter');
@@ -1496,7 +1582,7 @@
                 'T. Harv Eker & The MMI Team'
             ], 170);
 
-            yPos = addParagraphBlock(nextStepsParagraphs, margin, yPos, 5, 3);
+            addParagraphBlock(nextStepsParagraphs, margin, yPos, 5, 3);
 
             doc.save(firstName + '_MMI_Complete_Leak_Report.pdf');
         }
