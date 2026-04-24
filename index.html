@@ -1,1591 +1,1212 @@
-<!-- zapier version 2 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The 3-Minute Audit That Found $234K in Hidden Revenue</title>
-    <style>
-        * {
-            margin: 0 !important;
-            padding: 0 !important;
-            box-sizing: border-box !important;
-        }
-
-        html, body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-            background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important;
-            color: #333 !important;
-            line-height: 1.6 !important;
-            position: relative !important;
-            overflow-x: hidden !important;
-            width: 100% !important;
-            height: auto !important;
-        }
-
-        .mmi-wrapper {
-            width: 100% !important;
-            background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important;
-            min-height: 100vh !important;
-            position: relative !important;
-            z-index: 1 !important;
-        }
-
-        .container {
-            max-width: 800px !important;
-            margin: 0 auto !important;
-            padding: 20px !important;
-            position: relative !important;
-            z-index: 1 !important;
-        }
-
-        .header {
-            text-align: center !important;
-            color: white !important;
-            padding: 40px 20px !important;
-            position: relative !important;
-            background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important;
-        }
-
-        .brand-strip {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 18px !important;
-            margin-bottom: 18px !important;
-            flex-wrap: wrap !important;
-        }
-
-        .sr-logo {
-            max-width: 220px !important;
-            width: 100% !important;
-            height: auto !important;
-            opacity: 0.95 !important;
-        }
-
-        .brand-divider {
-            width: 1px !important;
-            height: 34px !important;
-            background: rgba(255, 255, 255, 0.25) !important;
-        }
-
-        .mmi-kicker {
-            color: #d4af37 !important;
-            font-size: 13px !important;
-            font-weight: 700 !important;
-            letter-spacing: 2px !important;
-            text-transform: uppercase !important;
-        }
-
-        .logo {
-            font-family: 'Brush Script MT', cursive !important;
-            font-size: 36px !important;
-            color: #d4af37 !important;
-            margin-bottom: 10px !important;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
-        }
-
-        .tagline {
-            font-size: 14px !important;
-            color: #d4af37 !important;
-            text-transform: uppercase !important;
-            letter-spacing: 2px !important;
-        }
-
-        .hero-proof {
-            display: flex !important;
-            justify-content: center !important;
-            gap: 10px !important;
-            margin-top: 18px !important;
-            flex-wrap: wrap !important;
-        }
-
-        .proof-pill {
-            background: rgba(255, 255, 255, 0.12) !important;
-            border: 1px solid rgba(255, 255, 255, 0.18) !important;
-            color: white !important;
-            padding: 8px 14px !important;
-            border-radius: 999px !important;
-            font-size: 12px !important;
-            font-weight: 600 !important;
-            letter-spacing: 0.4px !important;
-        }
-
-        .live-feed {
-            background: rgba(255, 255, 255, 0.98) !important;
-            border-radius: 8px !important;
-            padding: 15px !important;
-            margin: 20px auto !important;
-            max-width: 600px !important;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-            border-left: 5px solid #d4af37 !important;
-        }
-
-        .feed-item {
-            padding: 8px !important;
-            font-size: 14px !important;
-            color: #1a4d2e !important;
-            display: flex !important;
-            align-items: center !important;
-            animation: slideIn 0.5s ease !important;
-            font-weight: 600 !important;
-        }
-
-        .feed-item::before {
-            content: "🔴" !important;
-            margin-right: 8px !important;
-            animation: pulse 2s infinite !important;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .card {
-            background: white !important;
-            border-radius: 12px !important;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
-            padding: 40px !important;
-            margin: 20px 0 !important;
-            position: relative !important;
-            overflow: hidden !important;
-        }
-
-        .card::before {
-            content: "" !important;
-            position: absolute !important;
-            top: -5px !important;
-            left: -5px !important;
-            right: -5px !important;
-            bottom: -5px !important;
-            background: linear-gradient(45deg, #d4af37, #1a4d2e, #d4af37) !important;
-            z-index: -1 !important;
-            opacity: 0.3 !important;
-            filter: blur(10px) !important;
-        }
-
-        .card-decoration {
-            position: absolute !important;
-            top: 20px !important;
-            right: 20px !important;
-            font-size: 80px !important;
-            opacity: 0.05 !important;
-            z-index: 0 !important;
-        }
-
-        .stage {
-            display: none !important;
-            position: relative !important;
-            z-index: 1 !important;
-        }
-
-        .stage.active {
-            display: block !important;
-            animation: fadeIn 0.5s ease-in !important;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            color: #1a4d2e !important;
-            font-size: 32px !important;
-            margin-bottom: 15px !important;
-            line-height: 1.2 !important;
-        }
-
-        h2 {
-            color: #1a4d2e !important;
-            font-size: 24px !important;
-            margin-bottom: 20px !important;
-        }
-
-        h3 {
-            color: #d4af37 !important;
-            margin-bottom: 15px !important;
-        }
-
-        .subtitle {
-            color: #666 !important;
-            font-size: 18px !important;
-            margin-bottom: 30px !important;
-        }
-
-        .trust-badges {
-            display: flex !important;
-            justify-content: center !important;
-            gap: 20px !important;
-            margin: 20px 0 !important;
-            font-size: 12px !important;
-            color: #666 !important;
-            flex-wrap: wrap !important;
-        }
-
-        .urgency-banner {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
-            color: white !important;
-            padding: 12px !important;
-            text-align: center !important;
-            border-radius: 8px !important;
-            margin-bottom: 20px !important;
-            font-weight: 600 !important;
-            animation: glow 2s infinite !important;
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(231, 76, 60, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(231, 76, 60, 0.8); }
-        }
-
-        .form-group {
-            margin-bottom: 20px !important;
-        }
-
-        label {
-            display: block !important;
-            margin-bottom: 8px !important;
-            color: #333 !important;
-            font-weight: 600 !important;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        select {
-            width: 100% !important;
-            padding: 12px !important;
-            border: 2px solid #ddd !important;
-            border-radius: 6px !important;
-            font-size: 16px !important;
-            transition: border-color 0.3s !important;
-            background: white !important;
-            color: #333 !important;
-        }
-
-        input:focus,
-        select:focus {
-            outline: none !important;
-            border-color: #d4af37 !important;
-        }
-
-        .helper-text {
-            font-size: 13px !important;
-            color: #666 !important;
-            margin-top: 5px !important;
-        }
-
-        .checkbox-grid {
-            display: grid !important;
-            grid-template-columns: 1fr !important;
-            gap: 12px !important;
-            margin: 20px 0 !important;
-        }
-
-        .checkbox-item {
-            display: flex !important;
-            align-items: flex-start !important;
-            padding: 15px !important;
-            border: 2px solid #e0e0e0 !important;
-            border-radius: 8px !important;
-            cursor: pointer !important;
-            transition: all 0.3s !important;
-            background: white !important;
-        }
-
-        .checkbox-item:hover {
-            border-color: #d4af37 !important;
-            background: #f9f9f9 !important;
-        }
-
-        .checkbox-item.checked {
-            border-color: #1a4d2e !important;
-            background: #f0f8f4 !important;
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            margin-right: 12px !important;
-            margin-top: 2px !important;
-            width: 20px !important;
-            height: 20px !important;
-            cursor: pointer !important;
-        }
-
-        .checkbox-label {
-            flex: 1 !important;
-            cursor: pointer !important;
-            font-size: 15px !important;
-        }
-
-        .radio-group {
-            margin: 20px 0 !important;
-        }
-
-        .radio-item {
-            display: flex !important;
-            align-items: center !important;
-            padding: 12px !important;
-            margin-bottom: 10px !important;
-            border: 2px solid #e0e0e0 !important;
-            border-radius: 8px !important;
-            cursor: pointer !important;
-            transition: all 0.3s !important;
-            background: white !important;
-        }
-
-        .radio-item:hover {
-            border-color: #d4af37 !important;
-            background: #f9f9f9 !important;
-        }
-
-        .radio-item.selected {
-            border-color: #1a4d2e !important;
-            background: #f0f8f4 !important;
-        }
-
-        .radio-item input[type="radio"] {
-            margin-right: 12px !important;
-            width: 18px !important;
-            height: 18px !important;
-            cursor: pointer !important;
-        }
-
-        .slider-container {
-            margin: 30px 0 !important;
-        }
-
-        .slider-value {
-            text-align: center !important;
-            font-size: 24px !important;
-            color: #1a4d2e !important;
-            font-weight: bold !important;
-            margin-bottom: 15px !important;
-        }
-
-        input[type="range"] {
-            width: 100% !important;
-            height: 8px !important;
-            border-radius: 5px !important;
-            background: #ddd !important;
-            outline: none !important;
-            -webkit-appearance: none !important;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none !important;
-            appearance: none !important;
-            width: 24px !important;
-            height: 24px !important;
-            border-radius: 50% !important;
-            background: #d4af37 !important;
-            cursor: pointer !important;
-        }
-
-        input[type="range"]::-moz-range-thumb {
-            width: 24px !important;
-            height: 24px !important;
-            border-radius: 50% !important;
-            background: #d4af37 !important;
-            cursor: pointer !important;
-        }
-
-        .slider-feedback {
-            text-align: center !important;
-            margin-top: 10px !important;
-            font-size: 16px !important;
-            font-weight: 600 !important;
-        }
-
-        .btn {
-            width: 100% !important;
-            padding: 16px !important;
-            background: linear-gradient(135deg, #d4af37 0%, #f0d068 100%) !important;
-            color: #1a4d2e !important;
-            border: none !important;
-            border-radius: 8px !important;
-            font-size: 18px !important;
-            font-weight: bold !important;
-            cursor: pointer !important;
-            transition: transform 0.2s, box-shadow 0.2s !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1px !important;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4) !important;
-        }
-
-        .btn:active {
-            transform: translateY(0) !important;
-        }
-
-        .btn-green {
-            background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important;
-            color: white !important;
-        }
-
-        .progress-bar {
-            width: 100% !important;
-            height: 6px !important;
-            background: #e0e0e0 !important;
-            border-radius: 3px !important;
-            margin: 30px 0 !important;
-            overflow: hidden !important;
-        }
-
-        .progress-fill {
-            height: 100% !important;
-            background: linear-gradient(90deg, #1a4d2e 0%, #d4af37 100%) !important;
-            transition: width 0.5s ease !important;
-        }
-
-        .progress-text {
-            text-align: center !important;
-            color: #666 !important;
-            font-size: 14px !important;
-            margin-top: 10px !important;
-        }
-
-        .loading {
-            text-align: center !important;
-            padding: 40px !important;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3 !important;
-            border-top: 4px solid #d4af37 !important;
-            border-radius: 50% !important;
-            width: 50px !important;
-            height: 50px !important;
-            animation: spin 1s linear infinite !important;
-            margin: 20px auto !important;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .leak-amount {
-            font-size: 64px !important;
-            color: #e74c3c !important;
-            font-weight: bold !important;
-            margin: 30px 0 !important;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1) !important;
-        }
-
-        .bonus-box {
-            background: #fff9e6 !important;
-            border: 3px dashed #d4af37 !important;
-            padding: 20px !important;
-            border-radius: 8px !important;
-            margin: 20px 0 !important;
-            text-align: center !important;
-        }
-
-        .bonus-counter {
-            font-size: 24px !important;
-            color: #e74c3c !important;
-            font-weight: bold !important;
-            margin: 10px 0 !important;
-        }
-
-        .cta-box {
-            background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%) !important;
-            color: white !important;
-            padding: 30px !important;
-            border-radius: 12px !important;
-            margin: 30px 0 !important;
-            text-align: center !important;
-        }
-
-        .cta-box h3 {
-            color: #d4af37 !important;
-            margin-bottom: 15px !important;
-        }
-
-        .hot-badge {
-            display: inline-block !important;
-            background: #e74c3c !important;
-            color: white !important;
-            padding: 2px 8px !important;
-            border-radius: 4px !important;
-            font-size: 11px !important;
-            font-weight: bold !important;
-            margin-left: 8px !important;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 24px !important; }
-            .leak-amount { font-size: 48px !important; }
-            .card { padding: 25px !important; }
-            .sr-logo { max-width: 180px !important; }
-            .brand-divider { display: none !important; }
-            .hero-proof { gap: 8px !important; }
-            .proof-pill { font-size: 11px !important; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Leak Audit — Millionaire Mind Intensive</title>
+<style>
+
+/* ============================================================
+   SCREEN STYLES
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Colour palette matching millionairemindworld.com/money */
+  --navy:    #0a0f1e;   /* header, footer, dark sections          */
+  --navy2:   #111827;   /* slightly lighter navy for cards        */
+  --bg:      #ffffff;   /* main body                              */
+  --bg-alt:  #f4f5f8;   /* alternating section                    */
+  --text:    #0f172a;   /* body text                              */
+  --text2:   #374151;   /* secondary text                         */
+  --muted:   #6b7280;   /* placeholder / label                    */
+  --gold:    #c9a84c;   /* MMI brand accent                       */
+  --gold-l:  #ddb84e;   /* hover state                            */
+  --gold-d:  rgba(201,168,76,.12); /* tint for selected states   */
+  --border:  #e5e7eb;   /* card borders                           */
+  --grn:     #16a34a;
+  --red:     #dc2626;
+  --pur:     #7c3aed;
+  --r:       8px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:15px}
+a{color:var(--gold);text-decoration:none}
+img{max-width:100%}
+.hidden{display:none!important}
+.wrap{max-width:660px;margin:0 auto;padding:0 20px}
+.wrap-wide{max-width:980px;margin:0 auto;padding:0 24px}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav{background:var(--navy);padding:0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-mark{width:32px;height:32px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#000;flex-shrink:0}
+.nav-wordmark{line-height:1.2}
+.nav-wordmark strong{display:block;font-size:13px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.07em}
+.nav-wordmark span{display:block;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.05em}
+.nav-links{display:flex;gap:22px}
+.nav-links a{font-size:13px;color:rgba(255,255,255,.55);font-weight:500;transition:color .15s}
+.nav-links a:hover{color:#fff}
+.btn-nav{background:var(--gold);color:#000;font-size:13px;font-weight:800;padding:9px 20px;border-radius:6px;border:none;cursor:pointer;transition:background .15s;white-space:nowrap}
+.btn-nav:hover{background:var(--gold-l)}
+@media(max-width:600px){.nav-links{display:none}.nav-wordmark span{display:none}}
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats-bar{background:var(--navy2);padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.stats-inner{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.stat{text-align:center;font-size:11px;color:rgba(255,255,255,.45)}
+.stat strong{display:block;font-size:16px;font-weight:800;color:var(--gold);margin-bottom:1px}
+@media(max-width:520px){.stats-inner{gap:16px}.stat strong{font-size:14px}}
+
+/* ============================================================
+   LANDING — SECTION HELPERS
+   ============================================================ */
+.sec-white{background:var(--bg);padding:60px 0}
+.sec-gray{background:var(--bg-alt);padding:60px 0}
+.sec-navy{background:var(--navy);padding:60px 0}
+@media(max-width:600px){.sec-white,.sec-gray,.sec-navy{padding:44px 0}}
+.eyebrow{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-weight:700;text-align:center;margin-bottom:8px}
+.eyebrow-gold{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;font-weight:700;text-align:center;margin-bottom:8px}
+.sec-h{font-size:clamp(22px,4vw,32px);font-weight:900;text-align:center;margin-bottom:30px;letter-spacing:-.02em;line-height:1.2}
+.sec-h em,.sec-h-inv em{color:var(--gold);font-style:normal}
+.sec-h-inv{font-size:clamp(22px,4vw,32px);font-weight:900;text-align:center;margin-bottom:30px;letter-spacing:-.02em;line-height:1.2;color:#fff}
+.cta-center{text-align:center}
+.cta-note{font-size:12px;color:var(--muted);margin-top:10px}
+.cta-note-inv{font-size:12px;color:rgba(255,255,255,.4);margin-top:10px;text-align:center}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{background:var(--navy);padding:56px 0 52px;text-align:center}
+.hero-tag{display:inline-block;border:1px solid var(--gold);color:var(--gold);background:rgba(201,168,76,.1);border-radius:100px;padding:5px 18px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.live-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(22,163,74,.15);border:1px solid rgba(22,163,74,.3);border-radius:100px;padding:5px 13px;font-size:12px;color:#4ade80;font-weight:600;margin-bottom:20px}
+.live-dot{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{font-size:clamp(28px,5.5vw,50px);font-weight:900;line-height:1.14;margin-bottom:16px;letter-spacing:-.03em;color:#fff}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.65);max-width:480px;margin:0 auto 28px;line-height:1.65}
+
+/* Prominent bonus in hero */
+.bonus-hero{display:flex;align-items:flex-start;gap:14px;background:rgba(201,168,76,.1);border:1.5px solid var(--gold);border-radius:var(--r);padding:16px 20px;max-width:500px;margin:0 auto 28px;text-align:left}
+.bonus-icon{font-size:28px;flex-shrink:0;margin-top:2px}
+.bonus-lbl{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px}
+.bonus-title{font-size:15px;font-weight:800;color:#fff;margin-bottom:2px}
+.bonus-sub{font-size:12px;color:rgba(255,255,255,.5)}
+.value-pill{display:inline-block;background:var(--gold);color:#000;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;margin-left:5px;vertical-align:middle}
+.scarcity{font-size:12px;color:rgba(255,255,255,.45);margin-top:8px}
+.scarcity em{color:var(--gold);font-style:normal;font-weight:700}
+
+/* Primary buttons */
+.btn-gold{display:inline-block;background:var(--gold);color:#000;font-size:16px;font-weight:800;padding:17px 40px;border-radius:var(--r);border:none;cursor:pointer;transition:background .15s,transform .1s;width:100%;max-width:400px;text-align:center}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn-dark{display:inline-block;background:var(--navy);color:#fff;font-size:16px;font-weight:800;padding:17px 40px;border-radius:var(--r);border:none;cursor:pointer;transition:background .15s,transform .1s;width:100%;max-width:400px;text-align:center}
+.btn-dark:hover{background:var(--navy2);transform:translateY(-1px)}
+
+/* ============================================================
+   PATTERN CARDS
+   ============================================================ */
+.pattern-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:12px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.pattern-card:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(201,168,76,.12)}
+.plabel{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:6px}
+.pquote{font-size:17px;font-weight:800;margin-bottom:8px;line-height:1.3;color:var(--text)}
+.pdesc{font-size:14px;color:var(--muted);line-height:1.65}
+.pdesc strong{color:var(--text2);font-weight:700}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+@media(max-width:640px){.testi-grid{grid-template-columns:1fr}}
+.testi-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:22px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.testi-stars{color:var(--gold);font-size:14px;margin-bottom:12px;letter-spacing:1px}
+.testi-q{font-size:14px;color:var(--text2);line-height:1.72;margin-bottom:16px;font-style:italic}
+.testi-q strong{color:var(--text);font-style:normal}
+.testi-person{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.testi-av{width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.testi-name{font-size:14px;font-weight:800;color:var(--text)}
+.testi-role{font-size:12px;color:var(--muted)}
+.testi-tag{background:var(--bg-alt);border:1px solid var(--border);border-radius:6px;padding:7px 12px;font-size:12px;color:var(--muted)}
+.testi-tag strong{color:var(--red);font-weight:700}
+
+/* ============================================================
+   QUIZ SHELL
+   ============================================================ */
+#quiz{background:var(--bg);min-height:100vh;padding-bottom:60px}
+.quiz-header{background:var(--navy);padding:0;position:sticky;top:0;z-index:50}
+.quiz-header-inner{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;max-width:660px;margin:0 auto}
+.quiz-brand{font-size:12px;color:rgba(255,255,255,.45);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.quiz-stepcnt{font-size:12px;color:rgba(255,255,255,.45);font-weight:600}
+.prog-track{height:3px;background:rgba(255,255,255,.1)}
+.prog-bar{height:3px;background:var(--gold);transition:width .4s ease;width:0}
+
+/* Quiz step layout */
+.step{display:none}
+.step.active{display:block;padding:36px 0 0}
+.step-eye{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:8px}
+.step h2{font-size:clamp(20px,4vw,28px);font-weight:900;margin-bottom:8px;line-height:1.22;letter-spacing:-.02em;color:var(--text)}
+.step h2 em{color:var(--gold);font-style:normal}
+.step-sub{color:var(--muted);font-size:15px;margin-bottom:26px;line-height:1.65}
+.field-lbl{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin:18px 0 9px}
+
+/* Form inputs (Step 1 opt-in) */
+.form-group{margin-bottom:14px}
+.form-lbl{display:block;font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px}
+.form-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 15px;font-size:16px;color:var(--text);outline:none;transition:border-color .15s}
+.form-inp:focus{border-color:var(--gold)}
+.form-inp::placeholder{color:#9ca3af}
+.phone-row{display:flex;gap:8px}
+.phone-pre{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 10px;font-size:14px;color:var(--text);outline:none;min-width:88px;cursor:pointer}
+.phone-pre:focus{border-color:var(--gold)}
+.consent-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:18px}
+.consent-row input[type=checkbox]{margin-top:3px;accent-color:var(--gold);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.consent-row label{font-size:13px;color:var(--muted);line-height:1.55;cursor:pointer}
+
+/* Bonus inside Step 1 */
+.bonus-step1{display:flex;align-items:flex-start;gap:12px;background:#fffbeb;border:1.5px solid var(--gold);border-radius:var(--r);padding:15px 18px;margin-bottom:22px}
+.bonus-step1-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.bonus-step1-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px}
+.bonus-step1-sub{font-size:12px;color:var(--muted)}
+
+/* Radio / select options */
+.opt-grid{display:grid;gap:8px;margin-bottom:20px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:13px 16px;font-size:14px;color:var(--text);cursor:pointer;text-align:left;transition:all .12s;display:flex;align-items:center;gap:11px;width:100%}
+.opt:hover{border-color:var(--gold);background:var(--gold-d)}
+.opt.sel{border-color:var(--gold);background:var(--gold-d)}
+.opt.sel .dot{background:var(--gold);border-color:var(--gold)}
+.opt.sel .dot::after{display:block}
+.dot{width:17px;height:17px;min-width:17px;border-radius:50%;border:2px solid #d1d5db;display:flex;align-items:center;justify-content:center;transition:all .12s;flex-shrink:0}
+.dot::after{content:'';width:7px;height:7px;border-radius:50%;background:#000;display:none}
+.hot-badge{display:inline-block;background:#dc2626;color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;margin-left:6px;letter-spacing:.05em;vertical-align:middle}
+
+/* Native select (industry) */
+.select-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:13px 15px;font-size:14px;color:var(--text);outline:none;cursor:pointer;margin-bottom:8px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%236b7280'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.select-inp:focus{border-color:var(--gold)}
+
+/* Checkboxes */
+.chk-group{margin-bottom:8px}
+.chk{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:13px 16px;font-size:14px;color:var(--text);cursor:pointer;text-align:left;transition:all .12s;display:flex;align-items:flex-start;gap:11px;width:100%}
+.chk:hover{border-color:var(--gold)}
+.chk.on{border-color:var(--gold);background:var(--gold-d)}
+.chk-box{width:19px;height:19px;min-width:19px;border:2px solid #d1d5db;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .12s;font-size:11px;font-weight:800;color:transparent;flex-shrink:0}
+.chk.on .chk-box{background:var(--gold);border-color:var(--gold);color:#000}
+.chk-all-note{font-size:12px;color:var(--muted);margin-bottom:14px;text-align:center}
+
+/* Slider */
+.slider-wrap{margin:18px 0}
+.slider-labs{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px}
+input[type=range]{width:100%;-webkit-appearance:none;height:4px;background:var(--border);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold);cursor:pointer;border:3px solid #fff;box-shadow:0 0 0 2px var(--gold)}
+.slider-val{text-align:center;font-size:28px;font-weight:900;color:var(--gold);margin-top:10px}
+
+/* Navigation row */
+.nav-row{display:flex;gap:10px;margin-top:8px;padding-bottom:40px}
+.btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);font-size:14px;padding:13px 20px;border-radius:var(--r);cursor:pointer;transition:all .12s;white-space:nowrap}
+.btn-back:hover{border-color:var(--text2);color:var(--text)}
+.btn-next{flex:1;background:var(--gold);color:#000;font-size:15px;font-weight:800;padding:14px;border-radius:var(--r);border:none;cursor:pointer;transition:background .12s}
+.btn-next:hover{background:var(--gold-l)}
+.btn-next:disabled{opacity:.3;cursor:not-allowed;pointer-events:none}
+
+/* ============================================================
+   ANALYZING
+   ============================================================ */
+#analyzing{background:var(--bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
+#analyzing h2{font-size:22px;font-weight:800;margin-bottom:36px;color:var(--text)}
+.a-steps{width:100%;max-width:380px;text-align:left}
+.a-step{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--border);opacity:.25;transition:opacity .35s;font-size:14px;color:var(--text2)}
+.a-step.on{opacity:1}
+.a-step.done{opacity:.6}
+.a-icon{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;transition:all .25s;color:var(--muted);font-weight:700}
+.a-step.on .a-icon{border-color:var(--gold);color:var(--gold)}
+.a-step.done .a-icon{background:var(--grn);border-color:var(--grn);color:#fff;font-size:14px}
+
+/* ============================================================
+   RESULTS
+   ============================================================ */
+#results{background:var(--bg);padding:0 0 80px}
+
+/* Result header (dark) */
+.res-hdr{background:var(--navy);padding:36px 0;margin-bottom:32px}
+.res-hdr-inner{text-align:center}
+.res-brand{font-size:11px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:16px}
+.res-greeting{font-size:15px;color:rgba(255,255,255,.55);margin-bottom:6px}
+.res-h{font-size:clamp(22px,4vw,30px);font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.2}
+
+/* Big number card */
+.leak-hero{background:var(--navy);border-radius:var(--r);padding:32px 22px;text-align:center;margin-bottom:22px;position:relative;overflow:hidden}
+.leak-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-l),var(--gold))}
+.leak-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.45);font-weight:700;margin-bottom:8px}
+.leak-num{font-size:clamp(42px,9vw,68px);font-weight:900;color:var(--gold-l);line-height:1;letter-spacing:-.03em;margin-bottom:5px}
+.leak-period{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:16px}
+.leak-note{font-size:11px;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border-radius:6px;padding:7px 14px;display:inline-block}
+
+/* PDF download row */
+.pdf-row{display:flex;align-items:center;justify-content:space-between;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:var(--r);padding:16px 20px;margin-bottom:22px;gap:12px;flex-wrap:wrap}
+.pdf-row-left{display:flex;align-items:center;gap:12px}
+.pdf-icon{font-size:28px;flex-shrink:0}
+.pdf-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px}
+.pdf-sub{font-size:12px;color:var(--muted)}
+.btn-pdf{background:var(--grn);color:#fff;font-size:14px;font-weight:800;padding:11px 22px;border-radius:6px;border:none;cursor:pointer;transition:background .12s;white-space:nowrap;flex-shrink:0}
+.btn-pdf:hover{background:#15803d}
+@media(max-width:500px){.pdf-row{flex-direction:column;align-items:flex-start}.btn-pdf{width:100%;text-align:center}}
+
+/* Result section cards */
+.res-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:20px}
+.res-card-gold{background:var(--bg);border:1.5px solid var(--gold);border-radius:var(--r);padding:24px;margin-bottom:20px;position:relative;overflow:hidden}
+.res-card-gold::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
+.res-card-pur{background:var(--bg);border:1px solid #ddd6fe;border-radius:var(--r);padding:24px;margin-bottom:20px;position:relative;overflow:hidden}
+.res-card-pur::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--pur)}
+
+.card-eye{font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:6px}
+.eye-gold{color:var(--gold)}.eye-pur{color:var(--pur)}
+.card-name{font-size:22px;font-weight:900;color:var(--text);margin-bottom:10px}
+.card-desc{font-size:14px;color:var(--muted);line-height:1.72}
+
+/* Breakdown bars */
+.bdown-h{font-size:15px;font-weight:800;color:var(--text);margin-bottom:18px}
+.brow{margin-bottom:16px}
+.brow-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.bcat{font-weight:700;color:var(--text2)}
+.bamt{font-weight:800}
+.c-red{color:var(--red)}.c-ora{color:#ea580c}.c-yel{color:#ca8a04}.c-pur{color:var(--pur)}
+.bar-track{height:8px;background:var(--bg-alt);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;width:0;transition:width 1.4s ease}
+.bf-p{background:var(--red)}.bf-t{background:#ea580c}.bf-s{background:#ca8a04}.bf-b{background:var(--pur)}
+
+/* Blueprint insight box */
+.bp-insight{background:var(--bg-alt);border-left:3px solid var(--pur);padding:12px 15px;font-size:13px;line-height:1.7;border-radius:0 6px 6px 0;color:var(--text2);margin-top:14px}
+
+/* Bridge section */
+.bridge{background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--r);padding:26px 24px;margin-bottom:22px}
+.bridge h3{font-size:19px;font-weight:900;color:var(--text);margin-bottom:12px;line-height:1.3}
+.bridge p{color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:10px}
+.bridge p:last-child{margin-bottom:0}
+.bridge strong{color:var(--text2)}
+
+/* Outcomes */
+.outcomes{margin-bottom:24px}
+.out-lbl{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.out-item{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.5;color:var(--text2)}
+.out-chk{color:var(--grn);font-size:15px;margin-top:1px;flex-shrink:0;font-weight:800}
+
+/* Bonus unlocked bar */
+.bonus-unlocked{background:#fffbeb;border:1.5px solid var(--gold);border-radius:var(--r);padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.bu-icon{font-size:26px;flex-shrink:0}
+.bu-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px}
+.bu-sub{font-size:13px;color:var(--muted)}
+.bu-check{color:var(--grn);font-weight:700}
+
+/* Final CTA */
+.cta-result{background:var(--navy);border-radius:var(--r);padding:30px 24px;text-align:center}
+.cta-result h3{font-size:22px;font-weight:900;color:#fff;margin-bottom:8px}
+.cta-result p{color:rgba(255,255,255,.55);font-size:14px;margin-bottom:6px;line-height:1.65}
+.cta-outcomes{margin:14px 0 20px;text-align:left}
+.cta-out{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:14px;color:rgba(255,255,255,.7);line-height:1.4;border-bottom:1px solid rgba(255,255,255,.06)}
+.cta-chk{color:#4ade80;font-weight:800;flex-shrink:0;margin-top:1px}
+.trust-row{display:flex;justify-content:center;gap:16px;font-size:11px;color:rgba(255,255,255,.3);flex-wrap:wrap;margin-top:14px}
+.trust-item::before{content:'✓ ';color:#4ade80}
+
+/* Res footer */
+.res-footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--border);text-align:center;font-size:12px;color:var(--muted)}
+
+/* ============================================================
+   FOOTER (LANDING)
+   ============================================================ */
+.site-footer{background:var(--navy);padding:20px 0;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+.site-footer p{font-size:12px;color:rgba(255,255,255,.3)}
+.site-footer a{color:rgba(255,255,255,.4)}
+
+/* ============================================================
+   PRINT / PDF STYLES
+   The "Download Report" button calls window.print().
+   These styles create a clean branded PDF report.
+   ============================================================ */
+@media print{
+  /* Hide everything except results */
+  nav,.stats-bar,#landing,#quiz,#analyzing,.nav-row,.cta-result,
+  .pdf-row,.bridge,.outcomes,.btn-pdf,#results .res-footer{display:none!important}
+  #results{display:block!important;padding:0}
+
+  /* Page setup */
+  @page{size:A4;margin:18mm 16mm 18mm 16mm}
+  body{background:#fff!important;color:#000!important;font-size:11pt;line-height:1.55}
+
+  /* PDF header */
+  #results::before{
+    content:'';display:block;
+    border-bottom:3px solid #c9a84c;
+    padding-bottom:16px;margin-bottom:20px;
+  }
+  .pdf-report-header{display:flex!important;justify-content:space-between;align-items:flex-start;margin-bottom:24px;padding-bottom:16px;border-bottom:3px solid #c9a84c}
+  .pdf-report-branding strong{display:block;font-size:16pt;font-weight:900;color:#0a0f1e;letter-spacing:-.01em}
+  .pdf-report-branding span{display:block;font-size:9pt;color:#6b7280;margin-top:2px}
+  .pdf-report-meta{text-align:right;font-size:9pt;color:#6b7280;line-height:1.6}
+  .pdf-report-meta strong{color:#0a0f1e;font-weight:700}
+
+  /* Sections */
+  .res-hdr{background:#fff!important;padding:0;margin-bottom:20px}
+  .res-brand,.res-greeting{display:none}
+  .res-h{font-size:18pt;color:#0a0f1e;text-align:left;margin-bottom:0}
+
+  .leak-hero{background:#0a0f1e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:6px;margin-bottom:18px;padding:20px}
+  .leak-hero::before{display:none}
+  .leak-lbl{color:rgba(255,255,255,.6)!important}
+  .leak-num{font-size:36pt!important;color:#ddb84e!important}
+  .leak-period{color:rgba(255,255,255,.5)!important}
+  .leak-note{display:none}
+
+  .res-card,.res-card-gold,.res-card-pur{border:1px solid #e5e7eb!important;page-break-inside:avoid;margin-bottom:14px}
+  .res-card-gold::before,.res-card-pur::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card-name{font-size:14pt}
+  .card-desc{font-size:10pt}
+
+  .bdown-h{font-size:12pt}
+  .bar-track{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bar-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bamt,.bcat{font-size:10pt}
+
+  .bp-insight{-webkit-print-color-adjust:exact;print-color-adjust:exact;border-left:3px solid #7c3aed}
+
+  .bonus-unlocked{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#fffbeb!important;border:1.5px solid #c9a84c!important;margin-bottom:14px}
+
+  /* PDF footer per page */
+  .pdf-page-footer{display:block!important;position:fixed;bottom:0;left:0;right:0;font-size:8pt;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:6px}
+}
+
+/* Hidden on screen, shown in print */
+.pdf-report-header,.pdf-page-footer{display:none}
+
+</style>
 </head>
 <body>
-    <div class="mmi-wrapper">
-        <div class="header">
-            <div class="brand-strip">
-                <img
-                    class="sr-logo"
-                    src="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/ff96df6f1fde9_b0cbdd4d2f0ff-605c893fed0f4-sr-percent-20logo-percent-20white.png"
-                    alt="Success Resources"
-                />
-                <div class="brand-divider"></div>
-                <div class="mmi-kicker">3-Day Live In Person</div>
-            </div>
 
-            <div class="logo">💎 T. Harv Eker's 💰</div>
-            <h1 style="color: white !important; margin: 10px 0 !important;">MILLIONAIRE MIND INTENSIVE</h1>
-            <div class="tagline">Unlock Your True Financial Freedom</div>
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav>
+  <div class="wrap-wide">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="nav-mark">M</div>
+        <div class="nav-wordmark">
+          <strong>Millionaire Mind Intensive</strong>
+          <span>Success Resources &nbsp;·&nbsp; T. Harv Eker</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#audit-about">The Audit</a>
+        <a href="#testimonials">Results</a>
+        <a href="#cta-section">Programme</a>
+      </div>
+      <button class="btn-nav" onclick="startQuiz()">Take Free Audit</button>
+    </div>
+  </div>
+</nav>
 
-            <div class="hero-proof">
-                <div class="proof-pill">10 Million+ Attendees</div>
-                <div class="proof-pill">30 Countries</div>
-                <div class="proof-pill">World's No. 1 Seminar Company</div>
-            </div>
+<!-- ============================================================
+     LANDING PAGE
+     ============================================================ -->
+<div id="landing">
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="wrap-wide">
+      <div class="stats-inner">
+        <div class="stat"><strong>1.5M+</strong>Graduates worldwide</div>
+        <div class="stat"><strong>10,000+</strong>Entrepreneurs transformed</div>
+        <div class="stat"><strong>30+</strong>Countries</div>
+        <div class="stat"><strong>23 yrs</strong>Running the programme</div>
+        <div class="stat"><strong>94%</strong>Would recommend</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO (dark navy) -->
+  <div class="hero" id="audit-about">
+    <div class="wrap">
+      <div class="hero-tag">Free 3-Minute Audit</div>
+      <div class="live-badge"><span class="live-dot"></span>89 people completing this right now</div>
+      <h1>Your income isn't the problem.<br><em>Your money leaks are.</em></h1>
+      <p class="hero-sub">Answer 8 honest questions. See exactly where your money is disappearing, and how much it is costing you every single year.</p>
+
+      <!-- Cheatsheet bonus — prominent in hero -->
+      <div class="bonus-hero">
+        <div class="bonus-icon">🎁</div>
+        <div>
+          <div class="bonus-lbl">Free with your audit report</div>
+          <div class="bonus-title">7 Money Blueprints Cheatsheet <span class="value-pill">$47 value</span></div>
+          <div class="bonus-sub">Reveals the 7 unconscious patterns keeping people financially stuck, and how to rewrite yours.</div>
+          <div class="scarcity">Only for first 100 submissions &nbsp;·&nbsp; <em>77/100 claimed</em></div>
+        </div>
+      </div>
+
+      <div class="cta-center">
+        <button class="btn-gold" onclick="startQuiz()">Start My Free Audit</button>
+        <p class="cta-note" style="color:rgba(255,255,255,.35)">Free &nbsp;·&nbsp; 3 minutes &nbsp;·&nbsp; Personalised dollar figure &nbsp;·&nbsp; Instant result</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Patterns (light gray) -->
+  <div class="sec-gray">
+    <div class="wrap">
+      <p class="eyebrow">Which one sounds like you?</p>
+      <h2 class="sec-h">One of these is <em>already leaking your money.</em></h2>
+
+      <div class="pattern-card" onclick="startQuiz()">
+        <div class="plabel">Leak Type 1, Pricing</div>
+        <div class="pquote">"I dropped my price to close the deal... again."</div>
+        <p class="pdesc">You discount. You do extra work for free. You are afraid to raise your rates. Every invoice you send is smaller than it should be, not because the market will not pay more, but because your money blueprint will not let you ask for it. <strong>The gap between what you charge and what you are worth is your largest leak.</strong></p>
+      </div>
+
+      <div class="pattern-card" onclick="startQuiz()">
+        <div class="plabel">Leak Type 2, Time</div>
+        <div class="pquote">"I work nights and weekends. My income is still capped."</div>
+        <p class="pdesc">You are the business. Everything goes through you. You cannot delegate, cannot switch off, and every hour you do not work, nothing earns. <strong>Trading time for money has a ceiling, and you have hit it.</strong></p>
+      </div>
+
+      <div class="pattern-card" onclick="startQuiz()">
+        <div class="plabel">Leak Type 3, Systems</div>
+        <div class="pquote">"I have no idea what my business actually makes me."</div>
+        <p class="pdesc">No SOPs. No weekly metrics. No wealth-building system outside the day-to-day. Everything is manual and reactive. <strong>What you do not measure, you cannot stop losing.</strong></p>
+      </div>
+
+      <div class="pattern-card" onclick="startQuiz()">
+        <div class="plabel">Leak Type 4, Blueprint</div>
+        <div class="pquote">"I know what to do. I just do not do it."</div>
+        <p class="pdesc">You have read the books. You know you should invest. The gap between knowing and doing is not knowledge. <strong>An unconscious money blueprint is overriding every plan you make.</strong></p>
+      </div>
+
+      <div class="cta-center" style="margin-top:28px">
+        <button class="btn-dark" onclick="startQuiz()">Calculate My Annual Money Leak</button>
+        <p class="cta-note">Free &nbsp;·&nbsp; Personalised to your business size and revenue</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Testimonials (white) -->
+  <div class="sec-white" id="testimonials">
+    <div class="wrap-wide">
+      <p class="eyebrow">What people discovered</p>
+      <h2 class="sec-h">Real results from the Money Leak Audit</h2>
+
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testi-q">"I assumed my problem was getting more clients. The audit showed me I had a massive pricing leak. I was discounting on almost every deal, telling myself it was closing strategy. <strong>I could not unsee it after that.</strong>"</p>
+          <div class="testi-person">
+            <div class="testi-av">SK</div>
+            <div><div class="testi-name">Sarah K.</div><div class="testi-role">Business Coach, Singapore</div></div>
+          </div>
+          <div class="testi-tag">Primary Leak Found: <strong>Pricing</strong> &nbsp;·&nbsp; Est. $187,000/yr</div>
         </div>
 
-        <div class="container">
-            <div class="live-feed" id="liveFeed">
-                <div class="feed-item">John D. from Texas just secured 2 VIP MMI tickets</div>
-            </div>
-
-            <div class="card">
-                <div class="stage active" id="stage1">
-                    <h1>The 3-Minute Audit That Found $234,000 in Hidden Revenue for 10,000+ Entrepreneurs</h1>
-                    <p class="subtitle">Discover the exact money leaks draining your business right now</p>
-                    <div class="urgency-banner">
-                        ⏰ HIGH DEMAND: First 100 attendees get the FREE "7 Money Blueprints Cheatsheet" ($47 value)
-                        <div id="counterDisplay" style="margin-top: 5px !important;">Currently: <span id="spotCounter">73</span>/100 claimed</div>
-                    </div>
-                    <div class="trust-badges">
-                        <div>⭐ 10 Million Attendees</div>
-                        <div>🏆 World's #1 Seminar</div>
-                        <div>🌍 30 Countries</div>
-                    </div>
-                    <button type="button" class="btn" onclick="nextStage(2)">Continue to Audit →</button>
-                </div>
-
-                <div class="stage" id="stage2">
-                    <div class="card-decoration">📋</div>
-                    <h2>Get Your Free Money Leak Report</h2>
-                    <p class="subtitle">Enter your details to receive your personalized audit results</p>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 10% !important;"></div></div>
-                    <div class="progress-text">Step 1 of 9 • 10% Complete</div>
-
-                    <style>
-                        #_form_1008_{font-size:14px;line-height:1.6;font-family:arial, helvetica, sans-serif;margin:0;box-shadow:none}._form_hide{display:none;visibility:hidden}._form_show{display:block;visibility:visible}#_form_1008_._form-top{top:0}#_form_1008_._form-bottom{bottom:0}#_form_1008_._form-left{left:0}#_form_1008_._form-right{right:0}#_form_1008_ input[type="text"],#_form_1008_ input[type="tel"],#_form_1008_ input[type="date"],#_form_1008_ textarea{padding:12px !important;height:auto;border:#ddd 2px solid !important;border-radius:6px !important;color:#333 !important;font-size:16px !important;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}#_form_1008_ textarea{resize:none}#_form_1008_ input::placeholder{color:#999}#_form_1008_ ._submit{cursor:pointer;font-family:arial, sans-serif;font-size:18px;text-align:center;background:linear-gradient(135deg, #d4af37 0%, #f0d068 100%) !important;border:none !important;-moz-border-radius:8px !important;-webkit-border-radius:8px !important;border-radius:8px !important;width:100%;color:#1a4d2e !important;padding:16px !important;font-weight:bold;text-transform:uppercase;letter-spacing:1px;transition:all 0.3s}#_form_1008_ ._submit:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212, 175, 55, 0.4)}#_form_1008_ ._form_element{position:relative;margin-bottom:15px;font-size:0;max-width:100%}#_form_1008_ ._form_element *{font-size:14px}#_form_1008_ ._form-label{font-weight:bold;margin-bottom:8px;display:block;color:#333}#_form_1008_ ._form_element input[type="text"],#_form_1008_ ._form_element input[type="date"],#_form_1008_ ._form_element select,#_form_1008_ ._form_element textarea:not(.g-recaptcha-response){display:block;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-family:inherit}#_form_1008_ ._field-wrapper{position:relative}#_form_1008_{position:relative;text-align:left;margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;background:transparent !important;border:none !important;color:#000000}#_form_1008_ ._form-content{margin:0;width:100%}#_form_1008_ .sms_consent_checkbox{position:relative;width:100%;display:flex;align-items:flex-start;padding:15px 0}#_form_1008_ .sms_consent_checkbox input[type="checkbox"]{margin:5px 10px 10px 0}#_form_1008_ .sms_consent_checkbox .sms_consent_message{display:inline;text-align:left;margin-bottom:10px;font-size:12px;color:#666}
-                    </style>
-
-                    <form method="POST" action="https://srglobal75904.activehosted.com/proc.php" id="_form_1008_" class="_form _form_1008 _inline-form _dark" novalidate data-styles-version="5">
-                        <input type="hidden" name="u" value="1008" />
-                        <input type="hidden" name="f" value="1008" />
-                        <input type="hidden" name="s" />
-                        <input type="hidden" name="c" value="0" />
-                        <input type="hidden" name="m" value="0" />
-                        <input type="hidden" name="act" value="sub" />
-                        <input type="hidden" name="v" value="2" />
-                        <input type="hidden" name="or" value="72092d52-5968-4ae3-9bef-9636e00ffaef" />
-                        <div class="_form-content">
-                            <div class="_form_element _x40589242 _full_width">
-                                <label for="firstname" class="_form-label">First Name<span class="field-required">*</span></label>
-                                <div class="_field-wrapper">
-                                    <input type="text" id="firstname" name="firstname" placeholder="Type your first name" required/>
-                                </div>
-                            </div>
-                            <div class="_form_element _x64619065 _full_width">
-                                <label for="lastname" class="_form-label">Last Name<span class="field-required">*</span></label>
-                                <div class="._field-wrapper">
-                                    <input type="text" id="lastname" name="lastname" placeholder="Type your last name" required/>
-                                </div>
-                            </div>
-                            <div class="_form_element _field_email _full_width">
-                                <label for="email" class="_form-label">Email<span class="field-required">*</span></label>
-                                <div class="_field-wrapper">
-                                    <input type="text" id="email" name="email" placeholder="Type your email" required/>
-                                </div>
-                            </div>
-                            <div class="_form_element _x34863861 _full_width">
-                                <label for="phone" class="_form-label">Phone</label>
-                                <div class="_field-wrapper">
-                                    <input type="text" id="phone" name="phone" placeholder="Type your phone number" />
-                                </div>
-                            </div>
-                            <label for="sms_consent" class="sms_consent_checkbox">
-                                <input type="checkbox" id="sms_consent" name="sms_consent" />
-                                <div class="sms_consent_message">
-                                    By submitting this form and signing up for texts, you consent to receive marketing text messages from Millionaire Mind Intensive at the number provided. Consent is not a condition of purchase. Msg & data rates may apply. Unsubscribe at any time by replying STOP.
-                                </div>
-                            </label>
-                            <div class="_button-wrapper _full_width">
-                                <button id="_form_1008_submit" class="_submit" type="button" onclick="handleFormSubmit(event)">
-                                    Start My Free Audit →
-                                </button>
-                            </div>
-                        </div>
-                        <div class="_form-thank-you" style="display:none;"></div>
-                    </form>
-                </div>
-
-                <div class="stage" id="stage3">
-                    <div class="card-decoration">💼</div>
-                    <h2>Tell Us About Your Business</h2>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 20% !important;"></div></div>
-                    <div class="progress-text">Step 2 of 9 • 20% Complete</div>
-                    <form id="form3">
-                        <div class="form-group">
-                            <label for="companySize">What's your company size?</label>
-                            <select id="companySize" required>
-                                <option value="">Select...</option>
-                                <option value="solopreneur">Just me (Solopreneur)</option>
-                                <option value="2-5">2-5 employees</option>
-                                <option value="6-10">6-10 employees</option>
-                                <option value="11-25">11-25 employees</option>
-                                <option value="26-50">26-50 employees</option>
-                                <option value="51-100">51-100 employees</option>
-                                <option value="100+">100+ employees</option>
-                                <option value="employee">I'm an employee</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="revenue">What's your current annual revenue?</label>
-                            <select id="revenue" required>
-                                <option value="">Select...</option>
-                                <option value="0-100k">$0 - $100K (Just Starting)</option>
-                                <option value="100k-250k">$100K - $250K (Building Momentum)</option>
-                                <option value="250k-500k">$250K - $500K (Established)</option>
-                                <option value="500k-1m">$500K - $1M (Growing Fast)</option>
-                                <option value="1m-3m">$1M - $3M (Scaling)</option>
-                                <option value="3m+">$3M+ (Enterprise)</option>
-                                <option value="employee">I'm an employee (Personal Income)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="industry">What industry are you in?</label>
-                            <select id="industry" required>
-                                <option value="">Select...</option>
-                                <option value="coaching">Coaching/Consulting</option>
-                                <option value="ecommerce">E-commerce/Retail</option>
-                                <option value="saas">SaaS/Tech</option>
-                                <option value="agency">Agency/Services</option>
-                                <option value="realestate">Real Estate</option>
-                                <option value="health">Health/Wellness</option>
-                                <option value="employee">Corporate Employee</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn">Continue →</button>
-                        <button type="button" class="btn btn-green" onclick="prevStage(2)" style="margin-top: 10px !important;">← Back</button>
-                    </form>
-                </div>
-
-                <div class="stage" id="stage4">
-                    <div class="card-decoration">🎯</div>
-                    <h2>What's Your #1 Goal Right Now?</h2>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 30% !important;"></div></div>
-                    <div class="progress-text">Step 3 of 9 • 30% Complete</div>
-                    <form id="form4">
-                        <div class="form-group">
-                            <label>Choose the ONE that resonates most:</label>
-                            <div class="radio-group">
-                                <div class="radio-item"><input type="radio" id="g1" name="goal" value="scale-7fig" required><label for="g1" style="margin: 0 !important;">Scale to 7 figures within 12 months <span class="hot-badge">HOT</span></label></div>
-                                <div class="radio-item"><input type="radio" id="g2" name="goal" value="replace-income"><label for="g2" style="margin: 0 !important;">Replace my 9-5 income & go full-time</label></div>
-                                <div class="radio-item"><input type="radio" id="g3" name="goal" value="double-revenue"><label for="g3" style="margin: 0 !important;">Double my current revenue/income</label></div>
-                                <div class="radio-item"><input type="radio" id="g4" name="goal" value="passive-income"><label for="g4" style="margin: 0 !important;">Create passive income streams</label></div>
-                                <div class="radio-item"><input type="radio" id="g5" name="goal" value="sidehustle"><label for="g5" style="margin: 0 !important;">Build a side hustle ($2K-5K/month)</label></div>
-                                <div class="radio-item"><input type="radio" id="g6" name="goal" value="employee-wealth"><label for="g6" style="margin: 0 !important;">Build wealth while employed (investments, savings)</label></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>How soon do you want to achieve this? *</label>
-                            <div class="radio-group">
-                                <div class="radio-item"><input type="radio" id="u1" name="urgency" value="asap" required><label for="u1" style="margin: 0 !important;">ASAP - I'm ready to take massive action NOW <span class="hot-badge">HOT</span></label></div>
-                                <div class="radio-item"><input type="radio" id="u2" name="urgency" value="90days"><label for="u2" style="margin: 0 !important;">Within 90 days</label></div>
-                                <div class="radio-item"><input type="radio" id="u3" name="urgency" value="6months"><label for="u3" style="margin: 0 !important;">Within 6 months</label></div>
-                                <div class="radio-item"><input type="radio" id="u4" name="urgency" value="research"><label for="u4" style="margin: 0 !important;">Just researching for now</label></div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn">Continue →</button>
-                        <button type="button" class="btn btn-green" onclick="prevStage(3)" style="margin-top: 10px !important;">← Back</button>
-                    </form>
-                </div>
-
-                <div class="stage" id="stage5">
-                    <div class="card-decoration">💸</div>
-                    <h2>Let's Identify Your Pricing Leaks</h2>
-                    <p class="subtitle">Check all that apply:</p>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 40% !important;"></div></div>
-                    <div class="progress-text">Step 4 of 9 • 40% Complete</div>
-                    <form id="form5">
-                        <div class="checkbox-grid">
-                            <div class="checkbox-item"><input type="checkbox" id="p1" name="pricing" value="discount"><label class="checkbox-label" for="p1">I discount my prices to close deals (10-30% off)</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="p2" name="pricing" value="cheap"><label class="checkbox-label" for="p2">I'm the cheapest option in my market</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="p3" name="pricing" value="fear"><label class="checkbox-label" for="p3">I'm afraid to raise prices (fear of losing clients/job)</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="p4" name="pricing" value="free"><label class="checkbox-label" for="p4">I do a lot of free work hoping it leads to paid</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="p5" name="pricing" value="hourly"><label class="checkbox-label" for="p5">I charge by the hour instead of value (or accept hourly wage)</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="p6" name="pricing" value="employee-underpaid"><label class="checkbox-label" for="p6">I feel underpaid for the value I bring</label></div>
-                        </div>
-                        <button type="submit" class="btn">Continue →</button>
-                        <button type="button" class="btn btn-green" onclick="prevStage(4)" style="margin-top: 10px !important;">← Back</button>
-                    </form>
-                </div>
-
-                <div class="stage" id="stage6">
-                    <div class="card-decoration">⏰</div>
-                    <h2>Let's Find Your Time Leaks</h2>
-                    <p class="subtitle">Check all that apply:</p>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 50% !important;"></div></div>
-                    <div class="progress-text">Step 5 of 9 • 50% Complete</div>
-                    <form id="form6">
-                        <div class="checkbox-grid">
-                            <div class="checkbox-item"><input type="checkbox" id="t1" name="time" value="bottleneck"><label class="checkbox-label" for="t1">I'm the bottleneck - everything needs my approval</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="t2" name="time" value="nights"><label class="checkbox-label" for="t2">I work nights/weekends regularly (50+ hours/week)</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="t3" name="time" value="admin"><label class="checkbox-label" for="t3">I spend 5+ hours/week on admin tasks</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="t4" name="time" value="meetings"><label class="checkbox-label" for="t4">I'm stuck in back-to-back meetings all day</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="t5" name="time" value="delegate"><label class="checkbox-label" for="t5">I can't delegate because "no one can do it like me"</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="t6" name="time" value="employee-trapped"><label class="checkbox-label" for="t6">I'm trapped trading time for money with no leverage</label></div>
-                        </div>
-                        <button type="submit" class="btn">Continue →</button>
-                        <button type="button" class="btn btn-green" onclick="prevStage(5)" style="margin-top: 10px !important;">← Back</button>
-                    </form>
-                </div>
-
-                <div class="stage" id="stage7">
-                    <div class="card-decoration">📈</div>
-                    <h2>Let's Check Your Systems</h2>
-                    <p class="subtitle">Check all that apply:</p>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 60% !important;"></div></div>
-                    <div class="progress-text">Step 6 of 9 • 60% Complete</div>
-                    <form id="form7">
-                        <div class="checkbox-grid">
-                            <div class="checkbox-item"><input type="checkbox" id="s1" name="systems" value="no-tracking"><label class="checkbox-label" for="s1">I don't track profit per customer/product</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="s2" name="systems" value="no-sops"><label class="checkbox-label" for="s2">I have no documented systems/SOPs</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="s3" name="systems" value="manual"><label class="checkbox-label" for="s3">Everything is manual - no automation</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="s4" name="systems" value="no-metrics"><label class="checkbox-label" for="s4">I don't review key metrics weekly/monthly</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="s5" name="systems" value="reinvent"><label class="checkbox-label" for="s5">I reinvent the wheel every time (no templates)</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="s6" name="systems" value="employee-nosystem"><label class="checkbox-label" for="s6">I have no wealth-building system or investment strategy</label></div>
-                        </div>
-                        <button type="submit" class="btn">Continue →</button>
-                        <button type="button" class="btn btn-green" onclick="prevStage(6)" style="margin-top: 10px !important;">← Back</button>
-                    </form>
-                </div>
-
-                <div class="stage" id="stage8">
-                    <div class="card-decoration">🧠</div>
-                    <h2>Let's Uncover Your Money Blueprint</h2>
-                    <p class="subtitle">These beliefs shape everything. Be honest:</p>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 70% !important;"></div></div>
-                    <div class="progress-text">Step 7 of 9 • 70% Complete</div>
-                    <form id="form8">
-                        <div class="form-group">
-                            <label>When I think about money, I believe...</label>
-                            <div class="radio-group">
-                                <div class="radio-item"><input type="radio" id="m1" name="moneyBelief" value="hard" required><label for="m1" style="margin: 0 !important;">Money is hard to make - I must work hard for it</label></div>
-                                <div class="radio-item"><input type="radio" id="m2" name="moneyBelief" value="freedom"><label for="m2" style="margin: 0 !important;">Money is a tool for freedom and can flow easily</label></div>
-                                <div class="radio-item"><input type="radio" id="m3" name="moneyBelief" value="evil"><label for="m3" style="margin: 0 !important;">Rich people are greedy - money changes people</label></div>
-                                <div class="radio-item"><input type="radio" id="m4" name="moneyBelief" value="luck"><label for="m4" style="margin: 0 !important;">Making money is mostly about luck/timing</label></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Which statement feels most true?</label>
-                            <div class="radio-group">
-                                <div class="radio-item"><input type="radio" id="w1" name="worthiness" value="prove" required><label for="w1" style="margin: 0 !important;">I need to prove my worth through hard work</label></div>
-                                <div class="radio-item"><input type="radio" id="w2" name="worthiness" value="deserve"><label for="w2" style="margin: 0 !important;">I deserve wealth just for being me</label></div>
-                                <div class="radio-item"><input type="radio" id="w3" name="worthiness" value="others"><label for="w3" style="margin: 0 !important;">Others are more deserving of wealth than me</label></div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn">Continue →</button>
-                        <button type="button" class="btn btn-green" onclick="prevStage(7)" style="margin-top: 10px !important;">← Back</button>
-                    </form>
-                </div>
-
-                <div class="stage" id="stage9">
-                    <div class="card-decoration">💪</div>
-                    <h2>Assess Your Breakthrough Readiness</h2>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 80% !important;"></div></div>
-                    <div class="progress-text">Step 8 of 9 • 80% Complete</div>
-                    <form id="form9">
-                        <div class="form-group">
-                            <label>Have you invested in personal development before?</label>
-                            <div class="radio-group">
-                                <div class="radio-item"><input type="radio" id="i1" name="invested" value="yes-much" required><label for="i1" style="margin: 0 !important;">Yes, I've invested $10K+ in courses/coaching</label></div>
-                                <div class="radio-item"><input type="radio" id="i2" name="invested" value="yes-some"><label for="i2" style="margin: 0 !important;">Yes, I've spent $1K-$10K on training</label></div>
-                                <div class="radio-item"><input type="radio" id="i3" name="invested" value="yes-little"><label for="i3" style="margin: 0 !important;">Yes, but only books/free content</label></div>
-                                <div class="radio-item"><input type="radio" id="i4" name="invested" value="no"><label for="i4" style="margin: 0 !important;">No, this would be my first investment</label></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>What's holding you back from your next income level?</label>
-                            <div class="radio-group">
-                                <div class="radio-item"><input type="radio" id="b1" name="blocker" value="mindset" required><label for="b1" style="margin: 0 !important;">My mindset/beliefs about money</label></div>
-                                <div class="radio-item"><input type="radio" id="b2" name="blocker" value="skills"><label for="b2" style="margin: 0 !important;">Lack of skills/knowledge</label></div>
-                                <div class="radio-item"><input type="radio" id="b3" name="blocker" value="time" required><label for="b3" style="margin: 0 !important;">Not enough time/overwhelmed</label></div>
-                                <div class="radio-item"><input type="radio" id="b4" name="blocker" value="capital"><label for="b4" style="margin: 0 !important;">Lack of capital/resources</label></div>
-                                <div class="radio-item"><input type="radio" id="b5" name="blocker" value="unsure"><label for="b5" style="margin: 0 !important;">Honestly not sure - that's why I'm here</label></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>On a scale of 1-10, how committed are you to transforming your financial life in the next 90 days?</label>
-                            <div class="slider-container">
-                                <div class="slider-value" id="commitmentValue">5</div>
-                                <input type="range" id="commitment" name="commitment" min="1" max="10" value="5" required>
-                                <div class="slider-feedback" id="commitmentFeedback">Thinking about it</div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn">Reveal My Complete Leak Report →</button>
-                        <button type="button" class="btn btn-green" onclick="prevStage(8)" style="margin-top: 10px !important;">← Back</button>
-                    </form>
-                </div>
-
-                <div class="stage" id="stage10">
-                    <div class="card-decoration">🎉</div>
-                    <div class="loading" id="loading">
-                        <div class="spinner"></div>
-                        <p id="loadingText">🔍 Analyzing your money leaks...</p>
-                    </div>
-                    <div id="results" style="display: none !important;">
-                        <h2>Your Leak Report Is Ready!</h2>
-                        <div style="border: 3px solid #e74c3c !important; border-radius: 12px !important; padding: 30px !important; margin: 30px 0 !important; text-align: center !important;">
-                            <p style="font-size: 18px !important; color: #666 !important; margin-bottom: 10px !important;">You're losing approximately:</p>
-                            <div class="leak-amount" id="totalLeak">$234,000</div>
-                            <p style="color: #666 !important;">per year in preventable leaks</p>
-                        </div>
-
-                        <div class="bonus-box">
-                            <div style="font-size: 20px !important; font-weight: bold !important; color: #1a4d2e !important; margin-bottom: 10px !important;">🎁 BONUS UNLOCKED!</div>
-                            <p style="margin: 0 !important;">You qualified for the <strong>7 Money Blueprints Cheatsheet</strong> ($47 value)</p>
-                            <div class="bonus-counter">Spot #<span id="finalCounter">73</span> claimed ✓</div>
-                        </div>
-
-                        <div class="cta-box" id="finalCtaPrimary" style="margin-top: 30px !important;">
-                            <h3>Ready to Transform Your Financial Life?</h3>
-                            <p style="margin-bottom: 20px !important;">Join us at the Millionaire Mind Intensive live event and discover which date and location works best for you</p>
-                            <button class="btn" onclick="window.open('https://www.millionairemind.live/', '_blank')" style="margin-top: 15px !important;">
-                                👉 Access your special offer + confirm your event date here
-                            </button>
-                        </div>
-
-                        <div class="cta-box" id="finalCtaSecondary" style="margin-top: 30px !important;">
-                            <h3>Download Your Personalized PDF Report</h3>
-                            <p style="margin-bottom: 20px !important;">Get your full Money Leak Audit in one downloadable report, then take the next step with Millionaire Mind Intensive to start transforming your financial future.</p>
-                            <button class="btn btn-green" onclick="generatePDF()" style="margin-top: 15px !important; background: white !important; color: #1a4d2e !important;">📥 Download PDF Report</button>
-                        </div>
-
-                        <div style="text-align: center !important; margin: 30px 0 !important;">
-                            <p style="color: #666 !important; font-size: 14px !important; margin-bottom: 10px !important;">Need help deciding?</p>
-                            <button type="button" class="btn" onclick="openWhatsApp()" style="background: #25D366 !important; color: white !important;">💬 Chat With Us on WhatsApp</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="testi-card">
+          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testi-q">"Every single time leak they listed was me. The bottleneck, the nights and weekends, the 'no one can do it like me' excuse. <strong>The number it calculated stopped me completely.</strong> I had no idea my habits were that expensive."</p>
+          <div class="testi-person">
+            <div class="testi-av">MT</div>
+            <div><div class="testi-name">Marcus T.</div><div class="testi-role">E-commerce Founder, Malaysia</div></div>
+          </div>
+          <div class="testi-tag">Primary Leak Found: <strong>Time</strong> &nbsp;·&nbsp; Est. $340,000/yr</div>
         </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testi-q">"I was skeptical of the audit number at first. Then I tracked my actual finances for a month and realised it was conservative. <strong>Three years of trying to earn more, when the leak was the whole problem.</strong>"</p>
+          <div class="testi-person">
+            <div class="testi-av">PM</div>
+            <div><div class="testi-name">Priya M.</div><div class="testi-role">Finance Professional, Singapore</div></div>
+          </div>
+          <div class="testi-tag">Primary Leak Found: <strong>Systems</strong> &nbsp;·&nbsp; Est. $93,000/yr</div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testi-q">"The money blueprint section was the part I did not expect. I had spent years on business strategy. The audit showed me my real problem was a belief pattern running below everything else. <strong>Three minutes changed my perspective entirely.</strong>"</p>
+          <div class="testi-person">
+            <div class="testi-av">JW</div>
+            <div><div class="testi-name">James W.</div><div class="testi-role">Agency Owner, Australia</div></div>
+          </div>
+          <div class="testi-tag">Primary Leak Found: <strong>Blueprint</strong> &nbsp;·&nbsp; Est. $215,000/yr</div>
+        </div>
+      </div>
+
+      <div class="cta-center">
+        <button class="btn-dark" onclick="startQuiz()">Find My Leaks and Calculate the Cost</button>
+        <p class="cta-note">Free &nbsp;·&nbsp; Includes 7 Money Blueprints Cheatsheet ($47 value)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Hard Truth (dark navy) -->
+  <div class="sec-navy" id="cta-section">
+    <div class="wrap">
+      <p class="eyebrow-gold">After 23 years and 1.5 million graduates</p>
+      <h2 class="sec-h-inv">"A leak you have not named<br>will outlast every strategy you try."</h2>
+      <p style="font-size:15px;color:rgba(255,255,255,.55);text-align:center;line-height:1.8;margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto">The people who could not grow their income were not lacking knowledge or discipline. They were losing money through invisible leaks in their pricing, their time, their systems, and their unconscious money blueprint. The audit takes 3 minutes. The number it shows you will stay with you.</p>
+      <div class="cta-center">
+        <button class="btn-gold" onclick="startQuiz()">Start My Free Audit</button>
+        <p class="cta-note-inv">Free &nbsp;·&nbsp; Includes 7 Money Blueprints Cheatsheet &nbsp;·&nbsp; Instant result</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site footer -->
+  <div class="site-footer">
+    <p>© 2026 Success Resources &nbsp;·&nbsp; <a href="#">Contact Us</a> &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms and Conditions</a> &nbsp;·&nbsp; <a href="#">Cookies Policy</a></p>
+    <p style="margin-top:6px">10 million attendees &nbsp;·&nbsp; 30 countries &nbsp;·&nbsp; Trusted worldwide</p>
+  </div>
+
+</div><!-- /landing -->
+
+
+<!-- ============================================================
+     QUIZ
+     ============================================================ -->
+<div id="quiz" class="hidden">
+
+  <div class="quiz-header">
+    <div class="quiz-header-inner">
+      <div class="quiz-brand">Money Leak Audit &nbsp;·&nbsp; Millionaire Mind</div>
+      <div class="quiz-stepcnt" id="stepCnt">Step 1 of 8</div>
+    </div>
+    <div class="prog-track"><div class="prog-bar" id="progBar"></div></div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ======================================================
+         STEP 1: OPT-IN (details first, as per original)
+         ====================================================== -->
+    <div class="step" id="s1">
+      <p class="step-eye">Step 1 of 8</p>
+      <h2>Get Your Free <em>Money Leak Report</em></h2>
+      <p class="step-sub">Enter your details to receive your personalised audit results.</p>
+
+      <div class="bonus-step1">
+        <span class="bonus-step1-icon">🎁</span>
+        <div>
+          <div class="bonus-step1-title">Free: 7 Money Blueprints Cheatsheet <span class="value-pill">$47 value</span></div>
+          <div class="bonus-step1-sub">Sent to your inbox with your personalised report. Only for first 100 submissions &nbsp;·&nbsp; 77/100 claimed.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-lbl">First Name *</label>
+        <input type="text" class="form-inp" id="fName" placeholder="Your first name">
+      </div>
+      <div class="form-group">
+        <label class="form-lbl">Last Name *</label>
+        <input type="text" class="form-inp" id="lName" placeholder="Your last name">
+      </div>
+      <div class="form-group">
+        <label class="form-lbl">Email *</label>
+        <input type="email" class="form-inp" id="fEmail" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-lbl">Phone</label>
+        <div class="phone-row">
+          <select class="phone-pre" id="phoneCode">
+            <option value="+65">&#127480;&#127468; +65</option>
+            <option value="+60">&#127474;&#127486; +60</option>
+            <option value="+66">&#127481;&#127469; +66</option>
+            <option value="+886">&#127481;&#127484; +886</option>
+            <option value="+852">&#127469;&#127472; +852</option>
+            <option value="+86">&#127464;&#127475; +86</option>
+            <option value="+81">&#127471;&#127477; +81</option>
+            <option value="+63">&#127477;&#127469; +63</option>
+            <option value="+84">&#127483;&#127475; +84</option>
+            <option value="+61">&#127462;&#127482; +61</option>
+            <option value="+64">&#127475;&#127487; +64</option>
+            <option value="+44">&#127468;&#127463; +44</option>
+            <option value="+1">&#127482;&#127480; +1</option>
+          </select>
+          <input type="tel" class="form-inp" id="fPhone" placeholder="Phone number (optional)">
+        </div>
+      </div>
+
+      <div class="consent-row">
+        <input type="checkbox" id="consent" checked>
+        <label for="consent">I agree to receive marketing updates from Success Resources.</label>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-next" id="s1Next" onclick="validateStep1()" disabled>Start My Free Audit</button>
+      </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script>
-        let formData = {};
-        let spotCounter = 73;
-        const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/3673966/u7ipolm/';
-
-        async function sendToZapier(payload, eventName) {
-            const data = {
-                event: eventName,
-                event_name: eventName,
-                submitted_at: new Date().toISOString(),
-                page_title: document.title,
-                page_url: window.location.href,
-                ...payload
-            };
-
-            try {
-                const response = await fetch(zapierWebhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=UTF-8'
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                console.log('Zapier status:', response.status, eventName, data);
-                return true;
-            } catch (error) {
-                console.error('Zapier send failed:', error, data);
-                return false;
-            }
-        }
-
-        function nextStage(n) {
-            document.querySelectorAll('.stage').forEach((stage) => {
-                stage.classList.remove('active');
-            });
-
-            const next = document.getElementById('stage' + n);
-            if (next) {
-                next.classList.add('active');
-                window.scrollTo(0, 0);
-            }
-        }
-
-        function prevStage(n) {
-            nextStage(n);
-        }
-
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-
-            formData.firstName = document.getElementById('firstname').value.trim();
-            formData.lastName = document.getElementById('lastname').value.trim();
-            formData.email = document.getElementById('email').value.trim();
-            formData.phone = document.getElementById('phone').value.trim();
-            formData.smsConsent = document.getElementById('sms_consent').checked;
-
-            if (!formData.firstName || !formData.lastName || !formData.email) {
-                alert('Please fill in all required fields');
-                return;
-            }
-
-            await sendToZapier({
-                first_name: formData.firstName,
-                last_name: formData.lastName,
-                firstName: formData.firstName,
-                lastName: formData.lastName,
-                email: formData.email,
-                phone: formData.phone,
-                sms_consent: formData.smsConsent,
-                smsConsent: formData.smsConsent,
-                source: 'money-leak-audit',
-                stage: 'lead-submitted'
-            }, 'lead_submitted');
-
-            const form = document.getElementById('_form_1008_');
-            const formDataAC = new FormData(form);
-
-            try {
-                await fetch('https://srglobal75904.activehosted.com/proc.php', {
-                    method: 'POST',
-                    body: formDataAC
-                });
-            } catch (error) {
-                console.error('ActiveCampaign error:', error);
-            }
-
-            nextStage(3);
-        }
-
-        const feedMessages = [
-            'John D. from Texas just secured 2 VIP MMI tickets',
-            'Amelia from Singapore completed her Money Leak Audit',
-            'Marcus from London just upgraded to VIP',
-            'Priya from Kuala Lumpur found $118K in hidden leaks',
-            'Daniel from Sydney just booked 2 MMI passes',
-            'Rachel from Dubai downloaded her personalized report',
-            'Chris from California just secured a VIP seat',
-            'Nadia from Johannesburg started her free audit',
-            'Michael from New York just bought 2 VIP MMI tickets',
-            'Samantha from Zurich discovered $94K in hidden revenue',
-            'Ethan from Toronto just claimed his event seat',
-            'Farah from Abu Dhabi downloaded her leak report',
-            'Kevin from Cape Town just bought 1 VIP MMI ticket',
-            'Olivia from Melbourne completed her audit',
-            'Jason from Frankfurt just secured 2 event passes',
-            'Alicia from Brussels found $76K in preventable leaks',
-            'Ryan from Durban just upgraded to VIP',
-            'Mei from Singapore just booked her MMI ticket',
-            'Andre from Warsaw started the audit',
-            'Sophia from Dubai just secured 2 VIP MMI tickets'
-        ];
-
-        let feedIndex = 0;
-
-        function rotateFeed() {
-            const feedItem = document.querySelector('.feed-item');
-            if (!feedItem) {
-                return;
-            }
-
-            feedIndex = (feedIndex + 1) % feedMessages.length;
-            feedItem.textContent = feedMessages[feedIndex];
-        }
-
-        setInterval(rotateFeed, 6500);
-
-        setInterval(() => {
-            const counter = document.getElementById('spotCounter');
-            if (!counter) {
-                return;
-            }
-
-            if (spotCounter < 97) {
-                spotCounter += 1;
-                counter.textContent = spotCounter;
-            }
-        }, 45000);
-
-        const form3 = document.getElementById('form3');
-        if (form3) {
-            form3.addEventListener('submit', function (e) {
-                e.preventDefault();
-                formData.companySize = document.getElementById('companySize').value;
-                formData.revenue = document.getElementById('revenue').value;
-                formData.industry = document.getElementById('industry').value;
-                nextStage(4);
-            });
-        }
-
-        const form4 = document.getElementById('form4');
-        if (form4) {
-            form4.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                const goal = document.querySelector('input[name="goal"]:checked');
-                const urgency = document.querySelector('input[name="urgency"]:checked');
-
-                if (!goal || !urgency) {
-                    alert('Please select your goal and urgency.');
-                    return;
-                }
-
-                formData.goal = goal.value;
-                formData.urgency = urgency.value;
-
-                if (formData.goal === 'scale-7fig' || formData.urgency === 'asap') {
-                    formData.leadScore = 'HOT';
-                } else if (formData.goal === 'replace-income' || formData.goal === 'double-revenue') {
-                    formData.leadScore = 'WARM';
-                } else {
-                    formData.leadScore = 'COLD';
-                }
-
-                nextStage(5);
-            });
-        }
-
-        const form5 = document.getElementById('form5');
-        if (form5) {
-            form5.addEventListener('submit', function (e) {
-                e.preventDefault();
-                const checkboxes = document.querySelectorAll('input[name="pricing"]:checked');
-                formData.pricingLeaks = Array.from(checkboxes).map((cb) => cb.value);
-                nextStage(6);
-            });
-        }
-
-        const form6 = document.getElementById('form6');
-        if (form6) {
-            form6.addEventListener('submit', function (e) {
-                e.preventDefault();
-                const checkboxes = document.querySelectorAll('input[name="time"]:checked');
-                formData.timeLeaks = Array.from(checkboxes).map((cb) => cb.value);
-                nextStage(7);
-            });
-        }
-
-        const form7 = document.getElementById('form7');
-        if (form7) {
-            form7.addEventListener('submit', function (e) {
-                e.preventDefault();
-                const checkboxes = document.querySelectorAll('input[name="systems"]:checked');
-                formData.systemsLeaks = Array.from(checkboxes).map((cb) => cb.value);
-                nextStage(8);
-            });
-        }
-
-        const form8 = document.getElementById('form8');
-        if (form8) {
-            form8.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                const moneyBelief = document.querySelector('input[name="moneyBelief"]:checked');
-                const worthiness = document.querySelector('input[name="worthiness"]:checked');
-
-                if (!moneyBelief || !worthiness) {
-                    alert('Please answer both questions.');
-                    return;
-                }
-
-                formData.moneyBelief = moneyBelief.value;
-                formData.worthiness = worthiness.value;
-                nextStage(9);
-            });
-        }
-
-        const form9 = document.getElementById('form9');
-        if (form9) {
-            form9.addEventListener('submit', async function (e) {
-                e.preventDefault();
-
-                const invested = document.querySelector('input[name="invested"]:checked');
-                const blocker = document.querySelector('input[name="blocker"]:checked');
-                const commitmentInput = document.getElementById('commitment');
-
-                if (!invested || !blocker || !commitmentInput) {
-                    alert('Please complete all required fields.');
-                    return;
-                }
-
-                formData.invested = invested.value;
-                formData.blocker = blocker.value;
-                formData.commitment = commitmentInput.value;
-
-                if (parseInt(formData.commitment, 10) >= 8) {
-                    formData.leadScore = 'HOT';
-                }
-
-                nextStage(10);
-
-                const loadingMessages = [
-                    '🔍 Analyzing your money leaks...',
-                    '💰 Calculating total leak amount...',
-                    '🧠 Identifying your Money Blueprint...',
-                    '📊 Generating personalized recommendations...'
-                ];
-
-                let msgIndex = 0;
-                const loadingInterval = setInterval(() => {
-                    const loadingText = document.getElementById('loadingText');
-                    if (!loadingText) {
-                        clearInterval(loadingInterval);
-                        return;
-                    }
-
-                    if (msgIndex < loadingMessages.length) {
-                        loadingText.textContent = loadingMessages[msgIndex];
-                        msgIndex += 1;
-                    }
-                }, 800);
-
-                setTimeout(async () => {
-                    clearInterval(loadingInterval);
-
-                    const loading = document.getElementById('loading');
-                    const results = document.getElementById('results');
-                    const finalCounter = document.getElementById('finalCounter');
-                    const totalLeak = document.getElementById('totalLeak');
-
-                    if (loading) {
-                        loading.style.display = 'none';
-                    }
-
-                    if (results) {
-                        results.style.display = 'block';
-                    }
-
-                    if (finalCounter) {
-                        finalCounter.textContent = spotCounter;
-                    }
-
-                    const revenueBase = {
-                        '0-100k': 50000,
-                        '100k-250k': 175000,
-                        '250k-500k': 375000,
-                        '500k-1m': 750000,
-                        '1m-3m': 2000000,
-                        '3m+': 4000000,
-                        'employee': 75000
-                    };
-
-                    const baseRevenue = revenueBase[formData.revenue] || 50000;
-
-                    const pricingLeakCount = formData.pricingLeaks ? formData.pricingLeaks.length : 0;
-                    const pricingLeakPercentage = pricingLeakCount * 0.03;
-                    formData.pricingLeak = Math.round(baseRevenue * pricingLeakPercentage);
-
-                    const timeLeakCount = formData.timeLeaks ? formData.timeLeaks.length : 0;
-                    const timeLeakPercentage = timeLeakCount * 0.04;
-                    formData.timeLeak = Math.round(baseRevenue * timeLeakPercentage);
-
-                    const systemsLeakCount = formData.systemsLeaks ? formData.systemsLeaks.length : 0;
-                    const systemsLeakPercentage = systemsLeakCount * 0.02;
-                    formData.systemsLeak = Math.round(baseRevenue * systemsLeakPercentage);
-
-                    formData.totalLeakAmount = formData.pricingLeak + formData.timeLeak + formData.systemsLeak;
-                    const formattedLeak = '$' + formData.totalLeakAmount.toLocaleString();
-
-                    if (totalLeak) {
-                        totalLeak.textContent = formattedLeak;
-                    }
-
-                    await sendToZapier({
-                        ...formData,
-                        source: 'money-leak-audit',
-                        stage: 'audit-completed'
-                    }, 'audit_completed');
-                }, 3500);
-            });
-        }
-
-        document.querySelectorAll('.checkbox-item').forEach((item) => {
-            item.addEventListener('click', function (e) {
-                if (e.target.tagName !== 'INPUT') {
-                    const cb = this.querySelector('input');
-                    cb.checked = !cb.checked;
-                }
-
-                const input = this.querySelector('input');
-                this.classList.toggle('checked', input.checked);
-            });
-        });
-
-        document.querySelectorAll('.radio-item').forEach((item) => {
-            item.addEventListener('click', function (e) {
-                if (e.target.tagName !== 'INPUT') {
-                    const input = this.querySelector('input');
-                    input.checked = true;
-                }
-
-                this.parentElement.querySelectorAll('.radio-item').forEach((radio) => {
-                    radio.classList.remove('selected');
-                });
-
-                this.classList.add('selected');
-            });
-        });
-
-        const commitment = document.getElementById('commitment');
-        if (commitment) {
-            commitment.addEventListener('input', function (e) {
-                const value = parseInt(e.target.value, 10);
-                const valueEl = document.getElementById('commitmentValue');
-                const feedback = document.getElementById('commitmentFeedback');
-
-                if (valueEl) {
-                    valueEl.textContent = value;
-                }
-
-                if (!feedback) {
-                    return;
-                }
-
-                if (value <= 3) {
-                    feedback.textContent = 'Just curious';
-                    feedback.style.color = '#999';
-                } else if (value <= 5) {
-                    feedback.textContent = 'Thinking about it';
-                    feedback.style.color = '#666';
-                } else if (value <= 7) {
-                    feedback.textContent = 'Ready to take action';
-                    feedback.style.color = '#d4af37';
-                } else if (value <= 9) {
-                    feedback.textContent = 'Very committed!';
-                    feedback.style.color = '#1a4d2e';
-                } else {
-                    feedback.textContent = "ALL IN - Let's do this! 🔥";
-                    feedback.style.color = '#e74c3c';
-                    feedback.style.fontWeight = 'bold';
-                }
-            });
-        }
-
-        function openWhatsApp() {
-            const firstName = formData.firstName || 'Friend';
-            const message = encodeURIComponent(
-                `Hi! I just completed my Money Leak Audit and I'm interested in learning more about the Millionaire Mind Intensive event. My name is ${firstName}.`
-            );
-            window.open(`https://wa.me/14199633788?text=${message}`, '_blank');
-        }
-
-        function generatePDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            const green = [26, 77, 46];
-            const gold = [212, 175, 55];
-            const white = [255, 255, 255];
-            const black = [0, 0, 0];
-            const red = [231, 76, 60];
-            const lightGray = [240, 240, 240];
-            const paleGold = [255, 249, 230];
-            const paleBlue = [240, 248, 255];
-
-            const pageWidth = 210;
-            const pageHeight = 297;
-            const margin = 20;
-            const contentWidth = 170;
-            const firstName = formData.firstName || 'Friend';
-
-            function addWrappedText(lines, x, y, lineHeight) {
-                lines.forEach((line) => {
-                    doc.text(line, x, y, { charSpace: 0 });
-                    y += lineHeight;
-                });
-                return y;
-            }
-
-            function splitParagraphs(paragraphs, maxWidth) {
-                return paragraphs.map((paragraph) =>
-                    paragraph === '' ? [''] : doc.splitTextToSize(paragraph, maxWidth)
-                );
-            }
-
-            function getParagraphBlockHeight(paragraphs, lineHeight, paragraphGap) {
-                return paragraphs.reduce((total, lines, index) => {
-                    const linesHeight = lines.length * lineHeight;
-                    const gap = index < paragraphs.length - 1 ? paragraphGap : 0;
-                    return total + linesHeight + gap;
-                }, 0);
-            }
-
-            function addParagraphBlock(paragraphs, x, y, lineHeight, paragraphGap) {
-                paragraphs.forEach((lines, index) => {
-                    y = addWrappedText(lines, x, y, lineHeight);
-                    if (index < paragraphs.length - 1) {
-                        y += paragraphGap;
-                    }
-                });
-                return y;
-            }
-
-            function drawFilledBox(boxX, boxY, boxW, boxH, fillColor) {
-                doc.setFillColor(...fillColor);
-                doc.roundedRect(boxX, boxY, boxW, boxH, 3, 3, 'F');
-            }
-
-            doc.setFillColor(...green);
-            doc.rect(0, 0, pageWidth, pageHeight, 'F');
-
-            doc.setFontSize(16);
-            doc.setTextColor(...gold);
-            doc.setFont('helvetica', 'italic');
-            doc.text("T. Harv Eker's", 105, 90, { align: 'center', charSpace: 0 });
-
-            doc.setFontSize(38);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...white);
-            doc.text('YOUR MONEY', 105, 115, { align: 'center', charSpace: 0 });
-            doc.text('LEAK REPORT', 105, 135, { align: 'center', charSpace: 0 });
-
-            doc.setFillColor(255, 255, 255, 0.1);
-            doc.roundedRect(40, 150, 130, 35, 5, 5, 'F');
-
-            doc.setFontSize(18);
-            doc.setTextColor(...gold);
-            doc.text('Prepared For:', 105, 165, { align: 'center', charSpace: 0 });
-
-            doc.setFontSize(22);
-            doc.setTextColor(...white);
-            doc.text(firstName, 105, 178, { align: 'center', charSpace: 0 });
-
-            doc.addPage();
-            doc.setFillColor(...green);
-            doc.rect(0, 0, pageWidth, 50, 'F');
-
-            doc.setFontSize(18);
-            doc.setTextColor(...white);
-            doc.setFont('helvetica', 'bold');
-            doc.text('MILLIONAIRE MIND INTENSIVE', margin, 25, { charSpace: 0 });
-
-            let yPos = 70;
-
-            doc.setFontSize(12);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'bold');
-            doc.text(`Dear ${firstName},`, margin, yPos, { charSpace: 0 });
-
-            yPos += 10;
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(10);
-
-            const introText = [
-                'Thank you for completing the Money Leak Audit. Based on your responses,',
-                'we have identified critical patterns that are quietly draining your wealth',
-                'potential. This report reveals not just WHERE you are losing money, but',
-                'WHY these leaks exist and HOW to transform them into opportunities.'
-            ];
-            yPos = addWrappedText(introText, margin, yPos, 5);
-
-            yPos += 10;
-            drawFilledBox(margin, yPos, contentWidth, 40, lightGray);
-
-            doc.setFontSize(12);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'normal');
-            doc.text('Your Total Annual Loss:', margin + 5, yPos + 12, { charSpace: 0 });
-
-            doc.setFontSize(36);
-            doc.setTextColor(...red);
-            doc.setFont('helvetica', 'bold');
-            doc.text(`$${formData.totalLeakAmount.toLocaleString()}`, margin + 5, yPos + 28, { charSpace: 0 });
-
-            doc.setFontSize(11);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'normal');
-            doc.text('per year in preventable leaks', margin + 5, yPos + 36, { charSpace: 0 });
-
-            doc.addPage();
-            yPos = 20;
-
-            doc.setFontSize(16);
-            doc.setTextColor(...green);
-            doc.setFont('helvetica', 'bold');
-            doc.text('YOUR TOP 3 MONEY LEAKS: DETAILED ANALYSIS', margin, yPos, { charSpace: 0 });
-
-            yPos += 15;
-
-            function drawLeakBox(title, annualLoss, paragraphs) {
-                const lineHeight = 4;
-                const paragraphGap = 4;
-                const wrapped = splitParagraphs(paragraphs, 158);
-                const textHeight = getParagraphBlockHeight(wrapped, lineHeight, paragraphGap);
-                const boxHeight = 24 + textHeight + 6;
-
-                drawFilledBox(margin, yPos, contentWidth, boxHeight, paleGold);
-
-                doc.setFontSize(14);
-                doc.setTextColor(...black);
-                doc.setFont('helvetica', 'bold');
-                doc.text(title, margin + 5, yPos + 8, { charSpace: 0 });
-
-                doc.setFontSize(11);
-                doc.setTextColor(...red);
-                doc.text(`Annual Loss: $${annualLoss.toLocaleString()}`, margin + 5, yPos + 16, { charSpace: 0 });
-
-                doc.setFontSize(9);
-                doc.setTextColor(...black);
-                doc.setFont('helvetica', 'normal');
-
-                let lineY = yPos + 24;
-                lineY = addParagraphBlock(wrapped, margin + 5, lineY, lineHeight, paragraphGap);
-
-                yPos += boxHeight + 5;
-            }
-
-            drawLeakBox('1. THE UNDERPRICING TRAP', formData.pricingLeak, [
-                'What is happening: You are leaving money on the table by undervaluing your services, discounting to close deals, or accepting less than you deserve.',
-                `Why this matters: Every dollar you discount is a dollar that could compound into thousands. Over 5 years, this leak costs you $${(formData.pricingLeak * 5).toLocaleString()}.`,
-                'The opportunity: Premium pricing attracts premium clients. When you charge what you are worth, you work with better clients, deliver better results, and build a reputation that commands even higher fees.'
-            ]);
-
-            drawLeakBox('2. THE TIME WASTE LEAK', formData.timeLeak, [
-                'What is happening: You are trapped in low-value activities - admin work, endless meetings, tasks that do not move the needle. Your time has become your biggest expense.',
-                'Why this matters: Time is your most valuable asset. You cannot scale by working more hours. This leak is stealing your freedom AND your income.',
-                'The opportunity: By systematizing and delegating, you can reclaim 20+ hours per week to focus on high-value activities that 10x your income.'
-            ]);
-
-            drawLeakBox('3. THE NO SYSTEMS LEAK', formData.systemsLeak, [
-                'What is happening: Without systems to track numbers, automate processes, and measure what matters, you are flying blind. You cannot optimize what you do not measure.',
-                'Why this matters: Systems turn chaos into clarity. They reveal hidden profit centers, eliminate waste, and create predictable growth.',
-                'The opportunity: With the right systems, you can double your revenue without doubling your workload. Systems create leverage and freedom.'
-            ]);
-
-            doc.addPage();
-            yPos = 20;
-
-            doc.setFontSize(16);
-            doc.setTextColor(...green);
-            doc.setFont('helvetica', 'bold');
-            doc.text('YOUR MONEY BLUEPRINT: THE INVISIBLE FORCE', margin, yPos, { charSpace: 0 });
-
-            yPos += 15;
-
-            const blueprintParagraphs = splitParagraphs([
-                'What Your Answers Reveal:',
-                'Your beliefs about money - formed in childhood and reinforced throughout your life - are the invisible operating system running your financial life.',
-                'These beliefs determine:',
-                '  - How much you think you deserve to earn',
-                '  - Whether you see opportunities or obstacles',
-                '  - How comfortable you are with wealth',
-                '  - Your relationship with risk and investment',
-                'Here is the truth: Your current income is a direct reflection of your money blueprint. To earn more, you must first UPGRADE your blueprint.',
-                'The Millionaire Mind Intensive teaches you how to identify and rewire the limiting beliefs that are capping your income - often in a single weekend.'
-            ], 158);
-
-            const blueprintLineHeight = 4;
-            const blueprintGap = 3;
-            const blueprintHeight = getParagraphBlockHeight(blueprintParagraphs, blueprintLineHeight, blueprintGap);
-            const blueprintBoxHeight = 12 + blueprintHeight + 8;
-
-            drawFilledBox(margin, yPos, contentWidth, blueprintBoxHeight, paleBlue);
-
-            doc.setFontSize(11);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'bold');
-            doc.text('What Your Answers Reveal:', margin + 5, yPos + 8, { charSpace: 0 });
-
-            doc.setFontSize(9);
-            doc.setFont('helvetica', 'normal');
-
-            let lineY = yPos + 16;
-            lineY = addParagraphBlock(blueprintParagraphs.slice(1), margin + 5, lineY, blueprintLineHeight, blueprintGap);
-
-            yPos += blueprintBoxHeight + 10;
-
-            const breakthroughTitle = 'YOUR BREAKTHROUGH OPPORTUNITY';
-            const breakthroughParagraphs = splitParagraphs([
-                'Based on your commitment level and answers, you are in the top 20% of people who are READY for a major financial breakthrough. Most people never take action. You did. That puts you ahead of 80% of the population.',
-                'The question is: What will you do with this information?',
-                'You can close this PDF and go back to your current path... or you can take the next step and join 10 million people who transformed their financial lives at the Millionaire Mind Intensive.'
-            ], 158);
-
-            const breakthroughLineHeight = 4;
-            const breakthroughGap = 4;
-            const breakthroughTextHeight = getParagraphBlockHeight(
-                breakthroughParagraphs,
-                breakthroughLineHeight,
-                breakthroughGap
-            );
-            const breakthroughBoxHeight = 20 + breakthroughTextHeight + 8;
-
-            drawFilledBox(margin, yPos, contentWidth, breakthroughBoxHeight, gold);
-
-            doc.setFontSize(14);
-            doc.setTextColor(...white);
-            doc.setFont('helvetica', 'bold');
-            doc.text(breakthroughTitle, margin + 85, yPos + 12, { align: 'center', charSpace: 0 });
-
-            doc.setFontSize(9);
-            doc.setFont('helvetica', 'normal');
-
-            lineY = yPos + 22;
-            addParagraphBlock(breakthroughParagraphs, margin + 5, lineY, breakthroughLineHeight, breakthroughGap);
-
-            doc.addPage();
-            doc.setFillColor(...green);
-            doc.rect(0, 0, pageWidth, 60, 'F');
-
-            doc.setFontSize(20);
-            doc.setTextColor(...white);
-            doc.setFont('helvetica', 'bold');
-            doc.text('YOUR NEXT STEP', 105, 30, { align: 'center', charSpace: 0 });
-
-            yPos = 80;
-            doc.setFontSize(11);
-            doc.setTextColor(...black);
-            doc.setFont('helvetica', 'normal');
-
-            const nextStepsParagraphs = splitParagraphs([
-                'This report shows you WHERE you are losing money. The Millionaire Mind Intensive shows you HOW to fix it - in 3 days.',
-                'At MMI, you will:',
-                '  1. Identify and eliminate your #1 wealth blocker (your money blueprint)',
-                '  2. Learn the exact strategies millionaires use to build passive income',
-                '  3. Master the mindset that turns obstacles into opportunities',
-                '  4. Create a personalized action plan to 2x-10x your income',
-                'This is not theory. This is a proven system used by 10 million people in 30 countries to transform their financial lives.',
-                'Here is what attendees say:',
-                '"I made back my investment in the first 30 days and went on to build a $2.3M business." - Sarah Chen, Singapore',
-                '"MMI showed me I was playing small. Within 6 months, I tripled my income." - Michael Torres, USA',
-                'The event is happening soon. Seats are limited. Your spot is waiting.',
-                'Visit: www.millionairemind.live',
-                'To your wealth and freedom,',
-                'T. Harv Eker & The MMI Team'
-            ], 170);
-
-            addParagraphBlock(nextStepsParagraphs, margin, yPos, 5, 3);
-
-            doc.save(firstName + '_MMI_Complete_Leak_Report.pdf');
-        }
-    </script>
+    <!-- ======================================================
+         STEP 2: Business Profile
+         ====================================================== -->
+    <div class="step" id="s2">
+      <p class="step-eye">Step 2 of 8</p>
+      <h2>Tell Us About <em>Your Business</em></h2>
+      <p class="step-sub">This is how we calculate your personalised leak figure accurately.</p>
+
+      <p class="field-lbl">Company size</p>
+      <div class="opt-grid" id="sizeGrid">
+        <button class="opt" onclick="pick('size','solo',this)"><span class="dot"></span>Just me (Solopreneur)</button>
+        <button class="opt" onclick="pick('size','2-5',this)"><span class="dot"></span>2 to 5 employees</button>
+        <button class="opt" onclick="pick('size','6-10',this)"><span class="dot"></span>6 to 10 employees</button>
+        <button class="opt" onclick="pick('size','11-25',this)"><span class="dot"></span>11 to 25 employees</button>
+        <button class="opt" onclick="pick('size','26-50',this)"><span class="dot"></span>26 to 50 employees</button>
+        <button class="opt" onclick="pick('size','51-100',this)"><span class="dot"></span>51 to 100 employees</button>
+        <button class="opt" onclick="pick('size','100+',this)"><span class="dot"></span>100+ employees</button>
+        <button class="opt" onclick="pick('size','employee',this)"><span class="dot"></span>I am an employee</button>
+      </div>
+
+      <p class="field-lbl">Current annual revenue</p>
+      <div class="opt-grid" id="revGrid">
+        <button class="opt" onclick="pick('rev','u50',this)"><span class="dot"></span>Under $50K</button>
+        <button class="opt" onclick="pick('rev','50-100',this)"><span class="dot"></span>$50K to $100K</button>
+        <button class="opt" onclick="pick('rev','100-250',this)"><span class="dot"></span>$100K to $250K</button>
+        <button class="opt" onclick="pick('rev','250-500',this)"><span class="dot"></span>$250K to $500K</button>
+        <button class="opt" onclick="pick('rev','500k-1m',this)"><span class="dot"></span>$500K to $1M</button>
+        <button class="opt" onclick="pick('rev','1m-5m',this)"><span class="dot"></span>$1M to $5M</button>
+        <button class="opt" onclick="pick('rev','5m+',this)"><span class="dot"></span>$5M+</button>
+      </div>
+
+      <p class="field-lbl">Industry</p>
+      <select class="select-inp" id="industrySelect">
+        <option value="">Select your industry...</option>
+        <option value="coaching">Coaching / Consulting</option>
+        <option value="ecom">E-commerce / Retail</option>
+        <option value="saas">SaaS / Tech</option>
+        <option value="agency">Agency / Services</option>
+        <option value="realestate">Real Estate</option>
+        <option value="health">Health / Wellness</option>
+        <option value="employee">Corporate Employee</option>
+        <option value="other">Other</option>
+      </select>
+
+      <div class="nav-row">
+        <button class="btn-back" onclick="go(1)">Back</button>
+        <button class="btn-next" id="s2Next" onclick="go(3)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         STEP 3: Goals
+         ====================================================== -->
+    <div class="step" id="s3">
+      <p class="step-eye">Step 3 of 8</p>
+      <h2>What's Your <em>#1 Goal</em> Right Now?</h2>
+      <p class="step-sub">Choose the one that resonates most.</p>
+
+      <div class="opt-grid" id="goalGrid">
+        <button class="opt" onclick="pick('goal','7fig',this)"><span class="dot"></span>Scale to 7 figures within 12 months <span class="hot-badge">HOT</span></button>
+        <button class="opt" onclick="pick('goal','9-5',this)"><span class="dot"></span>Replace my 9 to 5 income and go full-time</button>
+        <button class="opt" onclick="pick('goal','double',this)"><span class="dot"></span>Double my current revenue</button>
+        <button class="opt" onclick="pick('goal','passive',this)"><span class="dot"></span>Create passive income streams</button>
+        <button class="opt" onclick="pick('goal','side',this)"><span class="dot"></span>Build a side hustle ($2K to $5K per month)</button>
+        <button class="opt" onclick="pick('goal','wealth',this)"><span class="dot"></span>Build wealth while employed</button>
+      </div>
+
+      <p class="field-lbl">How soon do you want this?</p>
+      <div class="opt-grid" id="timeGrid">
+        <button class="opt" onclick="pick('timeline','asap',this)"><span class="dot"></span>ASAP, I am ready to take massive action NOW <span class="hot-badge">HOT</span></button>
+        <button class="opt" onclick="pick('timeline','90d',this)"><span class="dot"></span>Within 90 days</button>
+        <button class="opt" onclick="pick('timeline','6m',this)"><span class="dot"></span>Within 6 months</button>
+        <button class="opt" onclick="pick('timeline','research',this)"><span class="dot"></span>Just researching for now</button>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-back" onclick="go(2)">Back</button>
+        <button class="btn-next" id="s3Next" onclick="go(4)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         STEP 4: Pricing Leaks
+         ====================================================== -->
+    <div class="step" id="s4">
+      <p class="step-eye">Step 4 of 8</p>
+      <h2>Identify Your <em>Pricing Leaks</em></h2>
+      <p class="step-sub">Check all that apply. Be honest, this is what builds your number.</p>
+      <p class="chk-all-note">Select all that apply, or none</p>
+
+      <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I discount my prices to close deals (10 to 30 percent off)</span></button>
+      <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I am the cheapest option in my market</span></button>
+      <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I am afraid to raise prices (fear of losing clients)</span></button>
+      <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I do a lot of free work hoping it leads to paid</span></button>
+      <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I charge by the hour instead of by value</span></button>
+      <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I feel underpaid for the value I bring</span></button>
+
+      <div class="nav-row">
+        <button class="btn-back" onclick="go(3)">Back</button>
+        <button class="btn-next" onclick="go(5)">Continue</button>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         STEP 5: Time Leaks
+         ====================================================== -->
+    <div class="step" id="s5">
+      <p class="step-eye">Step 5 of 8</p>
+      <h2>Find Your <em>Time Leaks</em></h2>
+      <p class="step-sub">Every yes here is a direct ceiling on how much you can earn.</p>
+      <p class="chk-all-note">Select all that apply, or none</p>
+
+      <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I am the bottleneck, everything needs my approval</span></button>
+      <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I work nights and weekends regularly (50+ hours per week)</span></button>
+      <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I spend 5+ hours per week on admin tasks</span></button>
+      <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I am stuck in back-to-back meetings all day</span></button>
+      <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I cannot delegate, no one can do it like me</span></button>
+      <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I am trapped trading time for money with no leverage</span></button>
+
+      <div class="nav-row">
+        <button class="btn-back" onclick="go(4)">Back</button>
+        <button class="btn-next" onclick="go(6)">Continue</button>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         STEP 6: Systems Leaks
+         ====================================================== -->
+    <div class="step" id="s6">
+      <p class="step-eye">Step 6 of 8</p>
+      <h2>Check Your <em>Systems</em></h2>
+      <p class="step-sub">These are the silent leaks, hardest to see and easiest to fix once named.</p>
+      <p class="chk-all-note">Select all that apply, or none</p>
+
+      <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I do not track profit per customer or product</span></button>
+      <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I have no documented systems or SOPs</span></button>
+      <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>Everything is manual, no automation</span></button>
+      <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I do not review key metrics weekly or monthly</span></button>
+      <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I reinvent the wheel every time (no templates)</span></button>
+      <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I have no wealth-building system or investment strategy</span></button>
+
+      <div class="nav-row">
+        <button class="btn-back" onclick="go(5)">Back</button>
+        <button class="btn-next" onclick="go(7)">Continue</button>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         STEP 7: Money Blueprint
+         ====================================================== -->
+    <div class="step" id="s7">
+      <p class="step-eye">Step 7 of 8</p>
+      <h2>Uncover Your <em>Money Blueprint</em></h2>
+      <p class="step-sub">These beliefs shape everything. Be honest, there are no right answers.</p>
+
+      <p class="field-lbl">Which statement sounds most like your inner voice about money?</p>
+      <div class="opt-grid" id="bpGrid">
+        <button class="opt" onclick="pick('bp','worker',this)"><span class="dot"></span>"If I am not working hard, I have not earned it yet"</button>
+        <button class="opt" onclick="pick('bp','pleasure',this)"><span class="dot"></span>"Life is short, I would rather enjoy money now than save it"</button>
+        <button class="opt" onclick="pick('bp','hoarder',this)"><span class="dot"></span>"Spending makes me anxious, saving feels like the only safety"</button>
+        <button class="opt" onclick="pick('bp','avoider',this)"><span class="dot"></span>"I avoid looking at my finances, it is too overwhelming"</button>
+        <button class="opt" onclick="pick('bp','resister',this)"><span class="dot"></span>"Rich people are greedy, money changes people for the worse"</button>
+        <button class="opt" onclick="pick('bp','chaser',this)"><span class="dot"></span>"I am always chasing the big win, one break will change everything"</button>
+        <button class="opt" onclick="pick('bp','worthy',this)"><span class="dot"></span>"When I hit a certain number, I will finally feel worthy and respected"</button>
+      </div>
+
+      <p class="field-lbl">Which statement feels most true?</p>
+      <div class="opt-grid" id="worthGrid">
+        <button class="opt" onclick="pick('worth','work',this)"><span class="dot"></span>I need to prove my worth through hard work</button>
+        <button class="opt" onclick="pick('worth','deserve',this)"><span class="dot"></span>I deserve wealth just for being me</button>
+        <button class="opt" onclick="pick('worth','others',this)"><span class="dot"></span>Others are more deserving of wealth than me</button>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-back" onclick="go(6)">Back</button>
+        <button class="btn-next" id="s7Next" onclick="go(8)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         STEP 8: Breakthrough Readiness
+         ====================================================== -->
+    <div class="step" id="s8">
+      <p class="step-eye">Step 8 of 8</p>
+      <h2>Breakthrough <em>Readiness</em></h2>
+      <p class="step-sub">Your answers help us calibrate the right next step for your situation.</p>
+
+      <p class="field-lbl">Have you invested in personal development before?</p>
+      <div class="opt-grid" id="investGrid">
+        <button class="opt" onclick="pick('invest','10k+',this)"><span class="dot"></span>Yes, I have invested $10K+ in courses or coaching</button>
+        <button class="opt" onclick="pick('invest','1-10k',this)"><span class="dot"></span>Yes, $1K to $10K on training</button>
+        <button class="opt" onclick="pick('invest','free',this)"><span class="dot"></span>Yes, but only books and free content</button>
+        <button class="opt" onclick="pick('invest','none',this)"><span class="dot"></span>No, this would be my first investment</button>
+      </div>
+
+      <p class="field-lbl">What is holding you back from your next income level?</p>
+      <div class="opt-grid" id="holdGrid">
+        <button class="opt" onclick="pick('hold','mindset',this)"><span class="dot"></span>My mindset and beliefs about money</button>
+        <button class="opt" onclick="pick('hold','skills',this)"><span class="dot"></span>Lack of skills or knowledge</button>
+        <button class="opt" onclick="pick('hold','time',this)"><span class="dot"></span>Not enough time, I am overwhelmed</button>
+        <button class="opt" onclick="pick('hold','capital',this)"><span class="dot"></span>Lack of capital or resources</button>
+        <button class="opt" onclick="pick('hold','unsure',this)"><span class="dot"></span>Honestly not sure, that is why I am here</button>
+      </div>
+
+      <p class="field-lbl">How committed are you to transforming your financial life in the next 90 days?</p>
+      <div class="slider-wrap">
+        <div class="slider-labs"><span>Thinking about it</span><span>All in</span></div>
+        <input type="range" min="1" max="10" value="7" id="commitSlider" oninput="state.commit=+this.value;document.getElementById('commitVal').textContent=this.value">
+        <div class="slider-val" id="commitVal">7</div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-back" onclick="go(7)">Back</button>
+        <button class="btn-next" id="s8Next" onclick="runAnalyze()" disabled>Reveal My Leak Report</button>
+      </div>
+    </div>
+
+  </div><!-- /wrap -->
+</div><!-- /quiz -->
+
+
+<!-- ============================================================
+     ANALYZING
+     ============================================================ -->
+<div id="analyzing" class="hidden">
+  <h2>&#128269; Analysing your money leaks...</h2>
+  <div class="a-steps">
+    <div class="a-step" id="as1"><div class="a-icon">1</div><span>Scoring your pricing, time and systems leaks</span></div>
+    <div class="a-step" id="as2"><div class="a-icon">2</div><span>Identifying your primary leak archetype</span></div>
+    <div class="a-step" id="as3"><div class="a-icon">3</div><span>Mapping your money blueprint pattern</span></div>
+    <div class="a-step" id="as4"><div class="a-icon">4</div><span>Calculating your personalised annual figure</span></div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     RESULTS
+     ============================================================ -->
+<div id="results" class="hidden">
+
+  <!-- PDF-only header (hidden on screen, visible in print) -->
+  <div class="pdf-report-header">
+    <div class="pdf-report-branding">
+      <strong>Millionaire Mind Intensive</strong>
+      <span>Money Leak Audit Report &nbsp;·&nbsp; Success Resources &nbsp;·&nbsp; T. Harv Eker</span>
+    </div>
+    <div class="pdf-report-meta">
+      <div><strong>Prepared for:</strong> <span id="pdf-name"></span></div>
+      <div><strong>Date:</strong> <span id="pdf-date"></span></div>
+      <div><strong>Confidential</strong></div>
+    </div>
+  </div>
+
+  <!-- Dark header -->
+  <div class="res-hdr">
+    <div class="wrap">
+      <div class="res-hdr-inner">
+        <div class="res-brand">Money Leak Audit &nbsp;·&nbsp; Millionaire Mind Intensive</div>
+        <p class="res-greeting" id="resGreet">Your personalised audit is complete.</p>
+        <h1 class="res-h">Here's Where Your Money Is Leaking</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- Total -->
+    <div class="leak-hero">
+      <div class="leak-lbl">Your Estimated Annual Money Leak</div>
+      <div class="leak-num" id="totalNum">$0</div>
+      <div class="leak-period">per year slipping through the cracks</div>
+      <div class="leak-note" id="calcNote">Calculated from your answers across all 4 leak categories</div>
+    </div>
+
+    <!-- PDF Download (prominent) -->
+    <div class="pdf-row">
+      <div class="pdf-row-left">
+        <div class="pdf-icon">&#128196;</div>
+        <div>
+          <div class="pdf-title">Your Personalised PDF Report</div>
+          <div class="pdf-sub">Download your full Money Leak Audit, and see exactly what to fix first.</div>
+        </div>
+      </div>
+      <button class="btn-pdf" onclick="downloadReport()">&#8681; Download Report</button>
+    </div>
+
+    <!-- Bonus Unlocked -->
+    <div class="bonus-unlocked">
+      <div class="bu-icon">&#127881;</div>
+      <div>
+        <div class="bu-title">Bonus Unlocked, Check Your Email</div>
+        <div class="bu-sub">Your <strong>7 Money Blueprints Cheatsheet</strong> ($47 value) is on its way to your inbox. <span class="bu-check">&#10003; Spot #77 claimed</span></div>
+      </div>
+    </div>
+
+    <!-- Archetype -->
+    <div class="res-card-gold">
+      <div class="card-eye eye-gold">Your Primary Leak Type</div>
+      <div class="card-name" id="archName">...</div>
+      <p class="card-desc" id="archDesc">...</p>
+    </div>
+
+    <!-- Breakdown -->
+    <div class="res-card">
+      <div class="bdown-h">Where Your Money Is Leaking</div>
+      <div class="brow">
+        <div class="brow-top"><span class="bcat">&#128184; Pricing Leaks</span><span class="bamt c-red" id="pAmt">$0</span></div>
+        <div class="bar-track"><div class="bar-fill bf-p" id="pBar"></div></div>
+      </div>
+      <div class="brow">
+        <div class="brow-top"><span class="bcat">&#9200; Time Leaks</span><span class="bamt c-ora" id="tAmt">$0</span></div>
+        <div class="bar-track"><div class="bar-fill bf-t" id="tBar"></div></div>
+      </div>
+      <div class="brow">
+        <div class="brow-top"><span class="bcat">&#9881; Systems Leaks</span><span class="bamt c-yel" id="sAmt">$0</span></div>
+        <div class="bar-track"><div class="bar-fill bf-s" id="sBar"></div></div>
+      </div>
+      <div class="brow">
+        <div class="brow-top"><span class="bcat">&#129504; Blueprint Tax</span><span class="bamt c-pur" id="bAmt">$0</span></div>
+        <div class="bar-track"><div class="bar-fill bf-b" id="bBar"></div></div>
+      </div>
+    </div>
+
+    <!-- Blueprint Pattern -->
+    <div class="res-card-pur">
+      <div class="card-eye eye-pur">Your Money Blueprint Pattern</div>
+      <div class="card-name" id="bpName">...</div>
+      <p class="card-desc" id="bpDesc">...</p>
+      <div class="bp-insight" id="bpInsight">...</div>
+    </div>
+
+    <!-- Bridge -->
+    <div class="bridge">
+      <h3 id="bridgeH">The leaks are identified. Now it is time to seal them.</h3>
+      <p id="bridgeP1">...</p>
+      <p>This is exactly what the <strong>Millionaire Mind Hybrid</strong> is built for. In 3 days, you do not just learn new strategies, you reprogram the blueprint that has been quietly overriding every strategy you have already tried. Then you install the systems that make the leaks stop permanently.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-result">
+      <h3>Ready to Seal the Leaks?</h3>
+      <p>Join <strong>Millionaire Mind Hybrid</strong>, 3 days to rewire your money blueprint and stop the bleeding for good.</p>
+      <div class="cta-outcomes">
+        <div class="cta-out"><span class="cta-chk">&#10003;</span><span>Fix your #1 wealth blocker, fast</span></div>
+        <div class="cta-out"><span class="cta-chk">&#10003;</span><span>Build income with leverage, not more hours</span></div>
+        <div class="cta-out"><span class="cta-chk">&#10003;</span><span>Walk away with a plan to 2x to 10x your income</span></div>
+      </div>
+      <a href="https://www.millionairemindworld.com" class="btn-gold" style="max-width:100%;display:block">&#128073; Claim Your Spot at Millionaire Mind Hybrid</a>
+      <div class="trust-row">
+        <span class="trust-item">10 million attendees</span>
+        <span class="trust-item">30 countries</span>
+        <span class="trust-item">Trusted worldwide</span>
+      </div>
+    </div>
+
+    <!-- PDF footer (screen-hidden, print-visible) -->
+    <div class="pdf-page-footer">
+      Millionaire Mind Intensive &nbsp;·&nbsp; Success Resources &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; millionairemindworld.com
+    </div>
+
+    <div class="res-footer">
+      © 2026 Success Resources &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms and Conditions</a> &nbsp;·&nbsp; <a href="#">Contact Us</a>
+    </div>
+
+  </div>
+</div><!-- /results -->
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+/* State */
+const state={
+  size:null,rev:null,goal:null,timeline:null,
+  pricing:0,time_leaks:0,systems:0,
+  bp:null,worth:null,invest:null,hold:null,commit:7,
+  firstName:'',lastName:'',email:'',phone:''
+};
+
+/* Section switcher */
+function show(id){
+  ['landing','quiz','analyzing','results'].forEach(s=>{
+    document.getElementById(s).classList.toggle('hidden',s!==id);
+  });
+  window.scrollTo(0,0);
+}
+
+function startQuiz(){ show('quiz'); go(1); }
+
+/* Step navigation */
+function go(n){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('progBar').style.width=Math.round(n/8*100)+'%';
+  const sc=document.getElementById('stepCnt');
+  if(sc) sc.textContent='Step '+n+' of 8';
+  window.scrollTo(0,0);
+}
+
+/* Step 1 validation */
+function validateStep1(){
+  const fn=document.getElementById('fName').value.trim();
+  const ln=document.getElementById('lName').value.trim();
+  const em=document.getElementById('fEmail').value.trim();
+  if(!fn||!ln||!em||!em.includes('@')){
+    alert('Please fill in your first name, last name and a valid email address.');
+    return;
+  }
+  state.firstName=fn; state.lastName=ln; state.email=em;
+  state.phone=document.getElementById('phoneCode').value+' '+document.getElementById('fPhone').value.trim();
+  go(2);
+}
+
+/* Live Step 1 enable button */
+['fName','fEmail','fLName'].forEach(id=>{
+  const el=document.getElementById(id==='fLName'?'lName':id);
+  if(el) el.addEventListener('input',checkS1);
+});
+function checkS1(){
+  const ok=document.getElementById('fName').value.trim()&&
+           document.getElementById('lName').value.trim()&&
+           document.getElementById('fEmail').value.includes('@');
+  document.getElementById('s1Next').disabled=!ok;
+}
+document.getElementById('fName').addEventListener('input',checkS1);
+document.getElementById('lName').addEventListener('input',checkS1);
+document.getElementById('fEmail').addEventListener('input',checkS1);
+
+/* Single-select options */
+function pick(field,val,el){
+  const grid=el.closest('.opt-grid');
+  if(grid) grid.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+  state[field]=val;
+  refreshNextBtns();
+}
+
+function refreshNextBtns(){
+  const s2=document.getElementById('s2Next');
+  if(s2) s2.disabled=!(state.size&&state.rev);
+  const s3=document.getElementById('s3Next');
+  if(s3) s3.disabled=!(state.goal&&state.timeline);
+  const s7=document.getElementById('s7Next');
+  if(s7) s7.disabled=!(state.bp&&state.worth);
+  const s8=document.getElementById('s8Next');
+  if(s8) s8.disabled=!(state.invest&&state.hold);
+}
+
+/* Checkboxes */
+function toggle(el){
+  el.classList.toggle('on');
+  const cat=el.dataset.cat;
+  state[cat==='time'?'time_leaks':cat]=document.querySelectorAll('.chk.on[data-cat="'+cat+'"]').length;
+}
+
+/* Run analysis */
+function runAnalyze(){
+  show('analyzing');
+  const ids=['as1','as2','as3','as4'];
+  ids.forEach(id=>{
+    const e=document.getElementById(id);
+    e.classList.remove('on','done');
+    e.querySelector('.a-icon').textContent=ids.indexOf(id)+1;
+  });
+  let i=0;
+  function tick(){
+    if(i>0){const p=document.getElementById(ids[i-1]);p.classList.remove('on');p.classList.add('done');p.querySelector('.a-icon').textContent='✓';}
+    if(i<ids.length){document.getElementById(ids[i]).classList.add('on');i++;setTimeout(tick,680);}
+    else{setTimeout(()=>{renderResults();show('results');setTimeout(animateBars,400);},550);}
+  }
+  setTimeout(tick,300);
+
+  /* Wire your CRM here */
+  // fetch('YOUR_WEBHOOK_URL',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...state})});
+}
+
+/* Calculation */
+function calc(){
+  const bases={solo:95000,'2-5':170000,'6-10':300000,'11-25':460000,'26-50':700000,'51-100':1000000,'100+':1350000,employee:70000};
+  const revM={u50:.55,'50-100':.75,'100-250':1.0,'250-500':1.25,'500k-1m':1.5,'1m-5m':1.8,'5m+':2.3};
+  const base=(bases[state.size]||120000)*(revM[state.rev]||1.0);
+  const p=(state.pricing/6)*base*0.42;
+  const t=(state.time_leaks/6)*base*0.36;
+  const s=(state.systems/6)*base*0.22;
+  const b=base*0.11*(1+0.4*(1-state.commit/10));
+  const total=p+t+s+b;
+  const scored=[{k:'pricing',v:state.pricing},{k:'time',v:state.time_leaks},{k:'systems',v:state.systems}];
+  scored.sort((a,b_)=>b_.v-a.v);
+  const primary=scored[0].v>0?scored[0].k:'blueprint';
+  return{total:rnd(total,1000),p:rnd(p,500),t:rnd(t,500),s:rnd(s,500),b:rnd(b,500),primary,barMax:Math.max(p,t,s,b,1)};
+}
+function rnd(n,to){return Math.round(n/to)*to}
+function fmtFull(n){return'$'+n.toLocaleString('en-US')}
+
+/* Archetypes */
+const ARCH={
+  pricing:{name:'The Underprizer',
+    desc:'Your biggest leak is in your pricing. You discount to close, you do work for free hoping it converts, and you undercharge for the value you deliver. Every invoice you raise is smaller than it should be, not because the market will not pay more, but because your money blueprint will not let you ask for it.',
+    bridge:'No amount of volume, hustle or extra hours closes the gap between what you charge and what you are worth. The only thing that changes this is a rewired relationship with money, value, and what you believe you deserve.'},
+  time:{name:'The Bottleneck',
+    desc:'Your biggest leak is your time. You are the business, and your income is capped by your hours. The business works when you work. The moment you stop, everything stops. You cannot scale what only you can do, and you cannot invest time you do not have.',
+    bridge:'Trading time for money is a ceiling disguised as a strategy. The only path through it is leverage, passive income streams, systems that run without you, and the mindset that money working for you is not laziness. It is the whole game.'},
+  systems:{name:'The Winger',
+    desc:'Your biggest leak is in your systems, or the absence of them. You are running a significant business on instinct and guesswork. No tracking, no repeatable processes, no wealth-building infrastructure outside the day-to-day grind. What does not get measured leaks quietly, every single month.',
+    bridge:'The absence of systems is the most fixable of all four leaks. Most of what you are losing here can be recovered within 90 days of having the right structure in place.'},
+  blueprint:{name:'The Blueprint Saboteur',
+    desc:'Your biggest leak is invisible. It is not in your pricing, your calendar or your spreadsheets. It is in the unconscious story you carry about money, wealth, and what you deserve. You know what to do. Something else is running the show.',
+    bridge:'An unconscious money blueprint running below the surface will outlast every plan, course or strategy you layer on top of it. The only lever that changes the outcome is the one nobody talks about.'}
+};
+
+const BP={
+  worker:{name:'The Worthiness Worker',desc:'You believe money must be earned through visible effort. Passive income feels morally questionable. Rest feels like theft. This keeps you in a cycle of overworking for every dollar, because some part of you believes you have not truly earned it unless you suffered for it.',insight:'At MMI we call this the hard work trap. The shift from earning through effort to earning through value and leverage is the single biggest mental unlock for people with your blueprint.'},
+  pleasure:{name:'The Pleasure Seeker',desc:'You earn well and spend freely. Every income increase gets absorbed into a better lifestyle rather than a stronger financial foundation. The wealth never compounds because it gets spent as fast as it arrives, or faster.',insight:'This blueprint is not a discipline problem. It is an identity problem. When we change the story about what money is for, the behaviour follows automatically.'},
+  hoarder:{name:'The Guardian',desc:'Money feels like safety and spending it feels like a threat. Your savings account is barely touched but your wealth is not growing either. You need certainty before you invest, which means you miss every window.',insight:'The Guardian blueprint trades one form of financial fear for another. The goal is not reckless spending. It is releasing the anxiety so you can make bold, strategic decisions from a place of abundance.'},
+  avoider:{name:'The Avoider',desc:'You know you should look at your finances more carefully. But something makes you close the app, delay the conversation and skip the review. Avoidance is not laziness. It is a protective mechanism running below conscious awareness, and it is one of the most expensive patterns we see.',insight:'The fact that you completed this audit is significant. Most Avoiders do not get this far. That tells us something important about your readiness for what comes next.'},
+  resister:{name:'The Resentful Resister',desc:'There is a part of you that associates wealth with greed or moral compromise. This unconscious belief quietly sabotages your financial progress, because some part of you does not actually want to become one of those people.',insight:'This is one of the most powerful and most common blueprints we see at MMI. Separating what wealthy people do from who wealthy people are changes everything.'},
+  chaser:{name:'The Lottery Thinker',desc:'You believe the big break is coming. The deal, the connection, the viral moment. This keeps you in a state of perpetual readiness for a windfall rather than building consistent, compounding wealth.',insight:'At MMI we call this the windfall mentality. The shift is from waiting for luck to building systems, passive income structures that compound quietly and consistently, without needing the break.'},
+  worthy:{name:'The Conditional Receiver',desc:'You have tied your net worth to your self-worth. There is a number in your head and when you hit it, you will finally feel okay. But every time you approach it, something pulls you back, because the number is not the real target. The feeling is.',insight:'This blueprint creates a moving target that can never be reached by external achievement alone. The work at MMI addresses the root, so wealth becomes an expression of who you are, not proof of it.'}
+};
+
+/* Render results */
+function renderResults(){
+  const r=calc();
+  const arch=ARCH[r.primary]||ARCH.blueprint;
+  const bp=BP[state.bp]||BP.worker;
+  const nm=state.firstName;
+  const totalChecks=state.pricing+state.time_leaks+state.systems;
+  const sizeLabel={solo:'solopreneur',employee:'employee','2-5':'2 to 5 person business','6-10':'6 to 10 person business','11-25':'11 to 25 person business','26-50':'26 to 50 person business','51-100':'51 to 100 person business','100+':'100 person plus business'};
+
+  document.getElementById('resGreet').textContent=nm?nm+', your personalised audit is complete.':'Your personalised audit is complete.';
+  document.getElementById('totalNum').textContent=fmtFull(r.total);
+  document.getElementById('calcNote').textContent=totalChecks+' identified leaks across your '+(sizeLabel[state.size]||'business')+', calculated against your revenue tier';
+  document.getElementById('archName').textContent=arch.name;
+  document.getElementById('archDesc').textContent=arch.desc;
+  document.getElementById('pAmt').textContent=r.p>0?fmtFull(r.p):'$0';
+  document.getElementById('tAmt').textContent=r.t>0?fmtFull(r.t):'$0';
+  document.getElementById('sAmt').textContent=r.s>0?fmtFull(r.s):'$0';
+  document.getElementById('bAmt').textContent=fmtFull(r.b);
+  window._bars={p:r.p/r.barMax*100,t:r.t/r.barMax*100,s:r.s/r.barMax*100,b:r.b/r.barMax*100};
+  document.getElementById('bpName').textContent=bp.name;
+  document.getElementById('bpDesc').textContent=bp.desc;
+  document.getElementById('bpInsight').textContent=bp.insight;
+  document.getElementById('bridgeH').textContent=(nm?nm+', the':'The')+' leaks are identified. Now it is time to seal them.';
+  document.getElementById('bridgeP1').textContent=arch.bridge;
+
+  /* PDF meta */
+  document.getElementById('pdf-name').textContent=state.firstName+' '+state.lastName;
+  document.getElementById('pdf-date').textContent=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+}
+
+function animateBars(){
+  if(!window._bars)return;
+  document.getElementById('pBar').style.width=window._bars.p+'%';
+  document.getElementById('tBar').style.width=window._bars.t+'%';
+  document.getElementById('sBar').style.width=window._bars.s+'%';
+  document.getElementById('bBar').style.width=window._bars.b+'%';
+}
+
+/* PDF download via browser print */
+function downloadReport(){
+  window.print();
+}
+
+/* Slider */
+document.getElementById('commitSlider').addEventListener('input',function(){
+  state.commit=+this.value;
+  document.getElementById('commitVal').textContent=this.value;
+});
+</script>
 </body>
 </html>
