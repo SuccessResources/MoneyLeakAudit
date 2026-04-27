@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Money Leak Audit — Millionaire Mind Intensive</title>
+<title>Money Leak Audit | Millionaire Mind Intensive</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -242,15 +242,113 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .res-h{font-size:clamp(22px,3vw,34px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.18}
 @media(max-width:899px){.res-brand,.res-greeting,.res-h{text-align:center}}
 
-.leak-hero{background:var(--green);border-radius:14px;padding:32px 28px;text-align:center;margin-bottom:24px;position:relative;overflow:hidden}
-@media(min-width:900px){.leak-hero{padding:40px 48px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;text-align:left}
-.leak-hero .leak-lbl{margin-bottom:6px}
-.leak-hero-right{text-align:right;flex-shrink:0}}
-.leak-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-l),var(--gold))}
-.leak-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.45);font-weight:700;margin-bottom:6px}
-.leak-num{font-size:clamp(40px,8vw,62px);font-weight:800;color:var(--gold-l);line-height:1;letter-spacing:-.02em;font-family:'Playfair Display',serif;margin-bottom:4px}
-.leak-period{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:12px}
-.leak-note{font-size:10px;color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);border-radius:6px;padding:6px 12px;display:inline-block}
+/* ── LEAK HERO — redesigned ── */
+.leak-hero{
+  background: linear-gradient(135deg, #0f2318 0%, var(--green) 50%, #1a3d28 100%);
+  border-radius: 20px;
+  padding: 48px 40px;
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(28,56,41,.25);
+}
+.leak-hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-l),#fff8e1,var(--gold-l),var(--gold));
+}
+.leak-hero::after{
+  content:'';position:absolute;
+  top:-60px;right:-60px;
+  width:220px;height:220px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(201,168,76,.12) 0%, transparent 70%);
+  pointer-events:none;
+}
+.leak-hero-inner{position:relative;z-index:1}
+.leak-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);
+  border-radius:100px;padding:5px 14px;
+  font-size:10px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gold-l);
+  margin-bottom:20px;
+}
+.leak-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+.leak-num{
+  font-size: clamp(52px, 10vw, 80px);
+  font-weight:800;
+  color: var(--gold-l);
+  line-height:1;
+  letter-spacing:-.03em;
+  font-family:'Playfair Display',serif;
+  margin-bottom:10px;
+  text-shadow: 0 0 40px rgba(201,168,76,.3);
+}
+.leak-period{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:20px;font-weight:400}
+.leak-badges{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.leak-badge{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;padding:6px 14px;
+  font-size:11px;color:rgba(255,255,255,.55);font-weight:500;
+}
+.leak-badge strong{color:rgba(255,255,255,.85);font-weight:700}
+.currency-note{font-size:10px;color:rgba(255,255,255,.2);margin-top:8px;text-align:center}
+@media(min-width:900px){
+  .leak-hero{padding:56px 64px}
+  .leak-num{font-size:clamp(64px,8vw,88px)}
+}
+@media(max-width:480px){
+  .leak-hero{padding:28px 20px;border-radius:14px}
+  .leak-num{font-size:42px}
+  .leak-period{font-size:13px}
+  .leak-badges{gap:6px}
+  .leak-badge{font-size:10px;padding:5px 10px}
+}
+
+/* ── OUTCOMES — redesigned as day cards ── */
+.outcomes{margin-bottom:24px}
+.out-lbl{
+  font-size:11px;font-weight:800;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.12em;
+  margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.out-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
+.day-cards{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:14px}
+@media(min-width:600px){.day-cards{grid-template-columns:1fr 1fr 1fr;gap:12px}}
+.day-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:14px;padding:20px 18px;
+  position:relative;overflow:hidden;
+  transition:box-shadow .15s,transform .15s;
+}
+.day-card:hover{box-shadow:0 6px 24px rgba(28,56,41,.1);transform:translateY(-2px)}
+.day-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+}
+.day-card.d1::before{background:linear-gradient(90deg,#16a34a,#4ade80)}
+.day-card.d2::before{background:linear-gradient(90deg,var(--gold),var(--gold-l))}
+.day-card.d3::before{background:linear-gradient(90deg,var(--pur),#a78bfa)}
+.day-num{
+  font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.d1 .day-num{color:#16a34a}
+.d2 .day-num{color:var(--gold)}
+.d3 .day-num{color:var(--pur)}
+.day-icon{font-size:24px;margin-bottom:10px;display:block}
+.day-title{font-size:14px;font-weight:800;color:var(--green);margin-bottom:6px;line-height:1.25}
+.day-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.bonus-items{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:480px){.bonus-items{grid-template-columns:1fr}}
+.bonus-item{
+  background:var(--cream);border:1px solid var(--border);
+  border-radius:10px;padding:12px 14px;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.bonus-item-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.bonus-item-text{font-size:12px;color:var(--body);line-height:1.5;font-weight:500}
 
 .pdf-row{display:flex;align-items:center;justify-content:space-between;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:15px 18px;margin:0 auto 16px;gap:12px;flex-wrap:wrap;max-width:600px}
 .pdf-left{display:flex;align-items:center;gap:11px}
@@ -380,7 +478,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .currency-note{font-size:10px;color:rgba(255,255,255,.25);margin-top:6px;text-align:center}
 
 /* ══════════════════════════════════════════════════════════════
-   MOBILE — full optimisation for screens under 480px
+   MOBILE, full optimisation for screens under 480px
    ══════════════════════════════════════════════════════════════ */
 @media(max-width:480px){
 
@@ -406,7 +504,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .stat strong{font-size:11px}
   .stat{font-size:8px}
 
-  /* Pattern cards — single column, compact */
+  /* Pattern cards, single column, compact */
   .patterns-grid{grid-template-columns:1fr;gap:10px;margin-bottom:20px}
   .pattern-card{padding:14px}
   .pcard-icon{width:32px;height:32px;min-width:32px}
@@ -502,11 +600,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .res-greeting{font-size:12px}
   .res-brand{font-size:9px}
   .res-num-wrap{padding:0 12px}
-  .leak-hero{padding:22px 16px;border-radius:10px;margin-bottom:16px}
-  .leak-num{font-size:36px}
-  .leak-lbl{font-size:9px}
-  .leak-period{font-size:11px}
-  .leak-note{font-size:9px;padding:4px 8px}
+  .leak-hero{padding:28px 20px;border-radius:14px;margin-bottom:16px}
+  .leak-num{font-size:42px}
+  .leak-period{font-size:13px}
+  .leak-eyebrow{font-size:9px;padding:4px 10px}
+  .leak-badges{gap:6px}
+  .leak-badge{font-size:10px;padding:5px 10px}
+  .day-cards{grid-template-columns:1fr!important;gap:8px}
+  .day-card{padding:16px 14px}
+  .day-icon{font-size:20px;margin-bottom:8px}
+  .day-title{font-size:13px}
+  .day-desc{font-size:11px}
+  .bonus-items{grid-template-columns:1fr}
+  .bonus-item{padding:10px 12px}
+  .bonus-item-text{font-size:11px}
 
   .res-body{padding:0 12px;gap:16px}
   .res-full{padding:0 12px}
@@ -613,28 +720,170 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 }
 
 @media print{
-  nav,.sr-header,.stats-strip,.hero-wrap,#landing,#quiz,#analyzing,
-  .nav-row,.cta-result,.pdf-row,.bridge-card,.outcomes,.btn-cta,
-  .res-hdr .res-greeting,.site-footer,.res-footer{display:none!important}
+  /* ── Hide everything except results ── */
+  .sr-header,.stats-strip,.hero-wrap,#landing,#quiz,#analyzing,
+  .nav-row,.site-footer,.res-footer,.mobile-sticky-cta,
+  .res-hdr,.sb-pdf,.res-sep,
+  .bridge-card,.btn-cta,.cta-result,
+  .res-sidebar{display:none!important}
+
   #results{display:block!important;padding:0;background:#fff!important}
-  @page{size:A4;margin:15mm 14mm}
-  body{background:#fff!important;color:#000!important;font-size:11pt}
-  .pdf-report-header{display:flex!important;justify-content:space-between;align-items:flex-start;padding-bottom:14px;margin-bottom:20px;border-bottom:3px solid #c9a84c}
-  .pdf-brand strong{font-size:15pt;font-weight:900;color:#1c3829}
-  .pdf-brand span{font-size:9pt;color:#6b7280;display:block;margin-top:2px}
-  .pdf-meta{text-align:right;font-size:9pt;color:#6b7280;line-height:1.6}
-  .pdf-meta strong{color:#1c3829}
-  .res-hdr{background:#1c3829!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:16px}
-  .res-h{font-size:18pt;text-align:left}
-  .leak-hero{background:#1c3829!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;margin:0 0 14px;border-radius:8px}
-  .leak-hero::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .leak-num{color:#ddb84e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .rcard,.rcard-gold,.rcard-pur{page-break-inside:avoid;margin-bottom:10px;border:1px solid #e5e7eb!important}
-  .rcard-gold::before,.rcard-pur::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .bar-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .bonus-unlocked{background:#fffbeb!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .pdf-page-footer{display:block!important;position:fixed;bottom:0;left:0;right:0;font-size:8pt;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:5px}
-  .res-wrap{padding:0}
+  @page{size:A4;margin:12mm 14mm}
+  body{background:#fff!important;color:#1a1a1a!important;font-size:10.5pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+
+  /* ── PDF cover header ── */
+  .pdf-report-header{
+    display:flex!important;
+    align-items:center;
+    justify-content:space-between;
+    background:#1c3829!important;
+    padding:18px 24px;
+    border-radius:10px;
+    margin-bottom:18px;
+  }
+  .pdf-brand strong{font-size:14pt;font-weight:900;color:#fff!important;display:block;margin-bottom:3px}
+  .pdf-brand span{font-size:8.5pt;color:rgba(255,255,255,.55)!important;display:block}
+  .pdf-meta{text-align:right;font-size:8.5pt;color:rgba(255,255,255,.65)!important;line-height:1.7}
+  .pdf-meta strong{color:#c9a84c!important}
+
+  /* ── Leak hero ── */
+  .res-num-wrap{padding:0!important}
+  .leak-hero{
+    background:linear-gradient(135deg,#0f2318,#1c3829)!important;
+    border-radius:12px!important;
+    padding:32px 36px!important;
+    margin-bottom:16px!important;
+    page-break-inside:avoid;
+  }
+  .leak-hero::after{display:none}
+  .leak-eyebrow{background:rgba(201,168,76,.2)!important;border-color:rgba(201,168,76,.4)!important;color:#c9a84c!important}
+  .leak-eyebrow-dot{background:#c9a84c!important;animation:none!important}
+  .leak-num{color:#d4b459!important;font-size:52pt!important;text-shadow:none!important}
+  .leak-period{color:rgba(255,255,255,.55)!important}
+  .leak-badge{background:rgba(255,255,255,.08)!important;border-color:rgba(255,255,255,.15)!important;color:rgba(255,255,255,.7)!important}
+  .leak-badge strong{color:#fff!important}
+  .currency-note{color:rgba(255,255,255,.3)!important}
+
+  /* ── Results body layout ── */
+  .res-body{display:block!important;padding:0!important}
+  .res-main{width:100%!important}
+  .res-full{padding:0!important}
+
+  /* ── Section heading ── */
+  .res-h{font-size:16pt!important;color:#1c3829!important}
+  .res-greeting{color:#6b7280!important;font-size:9pt!important}
+  .res-hdr{display:block!important;background:#1c3829!important;padding:14px 24px!important;margin-bottom:14px!important;border-radius:8px}
+
+  /* ── Result cards ── */
+  .rcard,.rcard-gold,.rcard-pur{
+    page-break-inside:avoid;
+    margin-bottom:12px!important;
+    border:1.5px solid #ddd5c8!important;
+    border-radius:10px!important;
+  }
+  .rcard-gold{border-color:#c9a84c!important}
+  .rcard-gold::before,.rcard-pur::before{-webkit-print-color-adjust:exact!important}
+  .card-name{color:#1c3829!important;font-size:14pt!important}
+  .card-desc{color:#374151!important}
+  .eye-gold{color:#c9a84c!important}
+
+  /* ── Blueprint deep dive ── */
+  .bp-deep{page-break-inside:avoid}
+  .bp-belief{background:#1c3829!important;border-radius:10px 10px 0 0!important}
+  .bp-belief-quote{color:#fff!important;font-size:12pt!important}
+  .bp-belief-eye{color:rgba(255,255,255,.45)!important}
+  .bp-voice{background:#f5f0e9!important}
+  .bp-voice-eye{color:#c9a84c!important}
+  .bp-voice-text{color:#374151!important}
+  .bp-behaviours{background:#fff!important}
+  .bp-beh-eye{color:#1c3829!important}
+  .bp-beh-arrow{color:#c9a84c!important}
+  .bp-watchout{background:#fff!important}
+  .bp-wo-eye{color:#c53030!important}
+  .wtag{background:#fef2f2!important;color:#c53030!important;border-color:#fecaca!important}
+  .bp-upgrade{background:#f0fdf4!important}
+  .bp-up-eye{color:#16a34a!important}
+  .bp-up-text{color:#15803d!important}
+
+  /* ── Quick wins ── */
+  .win-card{page-break-inside:avoid;margin-bottom:10px!important;border:1px solid #ddd5c8!important}
+  .win-num{background:#1c3829!important;color:#c9a84c!important}
+  .win-lbl{color:#c9a84c!important}
+
+  /* ── Day cards ── */
+  .day-cards{display:grid!important;grid-template-columns:1fr 1fr 1fr!important;gap:10px!important;page-break-inside:avoid}
+  .day-card{border:1.5px solid #ddd5c8!important;border-radius:10px!important;padding:14px!important}
+  .day-card.d1::before{background:linear-gradient(90deg,#16a34a,#4ade80)!important}
+  .day-card.d2::before{background:linear-gradient(90deg,#c9a84c,#d4b459)!important}
+  .day-card.d3::before{background:linear-gradient(90deg,#7c3aed,#a78bfa)!important}
+  .d1 .day-num{color:#16a34a!important}
+  .d2 .day-num{color:#c9a84c!important}
+  .d3 .day-num{color:#7c3aed!important}
+  .bonus-items{grid-template-columns:1fr 1fr!important}
+  .bonus-item{background:#f5f0e9!important;border-color:#ddd5c8!important}
+
+  /* ── Bonus unlocked ── */
+  .bonus-unlocked{
+    background:#fffbeb!important;
+    border-color:#c9a84c!important;
+    page-break-inside:avoid;
+  }
+
+  /* ── PDF CTA block: hidden on screen, shown in print ── */
+  .pdf-cta-block{display:block!important}
+    display:block!important;
+    background:linear-gradient(135deg,#0f2318,#1c3829)!important;
+    border-radius:12px!important;
+    padding:28px 32px!important;
+    text-align:center!important;
+    margin-top:20px!important;
+    page-break-inside:avoid;
+    border:3px solid #c9a84c!important;
+  }
+  .pdf-cta-block .pct-eyebrow{
+    font-size:9pt!important;font-weight:800!important;
+    letter-spacing:.14em!important;text-transform:uppercase!important;
+    color:#c9a84c!important;margin-bottom:10px!important;
+  }
+  .pdf-cta-block .pct-title{
+    font-family:'Playfair Display',Georgia,serif!important;
+    font-size:18pt!important;font-weight:900!important;
+    color:#fff!important;margin-bottom:10px!important;line-height:1.25!important;
+  }
+  .pdf-cta-block .pct-desc{
+    font-size:10pt!important;color:rgba(255,255,255,.65)!important;
+    line-height:1.65!important;margin-bottom:16px!important;
+  }
+  .pdf-cta-block .pct-bullets{
+    display:flex!important;flex-direction:column!important;
+    gap:6px!important;margin-bottom:20px!important;text-align:left!important;
+    max-width:380px!important;margin-left:auto!important;margin-right:auto!important;
+  }
+  .pdf-cta-block .pct-bullet{
+    font-size:10pt!important;color:rgba(255,255,255,.8)!important;
+    padding:6px 12px!important;
+    background:rgba(255,255,255,.07)!important;
+    border-radius:6px!important;
+    display:flex!important;gap:8px!important;
+  }
+  .pdf-cta-block .pct-chk{color:#4ade80!important;font-weight:900!important;flex-shrink:0}
+  .pdf-cta-block .pct-url{
+    font-size:12pt!important;font-weight:900!important;
+    color:#c9a84c!important;letter-spacing:.02em!important;
+    display:block!important;margin-top:8px!important;
+  }
+  .pdf-cta-block .pct-trust{
+    font-size:8.5pt!important;color:rgba(255,255,255,.3)!important;
+    margin-top:10px!important;
+  }
+
+  /* ── Page footer ── */
+  .pdf-page-footer{
+    display:block!important;position:fixed;bottom:0;left:0;right:0;
+    font-size:7.5pt;color:#9ca3af;text-align:center;
+    border-top:1px solid #e5e7eb;padding:4px 0;background:#fff;
+  }
 }
 .pdf-report-header,.pdf-page-footer{display:none}
 </style>
@@ -804,9 +1053,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <input type="email" class="form-inp" id="fEmail" placeholder="your@email.com" oninput="checkS1()">
       </div>
       <div class="form-group">
-        <label class="form-lbl">Phone * <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#9ca3af;font-size:10px">(required — numbers only, no country code)</span></label>
+        <label class="form-lbl">Phone * <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#9ca3af;font-size:10px">(required, numbers only, no country code)</span></label>
         <div class="phone-row">
-          <!-- Custom country code picker — auto-detected by IP -->
+          <!-- Custom country code picker, auto-detected by IP -->
           <div class="cc-picker-wrap" id="ccPicker">
             <div class="cc-btn" onclick="toggleCC()">
               <span class="cc-flag" id="ccFlag">🇸🇬</span>
@@ -1038,11 +1287,18 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
   <div class="res-num-wrap" style="padding-top:0">
     <div class="leak-hero">
-      <div class="leak-lbl">Your Estimated Annual Money Leak</div>
-      <div class="leak-num" id="totalNum">—</div>
-      <div class="leak-period">per year slipping through the cracks</div>
-      <div class="leak-note" id="calcNote">Calculated from your answers across all 4 leak categories</div>
-      <div class="currency-note" id="currencyNote"></div>
+      <div class="leak-hero-inner">
+        <div class="leak-eyebrow">
+          <span class="leak-eyebrow-dot"></span>
+          Your Estimated Annual Money Leak
+        </div>
+        <div class="leak-num" id="totalNum"></div>
+        <div class="leak-period">leaking from your business every year</div>
+        <div class="leak-badges" id="leakBadges">
+          <span class="leak-badge"><strong id="calcNote">Calculated from your answers</strong></span>
+        </div>
+        <div class="currency-note" id="currencyNote"></div>
+      </div>
     </div>
   </div>
 
@@ -1056,7 +1312,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
 
       <div class="res-sep"><span class="res-sep-lbl">Why This Keeps Happening</span></div>
-      <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.65">The audit reveals <em>what</em> is leaking. Your money blueprint is <em>why</em> it keeps recreating itself — and why tactics alone have never fixed it permanently.</p>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.65">The audit reveals <em>what</em> is leaking. Your money blueprint is <em>why</em> it keeps recreating itself, and why tactics alone have never fixed it permanently.</p>
       <div class="bp-deep">
         <div class="bp-belief">
           <div class="bp-belief-eye">Your Money Blueprint &nbsp;·&nbsp; Core Belief</div>
@@ -1088,17 +1344,57 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <div class="bridge-card">
         <h3 id="bridgeH">These quick wins are the start. Not the seal.</h3>
         <p id="bridgeP1">...</p>
-        <p>Every leak has two layers. The outer layer is the habit — charging too little, working too many hours, missing metrics. The inner layer is the blueprint — the belief that keeps recreating the habit even after you know better. Fixing the outer without addressing the inner is why most people improve briefly, then reset.</p>
-        <p>The <strong>Millionaire Mind Hybrid</strong> addresses both in 3 days. Day 1 installs the financial systems framework. Days 2 and 3 do the deep blueprint work — identifying where the pattern formed, releasing it, and rewiring it permanently.</p>
+        <p>Every leak has two layers. The outer layer is the habit, charging too little, working too many hours, missing metrics. The inner layer is the blueprint, the belief that keeps recreating the habit even after you know better. Fixing the outer without addressing the inner is why most people improve briefly, then reset.</p>
+        <p>The <strong>Millionaire Mind Hybrid</strong> addresses both in 3 days. Day 1 installs the financial systems framework. Days 2 and 3 do the deep blueprint work, identifying where the pattern formed, releasing it, and rewiring it permanently.</p>
       </div>
 
       <div class="outcomes">
         <div class="out-lbl">What changes in 3 days</div>
-        <div class="out-item"><span class="out-chk">&#10003;</span><span><strong>Day 1:</strong> Complete money management system, 6 accounts set up and running, including your Financial Freedom Account</span></div>
-        <div class="out-item"><span class="out-chk">&#10003;</span><span><strong>Day 2:</strong> Blueprint pattern identified at the root, where it formed, what it costs, and what it sounds like in real time</span></div>
-        <div class="out-item"><span class="out-chk">&#10003;</span><span><strong>Day 3:</strong> Pattern released through a proven conditioning process used with 1.5 million graduates worldwide</span></div>
-        <div class="out-item"><span class="out-chk">&#10003;</span><span>Personalised passive income plan and your specific Financial Freedom number</span></div>
-        <div class="out-item"><span class="out-chk">&#10003;</span><span>Pricing and leverage frameworks specific to your business size and industry</span></div>
+        <div class="day-cards">
+          <div class="day-card d1">
+            <div class="day-num">Day 1</div>
+            <span class="day-icon">💰</span>
+            <div class="day-title">Your Money System Goes Live</div>
+            <div class="day-desc">Complete money management framework installed. 6 accounts set up including your Financial Freedom Account — the one that builds wealth automatically.</div>
+          </div>
+          <div class="day-card d2">
+            <div class="day-num">Day 2</div>
+            <span class="day-icon">🧠</span>
+            <div class="day-title">Your Blueprint Gets Exposed</div>
+            <div class="day-desc">The exact pattern identified at the root — where it formed, what it costs you, and what it sounds like in your head in real time.</div>
+          </div>
+          <div class="day-card d3">
+            <div class="day-num">Day 3</div>
+            <span class="day-icon">🔓</span>
+            <div class="day-title">The Pattern Gets Released</div>
+            <div class="day-desc">Proven conditioning process used with 1.5 million graduates worldwide. Most people feel the shift within the session itself.</div>
+          </div>
+        </div>
+        <div class="bonus-items">
+          <div class="bonus-item">
+            <span class="bonus-item-icon">🎯</span>
+            <span class="bonus-item-text">Personalised passive income plan and your specific Financial Freedom number</span>
+          </div>
+          <div class="bonus-item">
+            <span class="bonus-item-icon">📈</span>
+            <span class="bonus-item-text">Pricing and leverage frameworks tailored to your business size and industry</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PDF-only CTA block: hidden on screen, shows in print -->
+      <div class="pdf-cta-block" style="display:none">
+        <div class="pct-eyebrow">Your Next Step</div>
+        <div class="pct-title">Ready to Seal the Leaks?</div>
+        <div class="pct-desc" id="pdfCtaDesc">Join Millionaire Mind Hybrid — 3 days to fix both the habit and the blueprint behind it, permanently.</div>
+        <div class="pct-bullets">
+          <div class="pct-bullet"><span class="pct-chk">✓</span><span>Money management system live on Day 1</span></div>
+          <div class="pct-bullet"><span class="pct-chk">✓</span><span>Blueprint identified and released on Days 2 and 3</span></div>
+          <div class="pct-bullet"><span class="pct-chk">✓</span><span>Passive income plan personalised to your situation</span></div>
+          <div class="pct-bullet"><span class="pct-chk">✓</span><span>10 million attendees across 30 countries</span></div>
+        </div>
+        <div class="pct-url">🔒 millionairemind.online</div>
+        <div class="pct-trust">Scan the QR code or visit the link above to secure your spot</div>
       </div>
 
     </div>
@@ -1108,27 +1404,30 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <div class="sb-card">
         <div class="sb-lbl">Where Your Money Is Leaking</div>
         <div class="sb-brow">
-          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-p"></span>Pricing Leaks</span><span class="sb-bamt c-red" id="pAmt">—</span></div>
+          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-p"></span>Pricing Leaks</span><span class="sb-bamt c-red" id="pAmt"></span></div>
           <div class="bar-track"><div class="bar-fill bf-p" id="pBar"></div></div>
         </div>
         <div class="sb-brow">
-          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-t"></span>Time Leaks</span><span class="sb-bamt c-ora" id="tAmt">—</span></div>
+          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-t"></span>Time Leaks</span><span class="sb-bamt c-ora" id="tAmt"></span></div>
           <div class="bar-track"><div class="bar-fill bf-t" id="tBar"></div></div>
         </div>
         <div class="sb-brow">
-          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-s"></span>Systems Leaks</span><span class="sb-bamt c-yel" id="sAmt">—</span></div>
+          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-s"></span>Systems Leaks</span><span class="sb-bamt c-yel" id="sAmt"></span></div>
           <div class="bar-track"><div class="bar-fill bf-s" id="sBar"></div></div>
         </div>
         <div class="sb-brow" style="margin-bottom:0">
-          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-b"></span>Blueprint Tax</span><span class="sb-bamt c-pur" id="bAmt">—</span></div>
+          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-b"></span>Blueprint Tax</span><span class="sb-bamt c-pur" id="bAmt"></span></div>
           <div class="bar-track"><div class="bar-fill bf-b" id="bBar"></div></div>
         </div>
       </div>
 
-      <div class="sb-pdf" onclick="window.print()">
-        <div class="sb-pdf-icon">&#128196;</div>
-        <div class="sb-pdf-text"><strong>Download PDF Report</strong><span>Your full audit, ready to save</span></div>
-        <button class="sb-pdf-btn">&#8681; Save</button>
+      <div class="sb-pdf" onclick="window.print()" style="background:linear-gradient(135deg,#1c3829,#254d38);border:1.5px solid rgba(201,168,76,.4);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;margin-bottom:10px;transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 20px rgba(28,56,41,.25)'" onmouseout="this.style.boxShadow='none'">
+        <div style="width:38px;height:38px;background:rgba(201,168,76,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📄</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:800;color:#fff;margin-bottom:2px">Download PDF Report</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.45)">Your full audit, ready to save and share</div>
+        </div>
+        <button style="background:var(--gold);color:var(--green);font-size:11px;font-weight:800;padding:8px 14px;border-radius:6px;border:none;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap">↓ Save PDF</button>
       </div>
 
       <div class="bonus-unlocked" style="margin-bottom:14px">
@@ -1155,7 +1454,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <div class="res-footer">Copyright 2026 Success Resources &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms and Conditions</a> &nbsp;·&nbsp; <a href="#">Contact Us</a></div>
   </div>
 
-  <!-- Mobile sticky CTA — only shows on phones -->
+  <!-- Mobile sticky CTA, only shows on phones -->
   <div class="mobile-sticky-cta" id="mobileStickyCTA" style="display:none">
     <a href="https://www.millionairemind.online/" target="_blank">🔒 Secure Your Spot Now &nbsp;→</a>
   </div>
@@ -1165,7 +1464,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
      JAVASCRIPT
      ============================================================ -->
 <script>
-/* ── STATE — defined first so all functions can reference it safely ── */
+/* ── STATE, defined first so all functions can reference it safely ── */
 const state = {
   size:null, rev:null, industry:null, goal:null, timeline:null,
   pricing:0, time_leaks:0, systems:0,
@@ -1226,7 +1525,7 @@ function fmtBracket(usd) {
   return s + n.toLocaleString();
 }
 
-/* Revenue brackets in USD — labels re-rendered after currency detection */
+/* Revenue brackets in USD, labels re-rendered after currency detection */
 const REV_BRACKETS = [
   {val:'u50',    lo:0,       hi:50000},
   {val:'50-100', lo:50000,   hi:100000},
@@ -1342,7 +1641,7 @@ document.addEventListener('click', e => {
 });
 
 /* ══════════════════════════════════════════════════════════════
-   3. IP DETECTION — sets currency + phone country code together
+   3. IP DETECTION, sets currency + phone country code together
    ══════════════════════════════════════════════════════════════ */
 (async function detectByIP() {
   try {
@@ -1355,7 +1654,7 @@ document.addEventListener('click', e => {
     // Set currency
     setCurrency(iso);
   } catch(e) {
-    // Silent fail — stays on SGD/+65 defaults, renders USD revenue options
+    // Silent fail, stays on SGD/+65 defaults, renders USD revenue options
     renderRevOpts();
   }
 })();
@@ -1373,7 +1672,7 @@ async function sendToZapier(payload, event) {
   try {
     await fetch(ZAPIER_URL, {
       method: 'POST',
-      // text/plain avoids CORS preflight — Zapier accepts this
+      // text/plain avoids CORS preflight, Zapier accepts this
       headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
       body: JSON.stringify({
         event,
@@ -1405,7 +1704,7 @@ function go(n) {
   window.scrollTo(0, 0);
 }
 
-/* Step 1 validation — phone is now required */
+/* Step 1 validation, phone is now required */
 function checkS1() {
   const fn = document.getElementById('fName').value.trim();
   const ln = document.getElementById('lName').value.trim();
@@ -1414,7 +1713,7 @@ function checkS1() {
   const phoneOk = ph.replace(/\D/g, '').length >= 4;
   const valid = fn && ln && em && em.includes('@') && phoneOk;
   const btn = document.getElementById('s1Next');
-  // Visual feedback only — button stays clickable so validateS1 can show the error
+  // Visual feedback only, button stays clickable so validateS1 can show the error
   btn.style.opacity = valid ? '1' : '0.45';
   btn.style.cursor  = valid ? 'pointer' : 'not-allowed';
 }
@@ -1572,14 +1871,14 @@ async function runAnalyze() {
           systems_leaks:      state.systems,
           /* Results */
           total_leak_usd:     r.total_usd || 0,
-          total_leak_local:   r.total_fmt || '—',
-          pricing_amt_local:  r.p_fmt     || '—',
-          time_amt_local:     r.t_fmt     || '—',
-          systems_amt_local:  r.s_fmt     || '—',
-          blueprint_tax_local:r.b_fmt     || '—',
-          primary_leak:       r.primary   || '—',
-          money_blueprint:    state.bp    || '—',
-          worthiness:         state.worth || '—',
+          total_leak_local:   r.total_fmt || '',
+          pricing_amt_local:  r.p_fmt     || '',
+          time_amt_local:     r.t_fmt     || '',
+          systems_amt_local:  r.s_fmt     || '',
+          blueprint_tax_local:r.b_fmt     || '',
+          primary_leak:       r.primary   || '',
+          money_blueprint:    state.bp    || '',
+          worthiness:         state.worth || '',
           /* Business context */
           company_size:       state.size,
           revenue_tier:       state.rev,
@@ -1641,42 +1940,42 @@ function calc() {
    ARCHETYPE DATA
    ══════════════════════════════════════════════════════════════ */
 const ARCH = {
-  pricing:{name:'The Underprizer',desc:'Your audit shows your largest leak is in your pricing. You discount to close deals, you do work for free hoping it converts, and you consistently undercharge for the value you deliver. Every invoice you raise is smaller than it should be — not because the market will not pay more, but because a deeper pattern will not let you ask for it.',bridge:'Your pricing leak is rarely fixed by learning how to negotiate. Most people try that and slide back within months. The pattern that keeps recreating the discount, the free work, the fear of raising rates — that is what needs to change first.'},
-  time:{name:'The Bottleneck',desc:'Your audit shows your largest leak is in your time. You are the business — and your income is capped by the hours you can physically work. The moment you stop, everything stops. You cannot scale what only you can do, and you cannot buy back time you have already spent.',bridge:'More delegation tools will not fix a bottleneck pattern. The belief that "no one can do it like me" and the guilt that comes with taking your hands off — those run deeper than any productivity system. That is the layer that needs to be addressed first.'},
-  systems:{name:'The Winger',desc:'Your audit shows your largest leak is in your systems. You are running a significant business on instinct, memory, and guesswork. No tracking, no repeatable processes, no wealth-building structure outside the day-to-day. What does not get measured cannot be managed — and right now, very little is being measured.',bridge:'Most people know they need systems. The reason they never build them is not lack of knowledge — it is a belief that structure kills creativity, or an Avoider pattern that makes tracking finances feel overwhelming. The system is easy. The blueprint that resists it is the real obstacle.'},
-  blueprint:{name:'The Blueprint Saboteur',desc:'Your audit shows the primary leak is at the root level — your money blueprint. It is not in your pricing, your calendar, or your spreadsheet. It is in the unconscious belief system you formed about money, wealth, and what you deserve. You know what to do. Something below the surface is running a different programme.',bridge:'A money blueprint leak is invisible on a P&L but visible in your results. You have probably tried strategies and tactics that worked briefly and then reset. That is the blueprint reasserting itself. Strategies do not fix blueprints. The blueprint has to be addressed directly.'}
+  pricing:{name:'The Underprizer',desc:'Your audit shows your largest leak is in your pricing. You discount to close deals, you do work for free hoping it converts, and you consistently undercharge for the value you deliver. Every invoice you raise is smaller than it should be, not because the market will not pay more, but because a deeper pattern will not let you ask for it.',bridge:'Your pricing leak is rarely fixed by learning how to negotiate. Most people try that and slide back within months. The pattern that keeps recreating the discount, the free work, the fear of raising rates, that is what needs to change first.'},
+  time:{name:'The Bottleneck',desc:'Your audit shows your largest leak is in your time. You are the business, and your income is capped by the hours you can physically work. The moment you stop, everything stops. You cannot scale what only you can do, and you cannot buy back time you have already spent.',bridge:'More delegation tools will not fix a bottleneck pattern. The belief that "no one can do it like me" and the guilt that comes with taking your hands off, those run deeper than any productivity system. That is the layer that needs to be addressed first.'},
+  systems:{name:'The Winger',desc:'Your audit shows your largest leak is in your systems. You are running a significant business on instinct, memory, and guesswork. No tracking, no repeatable processes, no wealth-building structure outside the day-to-day. What does not get measured cannot be managed, and right now, very little is being measured.',bridge:'Most people know they need systems. The reason they never build them is not lack of knowledge, it is a belief that structure kills creativity, or an Avoider pattern that makes tracking finances feel overwhelming. The system is easy. The blueprint that resists it is the real obstacle.'},
+  blueprint:{name:'The Blueprint Saboteur',desc:'Your audit shows the primary leak is at the root level, your money blueprint. It is not in your pricing, your calendar, or your spreadsheet. It is in the unconscious belief system you formed about money, wealth, and what you deserve. You know what to do. Something below the surface is running a different programme.',bridge:'A money blueprint leak is invisible on a P&L but visible in your results. You have probably tried strategies and tactics that worked briefly and then reset. That is the blueprint reasserting itself. Strategies do not fix blueprints. The blueprint has to be addressed directly.'}
 };
 
 const BP_DEEP = {
-  worker:{name:'The Hard Worker',belief:'"I must earn every cent through effort and sacrifice."',voice:'"If you are not exhausted, you are not trying hard enough. More hours equals more worth."',behaviours:['Works 60 to 80 hour weeks as a badge of honour','Feels guilty resting or taking time away from work','Resists delegation — "no one does it like me"','Equates busyness with productivity and personal worth'],watchout:['Burnout','Income ceiling','No leverage','Resentment','Health decline'],upgrade:'Shift from trading time for money to building systems and leverage. Your worth is not measured in hours — it is measured in the value you create. The moment you internalise this, everything about how you work changes.'},
-  pleasure:{name:'The Pleasure Seeker',belief:'"Money is for enjoying — life is too short to save it all."',voice:'"You deserve this. You worked hard. One more purchase will not hurt. Save later, enjoy now."',behaviours:['Lives paycheque to paycheque despite strong income','Impulse spending on lifestyle upgrades the moment income rises','Avoids looking at bank balances or statements','Believes any financial structure or restriction equals unhappiness'],watchout:['No savings buffer','Debt spiral','Financial fragility','Lifestyle inflation'],upgrade:'You can enjoy life AND build wealth. They are not opposites. The key is paying yourself first — automating savings before spending begins, so financial freedom compounds quietly alongside the life you enjoy now.'},
-  hoarder:{name:'The Saver',belief:'"Security comes from saving — spending feels like losing."',voice:'"Do not spend that. What if something goes wrong? Keep saving — it is never enough."',behaviours:['Hoards cash in low-interest accounts while wealth stagnates','Too anxious to invest — "what if I lose it?"','Never feels financially secure regardless of how much is saved','Misses investment opportunities through excessive caution'],watchout:['Money never grows','Missed wealth opportunities','Scarcity mindset','Relationship friction'],upgrade:'Saving is a strength — but money sitting still is money dying slowly. The next step is making money work harder through smart, diversified investing. Safety and growth are not mutually exclusive.'},
-  avoider:{name:'The Avoider',belief:'"If I do not look at my finances, they cannot stress me out."',voice:'"I will sort it out later. It is too complicated. I am not a numbers person. Someone else will handle it."',behaviours:['Never opens bank statements, invoices, or financial reports','Has no budget or financial plan in place','Defers all financial decisions to a partner or advisor','Panics when forced to confront the actual financial picture'],watchout:['Hidden debt growing silently','Financial dependency','Missed tax obligations','Growing vulnerability'],upgrade:'Awareness is the beginning of all financial power. You do not need to become a spreadsheet expert. Start with one habit — check your balance weekly. Financial confidence is built in small steps, not giant leaps.'},
-  resister:{name:'The Money Monk',belief:'"Money corrupts. True meaning comes from things beyond wealth."',voice:'"Money is not important. I do not want to be like those greedy people. I am above that."',behaviours:['Undercharges or gives services away for free as a subconscious act of virtue','Feels moral superiority over wealthy people','Self-sabotages when income starts to rise','Attracts people with broke mindsets while repelling wealthy mentors'],watchout:['Hard income ceiling','Resentment of others\' success','Self-sabotage patterns','Financial martyrdom'],upgrade:'Wealth amplifies who you already are. A good person with money does more good in the world than a good person without it. You can have both meaning and financial freedom — they are not opposites, and never were.'},
-  chaser:{name:'The Gambler',belief:'"The big win is just around the corner — I can feel it."',voice:'"This is the one. Steady growth is boring — I want to win big. Double or nothing."',behaviours:['Chases crypto, forex, and hot tips without a clear strategy','Makes high-risk moves based on feeling, not research','Gets bored with consistent, proven wealth-building approaches','Boom-and-bust financial cycles that repeat every few years'],watchout:['Capital erosion','Impulsive decisions','Addiction-like patterns','No financial safety net'],upgrade:'The real game is calculated risk management — strategic moves with a known downside and unlimited upside. Consistent, compounding strategy beats lucky timing every time across the long run. The boring path is the fast one.'},
-  worthy:{name:'The Idolizer',belief:'"More money will finally make me feel good enough."',voice:'"When I make it, people will respect me. I just need more — then I will be happy."',behaviours:['Ties self-worth entirely to net worth and external income','Overspends on status symbols to manage how others perceive them','Never feels enough regardless of income or achievement level','Deep anxiety and emptiness sitting underneath financial success'],watchout:['Emotional spending cycles','Constant comparison','Empty achievement','Hollow success'],upgrade:'Worthiness is not earned — it is chosen. Build wealth from a foundation of inner security, not to fill an emotional hole. The hole never gets filled from the outside. When you understand this, wealth becomes a byproduct of who you are, not a replacement for it.'}
+  worker:{name:'The Hard Worker',belief:'"I must earn every cent through effort and sacrifice."',voice:'"If you are not exhausted, you are not trying hard enough. More hours equals more worth."',behaviours:['Works 60 to 80 hour weeks as a badge of honour','Feels guilty resting or taking time away from work','Resists delegation, "no one does it like me"','Equates busyness with productivity and personal worth'],watchout:['Burnout','Income ceiling','No leverage','Resentment','Health decline'],upgrade:'Shift from trading time for money to building systems and leverage. Your worth is not measured in hours, it is measured in the value you create. The moment you internalise this, everything about how you work changes.'},
+  pleasure:{name:'The Pleasure Seeker',belief:'"Money is for enjoying, life is too short to save it all."',voice:'"You deserve this. You worked hard. One more purchase will not hurt. Save later, enjoy now."',behaviours:['Lives paycheque to paycheque despite strong income','Impulse spending on lifestyle upgrades the moment income rises','Avoids looking at bank balances or statements','Believes any financial structure or restriction equals unhappiness'],watchout:['No savings buffer','Debt spiral','Financial fragility','Lifestyle inflation'],upgrade:'You can enjoy life AND build wealth. They are not opposites. The key is paying yourself first, automating savings before spending begins, so financial freedom compounds quietly alongside the life you enjoy now.'},
+  hoarder:{name:'The Saver',belief:'"Security comes from saving, spending feels like losing."',voice:'"Do not spend that. What if something goes wrong? Keep saving, it is never enough."',behaviours:['Hoards cash in low-interest accounts while wealth stagnates','Too anxious to invest, "what if I lose it?"','Never feels financially secure regardless of how much is saved','Misses investment opportunities through excessive caution'],watchout:['Money never grows','Missed wealth opportunities','Scarcity mindset','Relationship friction'],upgrade:'Saving is a strength, but money sitting still is money dying slowly. The next step is making money work harder through smart, diversified investing. Safety and growth are not mutually exclusive.'},
+  avoider:{name:'The Avoider',belief:'"If I do not look at my finances, they cannot stress me out."',voice:'"I will sort it out later. It is too complicated. I am not a numbers person. Someone else will handle it."',behaviours:['Never opens bank statements, invoices, or financial reports','Has no budget or financial plan in place','Defers all financial decisions to a partner or advisor','Panics when forced to confront the actual financial picture'],watchout:['Hidden debt growing silently','Financial dependency','Missed tax obligations','Growing vulnerability'],upgrade:'Awareness is the beginning of all financial power. You do not need to become a spreadsheet expert. Start with one habit, check your balance weekly. Financial confidence is built in small steps, not giant leaps.'},
+  resister:{name:'The Money Monk',belief:'"Money corrupts. True meaning comes from things beyond wealth."',voice:'"Money is not important. I do not want to be like those greedy people. I am above that."',behaviours:['Undercharges or gives services away for free as a subconscious act of virtue','Feels moral superiority over wealthy people','Self-sabotages when income starts to rise','Attracts people with broke mindsets while repelling wealthy mentors'],watchout:['Hard income ceiling','Resentment of others\' success','Self-sabotage patterns','Financial martyrdom'],upgrade:'Wealth amplifies who you already are. A good person with money does more good in the world than a good person without it. You can have both meaning and financial freedom, they are not opposites, and never were.'},
+  chaser:{name:'The Gambler',belief:'"The big win is just around the corner, I can feel it."',voice:'"This is the one. Steady growth is boring, I want to win big. Double or nothing."',behaviours:['Chases crypto, forex, and hot tips without a clear strategy','Makes high-risk moves based on feeling, not research','Gets bored with consistent, proven wealth-building approaches','Boom-and-bust financial cycles that repeat every few years'],watchout:['Capital erosion','Impulsive decisions','Addiction-like patterns','No financial safety net'],upgrade:'The real game is calculated risk management, strategic moves with a known downside and unlimited upside. Consistent, compounding strategy beats lucky timing every time across the long run. The boring path is the fast one.'},
+  worthy:{name:'The Idolizer',belief:'"More money will finally make me feel good enough."',voice:'"When I make it, people will respect me. I just need more, then I will be happy."',behaviours:['Ties self-worth entirely to net worth and external income','Overspends on status symbols to manage how others perceive them','Never feels enough regardless of income or achievement level','Deep anxiety and emptiness sitting underneath financial success'],watchout:['Emotional spending cycles','Constant comparison','Empty achievement','Hollow success'],upgrade:'Worthiness is not earned, it is chosen. Build wealth from a foundation of inner security, not to fill an emotional hole. The hole never gets filled from the outside. When you understand this, wealth becomes a byproduct of who you are, not a replacement for it.'}
 };
 
 const QUICK_WINS = {
   pricing:[
-    {label:'Calculate your real rate — today',text:'Take last month\'s total revenue and divide it by the hours you worked. Write that number down. That is what you are currently charging per hour of your life. Then ask yourself: is that what you are worth? The gap between that number and the answer is your pricing leak in its most honest form.',action:'Do this before you close this page.'},
-    {label:'Find your 20 percent raise',text:'Identify one service, product, or retainer you could increase by 20 percent without losing the clients who actually value you. You are not raising it for everyone — test it on your next three enquiries only and observe what happens. You will be surprised how often the right clients do not flinch.',action:'Your next proposal goes out at the new price.'},
-    {label:'End the free work pattern',text:'Replace your next free consultation or unpaid discovery call with a paid strategy session. Charge a modest fee. Credit it toward the full engagement if they proceed. This one change filters out time-wasters, attracts serious buyers, and signals that your expertise has real value — because it does.',action:'Update your booking process this week.'}
+    {label:'Calculate your real rate, today',text:'Take last month\'s total revenue and divide it by the hours you worked. Write that number down. That is what you are currently charging per hour of your life. Then ask yourself: is that what you are worth? The gap between that number and the answer is your pricing leak in its most honest form.',action:'Do this before you close this page.'},
+    {label:'Find your 20 percent raise',text:'Identify one service, product, or retainer you could increase by 20 percent without losing the clients who actually value you. You are not raising it for everyone, test it on your next three enquiries only and observe what happens. You will be surprised how often the right clients do not flinch.',action:'Your next proposal goes out at the new price.'},
+    {label:'End the free work pattern',text:'Replace your next free consultation or unpaid discovery call with a paid strategy session. Charge a modest fee. Credit it toward the full engagement if they proceed. This one change filters out time-wasters, attracts serious buyers, and signals that your expertise has real value, because it does.',action:'Update your booking process this week.'}
   ],
   time:[
     {label:'Build your delegation list',text:'Write down every task you completed in the last seven days. Circle anything that another person could do with thirty minutes of training. That list is your delegation backlog. Every item on it is a task that is keeping you the bottleneck and preventing the business from running without you.',action:'Do this exercise right now, before the next week starts.'},
-    {label:'Set a decision threshold',text:'Choose a dollar amount below which no decision requires your approval. Any purchase, hire, or operational choice under that amount proceeds without you. Communicate this to your team in writing by end of week. This single rule can free up several hours immediately.',action:'Announce it in writing — today or tomorrow.'},
-    {label:'Document one process this week',text:'Choose one recurring task that only you know how to do. Spend twenty minutes recording yourself doing it — a voice memo, a Loom video, or a written step-by-step. That recording is the first page of your operations manual. One process documented per week transforms your business within a quarter.',action:'One process. This week. Just one.'}
+    {label:'Set a decision threshold',text:'Choose a dollar amount below which no decision requires your approval. Any purchase, hire, or operational choice under that amount proceeds without you. Communicate this to your team in writing by end of week. This single rule can free up several hours immediately.',action:'Announce it in writing, today or tomorrow.'},
+    {label:'Document one process this week',text:'Choose one recurring task that only you know how to do. Spend twenty minutes recording yourself doing it, a voice memo, a Loom video, or a written step-by-step. That recording is the first page of your operations manual. One process documented per week transforms your business within a quarter.',action:'One process. This week. Just one.'}
   ],
   systems:[
-    {label:'Start your weekly money date',text:'Block fifteen minutes every Monday morning — non-negotiable, in your calendar as a recurring event. Open your accounts. Review three numbers only: revenue received, expenses paid, and outstanding invoices. That is it. You cannot manage what you do not see, and you cannot see what you never look at.',action:'Open your calendar and block it right now.'},
-    {label:'Open your Financial Freedom Account',text:'Open a separate bank account today and label it Financial Freedom. Transfer a minimum of ten dollars to it now. The amount does not matter at this stage — the habit does. The principle behind this account is that you pay your own future first, before paying anyone else. Start the habit at any amount.',action:'Open the account before you close this page.'},
+    {label:'Start your weekly money date',text:'Block fifteen minutes every Monday morning, non-negotiable, in your calendar as a recurring event. Open your accounts. Review three numbers only: revenue received, expenses paid, and outstanding invoices. That is it. You cannot manage what you do not see, and you cannot see what you never look at.',action:'Open your calendar and block it right now.'},
+    {label:'Open your Financial Freedom Account',text:'Open a separate bank account today and label it Financial Freedom. Transfer a minimum of ten dollars to it now. The amount does not matter at this stage, the habit does. The principle behind this account is that you pay your own future first, before paying anyone else. Start the habit at any amount.',action:'Open the account before you close this page.'},
     {label:'Find your actual number',text:'Pull your last three months of income and expenses. Calculate your average monthly revenue. Calculate your average monthly costs. The gap between these two numbers is your current real financial picture. If you do not know this number, you are flying your business entirely on feel.',action:'Find this number by the end of this week.'}
   ],
   blueprint:[
-    {label:'Write down the little voice',text:'Right now, write down the first sentence that comes to mind when you think about money — unedited, raw, exactly as it sounds in your head. That is your blueprint speaking. You cannot rewrite a script you have never read out loud. Most people have never done this and spend years wondering why strategies do not stick.',action:'Write it. Read it back. Ask: is this a fact or something I inherited?'},
+    {label:'Write down the little voice',text:'Right now, write down the first sentence that comes to mind when you think about money, unedited, raw, exactly as it sounds in your head. That is your blueprint speaking. You cannot rewrite a script you have never read out loud. Most people have never done this and spend years wondering why strategies do not stick.',action:'Write it. Read it back. Ask: is this a fact or something I inherited?'},
     {label:'Find the counter-evidence',text:'Name one person you genuinely respect who is both wealthy and a good human being. Study their story this week. Your blueprint says wealth and character cannot coexist. Their existence disproves that assumption. The more examples you find, the weaker the blueprint becomes.',action:'Name one person by the end of today.'},
-    {label:'Track the pattern for seven days',text:'For the next week, every time the little voice says something limiting about money or your right to wealth — write it down. You will be surprised how often it speaks. You cannot change a pattern you have not observed. Awareness always comes before the shift.',action:'Keep a note on your phone. Start tracking tonight.'}
+    {label:'Track the pattern for seven days',text:'For the next week, every time the little voice says something limiting about money or your right to wealth, write it down. You will be surprised how often it speaks. You cannot change a pattern you have not observed. Awareness always comes before the shift.',action:'Keep a note on your phone. Start tracking tonight.'}
   ]
 };
 
@@ -1695,9 +1994,19 @@ function renderResults() {
     : 'Your personalised audit is complete.';
 
   document.getElementById('totalNum').textContent = r.total_fmt;
+
+  // Populate leak badges under the big number
+  const totalChecks = state.pricing + state.time_leaks + state.systems;
+  const leakBadges = document.getElementById('leakBadges');
+  if (leakBadges) {
+    leakBadges.innerHTML = `
+      <span class="leak-badge"><strong>${totalChecks}</strong> leak${totalChecks !== 1 ? 's' : ''} identified</span>
+      <span class="leak-badge"><strong>${sizeLabel[state.size] || 'your business'}</strong></span>
+      <span class="leak-badge">across <strong>4 categories</strong></span>
+    `;
+  }
   document.getElementById('calcNote').textContent =
-    (state.pricing + state.time_leaks + state.systems) +
-    ' identified leaks across your ' + (sizeLabel[state.size]||'business') +
+    totalChecks + ' identified leaks across your ' + (sizeLabel[state.size]||'business') +
     ', calculated against your revenue tier';
 
   // Currency note
@@ -1753,6 +2062,13 @@ function renderResults() {
   // PDF meta
   document.getElementById('pdfName').textContent = state.firstName + ' ' + state.lastName;
   document.getElementById('pdfDate').textContent = new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'});
+
+  // Personalise PDF CTA
+  const pdfCta = document.getElementById('pdfCtaDesc');
+  if (pdfCta) {
+    pdfCta.textContent = (state.firstName || 'You') + ', your audit found ' + r.total_fmt +
+      ' leaking every year. Millionaire Mind Hybrid gives you the permanent fix in just 3 days.';
+  }
 }
 
 function animateBars() {
