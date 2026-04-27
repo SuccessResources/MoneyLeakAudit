@@ -802,7 +802,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <input type="email" class="form-inp" id="fEmail" placeholder="your@email.com" oninput="checkS1()">
       </div>
       <div class="form-group">
-        <label class="form-lbl">Phone *</label>
+        <label class="form-lbl">Phone * <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#9ca3af;font-size:10px">(required — numbers only, no country code)</span></label>
         <div class="phone-row">
           <!-- Custom country code picker — auto-detected by IP -->
           <div class="cc-picker-wrap" id="ccPicker">
@@ -1404,11 +1404,13 @@ function go(n) {
 
 /* Step 1 validation — phone is now required */
 function checkS1() {
-  const fn    = document.getElementById('fName').value.trim();
-  const ln    = document.getElementById('lName').value.trim();
-  const em    = document.getElementById('fEmail').value.trim();
-  const ph    = document.getElementById('fPhone').value.trim();
-  const valid = fn && ln && em && em.includes('@') && ph.length >= 5;
+  const fn = document.getElementById('fName').value.trim();
+  const ln = document.getElementById('lName').value.trim();
+  const em = document.getElementById('fEmail').value.trim();
+  const ph = document.getElementById('fPhone').value.trim();
+  // Phone: just needs at least 5 digits typed (any length is fine — user may still be typing)
+  const phoneOk = ph.replace(/\D/g, '').length >= 4;
+  const valid = fn && ln && em && em.includes('@') && phoneOk;
   document.getElementById('s1Next').disabled = !valid;
 }
 
@@ -1417,14 +1419,15 @@ async function validateS1() {
   const ln = document.getElementById('lName').value.trim();
   const em = document.getElementById('fEmail').value.trim();
   const ph = document.getElementById('fPhone').value.trim();
-  if (!fn || !ln || !em || !em.includes('@') || !ph) {
-    alert('Please fill in all required fields including your phone number.');
+  const phoneDigits = ph.replace(/\D/g, '');
+  if (!fn || !ln || !em || !em.includes('@') || phoneDigits.length < 4) {
+    alert('Please fill in your name, a valid email, and phone number.');
     return;
   }
   state.firstName = fn;
   state.lastName  = ln;
   state.email     = em;
-  state.phone     = document.getElementById('selectedDialCode').value + ' ' + ph;
+  state.phone     = document.getElementById('selectedDialCode').value + ph;
   state.country   = selectedCC.name;
   state.countryISO = selectedCC.iso;
   state.dialCode  = selectedCC.dial;
@@ -1443,8 +1446,11 @@ async function validateS1() {
   state.fbclid       = _utmQ.get('fbclid')       || '';
   state.gclid        = _utmQ.get('gclid')        || '';
 
-  /* ── Zapier: lead submitted (SOI) ── */
-  await sendToZapier({
+  // ★ Navigate immediately — don't wait for Zapier
+  go(2);
+
+  // ── Zapier fires in background (no await) ──
+  sendToZapier({
     first_name:       state.firstName,
     last_name:        state.lastName,
     email:            state.email,
@@ -1456,7 +1462,6 @@ async function validateS1() {
     source:           'money-leak-audit-v2',
     stage:            'lead_submitted',
     landing_url:      state.landingUrl,
-    /* UTM tracking */
     utm_source:       state.utm_source,
     utm_medium:       state.utm_medium,
     utm_campaign:     state.utm_campaign,
@@ -1465,9 +1470,7 @@ async function validateS1() {
     utm_adset:        state.utm_adset,
     fbclid:           state.fbclid,
     gclid:            state.gclid,
-  }, 'lead_submitted');
-
-  go(2);
+  }, 'lead_submitted').catch(e => console.warn('Zapier lead_submitted:', e));
 }
 
 function pick(field, val, el) {
@@ -1520,9 +1523,9 @@ async function runAnalyze() {
         show('results');
         setTimeout(animateBars, 400);
 
-        /* ── Zapier: audit completed ── */
+        /* ── Zapier: audit completed (background, non-blocking) ── */
         const r = window._lastCalc || {};
-        await sendToZapier({
+        sendToZapier({
           first_name:         state.firstName,
           last_name:          state.lastName,
           email:              state.email,
@@ -1566,7 +1569,7 @@ async function runAnalyze() {
           utm_adset:          state.utm_adset    || '',
           fbclid:             state.fbclid       || '',
           gclid:              state.gclid        || '',
-        }, 'audit_completed');
+        }, 'audit_completed').catch(e => console.warn('Zapier audit_completed:', e));
 
       }, 550);
     }
