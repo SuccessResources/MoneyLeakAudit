@@ -156,6 +156,8 @@ a{color:var(--gold);text-decoration:none}
 .form-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:13px 14px;font-size:16px;color:var(--green);outline:none;transition:border-color .15s;font-family:'Inter',sans-serif}
 .form-inp:focus{border-color:var(--gold);background:var(--white)}
 .form-inp::placeholder{color:#9ca3af}
+.form-inp.err{border-color:var(--red)!important;background:#fff5f5}
+.field-err{font-size:11px;color:var(--red);font-weight:600;margin-top:5px;margin-bottom:2px}
 
 /* ── CUSTOM COUNTRY CODE PICKER ── */
 .phone-row{display:flex;gap:8px;align-items:stretch}
@@ -218,7 +220,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .btn-back:hover{border-color:var(--body);color:var(--body)}
 .btn-next{flex:1;background:var(--gold);color:var(--green);font-size:15px;font-weight:800;padding:13px;border-radius:8px;border:none;cursor:pointer;transition:background .12s;font-family:'Inter',sans-serif}
 .btn-next:hover{background:var(--gold-l)}
-.btn-next:disabled{opacity:.3;cursor:not-allowed;pointer-events:none}
+.btn-next:disabled{opacity:.4;cursor:not-allowed}
 
 /* ── ANALYZING ── */
 #analyzing{background:var(--bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
@@ -825,7 +827,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <label for="consent">I agree to receive marketing updates from Success Resources.</label>
       </div>
       <div class="nav-row">
-        <button class="btn-next" id="s1Next" onclick="validateS1()" disabled>Start My Free Audit</button>
+        <button class="btn-next" id="s1Next" onclick="validateS1()" style="opacity:0.45">Start My Free Audit</button>
       </div>
     </div>
 
@@ -1168,6 +1170,18 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
      JAVASCRIPT
      ============================================================ -->
 <script>
+/* ── STATE — defined first so all functions can reference it safely ── */
+const state = {
+  size:null, rev:null, industry:null, goal:null, timeline:null,
+  pricing:0, time_leaks:0, systems:0,
+  bp:null, worth:null, invest:null, hold:null, commit:7,
+  firstName:'', lastName:'', email:'', phone:'',
+  country:'', countryISO:'', dialCode:'', smsConsent:true,
+  detectedCurrency:'USD', landingUrl:'',
+  utm_source:'', utm_medium:'', utm_campaign:'',
+  utm_content:'', utm_term:'', utm_adset:'', fbclid:'', gclid:''
+};
+
 /* ══════════════════════════════════════════════════════════════
    1. CURRENCY SYSTEM
    ══════════════════════════════════════════════════════════════ */
@@ -1376,14 +1390,8 @@ async function sendToZapier(payload, event) {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   5. STATE & QUIZ LOGIC
+   5. QUIZ LOGIC
    ══════════════════════════════════════════════════════════════ */
-const state = {
-  size:null, rev:null, industry:null, goal:null, timeline:null,
-  pricing:0, time_leaks:0, systems:0,
-  bp:null, worth:null, invest:null, hold:null, commit:7,
-  firstName:'', lastName:'', email:'', phone:''
-};
 
 function show(id) {
   ['landing','quiz','analyzing','results'].forEach(s =>
@@ -1408,10 +1416,12 @@ function checkS1() {
   const ln = document.getElementById('lName').value.trim();
   const em = document.getElementById('fEmail').value.trim();
   const ph = document.getElementById('fPhone').value.trim();
-  // Phone: just needs at least 5 digits typed (any length is fine — user may still be typing)
   const phoneOk = ph.replace(/\D/g, '').length >= 4;
   const valid = fn && ln && em && em.includes('@') && phoneOk;
-  document.getElementById('s1Next').disabled = !valid;
+  const btn = document.getElementById('s1Next');
+  // Visual feedback only — button stays clickable so validateS1 can show the error
+  btn.style.opacity = valid ? '1' : '0.45';
+  btn.style.cursor  = valid ? 'pointer' : 'not-allowed';
 }
 
 async function validateS1() {
@@ -1420,22 +1430,50 @@ async function validateS1() {
   const em = document.getElementById('fEmail').value.trim();
   const ph = document.getElementById('fPhone').value.trim();
   const phoneDigits = ph.replace(/\D/g, '');
-  if (!fn || !ln || !em || !em.includes('@') || phoneDigits.length < 4) {
-    alert('Please fill in your name, a valid email, and phone number.');
-    return;
+
+  // Clear previous errors
+  document.querySelectorAll('.field-err').forEach(e => e.remove());
+  document.querySelectorAll('.form-inp.err').forEach(e => e.classList.remove('err'));
+
+  let hasError = false;
+  function showErr(id, msg) {
+    const inp = document.getElementById(id);
+    if (!inp) return;
+    inp.classList.add('err');
+    const err = document.createElement('div');
+    err.className = 'field-err';
+    err.textContent = msg;
+    inp.parentNode.insertBefore(err, inp.nextSibling);
+    hasError = true;
   }
-  state.firstName = fn;
-  state.lastName  = ln;
-  state.email     = em;
-  state.phone     = document.getElementById('selectedDialCode').value + ph;
-  state.country   = selectedCC.name;
+
+  if (!fn) showErr('fName', 'Please enter your first name');
+  if (!ln) showErr('lName', 'Please enter your last name');
+  if (!em || !em.includes('@')) showErr('fEmail', 'Please enter a valid email address');
+  if (phoneDigits.length < 4) {
+    const phoneInp = document.getElementById('fPhone');
+    phoneInp.classList.add('err');
+    const err = document.createElement('div');
+    err.className = 'field-err';
+    err.textContent = 'Please enter your phone number';
+    phoneInp.parentNode.parentNode.appendChild(err);
+    hasError = true;
+  }
+
+  if (hasError) return;
+
+  state.firstName  = fn;
+  state.lastName   = ln;
+  state.email      = em;
+  state.phone      = document.getElementById('selectedDialCode').value + ph;
+  state.country    = selectedCC.name;
   state.countryISO = selectedCC.iso;
-  state.dialCode  = selectedCC.dial;
+  state.dialCode   = selectedCC.dial;
   state.smsConsent = document.getElementById('consent').checked;
   state.detectedCurrency = activeCur.code;
   state.landingUrl = window.location.href;
 
-  /* ── Capture UTM params from URL ── */
+  /* ── Capture UTM params ── */
   const _utmQ = new URLSearchParams(window.location.search);
   state.utm_source   = _utmQ.get('utm_source')   || '';
   state.utm_medium   = _utmQ.get('utm_medium')   || '';
@@ -1446,10 +1484,10 @@ async function validateS1() {
   state.fbclid       = _utmQ.get('fbclid')       || '';
   state.gclid        = _utmQ.get('gclid')        || '';
 
-  // ★ Navigate immediately — don't wait for Zapier
+  // Navigate immediately
   go(2);
 
-  // ── Zapier fires in background (no await) ──
+  // Zapier fires in background
   sendToZapier({
     first_name:       state.firstName,
     last_name:        state.lastName,
