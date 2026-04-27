@@ -252,6 +252,39 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .leak-period{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:12px}
 .leak-note{font-size:10px;color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);border-radius:6px;padding:6px 12px;display:inline-block}
 
+/* ── LEAK HERO UPGRADES ── */
+.leak-hero{background:linear-gradient(135deg,#0e2018 0%,var(--green) 55%,#1a3d28 100%)!important;box-shadow:0 20px 60px rgba(28,56,41,.3)}
+.leak-hero::after{content:'';position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 70%);pointer-events:none}
+.leak-hero::before{background:linear-gradient(90deg,var(--gold),var(--gold-l),#fffde7,var(--gold-l),var(--gold))!important}
+.leak-eyebrow-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);border-radius:100px;padding:5px 14px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-l);margin-bottom:18px}
+.leak-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pdot 2s infinite;flex-shrink:0}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
+.leak-num{font-size:clamp(52px,10vw,80px)!important;text-shadow:0 0 40px rgba(201,168,76,.25)}
+.leak-badges{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:14px}
+.leak-badge-pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:5px 13px;font-size:11px;color:rgba(255,255,255,.55);font-weight:500}
+.leak-badge-pill strong{color:rgba(255,255,255,.85);font-weight:700}
+
+/* ── DAY CARDS ── */
+.outcomes{margin-bottom:24px}
+.day-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:680px){.day-cards{grid-template-columns:1fr;gap:8px}}
+.day-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px 18px;position:relative;overflow:hidden;transition:box-shadow .15s,transform .15s}
+.day-card:hover{box-shadow:0 6px 24px rgba(28,56,41,.1);transform:translateY(-2px)}
+.day-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.day-card.d1::before{background:linear-gradient(90deg,#16a34a,#4ade80)}
+.day-card.d2::before{background:linear-gradient(90deg,var(--gold),var(--gold-l))}
+.day-card.d3::before{background:linear-gradient(90deg,var(--pur),#a78bfa)}
+.day-num-lbl{font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.d1 .day-num-lbl{color:#16a34a}.d2 .day-num-lbl{color:var(--gold)}.d3 .day-num-lbl{color:var(--pur)}
+.day-icon{font-size:26px;margin-bottom:10px;display:block}
+.day-title{font-size:14px;font-weight:800;color:var(--green);margin-bottom:6px;line-height:1.25}
+.day-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.bonus-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:480px){.bonus-row{grid-template-columns:1fr}}
+.bonus-pill{background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
+.bonus-pill-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.bonus-pill-text{font-size:12px;color:var(--body);line-height:1.5;font-weight:500}
+
 .pdf-row{display:flex;align-items:center;justify-content:space-between;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:15px 18px;margin:0 auto 16px;gap:12px;flex-wrap:wrap;max-width:600px}
 .pdf-left{display:flex;align-items:center;gap:11px}
 .pdf-icon{font-size:26px;flex-shrink:0}
@@ -1038,11 +1071,18 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
   <div class="res-num-wrap" style="padding-top:0">
     <div class="leak-hero">
-      <div class="leak-lbl">Your Estimated Annual Money Leak</div>
-      <div class="leak-num" id="totalNum">—</div>
-      <div class="leak-period">per year slipping through the cracks</div>
-      <div class="leak-note" id="calcNote">Calculated from your answers across all 4 leak categories</div>
-      <div class="currency-note" id="currencyNote"></div>
+      <div style="position:relative;z-index:1;text-align:center">
+        <div class="leak-eyebrow-pill">
+          <span class="leak-eyebrow-dot"></span>
+          Your Estimated Annual Money Leak
+        </div>
+        <div class="leak-num" id="totalNum">—</div>
+        <div class="leak-period">per year slipping through the cracks</div>
+        <div class="leak-badges" id="leakBadges">
+          <span class="leak-badge-pill"><span id="calcNote">Calculated from your answers across all 4 leak categories</span></span>
+        </div>
+        <div class="currency-note" id="currencyNote"></div>
+      </div>
     </div>
   </div>
 
@@ -1094,11 +1134,36 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
       <div class="outcomes">
         <div class="out-lbl">What changes in 3 days</div>
-        <div class="out-item"><span class="out-chk">&#10003;</span><span><strong>Day 1:</strong> Complete money management system, 6 accounts set up and running, including your Financial Freedom Account</span></div>
-        <div class="out-item"><span class="out-chk">&#10003;</span><span><strong>Day 2:</strong> Blueprint pattern identified at the root, where it formed, what it costs, and what it sounds like in real time</span></div>
-        <div class="out-item"><span class="out-chk">&#10003;</span><span><strong>Day 3:</strong> Pattern released through a proven conditioning process used with 1.5 million graduates worldwide</span></div>
-        <div class="out-item"><span class="out-chk">&#10003;</span><span>Personalised passive income plan and your specific Financial Freedom number</span></div>
-        <div class="out-item"><span class="out-chk">&#10003;</span><span>Pricing and leverage frameworks specific to your business size and industry</span></div>
+        <div class="day-cards">
+          <div class="day-card d1">
+            <div class="day-num-lbl">Day 1</div>
+            <span class="day-icon">💰</span>
+            <div class="day-title">Your Money System Goes Live</div>
+            <div class="day-desc">Complete money management framework installed. 6 accounts set up including your Financial Freedom Account — the one that builds wealth automatically.</div>
+          </div>
+          <div class="day-card d2">
+            <div class="day-num-lbl">Day 2</div>
+            <span class="day-icon">🧠</span>
+            <div class="day-title">Your Blueprint Gets Exposed</div>
+            <div class="day-desc">The exact pattern identified at the root — where it formed, what it costs you, and what it sounds like in your head in real time.</div>
+          </div>
+          <div class="day-card d3">
+            <div class="day-num-lbl">Day 3</div>
+            <span class="day-icon">🔓</span>
+            <div class="day-title">The Pattern Gets Released</div>
+            <div class="day-desc">Proven conditioning process used with 1.5 million graduates worldwide. Most people feel the shift within the session itself.</div>
+          </div>
+        </div>
+        <div class="bonus-row">
+          <div class="bonus-pill">
+            <span class="bonus-pill-icon">🎯</span>
+            <span class="bonus-pill-text">Personalised passive income plan and your specific Financial Freedom number</span>
+          </div>
+          <div class="bonus-pill">
+            <span class="bonus-pill-icon">📈</span>
+            <span class="bonus-pill-text">Pricing and leverage frameworks specific to your business size and industry</span>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -1695,9 +1760,18 @@ function renderResults() {
     : 'Your personalised audit is complete.';
 
   document.getElementById('totalNum').textContent = r.total_fmt;
+
+  // Populate leak badges
+  const totalChecks = state.pricing + state.time_leaks + state.systems;
+  const leakBadges = document.getElementById('leakBadges');
+  if (leakBadges) {
+    leakBadges.innerHTML =
+      `<span class="leak-badge-pill"><strong>${totalChecks}</strong> leak${totalChecks!==1?'s':''} identified</span>` +
+      `<span class="leak-badge-pill"><strong>${sizeLabel[state.size]||'your business'}</strong></span>` +
+      `<span class="leak-badge-pill">across <strong>4 categories</strong></span>`;
+  }
   document.getElementById('calcNote').textContent =
-    (state.pricing + state.time_leaks + state.systems) +
-    ' identified leaks across your ' + (sizeLabel[state.size]||'business') +
+    totalChecks + ' identified leaks across your ' + (sizeLabel[state.size]||'business') +
     ', calculated against your revenue tier';
 
   // Currency note
