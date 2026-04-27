@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,24 +9,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-
-/* ============================================================
-   ROOT COLORS — exact match to millionairemindworld.com/money
-   ============================================================ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --green:  #1c3829;   /* dark forest green: header, headings, dark sections */
-  --green2: #254d38;   /* hover shade                                         */
-  --bg:     #ede9e2;   /* page background: warm beige                         */
-  --white:  #ffffff;   /* card surfaces                                        */
-  --cream:  #f5f0e9;   /* inner CTA box / soft highlight                      */
-  --gold:   #c9a84c;   /* MMI accent: buttons, italic accent, progress        */
-  --gold-l: #d4b459;   /* gold hover                                           */
+  --green:  #1c3829;
+  --green2: #254d38;
+  --bg:     #ede9e2;
+  --white:  #ffffff;
+  --cream:  #f5f0e9;
+  --gold:   #c9a84c;
+  --gold-l: #d4b459;
   --gold-d: rgba(201,168,76,.13);
-  --body:   #374151;   /* regular body copy                                    */
-  --muted:  #6b7280;   /* labels, secondary text                               */
-  --border: #ddd5c8;   /* warm card borders                                    */
-  --red:    #c53030;   /* scarcity copy                                        */
+  --body:   #374151;
+  --muted:  #6b7280;
+  --border: #ddd5c8;
+  --red:    #c53030;
   --grn:    #16a34a;
   --pur:    #7c3aed;
   --r:      12px;
@@ -38,7 +35,6 @@ a{color:var(--gold);text-decoration:none}
 .wrap{max-width:700px;margin:0 auto;padding:0 20px}
 .wrap-wide{max-width:1100px;margin:0 auto;padding:0 32px}
 
-/* Desktop scaling */
 @media(min-width:900px){
   body{font-size:16px}
   .wrap{max-width:820px}
@@ -57,21 +53,9 @@ a{color:var(--gold);text-decoration:none}
   .testi-text{font-size:15px}
 }
 
-/* ============================================================
-   SR HEADER BAR (dark forest green, white logo)
-   ============================================================ */
 .sr-header{background:var(--green);padding:14px 0;text-align:center}
 .sr-logo{display:flex;align-items:center;justify-content:center;gap:10px}
-.sr-logo-icon{width:36px;height:36px}
-.sr-wordmark{text-align:left;line-height:1.15}
-.sr-wordmark strong{display:block;font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff;letter-spacing:.04em}
-.sr-wordmark span{display:block;font-size:9px;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase}
 
-/* ============================================================
-   LANDING PAGE
-   ============================================================ */
-
-/* --- HERO -------------------------------------------------- */
 .hero-wrap{padding:40px 0 36px;background:var(--bg)}
 .hero-card{background:var(--white);border-radius:16px;box-shadow:0 4px 32px rgba(28,56,41,.08);padding:44px 40px 36px;max-width:820px;margin:0 auto;text-align:center}
 @media(max-width:600px){.hero-card{padding:28px 20px;border-radius:10px}}
@@ -93,14 +77,10 @@ a{color:var(--gold);text-decoration:none}
 .btn-green:hover{background:var(--green2);transform:translateY(-1px)}
 .cta-note{font-size:11px;color:var(--muted);text-align:center;margin-top:8px}
 
-
-/* --- Stats strip ------------------------------------------- */
 .stats-strip{background:var(--green);padding:14px 0;margin-top:0}
 .stats-inner{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
 .stat{text-align:center;font-size:11px;color:rgba(255,255,255,.45)}
 .stat strong{display:block;font-size:15px;font-weight:800;color:var(--gold);margin-bottom:1px}
-
-/* Mobile: force all 5 stats onto one line */
 @media(max-width:560px){
   .stats-inner{flex-wrap:nowrap;gap:0;justify-content:space-around;padding:0 8px}
   .stat{flex:1;min-width:0}
@@ -108,7 +88,6 @@ a{color:var(--gold);text-decoration:none}
   .stat{font-size:9px}
 }
 
-/* --- Pattern cards (section 2) ----------------------------- */
 .patterns-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:30px}
 @media(min-width:900px){.patterns-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:580px){.patterns-grid{grid-template-columns:1fr}}
@@ -124,7 +103,6 @@ a{color:var(--gold);text-decoration:none}
 .sec-h{font-size:clamp(22px,3.5vw,34px);font-weight:800;text-align:center;margin-bottom:32px;letter-spacing:-.01em}
 .sec-h em{color:var(--gold);font-style:italic}
 
-/* --- Testimonial carousel ---------------------------------- */
 .testi-section{background:var(--cream);padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .testi-inner{display:flex;align-items:center;gap:32px;max-width:860px;margin:0 auto;padding:0 32px}
 @media(max-width:600px){.testi-inner{flex-direction:column;gap:20px}}
@@ -145,19 +123,15 @@ a{color:var(--gold);text-decoration:none}
 .tdot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s}
 .tdot.on{background:var(--gold)}
 
-/* --- CTA section ------------------------------------------- */
 .cta-section{padding:48px 0;text-align:center}
 .cta-section h2{font-size:clamp(20px,3.5vw,28px);margin-bottom:10px}
 .cta-section p{color:var(--muted);font-size:15px;margin-bottom:24px;line-height:1.65;max-width:480px;margin-left:auto;margin-right:auto}
 
-/* --- Footer ------------------------------------------------ */
 .site-footer{background:var(--green);padding:18px 0;text-align:center}
 .site-footer p{font-size:11px;color:rgba(255,255,255,.35)}
 .site-footer a{color:rgba(255,255,255,.45)}
 
-/* ============================================================
-   QUIZ
-   ============================================================ */
+/* ── QUIZ ── */
 #quiz{background:var(--bg);min-height:100vh;padding-bottom:60px}
 .quiz-hdr{background:var(--green)}
 .quiz-hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;max-width:680px;margin:0 auto}
@@ -166,7 +140,6 @@ a{color:var(--gold);text-decoration:none}
 .prog-track{height:4px;background:rgba(255,255,255,.12)}
 .prog-bar{height:4px;background:var(--gold);transition:width .4s ease;width:0}
 
-/* Quiz card wrapper */
 .quiz-card{background:var(--white);border-radius:16px;box-shadow:0 4px 24px rgba(28,56,41,.07);margin:28px auto 0;max-width:600px;padding:32px 28px}
 @media(max-width:600px){.quiz-card{margin:16px 12px 0;padding:24px 18px}}
 
@@ -178,27 +151,42 @@ a{color:var(--gold);text-decoration:none}
 .step-sub{color:var(--muted);font-size:14px;margin-bottom:22px;line-height:1.6}
 .field-lbl{font-size:11px;font-weight:700;color:var(--body);text-transform:uppercase;letter-spacing:.07em;margin:16px 0 8px}
 
-/* Opt-in form */
 .form-group{margin-bottom:12px}
 .form-lbl{display:block;font-size:11px;font-weight:700;color:var(--body);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
-.form-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:13px 14px;font-size:15px;color:var(--green);outline:none;transition:border-color .15s;font-family:'Inter',sans-serif}
+.form-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:13px 14px;font-size:16px;color:var(--green);outline:none;transition:border-color .15s;font-family:'Inter',sans-serif}
 .form-inp:focus{border-color:var(--gold);background:var(--white)}
 .form-inp::placeholder{color:#9ca3af}
-.phone-row{display:flex;gap:8px}
-.phone-pre{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:13px 10px;font-size:13px;color:var(--green);outline:none;min-width:86px;cursor:pointer;font-family:'Inter',sans-serif}
-.phone-pre:focus{border-color:var(--gold)}
+
+/* ── CUSTOM COUNTRY CODE PICKER ── */
+.phone-row{display:flex;gap:8px;align-items:stretch}
+.cc-picker-wrap{position:relative;flex-shrink:0}
+.cc-btn{display:flex;align-items:center;gap:5px;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:0 10px;height:100%;min-height:50px;min-width:96px;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--green);transition:border-color .15s;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.cc-btn:hover,.cc-picker-wrap.open .cc-btn{border-color:var(--gold);background:var(--white)}
+.cc-flag{font-size:18px;line-height:1}
+.cc-code{font-size:13px;font-weight:700}
+.cc-arr{font-size:9px;color:var(--muted);transition:transform .2s}
+.cc-picker-wrap.open .cc-arr{transform:rotate(180deg)}
+.cc-drop{display:none;position:absolute;top:calc(100% + 5px);left:0;width:240px;background:var(--white);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.12);z-index:9999;overflow:hidden}
+.cc-picker-wrap.open .cc-drop{display:block}
+.cc-search{width:100%;padding:10px 13px;border:none;border-bottom:1px solid var(--border);font-size:13px;font-family:'Inter',sans-serif;outline:none;background:#fafaf8;color:var(--green)}
+.cc-list{max-height:210px;overflow-y:auto}
+.cc-opt{display:flex;align-items:center;gap:9px;padding:9px 13px;cursor:pointer;font-size:13px;color:var(--body);transition:background .12s;-webkit-tap-highlight-color:transparent}
+.cc-opt:hover,.cc-opt.active{background:var(--gold-d)}
+.cc-opt-flag{font-size:17px;flex-shrink:0}
+.cc-opt-name{flex:1;font-size:12px;color:var(--muted)}
+.cc-opt-code{font-weight:700;color:var(--green);font-size:13px;flex-shrink:0}
+.phone-number-input{flex:1}
+
 .consent-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px}
 .consent-row input{margin-top:3px;accent-color:var(--gold);width:15px;height:15px;flex-shrink:0;cursor:pointer}
 .consent-row label{font-size:12px;color:var(--muted);line-height:1.5;cursor:pointer}
 
-/* Bonus pill in step 1 */
 .bonus-s1{display:flex;align-items:flex-start;gap:11px;background:var(--cream);border:1.5px solid var(--gold);border-radius:10px;padding:13px 15px;margin-bottom:18px}
 .bs1-icon{font-size:20px;flex-shrink:0;margin-top:2px}
 .bs1-title{font-size:13px;font-weight:700;color:var(--green);margin-bottom:2px}
 .bs1-sub{font-size:11px;color:var(--muted)}
 .val-pill{display:inline-block;background:var(--gold);color:#000;font-size:10px;font-weight:800;padding:1px 7px;border-radius:4px;margin-left:5px;vertical-align:middle}
 
-/* Single-select options */
 .opt-grid{display:grid;gap:8px;margin-bottom:18px}
 .opt{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:12px 15px;font-size:14px;color:var(--green);cursor:pointer;text-align:left;transition:all .12s;display:flex;align-items:center;gap:10px;width:100%;font-family:'Inter',sans-serif}
 .opt:hover{border-color:var(--gold);background:var(--gold-d)}
@@ -209,11 +197,9 @@ a{color:var(--gold);text-decoration:none}
 .dot::after{content:'';width:6px;height:6px;border-radius:50%;background:#000;display:none}
 .hot{display:inline-block;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;margin-left:6px;letter-spacing:.04em;vertical-align:middle}
 
-/* Native select */
 .sel-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--green);outline:none;cursor:pointer;margin-bottom:8px;appearance:none;font-family:'Inter',sans-serif;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M0 0l5 7 5-7z' fill='%236b7280'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
 .sel-inp:focus{border-color:var(--gold)}
 
-/* Checkboxes */
 .chk{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:12px 15px;font-size:14px;color:var(--green);cursor:pointer;text-align:left;transition:all .12s;display:flex;align-items:flex-start;gap:10px;width:100%;margin-bottom:8px;font-family:'Inter',sans-serif}
 .chk:hover{border-color:var(--gold)}
 .chk.on{border-color:var(--gold);background:var(--gold-d)}
@@ -221,14 +207,12 @@ a{color:var(--gold);text-decoration:none}
 .chk.on .chk-box{background:var(--gold);border-color:var(--gold);color:#000}
 .chk-note{font-size:11px;color:var(--muted);text-align:center;margin-bottom:12px}
 
-/* Slider */
 .slider-wrap{margin:16px 0}
 .slider-labs{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:8px}
 input[type=range]{width:100%;-webkit-appearance:none;height:4px;background:var(--border);border-radius:2px;outline:none;cursor:pointer}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold);cursor:pointer;border:3px solid #fff;box-shadow:0 0 0 2px var(--gold)}
 .slider-val{text-align:center;font-size:26px;font-weight:800;color:var(--gold);margin-top:8px;font-family:'Playfair Display',serif}
 
-/* Nav row */
 .nav-row{display:flex;gap:10px;margin-top:10px}
 .btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);font-size:14px;padding:12px 18px;border-radius:8px;cursor:pointer;transition:all .12s;white-space:nowrap;font-family:'Inter',sans-serif}
 .btn-back:hover{border-color:var(--body);color:var(--body)}
@@ -236,9 +220,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .btn-next:hover{background:var(--gold-l)}
 .btn-next:disabled{opacity:.3;cursor:not-allowed;pointer-events:none}
 
-/* ============================================================
-   ANALYZING
-   ============================================================ */
+/* ── ANALYZING ── */
 #analyzing{background:var(--bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
 .analyzing-card{background:var(--white);border-radius:16px;padding:40px 32px;max-width:420px;width:100%;box-shadow:0 4px 24px rgba(28,56,41,.08)}
 #analyzing h2{font-size:20px;font-weight:800;margin-bottom:28px;color:var(--green)}
@@ -250,9 +232,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .a-step.on .a-icon{border-color:var(--gold);color:var(--gold)}
 .a-step.done .a-icon{background:var(--grn);border-color:var(--grn);color:#fff;font-size:13px}
 
-/* ============================================================
-   RESULTS
-   ============================================================ */
+/* ── RESULTS ── */
 #results{background:var(--bg);padding:0 0 80px}
 .res-hdr{background:var(--green);padding:28px 0 24px;margin-bottom:24px}
 .res-brand{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px}
@@ -260,7 +240,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .res-h{font-size:clamp(22px,3vw,34px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.18}
 @media(max-width:899px){.res-brand,.res-greeting,.res-h{text-align:center}}
 
-/* Big number */
 .leak-hero{background:var(--green);border-radius:14px;padding:32px 28px;text-align:center;margin-bottom:24px;position:relative;overflow:hidden}
 @media(min-width:900px){.leak-hero{padding:40px 48px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;text-align:left}
 .leak-hero .leak-lbl{margin-bottom:6px}
@@ -271,7 +250,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .leak-period{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:12px}
 .leak-note{font-size:10px;color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);border-radius:6px;padding:6px 12px;display:inline-block}
 
-/* PDF download row */
 .pdf-row{display:flex;align-items:center;justify-content:space-between;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:15px 18px;margin:0 auto 16px;gap:12px;flex-wrap:wrap;max-width:600px}
 .pdf-left{display:flex;align-items:center;gap:11px}
 .pdf-icon{font-size:26px;flex-shrink:0}
@@ -281,7 +259,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .btn-pdf:hover{background:#15803d}
 @media(max-width:500px){.pdf-row{flex-direction:column;align-items:flex-start}.btn-pdf{width:100%;text-align:center}}
 
-/* Result cards */
 .res-wrap{max-width:600px;margin:0 auto;padding:0 20px}
 .rcard{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:16px}
 .rcard-gold{background:var(--white);border:1.5px solid var(--gold);border-radius:12px;padding:22px;margin-bottom:16px;position:relative;overflow:hidden}
@@ -293,7 +270,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .card-name{font-size:20px;font-weight:800;color:var(--green);margin-bottom:8px}
 .card-desc{font-size:14px;color:var(--muted);line-height:1.7}
 
-/* Breakdown */
 .bdown-h{font-size:14px;font-weight:800;color:var(--green);margin-bottom:16px}
 .brow{margin-bottom:13px}
 .brow-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
@@ -304,12 +280,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .bar-fill{height:100%;border-radius:4px;width:0;transition:width 1.4s ease}
 .bf-p{background:var(--red)}.bf-t{background:#ea580c}.bf-s{background:#ca8a04}.bf-b{background:var(--pur)}
 
-/* ---- Blueprint deep-dive (cheatsheet-modelled) ------------ */
 .bp-deep{border-radius:12px;overflow:hidden;margin-bottom:16px}
 .bp-belief{background:var(--green);padding:20px 20px 18px}
 .bp-belief-eye{font-size:9px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:rgba(255,255,255,.4);margin-bottom:10px}
 .bp-belief-quote{font-family:'Playfair Display',Georgia,serif;font-size:17px;font-style:italic;color:#fff;line-height:1.45;border-left:3px solid var(--gold);padding-left:14px}
-.bp-voice{background:var(--cream);padding:16px 20px;border-left:none}
+.bp-voice{background:var(--cream);padding:16px 20px}
 .bp-voice-eye{font-size:9px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:var(--gold);margin-bottom:8px}
 .bp-voice-text{font-size:13px;font-style:italic;color:var(--body);line-height:1.6}
 .bp-behaviours{background:var(--white);border:1px solid var(--border);border-top:none;padding:16px 20px}
@@ -325,19 +300,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .bp-up-eye{font-size:9px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:var(--grn);margin-bottom:8px}
 .bp-up-text{font-size:13px;color:#15803d;line-height:1.65;font-weight:500}
 
-/* ---- Section separators ----------------------------------- */
 .res-sep{display:flex;align-items:center;gap:12px;margin:28px 0 20px}
 .res-sep::before,.res-sep::after{content:'';flex:1;height:1px;background:var(--border)}
 .res-sep-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:700;white-space:nowrap;padding:0 4px}
 
-/* ---- Quick wins ------------------------------------------- */
 .win-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px 18px 16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start}
 .win-num{width:34px;height:34px;min-width:34px;background:var(--green);color:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;font-family:'Playfair Display',serif;flex-shrink:0;margin-top:1px}
 .win-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);font-weight:800;margin-bottom:5px}
 .win-text{font-size:14px;color:var(--body);line-height:1.65;margin-bottom:6px}
 .win-do{font-size:12px;color:var(--grn);font-weight:700;font-style:italic}
 
-/* ---- Result page two-column layout ----------------------- */
 .res-full{max-width:1100px;margin:0 auto;padding:0 24px}
 .res-body{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr;gap:24px}
 @media(min-width:900px){
@@ -345,16 +317,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .res-sidebar{position:sticky;top:24px}
   .res-full{padding:0 32px}
 }
-@media(max-width:899px){
-  .res-sidebar{order:99}/* sidebar below main on mobile */
-}
-.res-main{}
+@media(max-width:899px){.res-sidebar{order:99}}
 
-/* Sidebar cards */
 .sb-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:14px}
 .sb-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--muted);margin-bottom:14px}
-
-/* Sidebar breakdown bars */
 .sb-brow{margin-bottom:14px}
 .sb-brow-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .sb-bcat{font-size:13px;font-weight:700;color:var(--green);display:flex;align-items:center;gap:7px}
@@ -362,7 +328,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .sd-p{background:var(--red)}.sd-t{background:#ea580c}.sd-s{background:#ca8a04}.sd-b{background:var(--pur)}
 .sb-bamt{font-size:14px;font-weight:800}
 
-/* Sidebar CTA card */
 .sb-cta{background:var(--green);border-radius:12px;padding:20px;margin-bottom:14px;text-align:center}
 .sb-cta h4{font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.25}
 .sb-cta p{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:14px;line-height:1.6}
@@ -372,37 +337,31 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .btn-sb-cta{display:block;background:var(--gold);color:var(--green);font-family:'Inter',sans-serif;font-size:14px;font-weight:800;padding:13px;border-radius:8px;border:none;cursor:pointer;width:100%;text-align:center;transition:background .12s}
 .btn-sb-cta:hover{background:var(--gold-l)}
 
-/* Sidebar PDF download */
 .sb-pdf{display:flex;align-items:center;gap:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:13px 14px;margin-bottom:10px;cursor:pointer}
 .sb-pdf-icon{font-size:22px;flex-shrink:0}
 .sb-pdf-text strong{display:block;font-size:13px;font-weight:800;color:var(--green);margin-bottom:1px}
 .sb-pdf-text span{font-size:11px;color:var(--muted)}
 .sb-pdf-btn{margin-left:auto;background:var(--grn);color:#fff;font-size:11px;font-weight:800;padding:7px 12px;border-radius:6px;border:none;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif}
 
-/* Result page big number — full width above grid */
 .res-num-wrap{max-width:1100px;margin:0 auto;padding:0 24px 0}
 @media(min-width:900px){.res-num-wrap{padding:0 32px}}
 
-/* Bridge */
 .bridge-card{background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px}
 .bridge-card h3{font-size:17px;font-weight:800;color:var(--green);margin-bottom:10px;line-height:1.3}
 .bridge-card p{color:var(--muted);font-size:14px;line-height:1.75;margin-bottom:10px}
 .bridge-card p:last-child{margin-bottom:0}
 .bridge-card strong{color:var(--body)}
 
-/* Outcomes */
 .outcomes{margin-bottom:18px}
 .out-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
 .out-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.45;color:var(--body)}
 .out-chk{color:var(--grn);font-size:14px;margin-top:1px;flex-shrink:0;font-weight:800}
 
-/* Bonus unlocked */
 .bonus-unlocked{background:#fffbeb;border:1.5px solid var(--gold);border-radius:12px;padding:15px 18px;margin-bottom:16px;display:flex;align-items:center;gap:13px}
 .bu-icon{font-size:24px;flex-shrink:0}
 .bu-title{font-size:13px;font-weight:800;color:var(--green);margin-bottom:2px}
 .bu-sub{font-size:12px;color:var(--muted)}
 
-/* Final CTA */
 .cta-result{background:var(--green);border-radius:12px;padding:28px 22px;text-align:center;margin-bottom:24px}
 .cta-result h3{font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
 .cta-result p{color:rgba(255,255,255,.55);font-size:14px;margin-bottom:6px;line-height:1.6}
@@ -415,9 +374,242 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .trust-item::before{content:'✓ ';color:#4ade80}
 .res-footer{text-align:center;font-size:11px;color:var(--muted);padding-top:20px;border-top:1px solid var(--border)}
 
-/* ============================================================
-   PRINT STYLES (PDF Report)
-   ============================================================ */
+/* Currency note */
+.currency-note{font-size:10px;color:rgba(255,255,255,.25);margin-top:6px;text-align:center}
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE — full optimisation for screens under 480px
+   ══════════════════════════════════════════════════════════════ */
+@media(max-width:480px){
+
+  /* Base */
+  body{font-size:14px}
+
+  /* Hero */
+  .hero-wrap{padding:20px 0 20px}
+  .hero-card{padding:24px 16px 24px;border-radius:12px;margin:0 12px}
+  .hero-tag{font-size:10px;padding:3px 10px;margin-bottom:12px}
+  .hero-h1{font-size:22px!important;letter-spacing:-.01em;margin-bottom:12px}
+  .hero-sub{font-size:13px;margin-bottom:16px}
+  .bonus-inline{padding:11px 12px;gap:9px;margin-bottom:16px}
+  .bi-icon{font-size:18px}
+  .bi-title{font-size:12px}
+  .bi-sub,.bi-lbl{font-size:10px}
+  .scarcity-line{font-size:11px}
+  .btn-gold,.btn-green{font-size:15px;padding:15px 20px}
+  .cta-note{font-size:10px}
+
+  /* Stats strip */
+  .stats-strip{padding:10px 0}
+  .stat strong{font-size:11px}
+  .stat{font-size:8px}
+
+  /* Pattern cards — single column, compact */
+  .patterns-grid{grid-template-columns:1fr;gap:10px;margin-bottom:20px}
+  .pattern-card{padding:14px}
+  .pcard-icon{width:32px;height:32px;min-width:32px}
+  .plabel{font-size:9px}
+  .pquote{font-size:13px}
+  .pdesc{font-size:12px}
+  .sec-h{font-size:20px;margin-bottom:20px}
+  .sec-label{font-size:10px}
+  [style*="padding:56px 0"]{padding:32px 0!important}
+  .wrap-wide{padding:0 14px}
+
+  /* Testimonials */
+  .testi-section{padding:24px 0}
+  .testi-inner{padding:0 16px;gap:16px}
+  .testi-stat-num{font-size:26px}
+  .testi-stat-lbl{font-size:9px}
+  .testi-quote-mark{font-size:22px}
+  .testi-text{font-size:13px}
+  .testi-meta{font-size:11px}
+
+  /* CTA section */
+  .cta-section{padding:28px 0}
+  .cta-section h2{font-size:18px}
+  .cta-section p{font-size:13px}
+
+  /* ── QUIZ MOBILE ── */
+  .quiz-hdr-inner{padding:10px 14px}
+  .quiz-brand{font-size:10px;letter-spacing:.04em}
+  .quiz-cnt{font-size:10px}
+  .prog-track{height:5px}
+  .prog-bar{height:5px}
+
+  .quiz-card{
+    margin:12px 10px 0;
+    padding:20px 16px;
+    border-radius:12px;
+    /* Fixed bottom nav so thumb can always reach buttons */
+  }
+
+  .step-eye{font-size:10px;margin-bottom:6px}
+  .step h2{font-size:18px;margin-bottom:6px}
+  .step-sub{font-size:13px;margin-bottom:16px}
+  .field-lbl{font-size:10px;margin:12px 0 6px}
+
+  /* Inputs */
+  .form-inp{padding:12px 12px;font-size:15px}/* 15px prevents iOS zoom */
+  .form-lbl{font-size:10px}
+  .form-group{margin-bottom:10px}
+
+  /* Phone row */
+  .cc-btn{min-width:82px;min-height:46px;padding:0 8px;font-size:12px}
+  .cc-flag{font-size:16px}
+  .cc-code{font-size:12px}
+  .cc-drop{width:220px}
+  .cc-list{max-height:180px}
+
+  /* Options */
+  .opt{padding:11px 12px;font-size:13px;gap:9px;min-height:46px;-webkit-tap-highlight-color:transparent}
+  .dot{width:18px;height:18px;min-width:18px}/* bigger tap target */
+  .hot{font-size:8px;padding:1px 5px}
+
+  /* Checkboxes */
+  .chk{padding:11px 12px;font-size:13px;gap:9px;margin-bottom:7px;min-height:46px}
+  .chk-box{width:20px;height:20px;min-width:20px}
+
+  /* Native select */
+  .sel-inp{padding:12px 36px 12px 12px;font-size:15px}/* 15px prevents iOS zoom */
+
+  /* Bonus strip */
+  .bonus-s1{padding:11px 12px;gap:9px;margin-bottom:14px}
+  .bs1-icon{font-size:18px}
+  .bs1-title{font-size:12px}
+  .bs1-sub{font-size:10px}
+
+  /* Consent */
+  .consent-row{gap:8px;margin-bottom:12px}
+  .consent-row label{font-size:11px}
+
+  /* Nav buttons */
+  .nav-row{gap:8px;margin-top:14px}
+  .btn-next{padding:14px;font-size:14px;border-radius:8px;min-height:50px}
+  .btn-back{padding:12px 14px;font-size:13px;min-height:50px}
+
+  /* Slider */
+  .slider-val{font-size:32px}
+  .slider-labs{font-size:10px}
+  input[type=range]{height:6px}
+  input[type=range]::-webkit-slider-thumb{width:26px;height:26px}
+
+  /* ── RESULTS MOBILE ── */
+  .res-hdr{padding:20px 0 16px}
+  .res-h{font-size:20px}
+  .res-greeting{font-size:12px}
+  .res-brand{font-size:9px}
+  .res-num-wrap{padding:0 12px}
+  .leak-hero{padding:22px 16px;border-radius:10px;margin-bottom:16px}
+  .leak-num{font-size:36px}
+  .leak-lbl{font-size:9px}
+  .leak-period{font-size:11px}
+  .leak-note{font-size:9px;padding:4px 8px}
+
+  .res-body{padding:0 12px;gap:16px}
+  .res-full{padding:0 12px}
+  .res-main{}
+
+  /* Result cards */
+  .rcard,.rcard-gold,.rcard-pur{padding:16px}
+  .card-eye{font-size:9px}
+  .card-name{font-size:17px}
+  .card-desc{font-size:13px;line-height:1.6}
+
+  /* Blueprint deep-dive */
+  .bp-belief{padding:16px}
+  .bp-belief-quote{font-size:15px}
+  .bp-voice,.bp-behaviours,.bp-watchout,.bp-upgrade{padding:13px 16px}
+  .bp-beh-item{font-size:12px}
+  .wtag{font-size:10px;padding:2px 8px}
+  .bp-up-text{font-size:12px}
+
+  /* Separators */
+  .res-sep{margin:20px 0 14px}
+  .res-sep-lbl{font-size:9px}
+
+  /* Quick wins */
+  .win-card{padding:14px;gap:10px}
+  .win-num{width:28px;height:28px;min-width:28px;font-size:13px}
+  .win-lbl{font-size:9px}
+  .win-text{font-size:12px}
+  .win-do{font-size:11px}
+
+  /* Bridge */
+  .bridge-card{padding:16px}
+  .bridge-card h3{font-size:15px}
+  .bridge-card p{font-size:12px}
+
+  /* Outcomes */
+  .out-item{font-size:12px;padding:8px 0;gap:8px}
+
+  /* Sidebar breakdown (shows below main on mobile) */
+  .sb-card{padding:14px}
+  .sb-lbl{font-size:9px}
+  .sb-bcat{font-size:12px}
+  .sb-bamt{font-size:13px}
+  .sb-cta{padding:16px}
+  .sb-cta h4{font-size:15px}
+  .sb-cta p{font-size:12px}
+  .btn-sb-cta{font-size:13px;padding:12px}
+  .sb-cta-out{font-size:11px}
+
+  /* Bonus unlocked */
+  .bonus-unlocked{padding:12px 14px;gap:10px}
+  .bu-title{font-size:12px}
+  .bu-sub{font-size:11px}
+
+  /* CTA block in results */
+  [style*="background:var(--green);border-radius:12px;padding:24px"]{padding:18px 14px!important;border-radius:10px!important}
+  [style*="font-size:16px;font-weight:800;padding:16px;border-radius:8px"]{font-size:14px!important;padding:14px!important}
+
+  /* PDF row */
+  .pdf-row{padding:12px;gap:8px}
+  .pdf-title{font-size:12px}
+  .pdf-sub{font-size:10px}
+  .btn-pdf{font-size:12px;padding:9px 14px}
+
+  /* Analyzing screen */
+  .analyzing-card{padding:28px 20px;margin:0 12px}
+  #analyzing h2{font-size:17px;margin-bottom:20px}
+  .a-step{font-size:13px;padding:9px 0}
+  .a-icon{width:22px;height:22px;font-size:10px}
+
+  /* Footer */
+  .site-footer p{font-size:10px}
+  .res-footer{font-size:10px}
+}
+
+/* Sticky bottom CTA bar on mobile results page */
+@media(max-width:480px){
+  .mobile-sticky-cta{
+    display:flex;
+    position:fixed;
+    bottom:0;left:0;right:0;
+    padding:12px 16px;
+    background:var(--green);
+    border-top:2px solid var(--gold);
+    z-index:100;
+    box-shadow:0 -4px 20px rgba(0,0,0,.2);
+  }
+  .mobile-sticky-cta a{
+    flex:1;
+    display:block;
+    background:var(--gold);
+    color:var(--green);
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    font-weight:800;
+    padding:13px;
+    border-radius:8px;
+    text-align:center;
+    text-decoration:none;
+  }
+}
+@media(min-width:481px){
+  .mobile-sticky-cta{display:none!important}
+}
+
 @media print{
   nav,.sr-header,.stats-strip,.hero-wrap,#landing,#quiz,#analyzing,
   .nav-row,.cta-result,.pdf-row,.bridge-card,.outcomes,.btn-cta,
@@ -435,46 +627,33 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .leak-hero{background:#1c3829!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;margin:0 0 14px;border-radius:8px}
   .leak-hero::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .leak-num{color:#ddb84e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .leak-lbl,.leak-period,.leak-note{color:rgba(255,255,255,.6)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .rcard,.rcard-gold,.rcard-pur{page-break-inside:avoid;margin-bottom:10px;border:1px solid #e5e7eb!important}
   .rcard-gold::before,.rcard-pur::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .bar-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .bar-track{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .bonus-unlocked{background:#fffbeb!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .pdf-page-footer{display:block!important;position:fixed;bottom:0;left:0;right:0;font-size:8pt;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:5px}
   .res-wrap{padding:0}
 }
 .pdf-report-header,.pdf-page-footer{display:none}
-
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     SR HEADER
-     ============================================================ -->
+<!-- SR HEADER -->
 <div class="sr-header">
   <div class="sr-logo">
     <img src="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/ff96df6f1fde9_b0cbdd4d2f0ff-605c893fed0f4-sr-percent-20logo-percent-20white.png" alt="Success Resources" style="height:38px;display:block">
   </div>
 </div>
 
-
-<!-- ============================================================
-     LANDING PAGE
-     ============================================================ -->
+<!-- LANDING -->
 <div id="landing">
-
-  <!-- HERO -->
   <div class="hero-wrap">
     <div class="wrap-wide">
       <div class="hero-card">
-
         <div class="hero-tag">Free 3-Minute Audit</div>
         <h1 class="hero-h1">The 3-Minute Audit That's Found <em>Hidden Revenue</em> for 10,000+ Entrepreneurs</h1>
         <p class="hero-sub">Discover exactly where your money is disappearing, and how much it is costing you every year.</p>
-
-        <!-- Cheatsheet bonus — prominent -->
         <div class="bonus-inline">
           <span class="bi-icon">🎁</span>
           <div>
@@ -484,17 +663,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             <div class="scarcity-line">Only for first 100 submissions &nbsp;·&nbsp; 77/100 claimed</div>
           </div>
         </div>
-
         <div class="hero-cta-wrap">
           <button class="btn-gold" onclick="startQuiz()">Start My Free Audit &nbsp;→</button>
-          <p class="cta-note">Free &nbsp;·&nbsp; 3 minutes &nbsp;·&nbsp; Personalised dollar figure &nbsp;·&nbsp; Instant result</p>
+          <p class="cta-note">Free &nbsp;·&nbsp; 3 minutes &nbsp;·&nbsp; Personalised figure &nbsp;·&nbsp; Instant result</p>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- Stats strip (dark green) -->
   <div class="stats-strip">
     <div class="wrap-wide" style="max-width:1200px">
       <div class="stats-inner">
@@ -507,84 +683,40 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     </div>
   </div>
 
-  <!-- SECTION 2: 4 LEAK PATTERNS -->
   <div style="padding:56px 0;background:var(--bg)">
     <div class="wrap-wide">
       <p class="sec-label">Which one sounds like you?</p>
       <h2 class="sec-h">One of these is <em>already leaking your money</em></h2>
-
       <div class="patterns-grid">
-
         <div class="pattern-card" onclick="startQuiz()">
           <div class="pcard-top">
-            <div class="pcard-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="3" width="18" height="18" rx="3" stroke="#1c3829" stroke-width="1.5"/>
-                <path d="M7 8h10M7 12h6M7 16h4" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
-                <path d="M17 14l2 2-2 2M19 16h-4" stroke="#c53030" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="pcard-meta">
-              <div class="plabel">Pricing Leak</div>
-              <div class="pquote">"I dropped my price to close the deal... again."</div>
-            </div>
+            <div class="pcard-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#1c3829" stroke-width="1.5"/><path d="M7 8h10M7 12h6M7 16h4" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/><path d="M17 14l2 2-2 2M19 16h-4" stroke="#c53030" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="pcard-meta"><div class="plabel">Pricing Leak</div><div class="pquote">"I dropped my price to close the deal... again."</div></div>
           </div>
           <p class="pdesc">You discount, you do free work, you undercharge. <strong>The gap between what you charge and what you are worth is your largest leak.</strong></p>
         </div>
-
         <div class="pattern-card" onclick="startQuiz()">
           <div class="pcard-top">
-            <div class="pcard-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="9" stroke="#1c3829" stroke-width="1.5"/>
-                <path d="M12 7v5l3 3" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
-                <path d="M19 5l1-1M5 5l-1-1" stroke="#c53030" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="pcard-meta">
-              <div class="plabel">Time Leak</div>
-              <div class="pquote">"I work nights and weekends. Income is still capped."</div>
-            </div>
+            <div class="pcard-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#1c3829" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/><path d="M19 5l1-1M5 5l-1-1" stroke="#c53030" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <div class="pcard-meta"><div class="plabel">Time Leak</div><div class="pquote">"I work nights and weekends. Income is still capped."</div></div>
           </div>
           <p class="pdesc">You are the business. Everything goes through you. <strong>Trading time for money has a ceiling, and you have hit it.</strong></p>
         </div>
-
         <div class="pattern-card" onclick="startQuiz()">
           <div class="pcard-top">
-            <div class="pcard-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="3" stroke="#c9a84c" stroke-width="1.5"/>
-                <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" stroke="#1c3829" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="pcard-meta">
-              <div class="plabel">Systems Leak</div>
-              <div class="pquote">"I have no idea what my business actually makes me."</div>
-            </div>
+            <div class="pcard-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#c9a84c" stroke-width="1.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" stroke="#1c3829" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <div class="pcard-meta"><div class="plabel">Systems Leak</div><div class="pquote">"I have no idea what my business actually makes me."</div></div>
           </div>
           <p class="pdesc">No SOPs, no metrics, no wealth-building system. <strong>What you do not measure, you cannot stop losing.</strong></p>
         </div>
-
         <div class="pattern-card" onclick="startQuiz()">
           <div class="pcard-top">
-            <div class="pcard-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <ellipse cx="12" cy="10" rx="6" ry="7" stroke="#1c3829" stroke-width="1.5"/>
-                <path d="M9 17.5c0 1.5 1.3 2.5 3 2.5s3-1 3-2.5" stroke="#1c3829" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M10 10h.01M14 10h.01" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
-                <path d="M10 13c.5.7 3.5.7 4 0" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="pcard-meta">
-              <div class="plabel">Blueprint Leak</div>
-              <div class="pquote">"I know what to do. I just do not do it."</div>
-            </div>
+            <div class="pcard-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="10" rx="6" ry="7" stroke="#1c3829" stroke-width="1.5"/><path d="M9 17.5c0 1.5 1.3 2.5 3 2.5s3-1 3-2.5" stroke="#1c3829" stroke-width="1.5" stroke-linecap="round"/><path d="M10 10h.01M14 10h.01" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/><path d="M10 13c.5.7 3.5.7 4 0" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <div class="pcard-meta"><div class="plabel">Blueprint Leak</div><div class="pquote">"I know what to do. I just do not do it."</div></div>
           </div>
           <p class="pdesc">You have read the books. <strong>An unconscious money pattern is overriding every plan you make.</strong></p>
         </div>
-
       </div>
-
       <div style="text-align:center">
         <button class="btn-green" onclick="startQuiz()" style="max-width:420px;margin:0 auto">Calculate My Annual Money Leak</button>
         <p class="cta-note">Free &nbsp;·&nbsp; Personalised to your business size and revenue</p>
@@ -592,48 +724,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     </div>
   </div>
 
-  <!-- TESTIMONIAL CAROUSEL (compact, auto-swipe) -->
   <div class="testi-section">
     <div class="testi-inner">
-
       <div class="testi-stat">
         <div class="testi-stat-num">10,000+</div>
         <div class="testi-stat-lbl">Entrepreneurs<br>transformed</div>
       </div>
-
       <div class="testi-divider"></div>
-
       <div style="flex:1;min-width:0">
         <div class="testi-carousel" id="testiCarousel">
-
-          <div class="testi-slide active" id="ts0">
-            <div class="testi-quote-mark">"</div>
-            <p class="testi-text">I assumed my problem was getting more clients. The audit showed me I had a massive pricing leak. <strong>I could not unsee the number after that.</strong></p>
-            <div class="testi-meta">Sarah K. &nbsp;·&nbsp; Business Coach, Singapore</div>
-            <div class="testi-leak">Primary Leak: Pricing &nbsp;·&nbsp; Est. $187,000/yr</div>
-          </div>
-
-          <div class="testi-slide" id="ts1">
-            <div class="testi-quote-mark">"</div>
-            <p class="testi-text">Every single time leak they listed was me. The bottleneck, nights and weekends, the 'no one can do it like me' excuse. <strong>The calculated number stopped me completely.</strong></p>
-            <div class="testi-meta">Marcus T. &nbsp;·&nbsp; E-commerce Founder, Malaysia</div>
-            <div class="testi-leak">Primary Leak: Time &nbsp;·&nbsp; Est. $340,000/yr</div>
-          </div>
-
-          <div class="testi-slide" id="ts2">
-            <div class="testi-quote-mark">"</div>
-            <p class="testi-text">I was skeptical at first. Then I tracked my finances for a month and realised the number was conservative. <strong>Three years of trying to earn more, when the leak was the whole problem.</strong></p>
-            <div class="testi-meta">Priya M. &nbsp;·&nbsp; Finance Professional, Singapore</div>
-            <div class="testi-leak">Primary Leak: Systems &nbsp;·&nbsp; Est. $93,000/yr</div>
-          </div>
-
-          <div class="testi-slide" id="ts3">
-            <div class="testi-quote-mark">"</div>
-            <p class="testi-text">The money blueprint section was the part I did not expect. Years of business strategy, and the audit showed me <strong>a belief pattern running below everything else.</strong></p>
-            <div class="testi-meta">James W. &nbsp;·&nbsp; Agency Owner, Australia</div>
-            <div class="testi-leak">Primary Leak: Blueprint &nbsp;·&nbsp; Est. $215,000/yr</div>
-          </div>
-
+          <div class="testi-slide active"><div class="testi-quote-mark">"</div><p class="testi-text">I assumed my problem was getting more clients. The audit showed me I had a massive pricing leak. <strong>I could not unsee the number after that.</strong></p><div class="testi-meta">Sarah K. &nbsp;·&nbsp; Business Coach, Singapore</div><div class="testi-leak">Primary Leak: Pricing</div></div>
+          <div class="testi-slide"><div class="testi-quote-mark">"</div><p class="testi-text">Every single time leak they listed was me. The bottleneck, nights and weekends, the 'no one can do it like me' excuse. <strong>The calculated number stopped me completely.</strong></p><div class="testi-meta">Marcus T. &nbsp;·&nbsp; E-commerce Founder, Malaysia</div><div class="testi-leak">Primary Leak: Time</div></div>
+          <div class="testi-slide"><div class="testi-quote-mark">"</div><p class="testi-text">I was skeptical at first. Then I tracked my finances for a month and realised the number was conservative. <strong>Three years of trying to earn more, when the leak was the whole problem.</strong></p><div class="testi-meta">Priya M. &nbsp;·&nbsp; Finance Professional, Singapore</div><div class="testi-leak">Primary Leak: Systems</div></div>
+          <div class="testi-slide"><div class="testi-quote-mark">"</div><p class="testi-text">The money blueprint section was the part I did not expect. Years of business strategy, and the audit showed me <strong>a belief pattern running below everything else.</strong></p><div class="testi-meta">James W. &nbsp;·&nbsp; Agency Owner, Australia</div><div class="testi-leak">Primary Leak: Blueprint</div></div>
         </div>
         <div class="testi-dots">
           <div class="tdot on" onclick="goTesti(0)"></div>
@@ -642,15 +745,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <div class="tdot" onclick="goTesti(3)"></div>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- FINAL CTA SECTION -->
   <div class="cta-section">
     <div class="wrap-wide" style="max-width:700px">
       <h2>Ready to Find Your Leaks?</h2>
-      <p>Take the 3-minute audit. Get a personalised dollar figure. See exactly what to fix first.</p>
+      <p>Take the 3-minute audit. Get a personalised figure. See exactly what to fix first.</p>
       <div style="text-align:center">
         <button class="btn-gold" onclick="startQuiz()" style="max-width:400px;margin:0 auto">Start My Free Audit</button>
         <p class="cta-note">Free &nbsp;·&nbsp; Includes 7 Money Blueprints Cheatsheet &nbsp;·&nbsp; Instant result</p>
@@ -658,25 +759,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     </div>
   </div>
 
-  <!-- Footer -->
   <div class="site-footer">
-    <p>
-      <a href="https://www.millionairemindworld.com/sr">Contact Us</a> &nbsp;|&nbsp;
-      <a href="#">Privacy Policy</a> &nbsp;|&nbsp;
-      <a href="https://www.millionairemindworld.com/terms-and-conditions">Terms and Conditions</a> &nbsp;|&nbsp;
-      <a href="#">Cookies Policy</a>
-    </p>
+    <p><a href="https://www.millionairemindworld.com/sr">Contact Us</a> &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://www.millionairemindworld.com/terms-and-conditions">Terms and Conditions</a> &nbsp;|&nbsp; <a href="#">Cookies Policy</a></p>
     <p style="margin-top:6px">Copyright 2026 Success Resources. All Rights Reserved.</p>
   </div>
+</div>
 
-</div><!-- /landing -->
-
-
-<!-- ============================================================
-     QUIZ
-     ============================================================ -->
+<!-- QUIZ -->
 <div id="quiz" class="hidden">
-
   <div class="quiz-hdr">
     <div class="quiz-hdr-inner">
       <div class="quiz-brand">Money Leak Audit &nbsp;·&nbsp; Success Resources</div>
@@ -687,12 +777,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
   <div class="quiz-card">
 
-    <!-- STEP 1: OPT-IN (details first, as per original) -->
+    <!-- STEP 1: OPT-IN -->
     <div class="step active" id="s1">
       <p class="step-eye">Getting Started</p>
       <h2>Get Your Free <em>Money Leak Report</em></h2>
       <p class="step-sub">Enter your details to receive your personalised audit results.</p>
-
       <div class="bonus-s1">
         <span class="bs1-icon">🎁</span>
         <div>
@@ -700,7 +789,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
           <div class="bs1-sub">Sent to your inbox with your report. Only for first 100 submissions, 77/100 claimed.</div>
         </div>
       </div>
-
       <div class="form-group">
         <label class="form-lbl">First Name *</label>
         <input type="text" class="form-inp" id="fName" placeholder="Your first name" oninput="checkS1()">
@@ -714,24 +802,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <input type="email" class="form-inp" id="fEmail" placeholder="your@email.com" oninput="checkS1()">
       </div>
       <div class="form-group">
-        <label class="form-lbl">Phone</label>
+        <label class="form-lbl">Phone *</label>
         <div class="phone-row">
-          <select class="phone-pre" id="phoneCode">
-            <option value="+65">SG +65</option>
-            <option value="+60">MY +60</option>
-            <option value="+66">TH +66</option>
-            <option value="+886">TW +886</option>
-            <option value="+852">HK +852</option>
-            <option value="+86">CN +86</option>
-            <option value="+81">JP +81</option>
-            <option value="+63">PH +63</option>
-            <option value="+84">VN +84</option>
-            <option value="+61">AU +61</option>
-            <option value="+64">NZ +64</option>
-            <option value="+44">UK +44</option>
-            <option value="+1">US +1</option>
-          </select>
-          <input type="tel" class="form-inp" id="fPhone" placeholder="Phone number (optional)">
+          <!-- Custom country code picker — auto-detected by IP -->
+          <div class="cc-picker-wrap" id="ccPicker">
+            <div class="cc-btn" onclick="toggleCC()">
+              <span class="cc-flag" id="ccFlag">🇸🇬</span>
+              <span class="cc-code" id="ccCode">+65</span>
+              <span class="cc-arr">▾</span>
+            </div>
+            <div class="cc-drop" id="ccDrop">
+              <input class="cc-search" id="ccSearch" type="text" placeholder="Search country..." oninput="filterCC(this.value)" onclick="event.stopPropagation()">
+              <div class="cc-list" id="ccList"></div>
+            </div>
+          </div>
+          <input type="hidden" id="selectedDialCode" value="+65">
+          <input type="tel" class="form-inp phone-number-input" id="fPhone" placeholder="Phone number (required)" oninput="checkS1()">
         </div>
       </div>
       <div class="consent-row">
@@ -748,7 +834,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <p class="step-eye">Step 2 of 8</p>
       <h2>Tell Us About <em>Your Business</em></h2>
       <p class="step-sub">This calibrates your personalised leak figure accurately.</p>
-
       <div class="field-lbl">Company size</div>
       <div class="opt-grid" id="sizeGrid">
         <button class="opt" onclick="pick('size','solo',this)"><span class="dot"></span>Just me (Solopreneur)</button>
@@ -760,18 +845,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <button class="opt" onclick="pick('size','100+',this)"><span class="dot"></span>100+ employees</button>
         <button class="opt" onclick="pick('size','employee',this)"><span class="dot"></span>I am an employee</button>
       </div>
-
       <div class="field-lbl">Current annual revenue</div>
-      <div class="opt-grid" id="revGrid">
-        <button class="opt" onclick="pick('rev','u50',this)"><span class="dot"></span>Under $50K</button>
-        <button class="opt" onclick="pick('rev','50-100',this)"><span class="dot"></span>$50K to $100K</button>
-        <button class="opt" onclick="pick('rev','100-250',this)"><span class="dot"></span>$100K to $250K</button>
-        <button class="opt" onclick="pick('rev','250-500',this)"><span class="dot"></span>$250K to $500K</button>
-        <button class="opt" onclick="pick('rev','500k-1m',this)"><span class="dot"></span>$500K to $1M</button>
-        <button class="opt" onclick="pick('rev','1m-5m',this)"><span class="dot"></span>$1M to $5M</button>
-        <button class="opt" onclick="pick('rev','5m+',this)"><span class="dot"></span>$5M+</button>
-      </div>
-
+      <!-- ★ Revenue options rendered dynamically in local currency by renderRevOpts() -->
+      <div class="opt-grid" id="revGrid"></div>
       <div class="field-lbl">Industry *</div>
       <select class="sel-inp" id="industrySelect" onchange="state.industry=this.value||null;refreshBtns()">
         <option value="">Select your industry...</option>
@@ -784,7 +860,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <option value="employee">Corporate Employee</option>
         <option value="other">Other</option>
       </select>
-
       <div class="nav-row">
         <button class="btn-back" onclick="go(1)">Back</button>
         <button class="btn-next" id="s2Next" onclick="go(3)" disabled>Continue</button>
@@ -801,7 +876,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <button class="opt" onclick="pick('goal','9-5',this)"><span class="dot"></span>Replace my 9 to 5 income and go full-time</button>
         <button class="opt" onclick="pick('goal','double',this)"><span class="dot"></span>Double my current revenue</button>
         <button class="opt" onclick="pick('goal','passive',this)"><span class="dot"></span>Create passive income streams</button>
-        <button class="opt" onclick="pick('goal','side',this)"><span class="dot"></span>Build a side hustle ($2K to $5K per month)</button>
+        <button class="opt" onclick="pick('goal','side',this)"><span class="dot"></span>Build a side hustle</button>
         <button class="opt" onclick="pick('goal','wealth',this)"><span class="dot"></span>Build wealth while employed</button>
       </div>
       <div class="field-lbl">How soon do you want this?</div>
@@ -817,7 +892,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
     </div>
 
-    <!-- STEP 4: Pricing Leaks -->
+    <!-- STEP 4: Pricing -->
     <div class="step" id="s4">
       <p class="step-eye">Step 4 of 8</p>
       <h2>Identify Your <em>Pricing Leaks</em></h2>
@@ -835,7 +910,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
     </div>
 
-    <!-- STEP 5: Time Leaks -->
+    <!-- STEP 5: Time -->
     <div class="step" id="s5">
       <p class="step-eye">Step 5 of 8</p>
       <h2>Find Your <em>Time Leaks</em></h2>
@@ -871,7 +946,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
     </div>
 
-    <!-- STEP 7: Money Blueprint -->
+    <!-- STEP 7: Blueprint -->
     <div class="step" id="s7">
       <p class="step-eye">Step 7 of 8</p>
       <h2>Uncover Your <em>Money Blueprint</em></h2>
@@ -930,13 +1005,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
     </div>
 
-  </div><!-- /quiz-card -->
-</div><!-- /quiz -->
+  </div>
+</div>
 
-
-<!-- ============================================================
-     ANALYZING
-     ============================================================ -->
+<!-- ANALYZING -->
 <div id="analyzing" class="hidden">
   <div class="analyzing-card">
     <h2>Analysing your money leaks...</h2>
@@ -947,13 +1019,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   </div>
 </div>
 
-
-<!-- ============================================================
-     RESULTS
-     ============================================================ -->
+<!-- RESULTS -->
 <div id="results" class="hidden">
-
-  <!-- PDF-only header -->
   <div class="pdf-report-header">
     <div class="pdf-brand"><strong>Millionaire Mind Intensive</strong><span>Money Leak Audit Report &nbsp;·&nbsp; Success Resources &nbsp;·&nbsp; T. Harv Eker</span></div>
     <div class="pdf-meta"><div><strong>Prepared for:</strong> <span id="pdfName"></span></div><div><strong>Date:</strong> <span id="pdfDate"></span></div><div><strong>Confidential</strong></div></div>
@@ -967,23 +1034,18 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     </div>
   </div>
 
-  <!-- ── FULL WIDTH: big number ──────────────────────────── -->
   <div class="res-num-wrap" style="padding-top:0">
     <div class="leak-hero">
       <div class="leak-lbl">Your Estimated Annual Money Leak</div>
-      <div class="leak-num" id="totalNum">$0</div>
+      <div class="leak-num" id="totalNum">—</div>
       <div class="leak-period">per year slipping through the cracks</div>
       <div class="leak-note" id="calcNote">Calculated from your answers across all 4 leak categories</div>
+      <div class="currency-note" id="currencyNote"></div>
     </div>
   </div>
 
-  <!-- ── TWO-COLUMN BODY ─────────────────────────────────── -->
   <div class="res-body">
-
-    <!-- LEFT: insight content -->
     <div class="res-main">
-
-      <!-- Primary archetype -->
       <div class="res-sep" style="margin-top:4px"><span class="res-sep-lbl">Your Primary Leak Type</span></div>
       <div class="rcard-gold">
         <div class="card-eye eye-gold">Identified from your answers</div>
@@ -991,7 +1053,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <p class="card-desc" id="archDesc">...</p>
       </div>
 
-      <!-- Blueprint deep-dive -->
       <div class="res-sep"><span class="res-sep-lbl">Why This Keeps Happening</span></div>
       <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.65">The audit reveals <em>what</em> is leaking. Your money blueprint is <em>why</em> it keeps recreating itself — and why tactics alone have never fixed it permanently.</p>
       <div class="bp-deep">
@@ -1017,12 +1078,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         </div>
       </div>
 
-      <!-- Quick wins -->
       <div class="res-sep"><span class="res-sep-lbl">3 Things You Can Do This Week</span></div>
       <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.65">Specific to your primary leak. No event needed to start here.</p>
       <div id="quickWins"></div>
 
-      <!-- Bridge -->
       <div class="res-sep"><span class="res-sep-lbl">The Complete Solution</span></div>
       <div class="bridge-card">
         <h3 id="bridgeH">These quick wins are the start. Not the seal.</h3>
@@ -1031,7 +1090,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <p>The <strong>Millionaire Mind Hybrid</strong> addresses both in 3 days. Day 1 installs the financial systems framework. Days 2 and 3 do the deep blueprint work — identifying where the pattern formed, releasing it, and rewiring it permanently.</p>
       </div>
 
-      <!-- Outcomes -->
       <div class="outcomes">
         <div class="out-lbl">What changes in 3 days</div>
         <div class="out-item"><span class="out-chk">&#10003;</span><span><strong>Day 1:</strong> Complete money management system, 6 accounts set up and running, including your Financial Freedom Account</span></div>
@@ -1041,68 +1099,46 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div class="out-item"><span class="out-chk">&#10003;</span><span>Pricing and leverage frameworks specific to your business size and industry</span></div>
       </div>
 
-      <!-- CTA button after outcomes — visible in main column -->
       <div style="background:var(--green);border-radius:12px;padding:24px;text-align:center;margin-bottom:8px">
         <p style="font-size:14px;color:rgba(255,255,255,.6);margin-bottom:14px;line-height:1.6">You have seen the number. You know the blueprint. You have your first three steps.<br>The question now is how fast you want to seal it permanently.</p>
         <a href="https://www.millionairemindworld.com" style="display:block;background:var(--gold);color:var(--green);font-family:'Inter',sans-serif;font-size:16px;font-weight:800;padding:16px;border-radius:8px;text-align:center;text-decoration:none;transition:background .12s">Claim Your Spot at Millionaire Mind Hybrid &nbsp;→</a>
         <p style="font-size:11px;color:rgba(255,255,255,.3);margin-top:10px">10 million attendees &nbsp;·&nbsp; 30 countries &nbsp;·&nbsp; 23 years running</p>
       </div>
+    </div>
 
-    </div><!-- /res-main -->
-
-    <!-- RIGHT: sticky sidebar ─────────────────────────── -->
+    <!-- SIDEBAR -->
     <div class="res-sidebar">
-
-      <!-- Breakdown bars -->
       <div class="sb-card">
         <div class="sb-lbl">Where Your Money Is Leaking</div>
         <div class="sb-brow">
-          <div class="sb-brow-top">
-            <span class="sb-bcat"><span class="sb-dot sd-p"></span>Pricing Leaks</span>
-            <span class="sb-bamt c-red" id="pAmt">$0</span>
-          </div>
+          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-p"></span>Pricing Leaks</span><span class="sb-bamt c-red" id="pAmt">—</span></div>
           <div class="bar-track"><div class="bar-fill bf-p" id="pBar"></div></div>
         </div>
         <div class="sb-brow">
-          <div class="sb-brow-top">
-            <span class="sb-bcat"><span class="sb-dot sd-t"></span>Time Leaks</span>
-            <span class="sb-bamt c-ora" id="tAmt">$0</span>
-          </div>
+          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-t"></span>Time Leaks</span><span class="sb-bamt c-ora" id="tAmt">—</span></div>
           <div class="bar-track"><div class="bar-fill bf-t" id="tBar"></div></div>
         </div>
         <div class="sb-brow">
-          <div class="sb-brow-top">
-            <span class="sb-bcat"><span class="sb-dot sd-s"></span>Systems Leaks</span>
-            <span class="sb-bamt c-yel" id="sAmt">$0</span>
-          </div>
+          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-s"></span>Systems Leaks</span><span class="sb-bamt c-yel" id="sAmt">—</span></div>
           <div class="bar-track"><div class="bar-fill bf-s" id="sBar"></div></div>
         </div>
         <div class="sb-brow" style="margin-bottom:0">
-          <div class="sb-brow-top">
-            <span class="sb-bcat"><span class="sb-dot sd-b"></span>Blueprint Tax</span>
-            <span class="sb-bamt c-pur" id="bAmt">$0</span>
-          </div>
+          <div class="sb-brow-top"><span class="sb-bcat"><span class="sb-dot sd-b"></span>Blueprint Tax</span><span class="sb-bamt c-pur" id="bAmt">—</span></div>
           <div class="bar-track"><div class="bar-fill bf-b" id="bBar"></div></div>
         </div>
       </div>
 
-      <!-- PDF download -->
       <div class="sb-pdf" onclick="window.print()">
         <div class="sb-pdf-icon">&#128196;</div>
         <div class="sb-pdf-text"><strong>Download PDF Report</strong><span>Your full audit, ready to save</span></div>
         <button class="sb-pdf-btn">&#8681; Save</button>
       </div>
 
-      <!-- Bonus -->
       <div class="bonus-unlocked" style="margin-bottom:14px">
         <div class="bu-icon">&#127881;</div>
-        <div>
-          <div class="bu-title">Bonus Unlocked</div>
-          <div class="bu-sub">7 Money Blueprints Cheatsheet ($47) sent to your inbox.</div>
-        </div>
+        <div><div class="bu-title">Bonus Unlocked</div><div class="bu-sub">7 Money Blueprints Cheatsheet ($47) sent to your inbox.</div></div>
       </div>
 
-      <!-- Sticky CTA card -->
       <div class="sb-cta">
         <h4>Ready to seal the leaks permanently?</h4>
         <p>23 years. 1.5 million graduates. The only programme that fixes both the habit and the blueprint behind it.</p>
@@ -1114,184 +1150,478 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <a href="https://www.millionairemindworld.com" class="btn-sb-cta">Claim Your Spot &nbsp;→</a>
         <p style="font-size:10px;color:rgba(255,255,255,.3);margin-top:10px">10M attendees &nbsp;·&nbsp; 30 countries &nbsp;·&nbsp; Trusted worldwide</p>
       </div>
+    </div>
+  </div>
 
-    </div><!-- /res-sidebar -->
-
-  </div><!-- /res-body -->
-
-  <!-- ── FULL WIDTH: footer ──────────────────────────────── -->
   <div class="res-full" style="padding-top:24px;padding-bottom:40px">
     <div class="pdf-page-footer">Millionaire Mind Intensive &nbsp;·&nbsp; Success Resources &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; millionairemindworld.com</div>
     <div class="res-footer">Copyright 2026 Success Resources &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms and Conditions</a> &nbsp;·&nbsp; <a href="#">Contact Us</a></div>
   </div>
 
-</div><!-- /results -->
-
+  <!-- Mobile sticky CTA — only shows on phones -->
+  <div class="mobile-sticky-cta" id="mobileStickyCTA" style="display:none">
+    <a href="https://www.millionairemindworld.com">Claim Your Spot at Millionaire Mind Hybrid &nbsp;→</a>
+  </div>
+</div>
 
 <!-- ============================================================
      JAVASCRIPT
      ============================================================ -->
 <script>
-/* State */
-const state={size:null,rev:null,industry:null,goal:null,timeline:null,pricing:0,time_leaks:0,systems:0,bp:null,worth:null,invest:null,hold:null,commit:7,firstName:'',lastName:'',email:'',phone:''};
+/* ══════════════════════════════════════════════════════════════
+   1. CURRENCY SYSTEM
+   ══════════════════════════════════════════════════════════════ */
+const CURRENCY_MAP = {
+  SG:{sym:'S$', code:'SGD', rate:1.35}, MY:{sym:'RM',  code:'MYR', rate:4.70},
+  AU:{sym:'A$', code:'AUD', rate:1.55}, NZ:{sym:'NZ$', code:'NZD', rate:1.65},
+  US:{sym:'$',  code:'USD', rate:1.00}, GB:{sym:'£',   code:'GBP', rate:0.79},
+  IN:{sym:'₹',  code:'INR', rate:83.5}, AE:{sym:'AED ',code:'AED', rate:3.67},
+  HK:{sym:'HK$',code:'HKD', rate:7.83}, CN:{sym:'¥',   code:'CNY', rate:7.25},
+  JP:{sym:'¥',  code:'JPY', rate:157},  KR:{sym:'₩',   code:'KRW', rate:1370},
+  TH:{sym:'฿',  code:'THB', rate:36.5}, ID:{sym:'Rp',  code:'IDR', rate:16200},
+  PH:{sym:'₱',  code:'PHP', rate:58},   VN:{sym:'₫',   code:'VND', rate:25400},
+  BD:{sym:'৳',  code:'BDT', rate:110},  LK:{sym:'Rs',  code:'LKR', rate:315},
+  PK:{sym:'₨',  code:'PKR', rate:279},  SA:{sym:'SAR ',code:'SAR', rate:3.75},
+  QA:{sym:'QR', code:'QAR', rate:3.64}, ZA:{sym:'R',   code:'ZAR', rate:18.5},
+  NG:{sym:'₦',  code:'NGN', rate:1550}, KE:{sym:'KSh', code:'KES', rate:132},
+  DE:{sym:'€',  code:'EUR', rate:0.92}, FR:{sym:'€',   code:'EUR', rate:0.92},
+  IT:{sym:'€',  code:'EUR', rate:0.92}, ES:{sym:'€',   code:'EUR', rate:0.92},
+  NL:{sym:'€',  code:'EUR', rate:0.92}, CH:{sym:'CHF ',code:'CHF', rate:0.90},
+  SE:{sym:'kr', code:'SEK', rate:10.5}, NO:{sym:'kr',  code:'NOK', rate:10.8},
+  DK:{sym:'kr', code:'DKK', rate:6.9},  PL:{sym:'zł',  code:'PLN', rate:3.96},
+  BR:{sym:'R$', code:'BRL', rate:5.0},  MX:{sym:'MX$', code:'MXN', rate:17},
+  CA:{sym:'C$', code:'CAD', rate:1.37},
+};
+let activeCur = CURRENCY_MAP['US'];
+let detectedISO = 'US';
 
-/* Section switcher */
-function show(id){['landing','quiz','analyzing','results'].forEach(s=>document.getElementById(s).classList.toggle('hidden',s!==id));window.scrollTo(0,0)}
-function startQuiz(){show('quiz');go(1)}
-
-/* Step navigation */
-function go(n){
-  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
-  document.getElementById('s'+n).classList.add('active');
-  document.getElementById('progBar').style.width=Math.round(n/8*100)+'%';
-  const sc=document.getElementById('stepCnt');
-  if(sc)sc.textContent='Step '+n+' of 8';
-  window.scrollTo(0,0);
+function setCurrency(iso) {
+  if (CURRENCY_MAP[iso]) { activeCur = CURRENCY_MAP[iso]; detectedISO = iso; }
+  renderRevOpts();
 }
 
-/* Step 1 live validation */
-function checkS1(){
-  const ok=document.getElementById('fName').value.trim()&&document.getElementById('lName').value.trim()&&document.getElementById('fEmail').value.includes('@');
-  document.getElementById('s1Next').disabled=!ok;
+function fmt(usd) {
+  const n = Math.round(usd * activeCur.rate);
+  const s = activeCur.sym.trim();
+  if (n >= 1000000000) return s + (n/1e9).toFixed(1).replace(/\.0$/,'') + 'B';
+  if (n >= 1000000)    return s + (n/1e6).toFixed(1).replace(/\.0$/,'') + 'M';
+  if (n >= 100000 && activeCur.rate > 10) return s + Math.round(n/1000).toLocaleString() + 'K';
+  return s + n.toLocaleString();
 }
-function validateS1(){
-  const fn=document.getElementById('fName').value.trim(),ln=document.getElementById('lName').value.trim(),em=document.getElementById('fEmail').value.trim();
-  if(!fn||!ln||!em||!em.includes('@')){alert('Please fill in your first name, last name and a valid email address.');return;}
-  state.firstName=fn;state.lastName=ln;state.email=em;
-  state.phone=document.getElementById('phoneCode').value+' '+document.getElementById('fPhone').value.trim();
-  /* Wire CRM here: fetch('WEBHOOK',{method:'POST',body:JSON.stringify(state)}) */
+
+function fmtBracket(usd) {
+  const n = Math.round(usd * activeCur.rate);
+  const s = activeCur.sym.trim();
+  if (n >= 1000000) return s + (n/1e6).toFixed(1).replace(/\.0$/,'') + 'M';
+  if (n >= 1000)    return s + Math.round(n/1000) + 'K';
+  return s + n.toLocaleString();
+}
+
+/* Revenue brackets in USD — labels re-rendered after currency detection */
+const REV_BRACKETS = [
+  {val:'u50',    lo:0,       hi:50000},
+  {val:'50-100', lo:50000,   hi:100000},
+  {val:'100-250',lo:100000,  hi:250000},
+  {val:'250-500',lo:250000,  hi:500000},
+  {val:'500k-1m',lo:500000,  hi:1000000},
+  {val:'1m-5m',  lo:1000000, hi:5000000},
+  {val:'5m+',    lo:5000000, hi:null},
+];
+
+function renderRevOpts() {
+  const grid = document.getElementById('revGrid');
+  if (!grid) return;
+  const saved = state.rev;
+  grid.innerHTML = REV_BRACKETS.map(b => {
+    const label = b.hi === null
+      ? `${fmtBracket(b.lo)}+`
+      : `${fmtBracket(b.lo)} to ${fmtBracket(b.hi)}`;
+    const selClass = saved === b.val ? ' sel' : '';
+    return `<button class="opt${selClass}" onclick="pick('rev','${b.val}',this)"><span class="dot${saved===b.val?' selected':''}"></span>${label}</button>`;
+  }).join('') + `<button class="opt${saved==='employee'?' sel':''}" onclick="pick('rev','employee',this)"><span class="dot"></span>I am an employee</button>`;
+  // Re-apply selected dot style
+  grid.querySelectorAll('.opt.sel .dot').forEach(d => {
+    d.style.background = 'var(--gold)';
+    d.style.borderColor = 'var(--gold)';
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   2. COUNTRY CODE PICKER (custom UI, IP auto-detect)
+   ══════════════════════════════════════════════════════════════ */
+const COUNTRIES = [
+  {iso:'SG',flag:'🇸🇬',name:'Singapore',   dial:'+65'},
+  {iso:'MY',flag:'🇲🇾',name:'Malaysia',     dial:'+60'},
+  {iso:'AU',flag:'🇦🇺',name:'Australia',    dial:'+61'},
+  {iso:'NZ',flag:'🇳🇿',name:'New Zealand',  dial:'+64'},
+  {iso:'US',flag:'🇺🇸',name:'United States',dial:'+1'},
+  {iso:'GB',flag:'🇬🇧',name:'United Kingdom',dial:'+44'},
+  {iso:'IN',flag:'🇮🇳',name:'India',        dial:'+91'},
+  {iso:'AE',flag:'🇦🇪',name:'UAE',          dial:'+971'},
+  {iso:'HK',flag:'🇭🇰',name:'Hong Kong',   dial:'+852'},
+  {iso:'CN',flag:'🇨🇳',name:'China',        dial:'+86'},
+  {iso:'JP',flag:'🇯🇵',name:'Japan',        dial:'+81'},
+  {iso:'KR',flag:'🇰🇷',name:'South Korea', dial:'+82'},
+  {iso:'TH',flag:'🇹🇭',name:'Thailand',    dial:'+66'},
+  {iso:'ID',flag:'🇮🇩',name:'Indonesia',   dial:'+62'},
+  {iso:'PH',flag:'🇵🇭',name:'Philippines', dial:'+63'},
+  {iso:'VN',flag:'🇻🇳',name:'Vietnam',     dial:'+84'},
+  {iso:'BD',flag:'🇧🇩',name:'Bangladesh',  dial:'+880'},
+  {iso:'LK',flag:'🇱🇰',name:'Sri Lanka',   dial:'+94'},
+  {iso:'PK',flag:'🇵🇰',name:'Pakistan',    dial:'+92'},
+  {iso:'SA',flag:'🇸🇦',name:'Saudi Arabia',dial:'+966'},
+  {iso:'QA',flag:'🇶🇦',name:'Qatar',       dial:'+974'},
+  {iso:'ZA',flag:'🇿🇦',name:'South Africa',dial:'+27'},
+  {iso:'NG',flag:'🇳🇬',name:'Nigeria',     dial:'+234'},
+  {iso:'KE',flag:'🇰🇪',name:'Kenya',       dial:'+254'},
+  {iso:'DE',flag:'🇩🇪',name:'Germany',     dial:'+49'},
+  {iso:'FR',flag:'🇫🇷',name:'France',      dial:'+33'},
+  {iso:'IT',flag:'🇮🇹',name:'Italy',       dial:'+39'},
+  {iso:'ES',flag:'🇪🇸',name:'Spain',       dial:'+34'},
+  {iso:'NL',flag:'🇳🇱',name:'Netherlands', dial:'+31'},
+  {iso:'CH',flag:'🇨🇭',name:'Switzerland', dial:'+41'},
+  {iso:'SE',flag:'🇸🇪',name:'Sweden',      dial:'+46'},
+  {iso:'NO',flag:'🇳🇴',name:'Norway',      dial:'+47'},
+  {iso:'DK',flag:'🇩🇰',name:'Denmark',     dial:'+45'},
+  {iso:'PL',flag:'🇵🇱',name:'Poland',      dial:'+48'},
+  {iso:'BR',flag:'🇧🇷',name:'Brazil',      dial:'+55'},
+  {iso:'MX',flag:'🇲🇽',name:'Mexico',      dial:'+52'},
+  {iso:'CA',flag:'🇨🇦',name:'Canada',      dial:'+1'},
+];
+let selectedCC = COUNTRIES[0];
+
+function renderCCList(q='') {
+  const list = document.getElementById('ccList');
+  if (!list) return;
+  const ql = q.toLowerCase();
+  const filtered = ql ? COUNTRIES.filter(c => c.name.toLowerCase().includes(ql) || c.dial.includes(ql)) : COUNTRIES;
+  list.innerHTML = filtered.map(c =>
+    `<div class="cc-opt${c.iso===selectedCC.iso?' active':''}" onclick="selectCC('${c.iso}')">
+      <span class="cc-opt-flag">${c.flag}</span>
+      <span class="cc-opt-name">${c.name}</span>
+      <span class="cc-opt-code">${c.dial}</span>
+    </div>`
+  ).join('');
+}
+
+function selectCC(iso) {
+  const c = COUNTRIES.find(x => x.iso === iso);
+  if (!c) return;
+  selectedCC = c;
+  document.getElementById('ccFlag').textContent = c.flag;
+  document.getElementById('ccCode').textContent = c.dial;
+  document.getElementById('selectedDialCode').value = c.dial;
+  closeCC();
+  renderCCList();
+}
+
+function toggleCC() {
+  const p = document.getElementById('ccPicker');
+  if (p.classList.contains('open')) { closeCC(); return; }
+  p.classList.add('open');
+  const s = document.getElementById('ccSearch');
+  if (s) { s.value = ''; renderCCList(); setTimeout(() => s.focus(), 60); }
+}
+function closeCC() {
+  const p = document.getElementById('ccPicker');
+  if (p) p.classList.remove('open');
+}
+function filterCC(v) { renderCCList(v); }
+document.addEventListener('click', e => {
+  const p = document.getElementById('ccPicker');
+  if (p && !p.contains(e.target)) closeCC();
+});
+
+/* ══════════════════════════════════════════════════════════════
+   3. IP DETECTION — sets currency + phone country code together
+   ══════════════════════════════════════════════════════════════ */
+(async function detectByIP() {
+  try {
+    const res  = await fetch('https://ipapi.co/json/');
+    const data = await res.json();
+    const iso  = data.country_code;
+    // Set phone flag
+    const match = COUNTRIES.find(c => c.iso === iso);
+    if (match) selectCC(iso);
+    // Set currency
+    setCurrency(iso);
+  } catch(e) {
+    // Silent fail — stays on SGD/+65 defaults, renders USD revenue options
+    renderRevOpts();
+  }
+})();
+
+// Render revenue options immediately with default currency (before IP resolves)
+renderRevOpts();
+renderCCList();
+
+/* ══════════════════════════════════════════════════════════════
+   4. ZAPIER WEBHOOK
+   ══════════════════════════════════════════════════════════════ */
+const ZAPIER_URL = 'https://hooks.zapier.com/hooks/catch/3673966/u7ipolm/';
+
+async function sendToZapier(payload, event) {
+  try {
+    await fetch(ZAPIER_URL, {
+      method: 'POST',
+      // text/plain avoids CORS preflight — Zapier accepts this
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify({
+        event,
+        submitted_at: new Date().toISOString(),
+        ...payload
+      })
+    });
+  } catch(e) { console.warn('Zapier send failed:', e); }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   5. STATE & QUIZ LOGIC
+   ══════════════════════════════════════════════════════════════ */
+const state = {
+  size:null, rev:null, industry:null, goal:null, timeline:null,
+  pricing:0, time_leaks:0, systems:0,
+  bp:null, worth:null, invest:null, hold:null, commit:7,
+  firstName:'', lastName:'', email:'', phone:''
+};
+
+function show(id) {
+  ['landing','quiz','analyzing','results'].forEach(s =>
+    document.getElementById(s).classList.toggle('hidden', s !== id)
+  );
+  window.scrollTo(0, 0);
+}
+function startQuiz() { show('quiz'); go(1); }
+
+function go(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('s' + n).classList.add('active');
+  document.getElementById('progBar').style.width = Math.round(n / 8 * 100) + '%';
+  const sc = document.getElementById('stepCnt');
+  if (sc) sc.textContent = 'Step ' + n + ' of 8';
+  window.scrollTo(0, 0);
+}
+
+/* Step 1 validation — phone is now required */
+function checkS1() {
+  const fn    = document.getElementById('fName').value.trim();
+  const ln    = document.getElementById('lName').value.trim();
+  const em    = document.getElementById('fEmail').value.trim();
+  const ph    = document.getElementById('fPhone').value.trim();
+  const valid = fn && ln && em && em.includes('@') && ph.length >= 5;
+  document.getElementById('s1Next').disabled = !valid;
+}
+
+async function validateS1() {
+  const fn = document.getElementById('fName').value.trim();
+  const ln = document.getElementById('lName').value.trim();
+  const em = document.getElementById('fEmail').value.trim();
+  const ph = document.getElementById('fPhone').value.trim();
+  if (!fn || !ln || !em || !em.includes('@') || !ph) {
+    alert('Please fill in all required fields including your phone number.');
+    return;
+  }
+  state.firstName = fn;
+  state.lastName  = ln;
+  state.email     = em;
+  state.phone     = document.getElementById('selectedDialCode').value + ' ' + ph;
+  state.country   = selectedCC.name;
+  state.countryISO = selectedCC.iso;
+  state.dialCode  = selectedCC.dial;
+  state.smsConsent = document.getElementById('consent').checked;
+  state.detectedCurrency = activeCur.code;
+  state.landingUrl = window.location.href;
+
+  /* ── Capture UTM params from URL ── */
+  const _utmQ = new URLSearchParams(window.location.search);
+  state.utm_source   = _utmQ.get('utm_source')   || '';
+  state.utm_medium   = _utmQ.get('utm_medium')   || '';
+  state.utm_campaign = _utmQ.get('utm_campaign') || '';
+  state.utm_content  = _utmQ.get('utm_content')  || '';
+  state.utm_term     = _utmQ.get('utm_term')     || '';
+  state.utm_adset    = _utmQ.get('utm_adset')    || '';
+  state.fbclid       = _utmQ.get('fbclid')       || '';
+  state.gclid        = _utmQ.get('gclid')        || '';
+
+  /* ── Zapier: lead submitted (SOI) ── */
+  await sendToZapier({
+    first_name:       state.firstName,
+    last_name:        state.lastName,
+    email:            state.email,
+    phone:            state.phone,
+    country:          state.country,
+    country_iso:      state.countryISO,
+    sms_consent:      state.smsConsent,
+    detected_currency:state.detectedCurrency,
+    source:           'money-leak-audit-v2',
+    stage:            'lead_submitted',
+    landing_url:      state.landingUrl,
+    /* UTM tracking */
+    utm_source:       state.utm_source,
+    utm_medium:       state.utm_medium,
+    utm_campaign:     state.utm_campaign,
+    utm_content:      state.utm_content,
+    utm_term:         state.utm_term,
+    utm_adset:        state.utm_adset,
+    fbclid:           state.fbclid,
+    gclid:            state.gclid,
+  }, 'lead_submitted');
+
   go(2);
 }
 
-/* Single-select */
-function pick(field,val,el){
-  el.closest('.opt-grid').querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
-  el.classList.add('sel');state[field]=val;refreshBtns();
-}
-function refreshBtns(){
-  /* Step 2: size + revenue + industry all required */
-  const s2=document.getElementById('s2Next');if(s2)s2.disabled=!(state.size&&state.rev&&state.industry);
-  /* Step 3: goal + timeline required */
-  const s3=document.getElementById('s3Next');if(s3)s3.disabled=!(state.goal&&state.timeline);
-  /* Steps 4/5/6: at least one checkbox required */
-  const s4=document.getElementById('s4Next');if(s4)s4.disabled=!(state.pricing>0);
-  const s5=document.getElementById('s5Next');if(s5)s5.disabled=!(state.time_leaks>0);
-  const s6=document.getElementById('s6Next');if(s6)s6.disabled=!(state.systems>0);
-  /* Step 7: both blueprint questions required */
-  const s7=document.getElementById('s7Next');if(s7)s7.disabled=!(state.bp&&state.worth);
-  /* Step 8: investment history + holding back required */
-  const s8=document.getElementById('s8Next');if(s8)s8.disabled=!(state.invest&&state.hold);
+function pick(field, val, el) {
+  el.closest('.opt-grid').querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  state[field] = val;
+  refreshBtns();
 }
 
-/* Checkboxes */
-function toggle(el){
+function refreshBtns() {
+  const s2 = document.getElementById('s2Next'); if(s2) s2.disabled = !(state.size && state.rev && state.industry);
+  const s3 = document.getElementById('s3Next'); if(s3) s3.disabled = !(state.goal && state.timeline);
+  const s4 = document.getElementById('s4Next'); if(s4) s4.disabled = !(state.pricing > 0);
+  const s5 = document.getElementById('s5Next'); if(s5) s5.disabled = !(state.time_leaks > 0);
+  const s6 = document.getElementById('s6Next'); if(s6) s6.disabled = !(state.systems > 0);
+  const s7 = document.getElementById('s7Next'); if(s7) s7.disabled = !(state.bp && state.worth);
+  const s8 = document.getElementById('s8Next'); if(s8) s8.disabled = !(state.invest && state.hold);
+}
+
+function toggle(el) {
   el.classList.toggle('on');
-  const cat=el.dataset.cat;
-  const key=cat==='time'?'time_leaks':cat;
-  state[key]=document.querySelectorAll('.chk.on[data-cat="'+cat+'"]').length;
-  refreshBtns(); /* re-check step buttons when checkbox changes */
+  const cat = el.dataset.cat;
+  const key = cat === 'time' ? 'time_leaks' : cat;
+  state[key] = document.querySelectorAll('.chk.on[data-cat="' + cat + '"]').length;
+  refreshBtns();
 }
 
-/* Run analysis */
-function runAnalyze(){
+async function runAnalyze() {
   show('analyzing');
-  const ids=['as1','as2','as3','as4'];
-  ids.forEach(id=>{const e=document.getElementById(id);e.classList.remove('on','done');e.querySelector('.a-icon').textContent=ids.indexOf(id)+1;});
-  let i=0;
-  (function tick(){if(i>0){const p=document.getElementById(ids[i-1]);p.classList.remove('on');p.classList.add('done');p.querySelector('.a-icon').textContent='✓';}if(i<ids.length){document.getElementById(ids[i]).classList.add('on');i++;setTimeout(tick,680);}else{setTimeout(()=>{renderResults();show('results');setTimeout(animateBars,400);},550);}})();
+  const ids = ['as1','as2','as3','as4'];
+  ids.forEach(id => {
+    const e = document.getElementById(id);
+    e.classList.remove('on','done');
+    e.querySelector('.a-icon').textContent = ids.indexOf(id) + 1;
+  });
+  let i = 0;
+  (function tick() {
+    if (i > 0) {
+      const p = document.getElementById(ids[i - 1]);
+      p.classList.remove('on'); p.classList.add('done');
+      p.querySelector('.a-icon').textContent = '✓';
+    }
+    if (i < ids.length) {
+      document.getElementById(ids[i]).classList.add('on');
+      i++;
+      setTimeout(tick, 680);
+    } else {
+      setTimeout(async () => {
+        renderResults();
+        show('results');
+        setTimeout(animateBars, 400);
+
+        /* ── Zapier: audit completed ── */
+        const r = window._lastCalc || {};
+        await sendToZapier({
+          first_name:         state.firstName,
+          last_name:          state.lastName,
+          email:              state.email,
+          phone:              state.phone,
+          country:            state.country,
+          country_iso:        state.countryISO,
+          detected_currency:  activeCur.code,
+          /* Leak scores */
+          pricing_leaks:      state.pricing,
+          time_leaks:         state.time_leaks,
+          systems_leaks:      state.systems,
+          /* Results */
+          total_leak_usd:     r.total_usd || 0,
+          total_leak_local:   r.total_fmt || '—',
+          pricing_amt_local:  r.p_fmt     || '—',
+          time_amt_local:     r.t_fmt     || '—',
+          systems_amt_local:  r.s_fmt     || '—',
+          blueprint_tax_local:r.b_fmt     || '—',
+          primary_leak:       r.primary   || '—',
+          money_blueprint:    state.bp    || '—',
+          worthiness:         state.worth || '—',
+          /* Business context */
+          company_size:       state.size,
+          revenue_tier:       state.rev,
+          industry:           state.industry,
+          goal:               state.goal,
+          timeline:           state.timeline,
+          investment_history: state.invest,
+          main_blocker:       state.hold,
+          commitment_score:   state.commit,
+          lead_score:         (state.goal==='7fig'||state.timeline==='asap'||state.commit>=8)?'HOT':(state.goal==='9-5'||state.goal==='double')?'WARM':'COLD',
+          source:             'money-leak-audit-v2',
+          stage:              'audit_completed',
+          landing_url:        state.landingUrl,
+          /* UTM tracking */
+          utm_source:         state.utm_source   || '',
+          utm_medium:         state.utm_medium   || '',
+          utm_campaign:       state.utm_campaign || '',
+          utm_content:        state.utm_content  || '',
+          utm_term:           state.utm_term     || '',
+          utm_adset:          state.utm_adset    || '',
+          fbclid:             state.fbclid       || '',
+          gclid:              state.gclid        || '',
+        }, 'audit_completed');
+
+      }, 550);
+    }
+  })();
 }
 
-/* Calc */
-function calc(){
-  const bases={solo:95000,'2-5':170000,'6-10':300000,'11-25':460000,'26-50':700000,'51-100':1000000,'100+':1350000,employee:70000};
-  const revM={u50:.55,'50-100':.75,'100-250':1.0,'250-500':1.25,'500k-1m':1.5,'1m-5m':1.8,'5m+':2.3};
-  const base=(bases[state.size]||120000)*(revM[state.rev]||1.0);
-  const p=(state.pricing/6)*base*0.42,t=(state.time_leaks/6)*base*0.36,s=(state.systems/6)*base*0.22;
-  const b=base*0.11*(1+0.4*(1-state.commit/10));
-  const total=p+t+s+b;
-  const scored=[{k:'pricing',v:state.pricing},{k:'time',v:state.time_leaks},{k:'systems',v:state.systems}];
-  scored.sort((a,b_)=>b_.v-a.v);
-  return{total:rnd(total,1000),p:rnd(p,500),t:rnd(t,500),s:rnd(s,500),b:rnd(b,500),primary:scored[0].v>0?scored[0].k:'blueprint',barMax:Math.max(p,t,s,b,1)};
+/* ══════════════════════════════════════════════════════════════
+   6. CALC
+   ══════════════════════════════════════════════════════════════ */
+function calc() {
+  const bases = {solo:95000,'2-5':170000,'6-10':300000,'11-25':460000,'26-50':700000,'51-100':1000000,'100+':1350000,employee:70000};
+  const revM  = {u50:.55,'50-100':.75,'100-250':1.0,'250-500':1.25,'500k-1m':1.5,'1m-5m':1.8,'5m+':2.3};
+  const base  = (bases[state.size]||120000) * (revM[state.rev]||1.0);
+  const p = (state.pricing   / 6) * base * 0.42;
+  const t = (state.time_leaks/ 6) * base * 0.36;
+  const s = (state.systems   / 6) * base * 0.22;
+  const b = base * 0.11 * (1 + 0.4 * (1 - state.commit / 10));
+  const total_usd = p + t + s + b;
+  const scored = [{k:'pricing',v:state.pricing},{k:'time',v:state.time_leaks},{k:'systems',v:state.systems}];
+  scored.sort((a,b_) => b_.v - a.v);
+  const primary = scored[0].v > 0 ? scored[0].k : 'blueprint';
+  const barMax  = Math.max(p, t, s, b, 1);
+  // Store for Zapier
+  window._lastCalc = {
+    total_usd: Math.round(total_usd),
+    total_fmt: fmt(total_usd),
+    p_fmt: fmt(p), t_fmt: fmt(t), s_fmt: fmt(s), b_fmt: fmt(b),
+    primary,
+    barMax,
+    bars: {p: p/barMax*100, t: t/barMax*100, s: s/barMax*100, b: b/barMax*100}
+  };
+  return window._lastCalc;
 }
-function rnd(n,to){return Math.round(n/to)*to}
-function fmtFull(n){return'$'+n.toLocaleString('en-US')}
 
-/* ============================================================
+/* ══════════════════════════════════════════════════════════════
    ARCHETYPE DATA
-   ============================================================ */
-const ARCH={
+   ══════════════════════════════════════════════════════════════ */
+const ARCH = {
   pricing:{name:'The Underprizer',desc:'Your audit shows your largest leak is in your pricing. You discount to close deals, you do work for free hoping it converts, and you consistently undercharge for the value you deliver. Every invoice you raise is smaller than it should be — not because the market will not pay more, but because a deeper pattern will not let you ask for it.',bridge:'Your pricing leak is rarely fixed by learning how to negotiate. Most people try that and slide back within months. The pattern that keeps recreating the discount, the free work, the fear of raising rates — that is what needs to change first.'},
   time:{name:'The Bottleneck',desc:'Your audit shows your largest leak is in your time. You are the business — and your income is capped by the hours you can physically work. The moment you stop, everything stops. You cannot scale what only you can do, and you cannot buy back time you have already spent.',bridge:'More delegation tools will not fix a bottleneck pattern. The belief that "no one can do it like me" and the guilt that comes with taking your hands off — those run deeper than any productivity system. That is the layer that needs to be addressed first.'},
   systems:{name:'The Winger',desc:'Your audit shows your largest leak is in your systems. You are running a significant business on instinct, memory, and guesswork. No tracking, no repeatable processes, no wealth-building structure outside the day-to-day. What does not get measured cannot be managed — and right now, very little is being measured.',bridge:'Most people know they need systems. The reason they never build them is not lack of knowledge — it is a belief that structure kills creativity, or an Avoider pattern that makes tracking finances feel overwhelming. The system is easy. The blueprint that resists it is the real obstacle.'},
   blueprint:{name:'The Blueprint Saboteur',desc:'Your audit shows the primary leak is at the root level — your money blueprint. It is not in your pricing, your calendar, or your spreadsheet. It is in the unconscious belief system you formed about money, wealth, and what you deserve. You know what to do. Something below the surface is running a different programme.',bridge:'A money blueprint leak is invisible on a P&L but visible in your results. You have probably tried strategies and tactics that worked briefly and then reset. That is the blueprint reasserting itself. Strategies do not fix blueprints. The blueprint has to be addressed directly.'}
 };
 
-/* ============================================================
-   BLUEPRINT DEEP-DIVE DATA (from cheatsheet)
-   ============================================================ */
-const BP_DEEP={
-  worker:{
-    name:'The Hard Worker',
-    belief:'"I must earn every cent through effort and sacrifice."',
-    voice:'"If you are not exhausted, you are not trying hard enough. More hours equals more worth."',
-    behaviours:['Works 60 to 80 hour weeks as a badge of honour','Feels guilty resting or taking time away from work','Resists delegation — "no one does it like me"','Equates busyness with productivity and personal worth'],
-    watchout:['Burnout','Income ceiling','No leverage','Resentment','Health decline'],
-    upgrade:'Shift from trading time for money to building systems and leverage. Your worth is not measured in hours — it is measured in the value you create. The moment you internalise this, everything about how you work changes.'
-  },
-  pleasure:{
-    name:'The Pleasure Seeker',
-    belief:'"Money is for enjoying — life is too short to save it all."',
-    voice:'"You deserve this. You worked hard. One more purchase will not hurt. Save later, enjoy now."',
-    behaviours:['Lives paycheque to paycheque despite strong income','Impulse spending on lifestyle upgrades the moment income rises','Avoids looking at bank balances or statements','Believes any financial structure or restriction equals unhappiness'],
-    watchout:['No savings buffer','Debt spiral','Financial fragility','Lifestyle inflation'],
-    upgrade:'You can enjoy life AND build wealth. They are not opposites. The key is paying yourself first — automating savings before spending begins, so financial freedom compounds quietly alongside the life you enjoy now.'
-  },
-  hoarder:{
-    name:'The Saver',
-    belief:'"Security comes from saving — spending feels like losing."',
-    voice:'"Do not spend that. What if something goes wrong? Keep saving — it is never enough."',
-    behaviours:['Hoards cash in low-interest accounts while wealth stagnates','Too anxious to invest — "what if I lose it?"','Never feels financially secure regardless of how much is saved','Misses investment opportunities through excessive caution'],
-    watchout:['Money never grows','Missed wealth opportunities','Scarcity mindset','Relationship friction'],
-    upgrade:'Saving is a strength — but money sitting still is money dying slowly. The next step is making money work harder through smart, diversified investing. Safety and growth are not mutually exclusive.'
-  },
-  avoider:{
-    name:'The Avoider',
-    belief:'"If I do not look at my finances, they cannot stress me out."',
-    voice:'"I will sort it out later. It is too complicated. I am not a numbers person. Someone else will handle it."',
-    behaviours:['Never opens bank statements, invoices, or financial reports','Has no budget or financial plan in place','Defers all financial decisions to a partner or advisor','Panics when forced to confront the actual financial picture'],
-    watchout:['Hidden debt growing silently','Financial dependency','Missed tax obligations','Growing vulnerability'],
-    upgrade:'Awareness is the beginning of all financial power. You do not need to become a spreadsheet expert. Start with one habit — check your balance weekly. Financial confidence is built in small steps, not giant leaps.'
-  },
-  resister:{
-    name:'The Money Monk',
-    belief:'"Money corrupts. True meaning comes from things beyond wealth."',
-    voice:'"Money is not important. I do not want to be like those greedy people. I am above that."',
-    behaviours:['Undercharges or gives services away for free as a subconscious act of virtue','Feels moral superiority over wealthy people','Self-sabotages when income starts to rise','Attracts people with broke mindsets while repelling wealthy mentors'],
-    watchout:['Hard income ceiling','Resentment of others\' success','Self-sabotage patterns','Financial martyrdom'],
-    upgrade:'Wealth amplifies who you already are. A good person with money does more good in the world than a good person without it. You can have both meaning and financial freedom — they are not opposites, and never were.'
-  },
-  chaser:{
-    name:'The Gambler',
-    belief:'"The big win is just around the corner — I can feel it."',
-    voice:'"This is the one. Steady growth is boring — I want to win big. Double or nothing."',
-    behaviours:['Chases crypto, forex, and hot tips without a clear strategy','Makes high-risk moves based on feeling, not research','Gets bored with consistent, proven wealth-building approaches','Boom-and-bust financial cycles that repeat every few years'],
-    watchout:['Capital erosion','Impulsive decisions','Addiction-like patterns','No financial safety net'],
-    upgrade:'The real game is calculated risk management — strategic moves with a known downside and unlimited upside. Consistent, compounding strategy beats lucky timing every time across the long run. The boring path is the fast one.'
-  },
-  worthy:{
-    name:'The Idolizer',
-    belief:'"More money will finally make me feel good enough."',
-    voice:'"When I make it, people will respect me. I just need more — then I will be happy."',
-    behaviours:['Ties self-worth entirely to net worth and external income','Overspends on status symbols to manage how others perceive them','Never feels enough regardless of income or achievement level','Deep anxiety and emptiness sitting underneath financial success'],
-    watchout:['Emotional spending cycles','Constant comparison','Empty achievement','Hollow success'],
-    upgrade:'Worthiness is not earned — it is chosen. Build wealth from a foundation of inner security, not to fill an emotional hole. The hole never gets filled from the outside. When you understand this, wealth becomes a byproduct of who you are, not a replacement for it.'
-  }
+const BP_DEEP = {
+  worker:{name:'The Hard Worker',belief:'"I must earn every cent through effort and sacrifice."',voice:'"If you are not exhausted, you are not trying hard enough. More hours equals more worth."',behaviours:['Works 60 to 80 hour weeks as a badge of honour','Feels guilty resting or taking time away from work','Resists delegation — "no one does it like me"','Equates busyness with productivity and personal worth'],watchout:['Burnout','Income ceiling','No leverage','Resentment','Health decline'],upgrade:'Shift from trading time for money to building systems and leverage. Your worth is not measured in hours — it is measured in the value you create. The moment you internalise this, everything about how you work changes.'},
+  pleasure:{name:'The Pleasure Seeker',belief:'"Money is for enjoying — life is too short to save it all."',voice:'"You deserve this. You worked hard. One more purchase will not hurt. Save later, enjoy now."',behaviours:['Lives paycheque to paycheque despite strong income','Impulse spending on lifestyle upgrades the moment income rises','Avoids looking at bank balances or statements','Believes any financial structure or restriction equals unhappiness'],watchout:['No savings buffer','Debt spiral','Financial fragility','Lifestyle inflation'],upgrade:'You can enjoy life AND build wealth. They are not opposites. The key is paying yourself first — automating savings before spending begins, so financial freedom compounds quietly alongside the life you enjoy now.'},
+  hoarder:{name:'The Saver',belief:'"Security comes from saving — spending feels like losing."',voice:'"Do not spend that. What if something goes wrong? Keep saving — it is never enough."',behaviours:['Hoards cash in low-interest accounts while wealth stagnates','Too anxious to invest — "what if I lose it?"','Never feels financially secure regardless of how much is saved','Misses investment opportunities through excessive caution'],watchout:['Money never grows','Missed wealth opportunities','Scarcity mindset','Relationship friction'],upgrade:'Saving is a strength — but money sitting still is money dying slowly. The next step is making money work harder through smart, diversified investing. Safety and growth are not mutually exclusive.'},
+  avoider:{name:'The Avoider',belief:'"If I do not look at my finances, they cannot stress me out."',voice:'"I will sort it out later. It is too complicated. I am not a numbers person. Someone else will handle it."',behaviours:['Never opens bank statements, invoices, or financial reports','Has no budget or financial plan in place','Defers all financial decisions to a partner or advisor','Panics when forced to confront the actual financial picture'],watchout:['Hidden debt growing silently','Financial dependency','Missed tax obligations','Growing vulnerability'],upgrade:'Awareness is the beginning of all financial power. You do not need to become a spreadsheet expert. Start with one habit — check your balance weekly. Financial confidence is built in small steps, not giant leaps.'},
+  resister:{name:'The Money Monk',belief:'"Money corrupts. True meaning comes from things beyond wealth."',voice:'"Money is not important. I do not want to be like those greedy people. I am above that."',behaviours:['Undercharges or gives services away for free as a subconscious act of virtue','Feels moral superiority over wealthy people','Self-sabotages when income starts to rise','Attracts people with broke mindsets while repelling wealthy mentors'],watchout:['Hard income ceiling','Resentment of others\' success','Self-sabotage patterns','Financial martyrdom'],upgrade:'Wealth amplifies who you already are. A good person with money does more good in the world than a good person without it. You can have both meaning and financial freedom — they are not opposites, and never were.'},
+  chaser:{name:'The Gambler',belief:'"The big win is just around the corner — I can feel it."',voice:'"This is the one. Steady growth is boring — I want to win big. Double or nothing."',behaviours:['Chases crypto, forex, and hot tips without a clear strategy','Makes high-risk moves based on feeling, not research','Gets bored with consistent, proven wealth-building approaches','Boom-and-bust financial cycles that repeat every few years'],watchout:['Capital erosion','Impulsive decisions','Addiction-like patterns','No financial safety net'],upgrade:'The real game is calculated risk management — strategic moves with a known downside and unlimited upside. Consistent, compounding strategy beats lucky timing every time across the long run. The boring path is the fast one.'},
+  worthy:{name:'The Idolizer',belief:'"More money will finally make me feel good enough."',voice:'"When I make it, people will respect me. I just need more — then I will be happy."',behaviours:['Ties self-worth entirely to net worth and external income','Overspends on status symbols to manage how others perceive them','Never feels enough regardless of income or achievement level','Deep anxiety and emptiness sitting underneath financial success'],watchout:['Emotional spending cycles','Constant comparison','Empty achievement','Hollow success'],upgrade:'Worthiness is not earned — it is chosen. Build wealth from a foundation of inner security, not to fill an emotional hole. The hole never gets filled from the outside. When you understand this, wealth becomes a byproduct of who you are, not a replacement for it.'}
 };
 
-/* ============================================================
-   QUICK WINS — personalised by primary leak type
-   ============================================================ */
-const QUICK_WINS={
+const QUICK_WINS = {
   pricing:[
     {label:'Calculate your real rate — today',text:'Take last month\'s total revenue and divide it by the hours you worked. Write that number down. That is what you are currently charging per hour of your life. Then ask yourself: is that what you are worth? The gap between that number and the answer is your pricing leak in its most honest form.',action:'Do this before you close this page.'},
     {label:'Find your 20 percent raise',text:'Identify one service, product, or retainer you could increase by 20 percent without losing the clients who actually value you. You are not raising it for everyone — test it on your next three enquiries only and observe what happens. You will be surprised how often the right clients do not flinch.',action:'Your next proposal goes out at the new price.'},
@@ -1314,46 +1644,65 @@ const QUICK_WINS={
   ]
 };
 
-/* ============================================================
-   RENDER RESULTS
-   ============================================================ */
-function renderResults(){
-  const r=calc();
-  const arch=ARCH[r.primary]||ARCH.blueprint;
-  const bpKey=state.bp||'worker';
-  const bpd=BP_DEEP[bpKey]||BP_DEEP.worker;
-  const wins=QUICK_WINS[r.primary]||QUICK_WINS.blueprint;
-  const nm=state.firstName;
-  const totalChecks=state.pricing+state.time_leaks+state.systems;
-  const sizeLabel={solo:'solopreneur',employee:'employee','2-5':'2 to 5 person business','6-10':'6 to 10 person business','11-25':'11 to 25 person business','26-50':'26 to 50 person business','51-100':'51 to 100 person business','100+':'100 person plus business'};
+/* ══════════════════════════════════════════════════════════════
+   7. RENDER RESULTS
+   ══════════════════════════════════════════════════════════════ */
+function renderResults() {
+  const r    = calc();
+  const arch = ARCH[r.primary] || ARCH.blueprint;
+  const bpd  = BP_DEEP[state.bp] || BP_DEEP.worker;
+  const wins = QUICK_WINS[r.primary] || QUICK_WINS.blueprint;
+  const sizeLabel = {solo:'solopreneur',employee:'employee','2-5':'2 to 5 person business','6-10':'6 to 10 person business','11-25':'11 to 25 person business','26-50':'26 to 50 person business','51-100':'51 to 100 person business','100+':'100 person plus business'};
 
-  /* Header */
-  document.getElementById('resGreet').textContent=nm?nm+', your personalised audit is complete.':'Your personalised audit is complete.';
-  document.getElementById('totalNum').textContent=fmtFull(r.total);
-  document.getElementById('calcNote').textContent=totalChecks+' identified leaks across your '+(sizeLabel[state.size]||'business')+', calculated against your revenue tier';
+  document.getElementById('resGreet').textContent = state.firstName
+    ? state.firstName + ', your personalised audit is complete.'
+    : 'Your personalised audit is complete.';
 
-  /* Archetype */
-  document.getElementById('archName').textContent=arch.name;
-  document.getElementById('archDesc').textContent=arch.desc;
+  document.getElementById('totalNum').textContent = r.total_fmt;
+  document.getElementById('calcNote').textContent =
+    (state.pricing + state.time_leaks + state.systems) +
+    ' identified leaks across your ' + (sizeLabel[state.size]||'business') +
+    ', calculated against your revenue tier';
 
-  /* Bars */
-  document.getElementById('pAmt').textContent=r.p>0?fmtFull(r.p):'$0';
-  document.getElementById('tAmt').textContent=r.t>0?fmtFull(r.t):'$0';
-  document.getElementById('sAmt').textContent=r.s>0?fmtFull(r.s):'$0';
-  document.getElementById('bAmt').textContent=fmtFull(r.b);
-  window._bars={p:r.p/r.barMax*100,t:r.t/r.barMax*100,s:r.s/r.barMax*100,b:r.b/r.barMax*100};
+  // Currency note
+  const note = document.getElementById('currencyNote');
+  if (note && activeCur.code !== 'USD') {
+    note.textContent = 'Amounts shown in ' + activeCur.code + ' · Estimated from USD base rates';
+  }
 
-  /* Blueprint deep-dive */
-  document.getElementById('bpBeliefQ').textContent=bpd.belief;
-  document.getElementById('bpVoice').textContent=bpd.voice;
-  document.getElementById('bpBehList').innerHTML=bpd.behaviours.map(b=>`<div class="bp-beh-item"><span class="bp-beh-arrow">→</span><span>${b}</span></div>`).join('');
-  document.getElementById('bpWatchout').innerHTML=bpd.watchout.map(w=>`<span class="wtag">${w}</span>`).join('');
-  document.getElementById('bpUpgrade').textContent=bpd.upgrade;
+  // Show mobile sticky CTA bar
+  const stickyCTA = document.getElementById('mobileStickyCTA');
+  if (stickyCTA && window.innerWidth <= 480) {
+    stickyCTA.style.display = 'flex';
+    // Add padding so last content isn't hidden behind sticky bar
+    document.getElementById('results').style.paddingBottom = '80px';
+  }
 
-  /* Quick wins */
-  document.getElementById('quickWins').innerHTML=wins.map((w,i)=>`
+  document.getElementById('archName').textContent = arch.name;
+  document.getElementById('archDesc').textContent  = arch.desc;
+
+  // Sidebar amounts
+  document.getElementById('pAmt').textContent = r.p_fmt;
+  document.getElementById('tAmt').textContent = r.t_fmt;
+  document.getElementById('sAmt').textContent = r.s_fmt;
+  document.getElementById('bAmt').textContent = r.b_fmt;
+  window._bars = r.bars;
+
+  // Blueprint
+  document.getElementById('bpBeliefQ').textContent = bpd.belief;
+  document.getElementById('bpVoice').textContent    = bpd.voice;
+  document.getElementById('bpBehList').innerHTML    = bpd.behaviours.map(b =>
+    `<div class="bp-beh-item"><span class="bp-beh-arrow">→</span><span>${b}</span></div>`
+  ).join('');
+  document.getElementById('bpWatchout').innerHTML   = bpd.watchout.map(w =>
+    `<span class="wtag">${w}</span>`
+  ).join('');
+  document.getElementById('bpUpgrade').textContent  = bpd.upgrade;
+
+  // Quick wins
+  document.getElementById('quickWins').innerHTML = wins.map((w, i) => `
     <div class="win-card">
-      <div class="win-num">${i+1}</div>
+      <div class="win-num">${i + 1}</div>
       <div>
         <div class="win-lbl">${w.label}</div>
         <div class="win-text">${w.text}</div>
@@ -1361,29 +1710,37 @@ function renderResults(){
       </div>
     </div>`).join('');
 
-  /* Bridge */
-  document.getElementById('bridgeH').textContent='These quick wins are the start. Not the seal.';
-  document.getElementById('bridgeP1').textContent=arch.bridge;
+  // Bridge
+  document.getElementById('bridgeH').textContent  = 'These quick wins are the start. Not the seal.';
+  document.getElementById('bridgeP1').textContent = arch.bridge;
 
-  /* PDF meta */
-  document.getElementById('pdfName').textContent=state.firstName+' '+state.lastName;
-  document.getElementById('pdfDate').textContent=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  // PDF meta
+  document.getElementById('pdfName').textContent = state.firstName + ' ' + state.lastName;
+  document.getElementById('pdfDate').textContent = new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'});
 }
-function animateBars(){if(!window._bars)return;['p','t','s','b'].forEach(k=>document.getElementById(k+'Bar').style.width=window._bars[k]+'%');}
 
-document.getElementById('commitSlider').addEventListener('input',function(){state.commit=+this.value;document.getElementById('commitVal').textContent=this.value;});
+function animateBars() {
+  if (!window._bars) return;
+  ['p','t','s','b'].forEach(k => {
+    document.getElementById(k + 'Bar').style.width = window._bars[k] + '%';
+  });
+}
 
-/* ============================================================
+document.getElementById('commitSlider').addEventListener('input', function() {
+  state.commit = +this.value;
+  document.getElementById('commitVal').textContent = this.value;
+});
+
+/* ══════════════════════════════════════════════════════════════
    TESTIMONIAL AUTO-SWIPE
-   ============================================================ */
-let testiIdx=0;const TESTI_COUNT=4;
-function goTesti(n){
-  document.querySelectorAll('.testi-slide').forEach((s,i)=>s.classList.toggle('active',i===n));
-  document.querySelectorAll('.tdot').forEach((d,i)=>d.classList.toggle('on',i===n));
-  testiIdx=n;
+   ══════════════════════════════════════════════════════════════ */
+let testiIdx = 0;
+function goTesti(n) {
+  document.querySelectorAll('.testi-slide').forEach((s, i) => s.classList.toggle('active', i === n));
+  document.querySelectorAll('.tdot').forEach((d, i) => d.classList.toggle('on', i === n));
+  testiIdx = n;
 }
-function nextTesti(){goTesti((testiIdx+1)%TESTI_COUNT);}
-setInterval(nextTesti,4000);
+setInterval(() => goTesti((testiIdx + 1) % 4), 4000);
 </script>
 </body>
 </html>
