@@ -897,7 +897,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </select>
       <div class="nav-row">
         <button class="btn-back" onclick="go(1)">Back</button>
-        <button class="btn-next" id="s2Next" onclick="go(3)" disabled>Continue</button>
+        <button class="btn-next" id="s2Next" onclick="guardGo(3,state.size&&state.rev&&state.industry,'Please select company size, revenue and industry.')" style="opacity:0.45">Continue</button>
       </div>
     </div>
 
@@ -923,7 +923,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
       <div class="nav-row">
         <button class="btn-back" onclick="go(2)">Back</button>
-        <button class="btn-next" id="s3Next" onclick="go(4)" disabled>Continue</button>
+        <button class="btn-next" id="s3Next" onclick="guardGo(4,state.goal&&state.timeline,'Please select your goal and timeline.')" style="opacity:0.45">Continue</button>
       </div>
     </div>
 
@@ -941,7 +941,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I feel underpaid for the value I bring</span></button>
       <div class="nav-row">
         <button class="btn-back" onclick="go(3)">Back</button>
-        <button class="btn-next" id="s4Next" onclick="go(5)" disabled>Continue</button>
+        <button class="btn-next" id="s4Next" onclick="guardGo(5,state.pricing>0,'Please select at least one pricing issue.')" style="opacity:0.45">Continue</button>
       </div>
     </div>
 
@@ -959,7 +959,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I am trapped trading time for money with no leverage</span></button>
       <div class="nav-row">
         <button class="btn-back" onclick="go(4)">Back</button>
-        <button class="btn-next" id="s5Next" onclick="go(6)" disabled>Continue</button>
+        <button class="btn-next" id="s5Next" onclick="guardGo(6,state.time_leaks>0,'Please select at least one time leak.')" style="opacity:0.45">Continue</button>
       </div>
     </div>
 
@@ -977,7 +977,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I have no wealth-building system or investment strategy</span></button>
       <div class="nav-row">
         <button class="btn-back" onclick="go(5)">Back</button>
-        <button class="btn-next" id="s6Next" onclick="go(7)" disabled>Continue</button>
+        <button class="btn-next" id="s6Next" onclick="guardGo(7,state.systems>0,'Please select at least one systems issue.')" style="opacity:0.45">Continue</button>
       </div>
     </div>
 
@@ -1004,7 +1004,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
       <div class="nav-row">
         <button class="btn-back" onclick="go(6)">Back</button>
-        <button class="btn-next" id="s7Next" onclick="go(8)" disabled>Continue</button>
+        <button class="btn-next" id="s7Next" onclick="guardGo(8,state.bp&&state.worth,'Please answer both blueprint questions.')" style="opacity:0.45">Continue</button>
       </div>
     </div>
 
@@ -1036,7 +1036,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
       <div class="nav-row">
         <button class="btn-back" onclick="go(7)">Back</button>
-        <button class="btn-next" id="s8Next" onclick="runAnalyze()" disabled>Reveal My Leak Report</button>
+        <button class="btn-next" id="s8Next" onclick="guardAnalyze()" style="opacity:0.45">Reveal My Leak Report</button>
       </div>
     </div>
 
@@ -1578,14 +1578,33 @@ function pick(field, val, el) {
   refreshBtns();
 }
 
+
+function guardGo(n,valid,msg){
+  if(!valid){
+    var id='s'+(n-1)+'Next';
+    var b=document.getElementById(id);
+    if(b){var orig=b.textContent;b.textContent=msg;b.style.background='#c53030';b.style.color='#fff';setTimeout(function(){b.textContent=orig;b.style.background='';b.style.color='';},2200);}
+    return;
+  }
+  go(n);
+}
+function guardAnalyze(){
+  if(!state.invest||!state.hold){
+    var b=document.getElementById('s8Next');
+    if(b){var orig=b.textContent;b.textContent='Please answer both questions above';b.style.background='#c53030';b.style.color='#fff';setTimeout(function(){b.textContent=orig;b.style.background='';b.style.color='';},2200);}
+    return;
+  }
+  runAnalyze();
+}
 function refreshBtns() {
-  const s2 = document.getElementById('s2Next'); if(s2) s2.disabled = !(state.size && state.rev && state.industry);
-  const s3 = document.getElementById('s3Next'); if(s3) s3.disabled = !(state.goal && state.timeline);
-  const s4 = document.getElementById('s4Next'); if(s4) s4.disabled = !(state.pricing > 0);
-  const s5 = document.getElementById('s5Next'); if(s5) s5.disabled = !(state.time_leaks > 0);
-  const s6 = document.getElementById('s6Next'); if(s6) s6.disabled = !(state.systems > 0);
-  const s7 = document.getElementById('s7Next'); if(s7) s7.disabled = !(state.bp && state.worth);
-  const s8 = document.getElementById('s8Next'); if(s8) s8.disabled = !(state.invest && state.hold);
+  function sb(id,v){const b=document.getElementById(id);if(!b)return;b.style.opacity=v?'1':'0.45';b.style.cursor=v?'pointer':'not-allowed';}
+  sb('s2Next',state.size&&state.rev&&state.industry);
+  sb('s3Next',state.goal&&state.timeline);
+  sb('s4Next',state.pricing>0);
+  sb('s5Next',state.time_leaks>0);
+  sb('s6Next',state.systems>0);
+  sb('s7Next',state.bp&&state.worth);
+  sb('s8Next',state.invest&&state.hold);
 }
 
 function toggle(el) {
@@ -1617,7 +1636,7 @@ async function runAnalyze() {
       setTimeout(tick, 680);
     } else {
       setTimeout(async () => {
-        renderResults();
+        try{renderResults();}catch(e){console.error('renderResults:',e);}
         show('results');
         setTimeout(animateBars, 400);
 
