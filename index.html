@@ -4,208 +4,235 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Money Leak Audit — Millionaire Mind Intensive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 
 /* ============================================================
-   SCREEN STYLES
+   ROOT COLORS — exact match to millionairemindworld.com/money
    ============================================================ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  /* Colour palette matching millionairemindworld.com/money */
-  --navy:    #0a0f1e;   /* header, footer, dark sections          */
-  --navy2:   #111827;   /* slightly lighter navy for cards        */
-  --bg:      #ffffff;   /* main body                              */
-  --bg-alt:  #f4f5f8;   /* alternating section                    */
-  --text:    #0f172a;   /* body text                              */
-  --text2:   #374151;   /* secondary text                         */
-  --muted:   #6b7280;   /* placeholder / label                    */
-  --gold:    #c9a84c;   /* MMI brand accent                       */
-  --gold-l:  #ddb84e;   /* hover state                            */
-  --gold-d:  rgba(201,168,76,.12); /* tint for selected states   */
-  --border:  #e5e7eb;   /* card borders                           */
-  --grn:     #16a34a;
-  --red:     #dc2626;
-  --pur:     #7c3aed;
-  --r:       8px;
+  --green:  #1c3829;   /* dark forest green: header, headings, dark sections */
+  --green2: #254d38;   /* hover shade                                         */
+  --bg:     #ede9e2;   /* page background: warm beige                         */
+  --white:  #ffffff;   /* card surfaces                                        */
+  --cream:  #f5f0e9;   /* inner CTA box / soft highlight                      */
+  --gold:   #c9a84c;   /* MMI accent: buttons, italic accent, progress        */
+  --gold-l: #d4b459;   /* gold hover                                           */
+  --gold-d: rgba(201,168,76,.13);
+  --body:   #374151;   /* regular body copy                                    */
+  --muted:  #6b7280;   /* labels, secondary text                               */
+  --border: #ddd5c8;   /* warm card borders                                    */
+  --red:    #c53030;   /* scarcity copy                                        */
+  --grn:    #16a34a;
+  --pur:    #7c3aed;
+  --r:      12px;
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:15px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--body);line-height:1.65;font-size:15px}
+h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;color:var(--green);line-height:1.2}
 a{color:var(--gold);text-decoration:none}
-img{max-width:100%}
 .hidden{display:none!important}
-.wrap{max-width:660px;margin:0 auto;padding:0 20px}
-.wrap-wide{max-width:980px;margin:0 auto;padding:0 24px}
+.wrap{max-width:700px;margin:0 auto;padding:0 20px}
+.wrap-wide{max-width:1100px;margin:0 auto;padding:0 32px}
+
+/* Desktop scaling */
+@media(min-width:900px){
+  body{font-size:16px}
+  .wrap{max-width:820px}
+  .wrap-wide{max-width:1200px}
+  .sec-h{font-size:34px}
+  .sec-label{font-size:12px}
+  .hero-h1{font-size:48px!important}
+  .hero-sub{font-size:17px}
+  .pattern-card{padding:26px}
+  .pquote{font-size:15px}
+  .pdesc{font-size:14px}
+  .quiz-card{max-width:820px!important;padding:48px 56px!important}
+  .quiz-hdr-inner{max-width:820px!important;padding:14px 32px}
+  .stat strong{font-size:18px}
+  .testi-inner{max-width:900px}
+  .testi-text{font-size:15px}
+}
 
 /* ============================================================
-   NAV
+   SR HEADER BAR (dark forest green, white logo)
    ============================================================ */
-nav{background:var(--navy);padding:0}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-.nav-logo{display:flex;align-items:center;gap:10px}
-.nav-mark{width:32px;height:32px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#000;flex-shrink:0}
-.nav-wordmark{line-height:1.2}
-.nav-wordmark strong{display:block;font-size:13px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.07em}
-.nav-wordmark span{display:block;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.05em}
-.nav-links{display:flex;gap:22px}
-.nav-links a{font-size:13px;color:rgba(255,255,255,.55);font-weight:500;transition:color .15s}
-.nav-links a:hover{color:#fff}
-.btn-nav{background:var(--gold);color:#000;font-size:13px;font-weight:800;padding:9px 20px;border-radius:6px;border:none;cursor:pointer;transition:background .15s;white-space:nowrap}
-.btn-nav:hover{background:var(--gold-l)}
-@media(max-width:600px){.nav-links{display:none}.nav-wordmark span{display:none}}
+.sr-header{background:var(--green);padding:14px 0;text-align:center}
+.sr-logo{display:flex;align-items:center;justify-content:center;gap:10px}
+.sr-logo-icon{width:36px;height:36px}
+.sr-wordmark{text-align:left;line-height:1.15}
+.sr-wordmark strong{display:block;font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff;letter-spacing:.04em}
+.sr-wordmark span{display:block;font-size:9px;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase}
 
 /* ============================================================
-   STATS BAR
+   LANDING PAGE
    ============================================================ */
-.stats-bar{background:var(--navy2);padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+
+/* --- HERO -------------------------------------------------- */
+.hero-wrap{padding:40px 0 36px;background:var(--bg)}
+.hero-card{background:var(--white);border-radius:16px;box-shadow:0 4px 32px rgba(28,56,41,.08);padding:44px 40px 36px;max-width:820px;margin:0 auto;text-align:center}
+@media(max-width:600px){.hero-card{padding:28px 20px;border-radius:10px}}
+@media(min-width:900px){.hero-card{padding:60px 72px 48px;max-width:900px}}
+.hero-tag{display:inline-block;background:var(--gold-d);color:var(--gold);border:1px solid var(--gold);border-radius:100px;padding:4px 14px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.hero-h1{font-size:clamp(26px,4.5vw,40px);font-weight:800;margin-bottom:14px;letter-spacing:-.02em;max-width:660px;margin-left:auto;margin-right:auto}
+.hero-h1 em{color:var(--gold);font-style:italic}
+.hero-sub{font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.65;max-width:480px;margin-left:auto;margin-right:auto}
+.bonus-inline{display:flex;align-items:flex-start;gap:11px;background:var(--cream);border:1.5px solid var(--gold);border-radius:10px;padding:13px 16px;margin:0 auto 22px;max-width:500px;text-align:left}
+.bi-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.bi-lbl{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.09em;margin-bottom:2px}
+.bi-title{font-size:13px;font-weight:700;color:var(--green);margin-bottom:1px}
+.bi-sub{font-size:11px;color:var(--muted)}
+.scarcity-line{font-size:12px;color:var(--red);font-weight:600;margin-top:4px}
+.hero-cta-wrap{max-width:420px;margin:0 auto}
+.btn-gold{display:block;background:var(--gold);color:var(--green);font-family:'Inter',sans-serif;font-size:16px;font-weight:800;padding:17px 32px;border-radius:8px;border:none;cursor:pointer;transition:background .15s,transform .1s;width:100%;text-align:center;letter-spacing:.01em}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn-green{display:block;background:var(--green);color:#fff;font-family:'Inter',sans-serif;font-size:16px;font-weight:700;padding:17px 32px;border-radius:8px;border:none;cursor:pointer;transition:background .15s,transform .1s;width:100%;text-align:center}
+.btn-green:hover{background:var(--green2);transform:translateY(-1px)}
+.cta-note{font-size:11px;color:var(--muted);text-align:center;margin-top:8px}
+
+
+/* --- Stats strip ------------------------------------------- */
+.stats-strip{background:var(--green);padding:14px 0;margin-top:0}
 .stats-inner{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
 .stat{text-align:center;font-size:11px;color:rgba(255,255,255,.45)}
-.stat strong{display:block;font-size:16px;font-weight:800;color:var(--gold);margin-bottom:1px}
-@media(max-width:520px){.stats-inner{gap:16px}.stat strong{font-size:14px}}
+.stat strong{display:block;font-size:15px;font-weight:800;color:var(--gold);margin-bottom:1px}
+
+/* Mobile: force all 5 stats onto one line */
+@media(max-width:560px){
+  .stats-inner{flex-wrap:nowrap;gap:0;justify-content:space-around;padding:0 8px}
+  .stat{flex:1;min-width:0}
+  .stat strong{font-size:12px;margin-bottom:0}
+  .stat{font-size:9px}
+}
+
+/* --- Pattern cards (section 2) ----------------------------- */
+.patterns-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:30px}
+@media(min-width:900px){.patterns-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:580px){.patterns-grid{grid-template-columns:1fr}}
+.pattern-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:22px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.pattern-card:hover{border-color:var(--gold);box-shadow:0 4px 18px rgba(201,168,76,.14)}
+.pcard-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
+.pcard-icon{width:40px;height:40px;min-width:40px;background:var(--cream);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.plabel{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:4px}
+.pquote{font-size:14px;font-weight:700;color:var(--green);line-height:1.3}
+.pdesc{font-size:13px;color:var(--muted);line-height:1.6}
+.pdesc strong{color:var(--body);font-weight:600}
+.sec-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-weight:700;text-align:center;margin-bottom:8px}
+.sec-h{font-size:clamp(22px,3.5vw,34px);font-weight:800;text-align:center;margin-bottom:32px;letter-spacing:-.01em}
+.sec-h em{color:var(--gold);font-style:italic}
+
+/* --- Testimonial carousel ---------------------------------- */
+.testi-section{background:var(--cream);padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.testi-inner{display:flex;align-items:center;gap:32px;max-width:860px;margin:0 auto;padding:0 32px}
+@media(max-width:600px){.testi-inner{flex-direction:column;gap:20px}}
+.testi-stat{flex-shrink:0;text-align:center;min-width:140px}
+.testi-stat-num{font-size:32px;font-weight:800;color:var(--green);font-family:'Playfair Display',serif;line-height:1}
+.testi-stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.testi-divider{width:1px;height:80px;background:var(--border);flex-shrink:0}
+@media(max-width:600px){.testi-divider{display:none}}
+.testi-carousel{flex:1;min-width:0;position:relative;min-height:90px}
+.testi-slide{position:absolute;top:0;left:0;right:0;opacity:0;transition:opacity .6s ease;pointer-events:none}
+.testi-slide.active{opacity:1;pointer-events:auto;position:relative}
+.testi-quote-mark{font-size:28px;color:var(--gold);line-height:1;margin-bottom:4px;font-family:'Playfair Display',serif}
+.testi-text{font-size:14px;color:var(--body);line-height:1.65;font-style:italic;margin-bottom:8px}
+.testi-text strong{font-style:normal;color:var(--green)}
+.testi-meta{font-size:12px;color:var(--muted);font-weight:600}
+.testi-leak{font-size:11px;color:var(--red);font-weight:700;margin-top:2px}
+.testi-dots{display:flex;gap:6px;margin-top:10px}
+.tdot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s}
+.tdot.on{background:var(--gold)}
+
+/* --- CTA section ------------------------------------------- */
+.cta-section{padding:48px 0;text-align:center}
+.cta-section h2{font-size:clamp(20px,3.5vw,28px);margin-bottom:10px}
+.cta-section p{color:var(--muted);font-size:15px;margin-bottom:24px;line-height:1.65;max-width:480px;margin-left:auto;margin-right:auto}
+
+/* --- Footer ------------------------------------------------ */
+.site-footer{background:var(--green);padding:18px 0;text-align:center}
+.site-footer p{font-size:11px;color:rgba(255,255,255,.35)}
+.site-footer a{color:rgba(255,255,255,.45)}
 
 /* ============================================================
-   LANDING — SECTION HELPERS
-   ============================================================ */
-.sec-white{background:var(--bg);padding:60px 0}
-.sec-gray{background:var(--bg-alt);padding:60px 0}
-.sec-navy{background:var(--navy);padding:60px 0}
-@media(max-width:600px){.sec-white,.sec-gray,.sec-navy{padding:44px 0}}
-.eyebrow{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-weight:700;text-align:center;margin-bottom:8px}
-.eyebrow-gold{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;font-weight:700;text-align:center;margin-bottom:8px}
-.sec-h{font-size:clamp(22px,4vw,32px);font-weight:900;text-align:center;margin-bottom:30px;letter-spacing:-.02em;line-height:1.2}
-.sec-h em,.sec-h-inv em{color:var(--gold);font-style:normal}
-.sec-h-inv{font-size:clamp(22px,4vw,32px);font-weight:900;text-align:center;margin-bottom:30px;letter-spacing:-.02em;line-height:1.2;color:#fff}
-.cta-center{text-align:center}
-.cta-note{font-size:12px;color:var(--muted);margin-top:10px}
-.cta-note-inv{font-size:12px;color:rgba(255,255,255,.4);margin-top:10px;text-align:center}
-
-/* ============================================================
-   HERO
-   ============================================================ */
-.hero{background:var(--navy);padding:56px 0 52px;text-align:center}
-.hero-tag{display:inline-block;border:1px solid var(--gold);color:var(--gold);background:rgba(201,168,76,.1);border-radius:100px;padding:5px 18px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
-.live-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(22,163,74,.15);border:1px solid rgba(22,163,74,.3);border-radius:100px;padding:5px 13px;font-size:12px;color:#4ade80;font-weight:600;margin-bottom:20px}
-.live-dot{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:pulse 1.5s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.hero h1{font-size:clamp(28px,5.5vw,50px);font-weight:900;line-height:1.14;margin-bottom:16px;letter-spacing:-.03em;color:#fff}
-.hero h1 em{color:var(--gold);font-style:normal}
-.hero-sub{font-size:17px;color:rgba(255,255,255,.65);max-width:480px;margin:0 auto 28px;line-height:1.65}
-
-/* Prominent bonus in hero */
-.bonus-hero{display:flex;align-items:flex-start;gap:14px;background:rgba(201,168,76,.1);border:1.5px solid var(--gold);border-radius:var(--r);padding:16px 20px;max-width:500px;margin:0 auto 28px;text-align:left}
-.bonus-icon{font-size:28px;flex-shrink:0;margin-top:2px}
-.bonus-lbl{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px}
-.bonus-title{font-size:15px;font-weight:800;color:#fff;margin-bottom:2px}
-.bonus-sub{font-size:12px;color:rgba(255,255,255,.5)}
-.value-pill{display:inline-block;background:var(--gold);color:#000;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;margin-left:5px;vertical-align:middle}
-.scarcity{font-size:12px;color:rgba(255,255,255,.45);margin-top:8px}
-.scarcity em{color:var(--gold);font-style:normal;font-weight:700}
-
-/* Primary buttons */
-.btn-gold{display:inline-block;background:var(--gold);color:#000;font-size:16px;font-weight:800;padding:17px 40px;border-radius:var(--r);border:none;cursor:pointer;transition:background .15s,transform .1s;width:100%;max-width:400px;text-align:center}
-.btn-gold:hover{background:var(--gold-l);transform:translateY(-1px)}
-.btn-dark{display:inline-block;background:var(--navy);color:#fff;font-size:16px;font-weight:800;padding:17px 40px;border-radius:var(--r);border:none;cursor:pointer;transition:background .15s,transform .1s;width:100%;max-width:400px;text-align:center}
-.btn-dark:hover{background:var(--navy2);transform:translateY(-1px)}
-
-/* ============================================================
-   PATTERN CARDS
-   ============================================================ */
-.pattern-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:12px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
-.pattern-card:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(201,168,76,.12)}
-.plabel{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:6px}
-.pquote{font-size:17px;font-weight:800;margin-bottom:8px;line-height:1.3;color:var(--text)}
-.pdesc{font-size:14px;color:var(--muted);line-height:1.65}
-.pdesc strong{color:var(--text2);font-weight:700}
-
-/* ============================================================
-   TESTIMONIALS
-   ============================================================ */
-.testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
-@media(max-width:640px){.testi-grid{grid-template-columns:1fr}}
-.testi-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:22px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
-.testi-stars{color:var(--gold);font-size:14px;margin-bottom:12px;letter-spacing:1px}
-.testi-q{font-size:14px;color:var(--text2);line-height:1.72;margin-bottom:16px;font-style:italic}
-.testi-q strong{color:var(--text);font-style:normal}
-.testi-person{display:flex;align-items:center;gap:11px;margin-bottom:12px}
-.testi-av{width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.testi-name{font-size:14px;font-weight:800;color:var(--text)}
-.testi-role{font-size:12px;color:var(--muted)}
-.testi-tag{background:var(--bg-alt);border:1px solid var(--border);border-radius:6px;padding:7px 12px;font-size:12px;color:var(--muted)}
-.testi-tag strong{color:var(--red);font-weight:700}
-
-/* ============================================================
-   QUIZ SHELL
+   QUIZ
    ============================================================ */
 #quiz{background:var(--bg);min-height:100vh;padding-bottom:60px}
-.quiz-header{background:var(--navy);padding:0;position:sticky;top:0;z-index:50}
-.quiz-header-inner{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;max-width:660px;margin:0 auto}
-.quiz-brand{font-size:12px;color:rgba(255,255,255,.45);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
-.quiz-stepcnt{font-size:12px;color:rgba(255,255,255,.45);font-weight:600}
-.prog-track{height:3px;background:rgba(255,255,255,.1)}
-.prog-bar{height:3px;background:var(--gold);transition:width .4s ease;width:0}
+.quiz-hdr{background:var(--green)}
+.quiz-hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;max-width:680px;margin:0 auto}
+.quiz-brand{font-size:11px;color:rgba(255,255,255,.45);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.quiz-cnt{font-size:11px;color:rgba(255,255,255,.45);font-weight:600}
+.prog-track{height:4px;background:rgba(255,255,255,.12)}
+.prog-bar{height:4px;background:var(--gold);transition:width .4s ease;width:0}
 
-/* Quiz step layout */
+/* Quiz card wrapper */
+.quiz-card{background:var(--white);border-radius:16px;box-shadow:0 4px 24px rgba(28,56,41,.07);margin:28px auto 0;max-width:600px;padding:32px 28px}
+@media(max-width:600px){.quiz-card{margin:16px 12px 0;padding:24px 18px}}
+
 .step{display:none}
-.step.active{display:block;padding:36px 0 0}
+.step.active{display:block}
 .step-eye{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:8px}
-.step h2{font-size:clamp(20px,4vw,28px);font-weight:900;margin-bottom:8px;line-height:1.22;letter-spacing:-.02em;color:var(--text)}
-.step h2 em{color:var(--gold);font-style:normal}
-.step-sub{color:var(--muted);font-size:15px;margin-bottom:26px;line-height:1.65}
-.field-lbl{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin:18px 0 9px}
+.step h2{font-size:clamp(18px,3.5vw,24px);font-weight:800;margin-bottom:8px;color:var(--green)}
+.step h2 em{color:var(--gold);font-style:italic}
+.step-sub{color:var(--muted);font-size:14px;margin-bottom:22px;line-height:1.6}
+.field-lbl{font-size:11px;font-weight:700;color:var(--body);text-transform:uppercase;letter-spacing:.07em;margin:16px 0 8px}
 
-/* Form inputs (Step 1 opt-in) */
-.form-group{margin-bottom:14px}
-.form-lbl{display:block;font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px}
-.form-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 15px;font-size:16px;color:var(--text);outline:none;transition:border-color .15s}
-.form-inp:focus{border-color:var(--gold)}
+/* Opt-in form */
+.form-group{margin-bottom:12px}
+.form-lbl{display:block;font-size:11px;font-weight:700;color:var(--body);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
+.form-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:13px 14px;font-size:15px;color:var(--green);outline:none;transition:border-color .15s;font-family:'Inter',sans-serif}
+.form-inp:focus{border-color:var(--gold);background:var(--white)}
 .form-inp::placeholder{color:#9ca3af}
 .phone-row{display:flex;gap:8px}
-.phone-pre{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 10px;font-size:14px;color:var(--text);outline:none;min-width:88px;cursor:pointer}
+.phone-pre{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:13px 10px;font-size:13px;color:var(--green);outline:none;min-width:86px;cursor:pointer;font-family:'Inter',sans-serif}
 .phone-pre:focus{border-color:var(--gold)}
-.consent-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:18px}
-.consent-row input[type=checkbox]{margin-top:3px;accent-color:var(--gold);width:16px;height:16px;flex-shrink:0;cursor:pointer}
-.consent-row label{font-size:13px;color:var(--muted);line-height:1.55;cursor:pointer}
+.consent-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px}
+.consent-row input{margin-top:3px;accent-color:var(--gold);width:15px;height:15px;flex-shrink:0;cursor:pointer}
+.consent-row label{font-size:12px;color:var(--muted);line-height:1.5;cursor:pointer}
 
-/* Bonus inside Step 1 */
-.bonus-step1{display:flex;align-items:flex-start;gap:12px;background:#fffbeb;border:1.5px solid var(--gold);border-radius:var(--r);padding:15px 18px;margin-bottom:22px}
-.bonus-step1-icon{font-size:22px;flex-shrink:0;margin-top:1px}
-.bonus-step1-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px}
-.bonus-step1-sub{font-size:12px;color:var(--muted)}
+/* Bonus pill in step 1 */
+.bonus-s1{display:flex;align-items:flex-start;gap:11px;background:var(--cream);border:1.5px solid var(--gold);border-radius:10px;padding:13px 15px;margin-bottom:18px}
+.bs1-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.bs1-title{font-size:13px;font-weight:700;color:var(--green);margin-bottom:2px}
+.bs1-sub{font-size:11px;color:var(--muted)}
+.val-pill{display:inline-block;background:var(--gold);color:#000;font-size:10px;font-weight:800;padding:1px 7px;border-radius:4px;margin-left:5px;vertical-align:middle}
 
-/* Radio / select options */
-.opt-grid{display:grid;gap:8px;margin-bottom:20px}
-.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:13px 16px;font-size:14px;color:var(--text);cursor:pointer;text-align:left;transition:all .12s;display:flex;align-items:center;gap:11px;width:100%}
+/* Single-select options */
+.opt-grid{display:grid;gap:8px;margin-bottom:18px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:12px 15px;font-size:14px;color:var(--green);cursor:pointer;text-align:left;transition:all .12s;display:flex;align-items:center;gap:10px;width:100%;font-family:'Inter',sans-serif}
 .opt:hover{border-color:var(--gold);background:var(--gold-d)}
 .opt.sel{border-color:var(--gold);background:var(--gold-d)}
 .opt.sel .dot{background:var(--gold);border-color:var(--gold)}
 .opt.sel .dot::after{display:block}
-.dot{width:17px;height:17px;min-width:17px;border-radius:50%;border:2px solid #d1d5db;display:flex;align-items:center;justify-content:center;transition:all .12s;flex-shrink:0}
-.dot::after{content:'';width:7px;height:7px;border-radius:50%;background:#000;display:none}
-.hot-badge{display:inline-block;background:#dc2626;color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;margin-left:6px;letter-spacing:.05em;vertical-align:middle}
+.dot{width:16px;height:16px;min-width:16px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .12s;flex-shrink:0}
+.dot::after{content:'';width:6px;height:6px;border-radius:50%;background:#000;display:none}
+.hot{display:inline-block;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;margin-left:6px;letter-spacing:.04em;vertical-align:middle}
 
-/* Native select (industry) */
-.select-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:13px 15px;font-size:14px;color:var(--text);outline:none;cursor:pointer;margin-bottom:8px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%236b7280'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
-.select-inp:focus{border-color:var(--gold)}
+/* Native select */
+.sel-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--green);outline:none;cursor:pointer;margin-bottom:8px;appearance:none;font-family:'Inter',sans-serif;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M0 0l5 7 5-7z' fill='%236b7280'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.sel-inp:focus{border-color:var(--gold)}
 
 /* Checkboxes */
-.chk-group{margin-bottom:8px}
-.chk{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:13px 16px;font-size:14px;color:var(--text);cursor:pointer;text-align:left;transition:all .12s;display:flex;align-items:flex-start;gap:11px;width:100%}
+.chk{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:12px 15px;font-size:14px;color:var(--green);cursor:pointer;text-align:left;transition:all .12s;display:flex;align-items:flex-start;gap:10px;width:100%;margin-bottom:8px;font-family:'Inter',sans-serif}
 .chk:hover{border-color:var(--gold)}
 .chk.on{border-color:var(--gold);background:var(--gold-d)}
-.chk-box{width:19px;height:19px;min-width:19px;border:2px solid #d1d5db;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .12s;font-size:11px;font-weight:800;color:transparent;flex-shrink:0}
+.chk-box{width:18px;height:18px;min-width:18px;border:2px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .12s;font-size:11px;font-weight:800;color:transparent;flex-shrink:0}
 .chk.on .chk-box{background:var(--gold);border-color:var(--gold);color:#000}
-.chk-all-note{font-size:12px;color:var(--muted);margin-bottom:14px;text-align:center}
+.chk-note{font-size:11px;color:var(--muted);text-align:center;margin-bottom:12px}
 
 /* Slider */
-.slider-wrap{margin:18px 0}
-.slider-labs{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px}
+.slider-wrap{margin:16px 0}
+.slider-labs{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:8px}
 input[type=range]{width:100%;-webkit-appearance:none;height:4px;background:var(--border);border-radius:2px;outline:none;cursor:pointer}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold);cursor:pointer;border:3px solid #fff;box-shadow:0 0 0 2px var(--gold)}
-.slider-val{text-align:center;font-size:28px;font-weight:900;color:var(--gold);margin-top:10px}
+.slider-val{text-align:center;font-size:26px;font-weight:800;color:var(--gold);margin-top:8px;font-family:'Playfair Display',serif}
 
-/* Navigation row */
-.nav-row{display:flex;gap:10px;margin-top:8px;padding-bottom:40px}
-.btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);font-size:14px;padding:13px 20px;border-radius:var(--r);cursor:pointer;transition:all .12s;white-space:nowrap}
-.btn-back:hover{border-color:var(--text2);color:var(--text)}
-.btn-next{flex:1;background:var(--gold);color:#000;font-size:15px;font-weight:800;padding:14px;border-radius:var(--r);border:none;cursor:pointer;transition:background .12s}
+/* Nav row */
+.nav-row{display:flex;gap:10px;margin-top:10px}
+.btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);font-size:14px;padding:12px 18px;border-radius:8px;cursor:pointer;transition:all .12s;white-space:nowrap;font-family:'Inter',sans-serif}
+.btn-back:hover{border-color:var(--body);color:var(--body)}
+.btn-next{flex:1;background:var(--gold);color:var(--green);font-size:15px;font-weight:800;padding:13px;border-radius:8px;border:none;cursor:pointer;transition:background .12s;font-family:'Inter',sans-serif}
 .btn-next:hover{background:var(--gold-l)}
 .btn-next:disabled{opacity:.3;cursor:not-allowed;pointer-events:none}
 
@@ -213,169 +240,210 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
    ANALYZING
    ============================================================ */
 #analyzing{background:var(--bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
-#analyzing h2{font-size:22px;font-weight:800;margin-bottom:36px;color:var(--text)}
-.a-steps{width:100%;max-width:380px;text-align:left}
-.a-step{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--border);opacity:.25;transition:opacity .35s;font-size:14px;color:var(--text2)}
+.analyzing-card{background:var(--white);border-radius:16px;padding:40px 32px;max-width:420px;width:100%;box-shadow:0 4px 24px rgba(28,56,41,.08)}
+#analyzing h2{font-size:20px;font-weight:800;margin-bottom:28px;color:var(--green)}
+.a-step{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);opacity:.25;transition:opacity .35s;font-size:14px;color:var(--body)}
+.a-step:last-child{border-bottom:none}
 .a-step.on{opacity:1}
-.a-step.done{opacity:.6}
+.a-step.done{opacity:.55}
 .a-icon{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;transition:all .25s;color:var(--muted);font-weight:700}
 .a-step.on .a-icon{border-color:var(--gold);color:var(--gold)}
-.a-step.done .a-icon{background:var(--grn);border-color:var(--grn);color:#fff;font-size:14px}
+.a-step.done .a-icon{background:var(--grn);border-color:var(--grn);color:#fff;font-size:13px}
 
 /* ============================================================
    RESULTS
    ============================================================ */
 #results{background:var(--bg);padding:0 0 80px}
+.res-hdr{background:var(--green);padding:28px 0 24px;margin-bottom:24px}
+.res-brand{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px}
+.res-greeting{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:5px}
+.res-h{font-size:clamp(22px,3vw,34px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.18}
+@media(max-width:899px){.res-brand,.res-greeting,.res-h{text-align:center}}
 
-/* Result header (dark) */
-.res-hdr{background:var(--navy);padding:36px 0;margin-bottom:32px}
-.res-hdr-inner{text-align:center}
-.res-brand{font-size:11px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:16px}
-.res-greeting{font-size:15px;color:rgba(255,255,255,.55);margin-bottom:6px}
-.res-h{font-size:clamp(22px,4vw,30px);font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.2}
-
-/* Big number card */
-.leak-hero{background:var(--navy);border-radius:var(--r);padding:32px 22px;text-align:center;margin-bottom:22px;position:relative;overflow:hidden}
-.leak-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-l),var(--gold))}
-.leak-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.45);font-weight:700;margin-bottom:8px}
-.leak-num{font-size:clamp(42px,9vw,68px);font-weight:900;color:var(--gold-l);line-height:1;letter-spacing:-.03em;margin-bottom:5px}
-.leak-period{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:16px}
-.leak-note{font-size:11px;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border-radius:6px;padding:7px 14px;display:inline-block}
+/* Big number */
+.leak-hero{background:var(--green);border-radius:14px;padding:32px 28px;text-align:center;margin-bottom:24px;position:relative;overflow:hidden}
+@media(min-width:900px){.leak-hero{padding:40px 48px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;text-align:left}
+.leak-hero .leak-lbl{margin-bottom:6px}
+.leak-hero-right{text-align:right;flex-shrink:0}}
+.leak-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-l),var(--gold))}
+.leak-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.45);font-weight:700;margin-bottom:6px}
+.leak-num{font-size:clamp(40px,8vw,62px);font-weight:800;color:var(--gold-l);line-height:1;letter-spacing:-.02em;font-family:'Playfair Display',serif;margin-bottom:4px}
+.leak-period{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:12px}
+.leak-note{font-size:10px;color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);border-radius:6px;padding:6px 12px;display:inline-block}
 
 /* PDF download row */
-.pdf-row{display:flex;align-items:center;justify-content:space-between;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:var(--r);padding:16px 20px;margin-bottom:22px;gap:12px;flex-wrap:wrap}
-.pdf-row-left{display:flex;align-items:center;gap:12px}
-.pdf-icon{font-size:28px;flex-shrink:0}
-.pdf-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px}
+.pdf-row{display:flex;align-items:center;justify-content:space-between;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:15px 18px;margin:0 auto 16px;gap:12px;flex-wrap:wrap;max-width:600px}
+.pdf-left{display:flex;align-items:center;gap:11px}
+.pdf-icon{font-size:26px;flex-shrink:0}
+.pdf-title{font-size:14px;font-weight:800;color:var(--green);margin-bottom:1px}
 .pdf-sub{font-size:12px;color:var(--muted)}
-.btn-pdf{background:var(--grn);color:#fff;font-size:14px;font-weight:800;padding:11px 22px;border-radius:6px;border:none;cursor:pointer;transition:background .12s;white-space:nowrap;flex-shrink:0}
+.btn-pdf{background:var(--grn);color:#fff;font-size:13px;font-weight:800;padding:10px 20px;border-radius:6px;border:none;cursor:pointer;transition:background .12s;white-space:nowrap;flex-shrink:0;font-family:'Inter',sans-serif}
 .btn-pdf:hover{background:#15803d}
 @media(max-width:500px){.pdf-row{flex-direction:column;align-items:flex-start}.btn-pdf{width:100%;text-align:center}}
 
-/* Result section cards */
-.res-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:20px}
-.res-card-gold{background:var(--bg);border:1.5px solid var(--gold);border-radius:var(--r);padding:24px;margin-bottom:20px;position:relative;overflow:hidden}
-.res-card-gold::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
-.res-card-pur{background:var(--bg);border:1px solid #ddd6fe;border-radius:var(--r);padding:24px;margin-bottom:20px;position:relative;overflow:hidden}
-.res-card-pur::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--pur)}
-
-.card-eye{font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:6px}
+/* Result cards */
+.res-wrap{max-width:600px;margin:0 auto;padding:0 20px}
+.rcard{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:16px}
+.rcard-gold{background:var(--white);border:1.5px solid var(--gold);border-radius:12px;padding:22px;margin-bottom:16px;position:relative;overflow:hidden}
+.rcard-gold::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
+.rcard-pur{background:var(--white);border:1px solid #ddd6fe;border-radius:12px;padding:22px;margin-bottom:16px;position:relative;overflow:hidden}
+.rcard-pur::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--pur)}
+.card-eye{font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:5px}
 .eye-gold{color:var(--gold)}.eye-pur{color:var(--pur)}
-.card-name{font-size:22px;font-weight:900;color:var(--text);margin-bottom:10px}
-.card-desc{font-size:14px;color:var(--muted);line-height:1.72}
+.card-name{font-size:20px;font-weight:800;color:var(--green);margin-bottom:8px}
+.card-desc{font-size:14px;color:var(--muted);line-height:1.7}
 
-/* Breakdown bars */
-.bdown-h{font-size:15px;font-weight:800;color:var(--text);margin-bottom:18px}
-.brow{margin-bottom:16px}
-.brow-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
-.bcat{font-weight:700;color:var(--text2)}
+/* Breakdown */
+.bdown-h{font-size:14px;font-weight:800;color:var(--green);margin-bottom:16px}
+.brow{margin-bottom:13px}
+.brow-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.bcat{font-weight:700;color:var(--body)}
 .bamt{font-weight:800}
 .c-red{color:var(--red)}.c-ora{color:#ea580c}.c-yel{color:#ca8a04}.c-pur{color:var(--pur)}
-.bar-track{height:8px;background:var(--bg-alt);border-radius:4px;overflow:hidden}
+.bar-track{height:9px;background:#ddd5c8;border-radius:4px;overflow:hidden}
 .bar-fill{height:100%;border-radius:4px;width:0;transition:width 1.4s ease}
 .bf-p{background:var(--red)}.bf-t{background:#ea580c}.bf-s{background:#ca8a04}.bf-b{background:var(--pur)}
 
-/* Blueprint insight box */
-.bp-insight{background:var(--bg-alt);border-left:3px solid var(--pur);padding:12px 15px;font-size:13px;line-height:1.7;border-radius:0 6px 6px 0;color:var(--text2);margin-top:14px}
+/* ---- Blueprint deep-dive (cheatsheet-modelled) ------------ */
+.bp-deep{border-radius:12px;overflow:hidden;margin-bottom:16px}
+.bp-belief{background:var(--green);padding:20px 20px 18px}
+.bp-belief-eye{font-size:9px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:rgba(255,255,255,.4);margin-bottom:10px}
+.bp-belief-quote{font-family:'Playfair Display',Georgia,serif;font-size:17px;font-style:italic;color:#fff;line-height:1.45;border-left:3px solid var(--gold);padding-left:14px}
+.bp-voice{background:var(--cream);padding:16px 20px;border-left:none}
+.bp-voice-eye{font-size:9px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:var(--gold);margin-bottom:8px}
+.bp-voice-text{font-size:13px;font-style:italic;color:var(--body);line-height:1.6}
+.bp-behaviours{background:var(--white);border:1px solid var(--border);border-top:none;padding:16px 20px}
+.bp-beh-eye{font-size:9px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:var(--green);margin-bottom:10px}
+.bp-beh-list{display:grid;gap:6px}
+.bp-beh-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--body);line-height:1.45}
+.bp-beh-arrow{color:var(--gold);font-weight:700;flex-shrink:0;margin-top:1px}
+.bp-watchout{background:var(--white);border:1px solid var(--border);border-top:none;padding:14px 20px}
+.bp-wo-eye{font-size:9px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:var(--red);margin-bottom:10px}
+.wo-tags{display:flex;flex-wrap:wrap;gap:6px}
+.wtag{background:#fef2f2;border:1px solid #fecaca;color:var(--red);font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px}
+.bp-upgrade{background:#f0fdf4;border:1px solid #bbf7d0;border-top:none;padding:16px 20px;border-radius:0 0 12px 12px}
+.bp-up-eye{font-size:9px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:var(--grn);margin-bottom:8px}
+.bp-up-text{font-size:13px;color:#15803d;line-height:1.65;font-weight:500}
 
-/* Bridge section */
-.bridge{background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--r);padding:26px 24px;margin-bottom:22px}
-.bridge h3{font-size:19px;font-weight:900;color:var(--text);margin-bottom:12px;line-height:1.3}
-.bridge p{color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:10px}
-.bridge p:last-child{margin-bottom:0}
-.bridge strong{color:var(--text2)}
+/* ---- Section separators ----------------------------------- */
+.res-sep{display:flex;align-items:center;gap:12px;margin:28px 0 20px}
+.res-sep::before,.res-sep::after{content:'';flex:1;height:1px;background:var(--border)}
+.res-sep-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:700;white-space:nowrap;padding:0 4px}
+
+/* ---- Quick wins ------------------------------------------- */
+.win-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px 18px 16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start}
+.win-num{width:34px;height:34px;min-width:34px;background:var(--green);color:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;font-family:'Playfair Display',serif;flex-shrink:0;margin-top:1px}
+.win-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);font-weight:800;margin-bottom:5px}
+.win-text{font-size:14px;color:var(--body);line-height:1.65;margin-bottom:6px}
+.win-do{font-size:12px;color:var(--grn);font-weight:700;font-style:italic}
+
+/* ---- Result page two-column layout ----------------------- */
+.res-full{max-width:1100px;margin:0 auto;padding:0 24px}
+.res-body{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:900px){
+  .res-body{grid-template-columns:1fr 340px;gap:36px;align-items:start;padding:0 32px}
+  .res-sidebar{position:sticky;top:24px}
+  .res-full{padding:0 32px}
+}
+@media(max-width:899px){
+  .res-sidebar{order:99}/* sidebar below main on mobile */
+}
+.res-main{}
+
+/* Sidebar cards */
+.sb-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:14px}
+.sb-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--muted);margin-bottom:14px}
+
+/* Sidebar breakdown bars */
+.sb-brow{margin-bottom:14px}
+.sb-brow-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.sb-bcat{font-size:13px;font-weight:700;color:var(--green);display:flex;align-items:center;gap:7px}
+.sb-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.sd-p{background:var(--red)}.sd-t{background:#ea580c}.sd-s{background:#ca8a04}.sd-b{background:var(--pur)}
+.sb-bamt{font-size:14px;font-weight:800}
+
+/* Sidebar CTA card */
+.sb-cta{background:var(--green);border-radius:12px;padding:20px;margin-bottom:14px;text-align:center}
+.sb-cta h4{font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.25}
+.sb-cta p{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:14px;line-height:1.6}
+.sb-cta-outs{text-align:left;margin-bottom:16px}
+.sb-cta-out{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,.7);margin-bottom:7px;line-height:1.4}
+.sb-chk{color:#4ade80;flex-shrink:0;font-weight:800;margin-top:1px}
+.btn-sb-cta{display:block;background:var(--gold);color:var(--green);font-family:'Inter',sans-serif;font-size:14px;font-weight:800;padding:13px;border-radius:8px;border:none;cursor:pointer;width:100%;text-align:center;transition:background .12s}
+.btn-sb-cta:hover{background:var(--gold-l)}
+
+/* Sidebar PDF download */
+.sb-pdf{display:flex;align-items:center;gap:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:13px 14px;margin-bottom:10px;cursor:pointer}
+.sb-pdf-icon{font-size:22px;flex-shrink:0}
+.sb-pdf-text strong{display:block;font-size:13px;font-weight:800;color:var(--green);margin-bottom:1px}
+.sb-pdf-text span{font-size:11px;color:var(--muted)}
+.sb-pdf-btn{margin-left:auto;background:var(--grn);color:#fff;font-size:11px;font-weight:800;padding:7px 12px;border-radius:6px;border:none;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif}
+
+/* Result page big number — full width above grid */
+.res-num-wrap{max-width:1100px;margin:0 auto;padding:0 24px 0}
+@media(min-width:900px){.res-num-wrap{padding:0 32px}}
+
+/* Bridge */
+.bridge-card{background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px}
+.bridge-card h3{font-size:17px;font-weight:800;color:var(--green);margin-bottom:10px;line-height:1.3}
+.bridge-card p{color:var(--muted);font-size:14px;line-height:1.75;margin-bottom:10px}
+.bridge-card p:last-child{margin-bottom:0}
+.bridge-card strong{color:var(--body)}
 
 /* Outcomes */
-.outcomes{margin-bottom:24px}
-.out-lbl{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
-.out-item{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.5;color:var(--text2)}
-.out-chk{color:var(--grn);font-size:15px;margin-top:1px;flex-shrink:0;font-weight:800}
+.outcomes{margin-bottom:18px}
+.out-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.out-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.45;color:var(--body)}
+.out-chk{color:var(--grn);font-size:14px;margin-top:1px;flex-shrink:0;font-weight:800}
 
-/* Bonus unlocked bar */
-.bonus-unlocked{background:#fffbeb;border:1.5px solid var(--gold);border-radius:var(--r);padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:14px}
-.bu-icon{font-size:26px;flex-shrink:0}
-.bu-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px}
-.bu-sub{font-size:13px;color:var(--muted)}
-.bu-check{color:var(--grn);font-weight:700}
+/* Bonus unlocked */
+.bonus-unlocked{background:#fffbeb;border:1.5px solid var(--gold);border-radius:12px;padding:15px 18px;margin-bottom:16px;display:flex;align-items:center;gap:13px}
+.bu-icon{font-size:24px;flex-shrink:0}
+.bu-title{font-size:13px;font-weight:800;color:var(--green);margin-bottom:2px}
+.bu-sub{font-size:12px;color:var(--muted)}
 
 /* Final CTA */
-.cta-result{background:var(--navy);border-radius:var(--r);padding:30px 24px;text-align:center}
-.cta-result h3{font-size:22px;font-weight:900;color:#fff;margin-bottom:8px}
-.cta-result p{color:rgba(255,255,255,.55);font-size:14px;margin-bottom:6px;line-height:1.65}
-.cta-outcomes{margin:14px 0 20px;text-align:left}
-.cta-out{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:14px;color:rgba(255,255,255,.7);line-height:1.4;border-bottom:1px solid rgba(255,255,255,.06)}
+.cta-result{background:var(--green);border-radius:12px;padding:28px 22px;text-align:center;margin-bottom:24px}
+.cta-result h3{font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
+.cta-result p{color:rgba(255,255,255,.55);font-size:14px;margin-bottom:6px;line-height:1.6}
+.cta-outcomes{margin:12px 0 18px;text-align:left}
+.cta-out{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:13px;color:rgba(255,255,255,.7);line-height:1.4;border-bottom:1px solid rgba(255,255,255,.07)}
 .cta-chk{color:#4ade80;font-weight:800;flex-shrink:0;margin-top:1px}
-.trust-row{display:flex;justify-content:center;gap:16px;font-size:11px;color:rgba(255,255,255,.3);flex-wrap:wrap;margin-top:14px}
+.btn-cta{display:block;background:var(--gold);color:var(--green);font-family:'Inter',sans-serif;font-size:16px;font-weight:800;padding:17px;border-radius:8px;text-align:center;width:100%;border:none;cursor:pointer;transition:background .12s;margin-bottom:12px}
+.btn-cta:hover{background:var(--gold-l)}
+.trust-row{display:flex;justify-content:center;gap:14px;font-size:11px;color:rgba(255,255,255,.3);flex-wrap:wrap}
 .trust-item::before{content:'✓ ';color:#4ade80}
-
-/* Res footer */
-.res-footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--border);text-align:center;font-size:12px;color:var(--muted)}
+.res-footer{text-align:center;font-size:11px;color:var(--muted);padding-top:20px;border-top:1px solid var(--border)}
 
 /* ============================================================
-   FOOTER (LANDING)
-   ============================================================ */
-.site-footer{background:var(--navy);padding:20px 0;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
-.site-footer p{font-size:12px;color:rgba(255,255,255,.3)}
-.site-footer a{color:rgba(255,255,255,.4)}
-
-/* ============================================================
-   PRINT / PDF STYLES
-   The "Download Report" button calls window.print().
-   These styles create a clean branded PDF report.
+   PRINT STYLES (PDF Report)
    ============================================================ */
 @media print{
-  /* Hide everything except results */
-  nav,.stats-bar,#landing,#quiz,#analyzing,.nav-row,.cta-result,
-  .pdf-row,.bridge,.outcomes,.btn-pdf,#results .res-footer{display:none!important}
-  #results{display:block!important;padding:0}
-
-  /* Page setup */
-  @page{size:A4;margin:18mm 16mm 18mm 16mm}
-  body{background:#fff!important;color:#000!important;font-size:11pt;line-height:1.55}
-
-  /* PDF header */
-  #results::before{
-    content:'';display:block;
-    border-bottom:3px solid #c9a84c;
-    padding-bottom:16px;margin-bottom:20px;
-  }
-  .pdf-report-header{display:flex!important;justify-content:space-between;align-items:flex-start;margin-bottom:24px;padding-bottom:16px;border-bottom:3px solid #c9a84c}
-  .pdf-report-branding strong{display:block;font-size:16pt;font-weight:900;color:#0a0f1e;letter-spacing:-.01em}
-  .pdf-report-branding span{display:block;font-size:9pt;color:#6b7280;margin-top:2px}
-  .pdf-report-meta{text-align:right;font-size:9pt;color:#6b7280;line-height:1.6}
-  .pdf-report-meta strong{color:#0a0f1e;font-weight:700}
-
-  /* Sections */
-  .res-hdr{background:#fff!important;padding:0;margin-bottom:20px}
-  .res-brand,.res-greeting{display:none}
-  .res-h{font-size:18pt;color:#0a0f1e;text-align:left;margin-bottom:0}
-
-  .leak-hero{background:#0a0f1e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:6px;margin-bottom:18px;padding:20px}
-  .leak-hero::before{display:none}
-  .leak-lbl{color:rgba(255,255,255,.6)!important}
-  .leak-num{font-size:36pt!important;color:#ddb84e!important}
-  .leak-period{color:rgba(255,255,255,.5)!important}
-  .leak-note{display:none}
-
-  .res-card,.res-card-gold,.res-card-pur{border:1px solid #e5e7eb!important;page-break-inside:avoid;margin-bottom:14px}
-  .res-card-gold::before,.res-card-pur::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .card-name{font-size:14pt}
-  .card-desc{font-size:10pt}
-
-  .bdown-h{font-size:12pt}
-  .bar-track{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  nav,.sr-header,.stats-strip,.hero-wrap,#landing,#quiz,#analyzing,
+  .nav-row,.cta-result,.pdf-row,.bridge-card,.outcomes,.btn-cta,
+  .res-hdr .res-greeting,.site-footer,.res-footer{display:none!important}
+  #results{display:block!important;padding:0;background:#fff!important}
+  @page{size:A4;margin:15mm 14mm}
+  body{background:#fff!important;color:#000!important;font-size:11pt}
+  .pdf-report-header{display:flex!important;justify-content:space-between;align-items:flex-start;padding-bottom:14px;margin-bottom:20px;border-bottom:3px solid #c9a84c}
+  .pdf-brand strong{font-size:15pt;font-weight:900;color:#1c3829}
+  .pdf-brand span{font-size:9pt;color:#6b7280;display:block;margin-top:2px}
+  .pdf-meta{text-align:right;font-size:9pt;color:#6b7280;line-height:1.6}
+  .pdf-meta strong{color:#1c3829}
+  .res-hdr{background:#1c3829!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:16px}
+  .res-h{font-size:18pt;text-align:left}
+  .leak-hero{background:#1c3829!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;margin:0 0 14px;border-radius:8px}
+  .leak-hero::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .leak-num{color:#ddb84e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .leak-lbl,.leak-period,.leak-note{color:rgba(255,255,255,.6)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .rcard,.rcard-gold,.rcard-pur{page-break-inside:avoid;margin-bottom:10px;border:1px solid #e5e7eb!important}
+  .rcard-gold::before,.rcard-pur::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .bar-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .bamt,.bcat{font-size:10pt}
-
-  .bp-insight{-webkit-print-color-adjust:exact;print-color-adjust:exact;border-left:3px solid #7c3aed}
-
-  .bonus-unlocked{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#fffbeb!important;border:1.5px solid #c9a84c!important;margin-bottom:14px}
-
-  /* PDF footer per page */
-  .pdf-page-footer{display:block!important;position:fixed;bottom:0;left:0;right:0;font-size:8pt;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:6px}
+  .bar-track{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bonus-unlocked{background:#fffbeb!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pdf-page-footer{display:block!important;position:fixed;bottom:0;left:0;right:0;font-size:8pt;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:5px}
+  .res-wrap{padding:0}
 }
-
-/* Hidden on screen, shown in print */
 .pdf-report-header,.pdf-page-footer{display:none}
 
 </style>
@@ -383,181 +451,222 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 <body>
 
 <!-- ============================================================
-     NAV
+     SR HEADER
      ============================================================ -->
-<nav>
-  <div class="wrap-wide">
-    <div class="nav-inner">
-      <div class="nav-logo">
-        <div class="nav-mark">M</div>
-        <div class="nav-wordmark">
-          <strong>Millionaire Mind Intensive</strong>
-          <span>Success Resources &nbsp;·&nbsp; T. Harv Eker</span>
-        </div>
-      </div>
-      <div class="nav-links">
-        <a href="#audit-about">The Audit</a>
-        <a href="#testimonials">Results</a>
-        <a href="#cta-section">Programme</a>
-      </div>
-      <button class="btn-nav" onclick="startQuiz()">Take Free Audit</button>
-    </div>
+<div class="sr-header">
+  <div class="sr-logo">
+    <img src="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/ff96df6f1fde9_b0cbdd4d2f0ff-605c893fed0f4-sr-percent-20logo-percent-20white.png" alt="Success Resources" style="height:38px;display:block">
   </div>
-</nav>
+</div>
+
 
 <!-- ============================================================
      LANDING PAGE
      ============================================================ -->
 <div id="landing">
 
-  <!-- Stats Bar -->
-  <div class="stats-bar">
+  <!-- HERO -->
+  <div class="hero-wrap">
     <div class="wrap-wide">
+      <div class="hero-card">
+
+        <div class="hero-tag">Free 3-Minute Audit</div>
+        <h1 class="hero-h1">The 3-Minute Audit That's Found <em>Hidden Revenue</em> for 10,000+ Entrepreneurs</h1>
+        <p class="hero-sub">Discover exactly where your money is disappearing, and how much it is costing you every year.</p>
+
+        <!-- Cheatsheet bonus — prominent -->
+        <div class="bonus-inline">
+          <span class="bi-icon">🎁</span>
+          <div>
+            <div class="bi-lbl">Free with your report</div>
+            <div class="bi-title">7 Money Blueprints Cheatsheet <span class="val-pill">$47 value</span></div>
+            <div class="bi-sub">Reveals the 7 patterns keeping people financially stuck.</div>
+            <div class="scarcity-line">Only for first 100 submissions &nbsp;·&nbsp; 77/100 claimed</div>
+          </div>
+        </div>
+
+        <div class="hero-cta-wrap">
+          <button class="btn-gold" onclick="startQuiz()">Start My Free Audit &nbsp;→</button>
+          <p class="cta-note">Free &nbsp;·&nbsp; 3 minutes &nbsp;·&nbsp; Personalised dollar figure &nbsp;·&nbsp; Instant result</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats strip (dark green) -->
+  <div class="stats-strip">
+    <div class="wrap-wide" style="max-width:1200px">
       <div class="stats-inner">
         <div class="stat"><strong>1.5M+</strong>Graduates worldwide</div>
-        <div class="stat"><strong>10,000+</strong>Entrepreneurs transformed</div>
+        <div class="stat"><strong>10,000+</strong>Entrepreneurs</div>
         <div class="stat"><strong>30+</strong>Countries</div>
-        <div class="stat"><strong>23 yrs</strong>Running the programme</div>
-        <div class="stat"><strong>94%</strong>Would recommend</div>
+        <div class="stat"><strong>23 yrs</strong>Running</div>
+        <div class="stat"><strong>94%</strong>Recommend</div>
       </div>
     </div>
   </div>
 
-  <!-- HERO (dark navy) -->
-  <div class="hero" id="audit-about">
-    <div class="wrap">
-      <div class="hero-tag">Free 3-Minute Audit</div>
-      <div class="live-badge"><span class="live-dot"></span>89 people completing this right now</div>
-      <h1>Your income isn't the problem.<br><em>Your money leaks are.</em></h1>
-      <p class="hero-sub">Answer 8 honest questions. See exactly where your money is disappearing, and how much it is costing you every single year.</p>
+  <!-- SECTION 2: 4 LEAK PATTERNS -->
+  <div style="padding:56px 0;background:var(--bg)">
+    <div class="wrap-wide">
+      <p class="sec-label">Which one sounds like you?</p>
+      <h2 class="sec-h">One of these is <em>already leaking your money</em></h2>
 
-      <!-- Cheatsheet bonus — prominent in hero -->
-      <div class="bonus-hero">
-        <div class="bonus-icon">🎁</div>
-        <div>
-          <div class="bonus-lbl">Free with your audit report</div>
-          <div class="bonus-title">7 Money Blueprints Cheatsheet <span class="value-pill">$47 value</span></div>
-          <div class="bonus-sub">Reveals the 7 unconscious patterns keeping people financially stuck, and how to rewrite yours.</div>
-          <div class="scarcity">Only for first 100 submissions &nbsp;·&nbsp; <em>77/100 claimed</em></div>
+      <div class="patterns-grid">
+
+        <div class="pattern-card" onclick="startQuiz()">
+          <div class="pcard-top">
+            <div class="pcard-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="18" height="18" rx="3" stroke="#1c3829" stroke-width="1.5"/>
+                <path d="M7 8h10M7 12h6M7 16h4" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+                <path d="M17 14l2 2-2 2M19 16h-4" stroke="#c53030" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="pcard-meta">
+              <div class="plabel">Pricing Leak</div>
+              <div class="pquote">"I dropped my price to close the deal... again."</div>
+            </div>
+          </div>
+          <p class="pdesc">You discount, you do free work, you undercharge. <strong>The gap between what you charge and what you are worth is your largest leak.</strong></p>
         </div>
+
+        <div class="pattern-card" onclick="startQuiz()">
+          <div class="pcard-top">
+            <div class="pcard-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" stroke="#1c3829" stroke-width="1.5"/>
+                <path d="M12 7v5l3 3" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+                <path d="M19 5l1-1M5 5l-1-1" stroke="#c53030" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="pcard-meta">
+              <div class="plabel">Time Leak</div>
+              <div class="pquote">"I work nights and weekends. Income is still capped."</div>
+            </div>
+          </div>
+          <p class="pdesc">You are the business. Everything goes through you. <strong>Trading time for money has a ceiling, and you have hit it.</strong></p>
+        </div>
+
+        <div class="pattern-card" onclick="startQuiz()">
+          <div class="pcard-top">
+            <div class="pcard-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="3" stroke="#c9a84c" stroke-width="1.5"/>
+                <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" stroke="#1c3829" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="pcard-meta">
+              <div class="plabel">Systems Leak</div>
+              <div class="pquote">"I have no idea what my business actually makes me."</div>
+            </div>
+          </div>
+          <p class="pdesc">No SOPs, no metrics, no wealth-building system. <strong>What you do not measure, you cannot stop losing.</strong></p>
+        </div>
+
+        <div class="pattern-card" onclick="startQuiz()">
+          <div class="pcard-top">
+            <div class="pcard-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <ellipse cx="12" cy="10" rx="6" ry="7" stroke="#1c3829" stroke-width="1.5"/>
+                <path d="M9 17.5c0 1.5 1.3 2.5 3 2.5s3-1 3-2.5" stroke="#1c3829" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M10 10h.01M14 10h.01" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+                <path d="M10 13c.5.7 3.5.7 4 0" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="pcard-meta">
+              <div class="plabel">Blueprint Leak</div>
+              <div class="pquote">"I know what to do. I just do not do it."</div>
+            </div>
+          </div>
+          <p class="pdesc">You have read the books. <strong>An unconscious money pattern is overriding every plan you make.</strong></p>
+        </div>
+
       </div>
 
-      <div class="cta-center">
-        <button class="btn-gold" onclick="startQuiz()">Start My Free Audit</button>
-        <p class="cta-note" style="color:rgba(255,255,255,.35)">Free &nbsp;·&nbsp; 3 minutes &nbsp;·&nbsp; Personalised dollar figure &nbsp;·&nbsp; Instant result</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION 2: Patterns (light gray) -->
-  <div class="sec-gray">
-    <div class="wrap">
-      <p class="eyebrow">Which one sounds like you?</p>
-      <h2 class="sec-h">One of these is <em>already leaking your money.</em></h2>
-
-      <div class="pattern-card" onclick="startQuiz()">
-        <div class="plabel">Leak Type 1, Pricing</div>
-        <div class="pquote">"I dropped my price to close the deal... again."</div>
-        <p class="pdesc">You discount. You do extra work for free. You are afraid to raise your rates. Every invoice you send is smaller than it should be, not because the market will not pay more, but because your money blueprint will not let you ask for it. <strong>The gap between what you charge and what you are worth is your largest leak.</strong></p>
-      </div>
-
-      <div class="pattern-card" onclick="startQuiz()">
-        <div class="plabel">Leak Type 2, Time</div>
-        <div class="pquote">"I work nights and weekends. My income is still capped."</div>
-        <p class="pdesc">You are the business. Everything goes through you. You cannot delegate, cannot switch off, and every hour you do not work, nothing earns. <strong>Trading time for money has a ceiling, and you have hit it.</strong></p>
-      </div>
-
-      <div class="pattern-card" onclick="startQuiz()">
-        <div class="plabel">Leak Type 3, Systems</div>
-        <div class="pquote">"I have no idea what my business actually makes me."</div>
-        <p class="pdesc">No SOPs. No weekly metrics. No wealth-building system outside the day-to-day. Everything is manual and reactive. <strong>What you do not measure, you cannot stop losing.</strong></p>
-      </div>
-
-      <div class="pattern-card" onclick="startQuiz()">
-        <div class="plabel">Leak Type 4, Blueprint</div>
-        <div class="pquote">"I know what to do. I just do not do it."</div>
-        <p class="pdesc">You have read the books. You know you should invest. The gap between knowing and doing is not knowledge. <strong>An unconscious money blueprint is overriding every plan you make.</strong></p>
-      </div>
-
-      <div class="cta-center" style="margin-top:28px">
-        <button class="btn-dark" onclick="startQuiz()">Calculate My Annual Money Leak</button>
+      <div style="text-align:center">
+        <button class="btn-green" onclick="startQuiz()" style="max-width:420px;margin:0 auto">Calculate My Annual Money Leak</button>
         <p class="cta-note">Free &nbsp;·&nbsp; Personalised to your business size and revenue</p>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 3: Testimonials (white) -->
-  <div class="sec-white" id="testimonials">
-    <div class="wrap-wide">
-      <p class="eyebrow">What people discovered</p>
-      <h2 class="sec-h">Real results from the Money Leak Audit</h2>
+  <!-- TESTIMONIAL CAROUSEL (compact, auto-swipe) -->
+  <div class="testi-section">
+    <div class="testi-inner">
 
-      <div class="testi-grid">
-        <div class="testi-card">
-          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testi-q">"I assumed my problem was getting more clients. The audit showed me I had a massive pricing leak. I was discounting on almost every deal, telling myself it was closing strategy. <strong>I could not unsee it after that.</strong>"</p>
-          <div class="testi-person">
-            <div class="testi-av">SK</div>
-            <div><div class="testi-name">Sarah K.</div><div class="testi-role">Business Coach, Singapore</div></div>
+      <div class="testi-stat">
+        <div class="testi-stat-num">10,000+</div>
+        <div class="testi-stat-lbl">Entrepreneurs<br>transformed</div>
+      </div>
+
+      <div class="testi-divider"></div>
+
+      <div style="flex:1;min-width:0">
+        <div class="testi-carousel" id="testiCarousel">
+
+          <div class="testi-slide active" id="ts0">
+            <div class="testi-quote-mark">"</div>
+            <p class="testi-text">I assumed my problem was getting more clients. The audit showed me I had a massive pricing leak. <strong>I could not unsee the number after that.</strong></p>
+            <div class="testi-meta">Sarah K. &nbsp;·&nbsp; Business Coach, Singapore</div>
+            <div class="testi-leak">Primary Leak: Pricing &nbsp;·&nbsp; Est. $187,000/yr</div>
           </div>
-          <div class="testi-tag">Primary Leak Found: <strong>Pricing</strong> &nbsp;·&nbsp; Est. $187,000/yr</div>
+
+          <div class="testi-slide" id="ts1">
+            <div class="testi-quote-mark">"</div>
+            <p class="testi-text">Every single time leak they listed was me. The bottleneck, nights and weekends, the 'no one can do it like me' excuse. <strong>The calculated number stopped me completely.</strong></p>
+            <div class="testi-meta">Marcus T. &nbsp;·&nbsp; E-commerce Founder, Malaysia</div>
+            <div class="testi-leak">Primary Leak: Time &nbsp;·&nbsp; Est. $340,000/yr</div>
+          </div>
+
+          <div class="testi-slide" id="ts2">
+            <div class="testi-quote-mark">"</div>
+            <p class="testi-text">I was skeptical at first. Then I tracked my finances for a month and realised the number was conservative. <strong>Three years of trying to earn more, when the leak was the whole problem.</strong></p>
+            <div class="testi-meta">Priya M. &nbsp;·&nbsp; Finance Professional, Singapore</div>
+            <div class="testi-leak">Primary Leak: Systems &nbsp;·&nbsp; Est. $93,000/yr</div>
+          </div>
+
+          <div class="testi-slide" id="ts3">
+            <div class="testi-quote-mark">"</div>
+            <p class="testi-text">The money blueprint section was the part I did not expect. Years of business strategy, and the audit showed me <strong>a belief pattern running below everything else.</strong></p>
+            <div class="testi-meta">James W. &nbsp;·&nbsp; Agency Owner, Australia</div>
+            <div class="testi-leak">Primary Leak: Blueprint &nbsp;·&nbsp; Est. $215,000/yr</div>
+          </div>
+
         </div>
-
-        <div class="testi-card">
-          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testi-q">"Every single time leak they listed was me. The bottleneck, the nights and weekends, the 'no one can do it like me' excuse. <strong>The number it calculated stopped me completely.</strong> I had no idea my habits were that expensive."</p>
-          <div class="testi-person">
-            <div class="testi-av">MT</div>
-            <div><div class="testi-name">Marcus T.</div><div class="testi-role">E-commerce Founder, Malaysia</div></div>
-          </div>
-          <div class="testi-tag">Primary Leak Found: <strong>Time</strong> &nbsp;·&nbsp; Est. $340,000/yr</div>
-        </div>
-
-        <div class="testi-card">
-          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testi-q">"I was skeptical of the audit number at first. Then I tracked my actual finances for a month and realised it was conservative. <strong>Three years of trying to earn more, when the leak was the whole problem.</strong>"</p>
-          <div class="testi-person">
-            <div class="testi-av">PM</div>
-            <div><div class="testi-name">Priya M.</div><div class="testi-role">Finance Professional, Singapore</div></div>
-          </div>
-          <div class="testi-tag">Primary Leak Found: <strong>Systems</strong> &nbsp;·&nbsp; Est. $93,000/yr</div>
-        </div>
-
-        <div class="testi-card">
-          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testi-q">"The money blueprint section was the part I did not expect. I had spent years on business strategy. The audit showed me my real problem was a belief pattern running below everything else. <strong>Three minutes changed my perspective entirely.</strong>"</p>
-          <div class="testi-person">
-            <div class="testi-av">JW</div>
-            <div><div class="testi-name">James W.</div><div class="testi-role">Agency Owner, Australia</div></div>
-          </div>
-          <div class="testi-tag">Primary Leak Found: <strong>Blueprint</strong> &nbsp;·&nbsp; Est. $215,000/yr</div>
+        <div class="testi-dots">
+          <div class="tdot on" onclick="goTesti(0)"></div>
+          <div class="tdot" onclick="goTesti(1)"></div>
+          <div class="tdot" onclick="goTesti(2)"></div>
+          <div class="tdot" onclick="goTesti(3)"></div>
         </div>
       </div>
 
-      <div class="cta-center">
-        <button class="btn-dark" onclick="startQuiz()">Find My Leaks and Calculate the Cost</button>
-        <p class="cta-note">Free &nbsp;·&nbsp; Includes 7 Money Blueprints Cheatsheet ($47 value)</p>
+    </div>
+  </div>
+
+  <!-- FINAL CTA SECTION -->
+  <div class="cta-section">
+    <div class="wrap-wide" style="max-width:700px">
+      <h2>Ready to Find Your Leaks?</h2>
+      <p>Take the 3-minute audit. Get a personalised dollar figure. See exactly what to fix first.</p>
+      <div style="text-align:center">
+        <button class="btn-gold" onclick="startQuiz()" style="max-width:400px;margin:0 auto">Start My Free Audit</button>
+        <p class="cta-note">Free &nbsp;·&nbsp; Includes 7 Money Blueprints Cheatsheet &nbsp;·&nbsp; Instant result</p>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 4: Hard Truth (dark navy) -->
-  <div class="sec-navy" id="cta-section">
-    <div class="wrap">
-      <p class="eyebrow-gold">After 23 years and 1.5 million graduates</p>
-      <h2 class="sec-h-inv">"A leak you have not named<br>will outlast every strategy you try."</h2>
-      <p style="font-size:15px;color:rgba(255,255,255,.55);text-align:center;line-height:1.8;margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto">The people who could not grow their income were not lacking knowledge or discipline. They were losing money through invisible leaks in their pricing, their time, their systems, and their unconscious money blueprint. The audit takes 3 minutes. The number it shows you will stay with you.</p>
-      <div class="cta-center">
-        <button class="btn-gold" onclick="startQuiz()">Start My Free Audit</button>
-        <p class="cta-note-inv">Free &nbsp;·&nbsp; Includes 7 Money Blueprints Cheatsheet &nbsp;·&nbsp; Instant result</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Site footer -->
+  <!-- Footer -->
   <div class="site-footer">
-    <p>© 2026 Success Resources &nbsp;·&nbsp; <a href="#">Contact Us</a> &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms and Conditions</a> &nbsp;·&nbsp; <a href="#">Cookies Policy</a></p>
-    <p style="margin-top:6px">10 million attendees &nbsp;·&nbsp; 30 countries &nbsp;·&nbsp; Trusted worldwide</p>
+    <p>
+      <a href="https://www.millionairemindworld.com/sr">Contact Us</a> &nbsp;|&nbsp;
+      <a href="#">Privacy Policy</a> &nbsp;|&nbsp;
+      <a href="https://www.millionairemindworld.com/terms-and-conditions">Terms and Conditions</a> &nbsp;|&nbsp;
+      <a href="#">Cookies Policy</a>
+    </p>
+    <p style="margin-top:6px">Copyright 2026 Success Resources. All Rights Reserved.</p>
   </div>
 
 </div><!-- /landing -->
@@ -568,85 +677,79 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
      ============================================================ -->
 <div id="quiz" class="hidden">
 
-  <div class="quiz-header">
-    <div class="quiz-header-inner">
-      <div class="quiz-brand">Money Leak Audit &nbsp;·&nbsp; Millionaire Mind</div>
-      <div class="quiz-stepcnt" id="stepCnt">Step 1 of 8</div>
+  <div class="quiz-hdr">
+    <div class="quiz-hdr-inner">
+      <div class="quiz-brand">Money Leak Audit &nbsp;·&nbsp; Success Resources</div>
+      <div class="quiz-cnt" id="stepCnt">Step 1 of 8</div>
     </div>
     <div class="prog-track"><div class="prog-bar" id="progBar"></div></div>
   </div>
 
-  <div class="wrap">
+  <div class="quiz-card">
 
-    <!-- ======================================================
-         STEP 1: OPT-IN (details first, as per original)
-         ====================================================== -->
-    <div class="step" id="s1">
-      <p class="step-eye">Step 1 of 8</p>
+    <!-- STEP 1: OPT-IN (details first, as per original) -->
+    <div class="step active" id="s1">
+      <p class="step-eye">Getting Started</p>
       <h2>Get Your Free <em>Money Leak Report</em></h2>
       <p class="step-sub">Enter your details to receive your personalised audit results.</p>
 
-      <div class="bonus-step1">
-        <span class="bonus-step1-icon">🎁</span>
+      <div class="bonus-s1">
+        <span class="bs1-icon">🎁</span>
         <div>
-          <div class="bonus-step1-title">Free: 7 Money Blueprints Cheatsheet <span class="value-pill">$47 value</span></div>
-          <div class="bonus-step1-sub">Sent to your inbox with your personalised report. Only for first 100 submissions &nbsp;·&nbsp; 77/100 claimed.</div>
+          <div class="bs1-title">Free: 7 Money Blueprints Cheatsheet <span class="val-pill">$47 value</span></div>
+          <div class="bs1-sub">Sent to your inbox with your report. Only for first 100 submissions, 77/100 claimed.</div>
         </div>
       </div>
 
       <div class="form-group">
         <label class="form-lbl">First Name *</label>
-        <input type="text" class="form-inp" id="fName" placeholder="Your first name">
+        <input type="text" class="form-inp" id="fName" placeholder="Your first name" oninput="checkS1()">
       </div>
       <div class="form-group">
         <label class="form-lbl">Last Name *</label>
-        <input type="text" class="form-inp" id="lName" placeholder="Your last name">
+        <input type="text" class="form-inp" id="lName" placeholder="Your last name" oninput="checkS1()">
       </div>
       <div class="form-group">
         <label class="form-lbl">Email *</label>
-        <input type="email" class="form-inp" id="fEmail" placeholder="your@email.com">
+        <input type="email" class="form-inp" id="fEmail" placeholder="your@email.com" oninput="checkS1()">
       </div>
       <div class="form-group">
         <label class="form-lbl">Phone</label>
         <div class="phone-row">
           <select class="phone-pre" id="phoneCode">
-            <option value="+65">&#127480;&#127468; +65</option>
-            <option value="+60">&#127474;&#127486; +60</option>
-            <option value="+66">&#127481;&#127469; +66</option>
-            <option value="+886">&#127481;&#127484; +886</option>
-            <option value="+852">&#127469;&#127472; +852</option>
-            <option value="+86">&#127464;&#127475; +86</option>
-            <option value="+81">&#127471;&#127477; +81</option>
-            <option value="+63">&#127477;&#127469; +63</option>
-            <option value="+84">&#127483;&#127475; +84</option>
-            <option value="+61">&#127462;&#127482; +61</option>
-            <option value="+64">&#127475;&#127487; +64</option>
-            <option value="+44">&#127468;&#127463; +44</option>
-            <option value="+1">&#127482;&#127480; +1</option>
+            <option value="+65">SG +65</option>
+            <option value="+60">MY +60</option>
+            <option value="+66">TH +66</option>
+            <option value="+886">TW +886</option>
+            <option value="+852">HK +852</option>
+            <option value="+86">CN +86</option>
+            <option value="+81">JP +81</option>
+            <option value="+63">PH +63</option>
+            <option value="+84">VN +84</option>
+            <option value="+61">AU +61</option>
+            <option value="+64">NZ +64</option>
+            <option value="+44">UK +44</option>
+            <option value="+1">US +1</option>
           </select>
           <input type="tel" class="form-inp" id="fPhone" placeholder="Phone number (optional)">
         </div>
       </div>
-
       <div class="consent-row">
         <input type="checkbox" id="consent" checked>
         <label for="consent">I agree to receive marketing updates from Success Resources.</label>
       </div>
-
       <div class="nav-row">
-        <button class="btn-next" id="s1Next" onclick="validateStep1()" disabled>Start My Free Audit</button>
+        <button class="btn-next" id="s1Next" onclick="validateS1()" disabled>Start My Free Audit</button>
       </div>
     </div>
 
-    <!-- ======================================================
-         STEP 2: Business Profile
-         ====================================================== -->
+    <!-- STEP 2: Business -->
     <div class="step" id="s2">
       <p class="step-eye">Step 2 of 8</p>
       <h2>Tell Us About <em>Your Business</em></h2>
-      <p class="step-sub">This is how we calculate your personalised leak figure accurately.</p>
+      <p class="step-sub">This calibrates your personalised leak figure accurately.</p>
 
-      <p class="field-lbl">Company size</p>
+      <div class="field-lbl">Company size</div>
       <div class="opt-grid" id="sizeGrid">
         <button class="opt" onclick="pick('size','solo',this)"><span class="dot"></span>Just me (Solopreneur)</button>
         <button class="opt" onclick="pick('size','2-5',this)"><span class="dot"></span>2 to 5 employees</button>
@@ -658,7 +761,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <button class="opt" onclick="pick('size','employee',this)"><span class="dot"></span>I am an employee</button>
       </div>
 
-      <p class="field-lbl">Current annual revenue</p>
+      <div class="field-lbl">Current annual revenue</div>
       <div class="opt-grid" id="revGrid">
         <button class="opt" onclick="pick('rev','u50',this)"><span class="dot"></span>Under $50K</button>
         <button class="opt" onclick="pick('rev','50-100',this)"><span class="dot"></span>$50K to $100K</button>
@@ -669,8 +772,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <button class="opt" onclick="pick('rev','5m+',this)"><span class="dot"></span>$5M+</button>
       </div>
 
-      <p class="field-lbl">Industry</p>
-      <select class="select-inp" id="industrySelect">
+      <div class="field-lbl">Industry *</div>
+      <select class="sel-inp" id="industrySelect" onchange="state.industry=this.value||null;refreshBtns()">
         <option value="">Select your industry...</option>
         <option value="coaching">Coaching / Consulting</option>
         <option value="ecom">E-commerce / Retail</option>
@@ -688,112 +791,92 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       </div>
     </div>
 
-    <!-- ======================================================
-         STEP 3: Goals
-         ====================================================== -->
+    <!-- STEP 3: Goals -->
     <div class="step" id="s3">
       <p class="step-eye">Step 3 of 8</p>
       <h2>What's Your <em>#1 Goal</em> Right Now?</h2>
       <p class="step-sub">Choose the one that resonates most.</p>
-
       <div class="opt-grid" id="goalGrid">
-        <button class="opt" onclick="pick('goal','7fig',this)"><span class="dot"></span>Scale to 7 figures within 12 months <span class="hot-badge">HOT</span></button>
+        <button class="opt" onclick="pick('goal','7fig',this)"><span class="dot"></span>Scale to 7 figures within 12 months <span class="hot">HOT</span></button>
         <button class="opt" onclick="pick('goal','9-5',this)"><span class="dot"></span>Replace my 9 to 5 income and go full-time</button>
         <button class="opt" onclick="pick('goal','double',this)"><span class="dot"></span>Double my current revenue</button>
         <button class="opt" onclick="pick('goal','passive',this)"><span class="dot"></span>Create passive income streams</button>
         <button class="opt" onclick="pick('goal','side',this)"><span class="dot"></span>Build a side hustle ($2K to $5K per month)</button>
         <button class="opt" onclick="pick('goal','wealth',this)"><span class="dot"></span>Build wealth while employed</button>
       </div>
-
-      <p class="field-lbl">How soon do you want this?</p>
+      <div class="field-lbl">How soon do you want this?</div>
       <div class="opt-grid" id="timeGrid">
-        <button class="opt" onclick="pick('timeline','asap',this)"><span class="dot"></span>ASAP, I am ready to take massive action NOW <span class="hot-badge">HOT</span></button>
+        <button class="opt" onclick="pick('timeline','asap',this)"><span class="dot"></span>ASAP, I am ready to take massive action NOW <span class="hot">HOT</span></button>
         <button class="opt" onclick="pick('timeline','90d',this)"><span class="dot"></span>Within 90 days</button>
         <button class="opt" onclick="pick('timeline','6m',this)"><span class="dot"></span>Within 6 months</button>
         <button class="opt" onclick="pick('timeline','research',this)"><span class="dot"></span>Just researching for now</button>
       </div>
-
       <div class="nav-row">
         <button class="btn-back" onclick="go(2)">Back</button>
         <button class="btn-next" id="s3Next" onclick="go(4)" disabled>Continue</button>
       </div>
     </div>
 
-    <!-- ======================================================
-         STEP 4: Pricing Leaks
-         ====================================================== -->
+    <!-- STEP 4: Pricing Leaks -->
     <div class="step" id="s4">
       <p class="step-eye">Step 4 of 8</p>
       <h2>Identify Your <em>Pricing Leaks</em></h2>
-      <p class="step-sub">Check all that apply. Be honest, this is what builds your number.</p>
-      <p class="chk-all-note">Select all that apply, or none</p>
-
+      <p class="step-sub">Select every statement that applies to you. At least one selection is required.</p>
+      <p class="chk-note">Select all that apply</p>
       <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I discount my prices to close deals (10 to 30 percent off)</span></button>
       <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I am the cheapest option in my market</span></button>
       <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I am afraid to raise prices (fear of losing clients)</span></button>
       <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I do a lot of free work hoping it leads to paid</span></button>
       <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I charge by the hour instead of by value</span></button>
       <button class="chk" data-cat="pricing" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I feel underpaid for the value I bring</span></button>
-
       <div class="nav-row">
         <button class="btn-back" onclick="go(3)">Back</button>
-        <button class="btn-next" onclick="go(5)">Continue</button>
+        <button class="btn-next" id="s4Next" onclick="go(5)" disabled>Continue</button>
       </div>
     </div>
 
-    <!-- ======================================================
-         STEP 5: Time Leaks
-         ====================================================== -->
+    <!-- STEP 5: Time Leaks -->
     <div class="step" id="s5">
       <p class="step-eye">Step 5 of 8</p>
       <h2>Find Your <em>Time Leaks</em></h2>
-      <p class="step-sub">Every yes here is a direct ceiling on how much you can earn.</p>
-      <p class="chk-all-note">Select all that apply, or none</p>
-
+      <p class="step-sub">Select every statement that applies to you. At least one selection is required.</p>
+      <p class="chk-note">Select all that apply</p>
       <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I am the bottleneck, everything needs my approval</span></button>
       <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I work nights and weekends regularly (50+ hours per week)</span></button>
       <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I spend 5+ hours per week on admin tasks</span></button>
       <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I am stuck in back-to-back meetings all day</span></button>
       <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I cannot delegate, no one can do it like me</span></button>
       <button class="chk" data-cat="time" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I am trapped trading time for money with no leverage</span></button>
-
       <div class="nav-row">
         <button class="btn-back" onclick="go(4)">Back</button>
-        <button class="btn-next" onclick="go(6)">Continue</button>
+        <button class="btn-next" id="s5Next" onclick="go(6)" disabled>Continue</button>
       </div>
     </div>
 
-    <!-- ======================================================
-         STEP 6: Systems Leaks
-         ====================================================== -->
+    <!-- STEP 6: Systems -->
     <div class="step" id="s6">
       <p class="step-eye">Step 6 of 8</p>
       <h2>Check Your <em>Systems</em></h2>
-      <p class="step-sub">These are the silent leaks, hardest to see and easiest to fix once named.</p>
-      <p class="chk-all-note">Select all that apply, or none</p>
-
+      <p class="step-sub">Select every statement that applies to you. At least one selection is required.</p>
+      <p class="chk-note">Select all that apply</p>
       <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I do not track profit per customer or product</span></button>
       <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I have no documented systems or SOPs</span></button>
       <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>Everything is manual, no automation</span></button>
       <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I do not review key metrics weekly or monthly</span></button>
       <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I reinvent the wheel every time (no templates)</span></button>
       <button class="chk" data-cat="systems" onclick="toggle(this)"><span class="chk-box">&#10003;</span><span>I have no wealth-building system or investment strategy</span></button>
-
       <div class="nav-row">
         <button class="btn-back" onclick="go(5)">Back</button>
-        <button class="btn-next" onclick="go(7)">Continue</button>
+        <button class="btn-next" id="s6Next" onclick="go(7)" disabled>Continue</button>
       </div>
     </div>
 
-    <!-- ======================================================
-         STEP 7: Money Blueprint
-         ====================================================== -->
+    <!-- STEP 7: Money Blueprint -->
     <div class="step" id="s7">
       <p class="step-eye">Step 7 of 8</p>
       <h2>Uncover Your <em>Money Blueprint</em></h2>
-      <p class="step-sub">These beliefs shape everything. Be honest, there are no right answers.</p>
-
-      <p class="field-lbl">Which statement sounds most like your inner voice about money?</p>
+      <p class="step-sub">These beliefs shape everything. Be honest.</p>
+      <div class="field-lbl">Which statement sounds most like your inner voice about money?</div>
       <div class="opt-grid" id="bpGrid">
         <button class="opt" onclick="pick('bp','worker',this)"><span class="dot"></span>"If I am not working hard, I have not earned it yet"</button>
         <button class="opt" onclick="pick('bp','pleasure',this)"><span class="dot"></span>"Life is short, I would rather enjoy money now than save it"</button>
@@ -803,37 +886,31 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <button class="opt" onclick="pick('bp','chaser',this)"><span class="dot"></span>"I am always chasing the big win, one break will change everything"</button>
         <button class="opt" onclick="pick('bp','worthy',this)"><span class="dot"></span>"When I hit a certain number, I will finally feel worthy and respected"</button>
       </div>
-
-      <p class="field-lbl">Which statement feels most true?</p>
+      <div class="field-lbl">Which statement feels most true?</div>
       <div class="opt-grid" id="worthGrid">
         <button class="opt" onclick="pick('worth','work',this)"><span class="dot"></span>I need to prove my worth through hard work</button>
         <button class="opt" onclick="pick('worth','deserve',this)"><span class="dot"></span>I deserve wealth just for being me</button>
         <button class="opt" onclick="pick('worth','others',this)"><span class="dot"></span>Others are more deserving of wealth than me</button>
       </div>
-
       <div class="nav-row">
         <button class="btn-back" onclick="go(6)">Back</button>
         <button class="btn-next" id="s7Next" onclick="go(8)" disabled>Continue</button>
       </div>
     </div>
 
-    <!-- ======================================================
-         STEP 8: Breakthrough Readiness
-         ====================================================== -->
+    <!-- STEP 8: Readiness -->
     <div class="step" id="s8">
       <p class="step-eye">Step 8 of 8</p>
       <h2>Breakthrough <em>Readiness</em></h2>
-      <p class="step-sub">Your answers help us calibrate the right next step for your situation.</p>
-
-      <p class="field-lbl">Have you invested in personal development before?</p>
+      <p class="step-sub">Your answers help us calibrate the right next step.</p>
+      <div class="field-lbl">Have you invested in personal development before?</div>
       <div class="opt-grid" id="investGrid">
-        <button class="opt" onclick="pick('invest','10k+',this)"><span class="dot"></span>Yes, I have invested $10K+ in courses or coaching</button>
+        <button class="opt" onclick="pick('invest','10k+',this)"><span class="dot"></span>Yes, $10K+ in courses or coaching</button>
         <button class="opt" onclick="pick('invest','1-10k',this)"><span class="dot"></span>Yes, $1K to $10K on training</button>
         <button class="opt" onclick="pick('invest','free',this)"><span class="dot"></span>Yes, but only books and free content</button>
         <button class="opt" onclick="pick('invest','none',this)"><span class="dot"></span>No, this would be my first investment</button>
       </div>
-
-      <p class="field-lbl">What is holding you back from your next income level?</p>
+      <div class="field-lbl">What is holding you back from your next income level?</div>
       <div class="opt-grid" id="holdGrid">
         <button class="opt" onclick="pick('hold','mindset',this)"><span class="dot"></span>My mindset and beliefs about money</button>
         <button class="opt" onclick="pick('hold','skills',this)"><span class="dot"></span>Lack of skills or knowledge</button>
@@ -841,21 +918,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <button class="opt" onclick="pick('hold','capital',this)"><span class="dot"></span>Lack of capital or resources</button>
         <button class="opt" onclick="pick('hold','unsure',this)"><span class="dot"></span>Honestly not sure, that is why I am here</button>
       </div>
-
-      <p class="field-lbl">How committed are you to transforming your financial life in the next 90 days?</p>
+      <div class="field-lbl">How committed are you to transforming your financial life in the next 90 days?</div>
       <div class="slider-wrap">
         <div class="slider-labs"><span>Thinking about it</span><span>All in</span></div>
         <input type="range" min="1" max="10" value="7" id="commitSlider" oninput="state.commit=+this.value;document.getElementById('commitVal').textContent=this.value">
         <div class="slider-val" id="commitVal">7</div>
       </div>
-
       <div class="nav-row">
         <button class="btn-back" onclick="go(7)">Back</button>
         <button class="btn-next" id="s8Next" onclick="runAnalyze()" disabled>Reveal My Leak Report</button>
       </div>
     </div>
 
-  </div><!-- /wrap -->
+  </div><!-- /quiz-card -->
 </div><!-- /quiz -->
 
 
@@ -863,8 +938,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
      ANALYZING
      ============================================================ -->
 <div id="analyzing" class="hidden">
-  <h2>&#128269; Analysing your money leaks...</h2>
-  <div class="a-steps">
+  <div class="analyzing-card">
+    <h2>Analysing your money leaks...</h2>
     <div class="a-step" id="as1"><div class="a-icon">1</div><span>Scoring your pricing, time and systems leaks</span></div>
     <div class="a-step" id="as2"><div class="a-icon">2</div><span>Identifying your primary leak archetype</span></div>
     <div class="a-step" id="as3"><div class="a-icon">3</div><span>Mapping your money blueprint pattern</span></div>
@@ -878,131 +953,178 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
      ============================================================ -->
 <div id="results" class="hidden">
 
-  <!-- PDF-only header (hidden on screen, visible in print) -->
+  <!-- PDF-only header -->
   <div class="pdf-report-header">
-    <div class="pdf-report-branding">
-      <strong>Millionaire Mind Intensive</strong>
-      <span>Money Leak Audit Report &nbsp;·&nbsp; Success Resources &nbsp;·&nbsp; T. Harv Eker</span>
-    </div>
-    <div class="pdf-report-meta">
-      <div><strong>Prepared for:</strong> <span id="pdf-name"></span></div>
-      <div><strong>Date:</strong> <span id="pdf-date"></span></div>
-      <div><strong>Confidential</strong></div>
-    </div>
+    <div class="pdf-brand"><strong>Millionaire Mind Intensive</strong><span>Money Leak Audit Report &nbsp;·&nbsp; Success Resources &nbsp;·&nbsp; T. Harv Eker</span></div>
+    <div class="pdf-meta"><div><strong>Prepared for:</strong> <span id="pdfName"></span></div><div><strong>Date:</strong> <span id="pdfDate"></span></div><div><strong>Confidential</strong></div></div>
   </div>
 
-  <!-- Dark header -->
   <div class="res-hdr">
-    <div class="wrap">
-      <div class="res-hdr-inner">
-        <div class="res-brand">Money Leak Audit &nbsp;·&nbsp; Millionaire Mind Intensive</div>
-        <p class="res-greeting" id="resGreet">Your personalised audit is complete.</p>
-        <h1 class="res-h">Here's Where Your Money Is Leaking</h1>
-      </div>
+    <div class="res-full">
+      <div class="res-brand">Money Leak Audit &nbsp;·&nbsp; Millionaire Mind Intensive</div>
+      <p class="res-greeting" id="resGreet">Your personalised audit is complete.</p>
+      <h1 class="res-h">Here's Where Your Money Is Leaking</h1>
     </div>
   </div>
 
-  <div class="wrap">
-
-    <!-- Total -->
+  <!-- ── FULL WIDTH: big number ──────────────────────────── -->
+  <div class="res-num-wrap" style="padding-top:0">
     <div class="leak-hero">
       <div class="leak-lbl">Your Estimated Annual Money Leak</div>
       <div class="leak-num" id="totalNum">$0</div>
       <div class="leak-period">per year slipping through the cracks</div>
       <div class="leak-note" id="calcNote">Calculated from your answers across all 4 leak categories</div>
     </div>
+  </div>
 
-    <!-- PDF Download (prominent) -->
-    <div class="pdf-row">
-      <div class="pdf-row-left">
-        <div class="pdf-icon">&#128196;</div>
-        <div>
-          <div class="pdf-title">Your Personalised PDF Report</div>
-          <div class="pdf-sub">Download your full Money Leak Audit, and see exactly what to fix first.</div>
+  <!-- ── TWO-COLUMN BODY ─────────────────────────────────── -->
+  <div class="res-body">
+
+    <!-- LEFT: insight content -->
+    <div class="res-main">
+
+      <!-- Primary archetype -->
+      <div class="res-sep" style="margin-top:4px"><span class="res-sep-lbl">Your Primary Leak Type</span></div>
+      <div class="rcard-gold">
+        <div class="card-eye eye-gold">Identified from your answers</div>
+        <div class="card-name" id="archName">...</div>
+        <p class="card-desc" id="archDesc">...</p>
+      </div>
+
+      <!-- Blueprint deep-dive -->
+      <div class="res-sep"><span class="res-sep-lbl">Why This Keeps Happening</span></div>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.65">The audit reveals <em>what</em> is leaking. Your money blueprint is <em>why</em> it keeps recreating itself — and why tactics alone have never fixed it permanently.</p>
+      <div class="bp-deep">
+        <div class="bp-belief">
+          <div class="bp-belief-eye">Your Money Blueprint &nbsp;·&nbsp; Core Belief</div>
+          <div class="bp-belief-quote" id="bpBeliefQ">...</div>
+        </div>
+        <div class="bp-voice">
+          <div class="bp-voice-eye">The Little Voice In Your Head</div>
+          <div class="bp-voice-text" id="bpVoice">...</div>
+        </div>
+        <div class="bp-behaviours">
+          <div class="bp-beh-eye">How It Shows Up In Your Business</div>
+          <div class="bp-beh-list" id="bpBehList">...</div>
+        </div>
+        <div class="bp-watchout">
+          <div class="bp-wo-eye">Watch Out For</div>
+          <div class="wo-tags" id="bpWatchout">...</div>
+        </div>
+        <div class="bp-upgrade">
+          <div class="bp-up-eye">The Upgrade</div>
+          <div class="bp-up-text" id="bpUpgrade">...</div>
         </div>
       </div>
-      <button class="btn-pdf" onclick="downloadReport()">&#8681; Download Report</button>
-    </div>
 
-    <!-- Bonus Unlocked -->
-    <div class="bonus-unlocked">
-      <div class="bu-icon">&#127881;</div>
-      <div>
-        <div class="bu-title">Bonus Unlocked, Check Your Email</div>
-        <div class="bu-sub">Your <strong>7 Money Blueprints Cheatsheet</strong> ($47 value) is on its way to your inbox. <span class="bu-check">&#10003; Spot #77 claimed</span></div>
+      <!-- Quick wins -->
+      <div class="res-sep"><span class="res-sep-lbl">3 Things You Can Do This Week</span></div>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.65">Specific to your primary leak. No event needed to start here.</p>
+      <div id="quickWins"></div>
+
+      <!-- Bridge -->
+      <div class="res-sep"><span class="res-sep-lbl">The Complete Solution</span></div>
+      <div class="bridge-card">
+        <h3 id="bridgeH">These quick wins are the start. Not the seal.</h3>
+        <p id="bridgeP1">...</p>
+        <p>Every leak has two layers. The outer layer is the habit — charging too little, working too many hours, missing metrics. The inner layer is the blueprint — the belief that keeps recreating the habit even after you know better. Fixing the outer without addressing the inner is why most people improve briefly, then reset.</p>
+        <p>The <strong>Millionaire Mind Hybrid</strong> addresses both in 3 days. Day 1 installs the financial systems framework. Days 2 and 3 do the deep blueprint work — identifying where the pattern formed, releasing it, and rewiring it permanently.</p>
       </div>
-    </div>
 
-    <!-- Archetype -->
-    <div class="res-card-gold">
-      <div class="card-eye eye-gold">Your Primary Leak Type</div>
-      <div class="card-name" id="archName">...</div>
-      <p class="card-desc" id="archDesc">...</p>
-    </div>
-
-    <!-- Breakdown -->
-    <div class="res-card">
-      <div class="bdown-h">Where Your Money Is Leaking</div>
-      <div class="brow">
-        <div class="brow-top"><span class="bcat">&#128184; Pricing Leaks</span><span class="bamt c-red" id="pAmt">$0</span></div>
-        <div class="bar-track"><div class="bar-fill bf-p" id="pBar"></div></div>
+      <!-- Outcomes -->
+      <div class="outcomes">
+        <div class="out-lbl">What changes in 3 days</div>
+        <div class="out-item"><span class="out-chk">&#10003;</span><span><strong>Day 1:</strong> Complete money management system, 6 accounts set up and running, including your Financial Freedom Account</span></div>
+        <div class="out-item"><span class="out-chk">&#10003;</span><span><strong>Day 2:</strong> Blueprint pattern identified at the root, where it formed, what it costs, and what it sounds like in real time</span></div>
+        <div class="out-item"><span class="out-chk">&#10003;</span><span><strong>Day 3:</strong> Pattern released through a proven conditioning process used with 1.5 million graduates worldwide</span></div>
+        <div class="out-item"><span class="out-chk">&#10003;</span><span>Personalised passive income plan and your specific Financial Freedom number</span></div>
+        <div class="out-item"><span class="out-chk">&#10003;</span><span>Pricing and leverage frameworks specific to your business size and industry</span></div>
       </div>
-      <div class="brow">
-        <div class="brow-top"><span class="bcat">&#9200; Time Leaks</span><span class="bamt c-ora" id="tAmt">$0</span></div>
-        <div class="bar-track"><div class="bar-fill bf-t" id="tBar"></div></div>
+
+      <!-- CTA button after outcomes — visible in main column -->
+      <div style="background:var(--green);border-radius:12px;padding:24px;text-align:center;margin-bottom:8px">
+        <p style="font-size:14px;color:rgba(255,255,255,.6);margin-bottom:14px;line-height:1.6">You have seen the number. You know the blueprint. You have your first three steps.<br>The question now is how fast you want to seal it permanently.</p>
+        <a href="https://www.millionairemindworld.com" style="display:block;background:var(--gold);color:var(--green);font-family:'Inter',sans-serif;font-size:16px;font-weight:800;padding:16px;border-radius:8px;text-align:center;text-decoration:none;transition:background .12s">Claim Your Spot at Millionaire Mind Hybrid &nbsp;→</a>
+        <p style="font-size:11px;color:rgba(255,255,255,.3);margin-top:10px">10 million attendees &nbsp;·&nbsp; 30 countries &nbsp;·&nbsp; 23 years running</p>
       </div>
-      <div class="brow">
-        <div class="brow-top"><span class="bcat">&#9881; Systems Leaks</span><span class="bamt c-yel" id="sAmt">$0</span></div>
-        <div class="bar-track"><div class="bar-fill bf-s" id="sBar"></div></div>
+
+    </div><!-- /res-main -->
+
+    <!-- RIGHT: sticky sidebar ─────────────────────────── -->
+    <div class="res-sidebar">
+
+      <!-- Breakdown bars -->
+      <div class="sb-card">
+        <div class="sb-lbl">Where Your Money Is Leaking</div>
+        <div class="sb-brow">
+          <div class="sb-brow-top">
+            <span class="sb-bcat"><span class="sb-dot sd-p"></span>Pricing Leaks</span>
+            <span class="sb-bamt c-red" id="pAmt">$0</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill bf-p" id="pBar"></div></div>
+        </div>
+        <div class="sb-brow">
+          <div class="sb-brow-top">
+            <span class="sb-bcat"><span class="sb-dot sd-t"></span>Time Leaks</span>
+            <span class="sb-bamt c-ora" id="tAmt">$0</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill bf-t" id="tBar"></div></div>
+        </div>
+        <div class="sb-brow">
+          <div class="sb-brow-top">
+            <span class="sb-bcat"><span class="sb-dot sd-s"></span>Systems Leaks</span>
+            <span class="sb-bamt c-yel" id="sAmt">$0</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill bf-s" id="sBar"></div></div>
+        </div>
+        <div class="sb-brow" style="margin-bottom:0">
+          <div class="sb-brow-top">
+            <span class="sb-bcat"><span class="sb-dot sd-b"></span>Blueprint Tax</span>
+            <span class="sb-bamt c-pur" id="bAmt">$0</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill bf-b" id="bBar"></div></div>
+        </div>
       </div>
-      <div class="brow">
-        <div class="brow-top"><span class="bcat">&#129504; Blueprint Tax</span><span class="bamt c-pur" id="bAmt">$0</span></div>
-        <div class="bar-track"><div class="bar-fill bf-b" id="bBar"></div></div>
+
+      <!-- PDF download -->
+      <div class="sb-pdf" onclick="window.print()">
+        <div class="sb-pdf-icon">&#128196;</div>
+        <div class="sb-pdf-text"><strong>Download PDF Report</strong><span>Your full audit, ready to save</span></div>
+        <button class="sb-pdf-btn">&#8681; Save</button>
       </div>
-    </div>
 
-    <!-- Blueprint Pattern -->
-    <div class="res-card-pur">
-      <div class="card-eye eye-pur">Your Money Blueprint Pattern</div>
-      <div class="card-name" id="bpName">...</div>
-      <p class="card-desc" id="bpDesc">...</p>
-      <div class="bp-insight" id="bpInsight">...</div>
-    </div>
-
-    <!-- Bridge -->
-    <div class="bridge">
-      <h3 id="bridgeH">The leaks are identified. Now it is time to seal them.</h3>
-      <p id="bridgeP1">...</p>
-      <p>This is exactly what the <strong>Millionaire Mind Hybrid</strong> is built for. In 3 days, you do not just learn new strategies, you reprogram the blueprint that has been quietly overriding every strategy you have already tried. Then you install the systems that make the leaks stop permanently.</p>
-    </div>
-
-    <!-- CTA -->
-    <div class="cta-result">
-      <h3>Ready to Seal the Leaks?</h3>
-      <p>Join <strong>Millionaire Mind Hybrid</strong>, 3 days to rewire your money blueprint and stop the bleeding for good.</p>
-      <div class="cta-outcomes">
-        <div class="cta-out"><span class="cta-chk">&#10003;</span><span>Fix your #1 wealth blocker, fast</span></div>
-        <div class="cta-out"><span class="cta-chk">&#10003;</span><span>Build income with leverage, not more hours</span></div>
-        <div class="cta-out"><span class="cta-chk">&#10003;</span><span>Walk away with a plan to 2x to 10x your income</span></div>
+      <!-- Bonus -->
+      <div class="bonus-unlocked" style="margin-bottom:14px">
+        <div class="bu-icon">&#127881;</div>
+        <div>
+          <div class="bu-title">Bonus Unlocked</div>
+          <div class="bu-sub">7 Money Blueprints Cheatsheet ($47) sent to your inbox.</div>
+        </div>
       </div>
-      <a href="https://www.millionairemindworld.com" class="btn-gold" style="max-width:100%;display:block">&#128073; Claim Your Spot at Millionaire Mind Hybrid</a>
-      <div class="trust-row">
-        <span class="trust-item">10 million attendees</span>
-        <span class="trust-item">30 countries</span>
-        <span class="trust-item">Trusted worldwide</span>
+
+      <!-- Sticky CTA card -->
+      <div class="sb-cta">
+        <h4>Ready to seal the leaks permanently?</h4>
+        <p>23 years. 1.5 million graduates. The only programme that fixes both the habit and the blueprint behind it.</p>
+        <div class="sb-cta-outs">
+          <div class="sb-cta-out"><span class="sb-chk">&#10003;</span><span>Money management system set up in Day 1</span></div>
+          <div class="sb-cta-out"><span class="sb-chk">&#10003;</span><span>Blueprint rewired in Days 2 and 3</span></div>
+          <div class="sb-cta-out"><span class="sb-chk">&#10003;</span><span>Passive income plan built for your situation</span></div>
+        </div>
+        <a href="https://www.millionairemindworld.com" class="btn-sb-cta">Claim Your Spot &nbsp;→</a>
+        <p style="font-size:10px;color:rgba(255,255,255,.3);margin-top:10px">10M attendees &nbsp;·&nbsp; 30 countries &nbsp;·&nbsp; Trusted worldwide</p>
       </div>
-    </div>
 
-    <!-- PDF footer (screen-hidden, print-visible) -->
-    <div class="pdf-page-footer">
-      Millionaire Mind Intensive &nbsp;·&nbsp; Success Resources &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; millionairemindworld.com
-    </div>
+    </div><!-- /res-sidebar -->
 
-    <div class="res-footer">
-      © 2026 Success Resources &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms and Conditions</a> &nbsp;·&nbsp; <a href="#">Contact Us</a>
-    </div>
+  </div><!-- /res-body -->
 
+  <!-- ── FULL WIDTH: footer ──────────────────────────────── -->
+  <div class="res-full" style="padding-top:24px;padding-bottom:40px">
+    <div class="pdf-page-footer">Millionaire Mind Intensive &nbsp;·&nbsp; Success Resources &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; millionairemindworld.com</div>
+    <div class="res-footer">Copyright 2026 Success Resources &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms and Conditions</a> &nbsp;·&nbsp; <a href="#">Contact Us</a></div>
   </div>
+
 </div><!-- /results -->
 
 
@@ -1011,22 +1133,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
      ============================================================ -->
 <script>
 /* State */
-const state={
-  size:null,rev:null,goal:null,timeline:null,
-  pricing:0,time_leaks:0,systems:0,
-  bp:null,worth:null,invest:null,hold:null,commit:7,
-  firstName:'',lastName:'',email:'',phone:''
-};
+const state={size:null,rev:null,industry:null,goal:null,timeline:null,pricing:0,time_leaks:0,systems:0,bp:null,worth:null,invest:null,hold:null,commit:7,firstName:'',lastName:'',email:'',phone:''};
 
 /* Section switcher */
-function show(id){
-  ['landing','quiz','analyzing','results'].forEach(s=>{
-    document.getElementById(s).classList.toggle('hidden',s!==id);
-  });
-  window.scrollTo(0,0);
-}
-
-function startQuiz(){ show('quiz'); go(1); }
+function show(id){['landing','quiz','analyzing','results'].forEach(s=>document.getElementById(s).classList.toggle('hidden',s!==id));window.scrollTo(0,0)}
+function startQuiz(){show('quiz');go(1)}
 
 /* Step navigation */
 function go(n){
@@ -1034,179 +1145,245 @@ function go(n){
   document.getElementById('s'+n).classList.add('active');
   document.getElementById('progBar').style.width=Math.round(n/8*100)+'%';
   const sc=document.getElementById('stepCnt');
-  if(sc) sc.textContent='Step '+n+' of 8';
+  if(sc)sc.textContent='Step '+n+' of 8';
   window.scrollTo(0,0);
 }
 
-/* Step 1 validation */
-function validateStep1(){
-  const fn=document.getElementById('fName').value.trim();
-  const ln=document.getElementById('lName').value.trim();
-  const em=document.getElementById('fEmail').value.trim();
-  if(!fn||!ln||!em||!em.includes('@')){
-    alert('Please fill in your first name, last name and a valid email address.');
-    return;
-  }
-  state.firstName=fn; state.lastName=ln; state.email=em;
+/* Step 1 live validation */
+function checkS1(){
+  const ok=document.getElementById('fName').value.trim()&&document.getElementById('lName').value.trim()&&document.getElementById('fEmail').value.includes('@');
+  document.getElementById('s1Next').disabled=!ok;
+}
+function validateS1(){
+  const fn=document.getElementById('fName').value.trim(),ln=document.getElementById('lName').value.trim(),em=document.getElementById('fEmail').value.trim();
+  if(!fn||!ln||!em||!em.includes('@')){alert('Please fill in your first name, last name and a valid email address.');return;}
+  state.firstName=fn;state.lastName=ln;state.email=em;
   state.phone=document.getElementById('phoneCode').value+' '+document.getElementById('fPhone').value.trim();
+  /* Wire CRM here: fetch('WEBHOOK',{method:'POST',body:JSON.stringify(state)}) */
   go(2);
 }
 
-/* Live Step 1 enable button */
-['fName','fEmail','fLName'].forEach(id=>{
-  const el=document.getElementById(id==='fLName'?'lName':id);
-  if(el) el.addEventListener('input',checkS1);
-});
-function checkS1(){
-  const ok=document.getElementById('fName').value.trim()&&
-           document.getElementById('lName').value.trim()&&
-           document.getElementById('fEmail').value.includes('@');
-  document.getElementById('s1Next').disabled=!ok;
-}
-document.getElementById('fName').addEventListener('input',checkS1);
-document.getElementById('lName').addEventListener('input',checkS1);
-document.getElementById('fEmail').addEventListener('input',checkS1);
-
-/* Single-select options */
+/* Single-select */
 function pick(field,val,el){
-  const grid=el.closest('.opt-grid');
-  if(grid) grid.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
-  el.classList.add('sel');
-  state[field]=val;
-  refreshNextBtns();
+  el.closest('.opt-grid').querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');state[field]=val;refreshBtns();
 }
-
-function refreshNextBtns(){
-  const s2=document.getElementById('s2Next');
-  if(s2) s2.disabled=!(state.size&&state.rev);
-  const s3=document.getElementById('s3Next');
-  if(s3) s3.disabled=!(state.goal&&state.timeline);
-  const s7=document.getElementById('s7Next');
-  if(s7) s7.disabled=!(state.bp&&state.worth);
-  const s8=document.getElementById('s8Next');
-  if(s8) s8.disabled=!(state.invest&&state.hold);
+function refreshBtns(){
+  /* Step 2: size + revenue + industry all required */
+  const s2=document.getElementById('s2Next');if(s2)s2.disabled=!(state.size&&state.rev&&state.industry);
+  /* Step 3: goal + timeline required */
+  const s3=document.getElementById('s3Next');if(s3)s3.disabled=!(state.goal&&state.timeline);
+  /* Steps 4/5/6: at least one checkbox required */
+  const s4=document.getElementById('s4Next');if(s4)s4.disabled=!(state.pricing>0);
+  const s5=document.getElementById('s5Next');if(s5)s5.disabled=!(state.time_leaks>0);
+  const s6=document.getElementById('s6Next');if(s6)s6.disabled=!(state.systems>0);
+  /* Step 7: both blueprint questions required */
+  const s7=document.getElementById('s7Next');if(s7)s7.disabled=!(state.bp&&state.worth);
+  /* Step 8: investment history + holding back required */
+  const s8=document.getElementById('s8Next');if(s8)s8.disabled=!(state.invest&&state.hold);
 }
 
 /* Checkboxes */
 function toggle(el){
   el.classList.toggle('on');
   const cat=el.dataset.cat;
-  state[cat==='time'?'time_leaks':cat]=document.querySelectorAll('.chk.on[data-cat="'+cat+'"]').length;
+  const key=cat==='time'?'time_leaks':cat;
+  state[key]=document.querySelectorAll('.chk.on[data-cat="'+cat+'"]').length;
+  refreshBtns(); /* re-check step buttons when checkbox changes */
 }
 
 /* Run analysis */
 function runAnalyze(){
   show('analyzing');
   const ids=['as1','as2','as3','as4'];
-  ids.forEach(id=>{
-    const e=document.getElementById(id);
-    e.classList.remove('on','done');
-    e.querySelector('.a-icon').textContent=ids.indexOf(id)+1;
-  });
+  ids.forEach(id=>{const e=document.getElementById(id);e.classList.remove('on','done');e.querySelector('.a-icon').textContent=ids.indexOf(id)+1;});
   let i=0;
-  function tick(){
-    if(i>0){const p=document.getElementById(ids[i-1]);p.classList.remove('on');p.classList.add('done');p.querySelector('.a-icon').textContent='✓';}
-    if(i<ids.length){document.getElementById(ids[i]).classList.add('on');i++;setTimeout(tick,680);}
-    else{setTimeout(()=>{renderResults();show('results');setTimeout(animateBars,400);},550);}
-  }
-  setTimeout(tick,300);
-
-  /* Wire your CRM here */
-  // fetch('YOUR_WEBHOOK_URL',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...state})});
+  (function tick(){if(i>0){const p=document.getElementById(ids[i-1]);p.classList.remove('on');p.classList.add('done');p.querySelector('.a-icon').textContent='✓';}if(i<ids.length){document.getElementById(ids[i]).classList.add('on');i++;setTimeout(tick,680);}else{setTimeout(()=>{renderResults();show('results');setTimeout(animateBars,400);},550);}})();
 }
 
-/* Calculation */
+/* Calc */
 function calc(){
   const bases={solo:95000,'2-5':170000,'6-10':300000,'11-25':460000,'26-50':700000,'51-100':1000000,'100+':1350000,employee:70000};
   const revM={u50:.55,'50-100':.75,'100-250':1.0,'250-500':1.25,'500k-1m':1.5,'1m-5m':1.8,'5m+':2.3};
   const base=(bases[state.size]||120000)*(revM[state.rev]||1.0);
-  const p=(state.pricing/6)*base*0.42;
-  const t=(state.time_leaks/6)*base*0.36;
-  const s=(state.systems/6)*base*0.22;
+  const p=(state.pricing/6)*base*0.42,t=(state.time_leaks/6)*base*0.36,s=(state.systems/6)*base*0.22;
   const b=base*0.11*(1+0.4*(1-state.commit/10));
   const total=p+t+s+b;
   const scored=[{k:'pricing',v:state.pricing},{k:'time',v:state.time_leaks},{k:'systems',v:state.systems}];
   scored.sort((a,b_)=>b_.v-a.v);
-  const primary=scored[0].v>0?scored[0].k:'blueprint';
-  return{total:rnd(total,1000),p:rnd(p,500),t:rnd(t,500),s:rnd(s,500),b:rnd(b,500),primary,barMax:Math.max(p,t,s,b,1)};
+  return{total:rnd(total,1000),p:rnd(p,500),t:rnd(t,500),s:rnd(s,500),b:rnd(b,500),primary:scored[0].v>0?scored[0].k:'blueprint',barMax:Math.max(p,t,s,b,1)};
 }
 function rnd(n,to){return Math.round(n/to)*to}
 function fmtFull(n){return'$'+n.toLocaleString('en-US')}
 
-/* Archetypes */
+/* ============================================================
+   ARCHETYPE DATA
+   ============================================================ */
 const ARCH={
-  pricing:{name:'The Underprizer',
-    desc:'Your biggest leak is in your pricing. You discount to close, you do work for free hoping it converts, and you undercharge for the value you deliver. Every invoice you raise is smaller than it should be, not because the market will not pay more, but because your money blueprint will not let you ask for it.',
-    bridge:'No amount of volume, hustle or extra hours closes the gap between what you charge and what you are worth. The only thing that changes this is a rewired relationship with money, value, and what you believe you deserve.'},
-  time:{name:'The Bottleneck',
-    desc:'Your biggest leak is your time. You are the business, and your income is capped by your hours. The business works when you work. The moment you stop, everything stops. You cannot scale what only you can do, and you cannot invest time you do not have.',
-    bridge:'Trading time for money is a ceiling disguised as a strategy. The only path through it is leverage, passive income streams, systems that run without you, and the mindset that money working for you is not laziness. It is the whole game.'},
-  systems:{name:'The Winger',
-    desc:'Your biggest leak is in your systems, or the absence of them. You are running a significant business on instinct and guesswork. No tracking, no repeatable processes, no wealth-building infrastructure outside the day-to-day grind. What does not get measured leaks quietly, every single month.',
-    bridge:'The absence of systems is the most fixable of all four leaks. Most of what you are losing here can be recovered within 90 days of having the right structure in place.'},
-  blueprint:{name:'The Blueprint Saboteur',
-    desc:'Your biggest leak is invisible. It is not in your pricing, your calendar or your spreadsheets. It is in the unconscious story you carry about money, wealth, and what you deserve. You know what to do. Something else is running the show.',
-    bridge:'An unconscious money blueprint running below the surface will outlast every plan, course or strategy you layer on top of it. The only lever that changes the outcome is the one nobody talks about.'}
+  pricing:{name:'The Underprizer',desc:'Your audit shows your largest leak is in your pricing. You discount to close deals, you do work for free hoping it converts, and you consistently undercharge for the value you deliver. Every invoice you raise is smaller than it should be — not because the market will not pay more, but because a deeper pattern will not let you ask for it.',bridge:'Your pricing leak is rarely fixed by learning how to negotiate. Most people try that and slide back within months. The pattern that keeps recreating the discount, the free work, the fear of raising rates — that is what needs to change first.'},
+  time:{name:'The Bottleneck',desc:'Your audit shows your largest leak is in your time. You are the business — and your income is capped by the hours you can physically work. The moment you stop, everything stops. You cannot scale what only you can do, and you cannot buy back time you have already spent.',bridge:'More delegation tools will not fix a bottleneck pattern. The belief that "no one can do it like me" and the guilt that comes with taking your hands off — those run deeper than any productivity system. That is the layer that needs to be addressed first.'},
+  systems:{name:'The Winger',desc:'Your audit shows your largest leak is in your systems. You are running a significant business on instinct, memory, and guesswork. No tracking, no repeatable processes, no wealth-building structure outside the day-to-day. What does not get measured cannot be managed — and right now, very little is being measured.',bridge:'Most people know they need systems. The reason they never build them is not lack of knowledge — it is a belief that structure kills creativity, or an Avoider pattern that makes tracking finances feel overwhelming. The system is easy. The blueprint that resists it is the real obstacle.'},
+  blueprint:{name:'The Blueprint Saboteur',desc:'Your audit shows the primary leak is at the root level — your money blueprint. It is not in your pricing, your calendar, or your spreadsheet. It is in the unconscious belief system you formed about money, wealth, and what you deserve. You know what to do. Something below the surface is running a different programme.',bridge:'A money blueprint leak is invisible on a P&L but visible in your results. You have probably tried strategies and tactics that worked briefly and then reset. That is the blueprint reasserting itself. Strategies do not fix blueprints. The blueprint has to be addressed directly.'}
 };
 
-const BP={
-  worker:{name:'The Worthiness Worker',desc:'You believe money must be earned through visible effort. Passive income feels morally questionable. Rest feels like theft. This keeps you in a cycle of overworking for every dollar, because some part of you believes you have not truly earned it unless you suffered for it.',insight:'At MMI we call this the hard work trap. The shift from earning through effort to earning through value and leverage is the single biggest mental unlock for people with your blueprint.'},
-  pleasure:{name:'The Pleasure Seeker',desc:'You earn well and spend freely. Every income increase gets absorbed into a better lifestyle rather than a stronger financial foundation. The wealth never compounds because it gets spent as fast as it arrives, or faster.',insight:'This blueprint is not a discipline problem. It is an identity problem. When we change the story about what money is for, the behaviour follows automatically.'},
-  hoarder:{name:'The Guardian',desc:'Money feels like safety and spending it feels like a threat. Your savings account is barely touched but your wealth is not growing either. You need certainty before you invest, which means you miss every window.',insight:'The Guardian blueprint trades one form of financial fear for another. The goal is not reckless spending. It is releasing the anxiety so you can make bold, strategic decisions from a place of abundance.'},
-  avoider:{name:'The Avoider',desc:'You know you should look at your finances more carefully. But something makes you close the app, delay the conversation and skip the review. Avoidance is not laziness. It is a protective mechanism running below conscious awareness, and it is one of the most expensive patterns we see.',insight:'The fact that you completed this audit is significant. Most Avoiders do not get this far. That tells us something important about your readiness for what comes next.'},
-  resister:{name:'The Resentful Resister',desc:'There is a part of you that associates wealth with greed or moral compromise. This unconscious belief quietly sabotages your financial progress, because some part of you does not actually want to become one of those people.',insight:'This is one of the most powerful and most common blueprints we see at MMI. Separating what wealthy people do from who wealthy people are changes everything.'},
-  chaser:{name:'The Lottery Thinker',desc:'You believe the big break is coming. The deal, the connection, the viral moment. This keeps you in a state of perpetual readiness for a windfall rather than building consistent, compounding wealth.',insight:'At MMI we call this the windfall mentality. The shift is from waiting for luck to building systems, passive income structures that compound quietly and consistently, without needing the break.'},
-  worthy:{name:'The Conditional Receiver',desc:'You have tied your net worth to your self-worth. There is a number in your head and when you hit it, you will finally feel okay. But every time you approach it, something pulls you back, because the number is not the real target. The feeling is.',insight:'This blueprint creates a moving target that can never be reached by external achievement alone. The work at MMI addresses the root, so wealth becomes an expression of who you are, not proof of it.'}
+/* ============================================================
+   BLUEPRINT DEEP-DIVE DATA (from cheatsheet)
+   ============================================================ */
+const BP_DEEP={
+  worker:{
+    name:'The Hard Worker',
+    belief:'"I must earn every cent through effort and sacrifice."',
+    voice:'"If you are not exhausted, you are not trying hard enough. More hours equals more worth."',
+    behaviours:['Works 60 to 80 hour weeks as a badge of honour','Feels guilty resting or taking time away from work','Resists delegation — "no one does it like me"','Equates busyness with productivity and personal worth'],
+    watchout:['Burnout','Income ceiling','No leverage','Resentment','Health decline'],
+    upgrade:'Shift from trading time for money to building systems and leverage. Your worth is not measured in hours — it is measured in the value you create. The moment you internalise this, everything about how you work changes.'
+  },
+  pleasure:{
+    name:'The Pleasure Seeker',
+    belief:'"Money is for enjoying — life is too short to save it all."',
+    voice:'"You deserve this. You worked hard. One more purchase will not hurt. Save later, enjoy now."',
+    behaviours:['Lives paycheque to paycheque despite strong income','Impulse spending on lifestyle upgrades the moment income rises','Avoids looking at bank balances or statements','Believes any financial structure or restriction equals unhappiness'],
+    watchout:['No savings buffer','Debt spiral','Financial fragility','Lifestyle inflation'],
+    upgrade:'You can enjoy life AND build wealth. They are not opposites. The key is paying yourself first — automating savings before spending begins, so financial freedom compounds quietly alongside the life you enjoy now.'
+  },
+  hoarder:{
+    name:'The Saver',
+    belief:'"Security comes from saving — spending feels like losing."',
+    voice:'"Do not spend that. What if something goes wrong? Keep saving — it is never enough."',
+    behaviours:['Hoards cash in low-interest accounts while wealth stagnates','Too anxious to invest — "what if I lose it?"','Never feels financially secure regardless of how much is saved','Misses investment opportunities through excessive caution'],
+    watchout:['Money never grows','Missed wealth opportunities','Scarcity mindset','Relationship friction'],
+    upgrade:'Saving is a strength — but money sitting still is money dying slowly. The next step is making money work harder through smart, diversified investing. Safety and growth are not mutually exclusive.'
+  },
+  avoider:{
+    name:'The Avoider',
+    belief:'"If I do not look at my finances, they cannot stress me out."',
+    voice:'"I will sort it out later. It is too complicated. I am not a numbers person. Someone else will handle it."',
+    behaviours:['Never opens bank statements, invoices, or financial reports','Has no budget or financial plan in place','Defers all financial decisions to a partner or advisor','Panics when forced to confront the actual financial picture'],
+    watchout:['Hidden debt growing silently','Financial dependency','Missed tax obligations','Growing vulnerability'],
+    upgrade:'Awareness is the beginning of all financial power. You do not need to become a spreadsheet expert. Start with one habit — check your balance weekly. Financial confidence is built in small steps, not giant leaps.'
+  },
+  resister:{
+    name:'The Money Monk',
+    belief:'"Money corrupts. True meaning comes from things beyond wealth."',
+    voice:'"Money is not important. I do not want to be like those greedy people. I am above that."',
+    behaviours:['Undercharges or gives services away for free as a subconscious act of virtue','Feels moral superiority over wealthy people','Self-sabotages when income starts to rise','Attracts people with broke mindsets while repelling wealthy mentors'],
+    watchout:['Hard income ceiling','Resentment of others\' success','Self-sabotage patterns','Financial martyrdom'],
+    upgrade:'Wealth amplifies who you already are. A good person with money does more good in the world than a good person without it. You can have both meaning and financial freedom — they are not opposites, and never were.'
+  },
+  chaser:{
+    name:'The Gambler',
+    belief:'"The big win is just around the corner — I can feel it."',
+    voice:'"This is the one. Steady growth is boring — I want to win big. Double or nothing."',
+    behaviours:['Chases crypto, forex, and hot tips without a clear strategy','Makes high-risk moves based on feeling, not research','Gets bored with consistent, proven wealth-building approaches','Boom-and-bust financial cycles that repeat every few years'],
+    watchout:['Capital erosion','Impulsive decisions','Addiction-like patterns','No financial safety net'],
+    upgrade:'The real game is calculated risk management — strategic moves with a known downside and unlimited upside. Consistent, compounding strategy beats lucky timing every time across the long run. The boring path is the fast one.'
+  },
+  worthy:{
+    name:'The Idolizer',
+    belief:'"More money will finally make me feel good enough."',
+    voice:'"When I make it, people will respect me. I just need more — then I will be happy."',
+    behaviours:['Ties self-worth entirely to net worth and external income','Overspends on status symbols to manage how others perceive them','Never feels enough regardless of income or achievement level','Deep anxiety and emptiness sitting underneath financial success'],
+    watchout:['Emotional spending cycles','Constant comparison','Empty achievement','Hollow success'],
+    upgrade:'Worthiness is not earned — it is chosen. Build wealth from a foundation of inner security, not to fill an emotional hole. The hole never gets filled from the outside. When you understand this, wealth becomes a byproduct of who you are, not a replacement for it.'
+  }
 };
 
-/* Render results */
+/* ============================================================
+   QUICK WINS — personalised by primary leak type
+   ============================================================ */
+const QUICK_WINS={
+  pricing:[
+    {label:'Calculate your real rate — today',text:'Take last month\'s total revenue and divide it by the hours you worked. Write that number down. That is what you are currently charging per hour of your life. Then ask yourself: is that what you are worth? The gap between that number and the answer is your pricing leak in its most honest form.',action:'Do this before you close this page.'},
+    {label:'Find your 20 percent raise',text:'Identify one service, product, or retainer you could increase by 20 percent without losing the clients who actually value you. You are not raising it for everyone — test it on your next three enquiries only and observe what happens. You will be surprised how often the right clients do not flinch.',action:'Your next proposal goes out at the new price.'},
+    {label:'End the free work pattern',text:'Replace your next free consultation or unpaid discovery call with a paid strategy session. Charge a modest fee. Credit it toward the full engagement if they proceed. This one change filters out time-wasters, attracts serious buyers, and signals that your expertise has real value — because it does.',action:'Update your booking process this week.'}
+  ],
+  time:[
+    {label:'Build your delegation list',text:'Write down every task you completed in the last seven days. Circle anything that another person could do with thirty minutes of training. That list is your delegation backlog. Every item on it is a task that is keeping you the bottleneck and preventing the business from running without you.',action:'Do this exercise right now, before the next week starts.'},
+    {label:'Set a decision threshold',text:'Choose a dollar amount below which no decision requires your approval. Any purchase, hire, or operational choice under that amount proceeds without you. Communicate this to your team in writing by end of week. This single rule can free up several hours immediately.',action:'Announce it in writing — today or tomorrow.'},
+    {label:'Document one process this week',text:'Choose one recurring task that only you know how to do. Spend twenty minutes recording yourself doing it — a voice memo, a Loom video, or a written step-by-step. That recording is the first page of your operations manual. One process documented per week transforms your business within a quarter.',action:'One process. This week. Just one.'}
+  ],
+  systems:[
+    {label:'Start your weekly money date',text:'Block fifteen minutes every Monday morning — non-negotiable, in your calendar as a recurring event. Open your accounts. Review three numbers only: revenue received, expenses paid, and outstanding invoices. That is it. You cannot manage what you do not see, and you cannot see what you never look at.',action:'Open your calendar and block it right now.'},
+    {label:'Open your Financial Freedom Account',text:'Open a separate bank account today and label it Financial Freedom. Transfer a minimum of ten dollars to it now. The amount does not matter at this stage — the habit does. The principle behind this account is that you pay your own future first, before paying anyone else. Start the habit at any amount.',action:'Open the account before you close this page.'},
+    {label:'Find your actual number',text:'Pull your last three months of income and expenses. Calculate your average monthly revenue. Calculate your average monthly costs. The gap between these two numbers is your current real financial picture. If you do not know this number, you are flying your business entirely on feel.',action:'Find this number by the end of this week.'}
+  ],
+  blueprint:[
+    {label:'Write down the little voice',text:'Right now, write down the first sentence that comes to mind when you think about money — unedited, raw, exactly as it sounds in your head. That is your blueprint speaking. You cannot rewrite a script you have never read out loud. Most people have never done this and spend years wondering why strategies do not stick.',action:'Write it. Read it back. Ask: is this a fact or something I inherited?'},
+    {label:'Find the counter-evidence',text:'Name one person you genuinely respect who is both wealthy and a good human being. Study their story this week. Your blueprint says wealth and character cannot coexist. Their existence disproves that assumption. The more examples you find, the weaker the blueprint becomes.',action:'Name one person by the end of today.'},
+    {label:'Track the pattern for seven days',text:'For the next week, every time the little voice says something limiting about money or your right to wealth — write it down. You will be surprised how often it speaks. You cannot change a pattern you have not observed. Awareness always comes before the shift.',action:'Keep a note on your phone. Start tracking tonight.'}
+  ]
+};
+
+/* ============================================================
+   RENDER RESULTS
+   ============================================================ */
 function renderResults(){
   const r=calc();
   const arch=ARCH[r.primary]||ARCH.blueprint;
-  const bp=BP[state.bp]||BP.worker;
+  const bpKey=state.bp||'worker';
+  const bpd=BP_DEEP[bpKey]||BP_DEEP.worker;
+  const wins=QUICK_WINS[r.primary]||QUICK_WINS.blueprint;
   const nm=state.firstName;
   const totalChecks=state.pricing+state.time_leaks+state.systems;
   const sizeLabel={solo:'solopreneur',employee:'employee','2-5':'2 to 5 person business','6-10':'6 to 10 person business','11-25':'11 to 25 person business','26-50':'26 to 50 person business','51-100':'51 to 100 person business','100+':'100 person plus business'};
 
+  /* Header */
   document.getElementById('resGreet').textContent=nm?nm+', your personalised audit is complete.':'Your personalised audit is complete.';
   document.getElementById('totalNum').textContent=fmtFull(r.total);
   document.getElementById('calcNote').textContent=totalChecks+' identified leaks across your '+(sizeLabel[state.size]||'business')+', calculated against your revenue tier';
+
+  /* Archetype */
   document.getElementById('archName').textContent=arch.name;
   document.getElementById('archDesc').textContent=arch.desc;
+
+  /* Bars */
   document.getElementById('pAmt').textContent=r.p>0?fmtFull(r.p):'$0';
   document.getElementById('tAmt').textContent=r.t>0?fmtFull(r.t):'$0';
   document.getElementById('sAmt').textContent=r.s>0?fmtFull(r.s):'$0';
   document.getElementById('bAmt').textContent=fmtFull(r.b);
   window._bars={p:r.p/r.barMax*100,t:r.t/r.barMax*100,s:r.s/r.barMax*100,b:r.b/r.barMax*100};
-  document.getElementById('bpName').textContent=bp.name;
-  document.getElementById('bpDesc').textContent=bp.desc;
-  document.getElementById('bpInsight').textContent=bp.insight;
-  document.getElementById('bridgeH').textContent=(nm?nm+', the':'The')+' leaks are identified. Now it is time to seal them.';
+
+  /* Blueprint deep-dive */
+  document.getElementById('bpBeliefQ').textContent=bpd.belief;
+  document.getElementById('bpVoice').textContent=bpd.voice;
+  document.getElementById('bpBehList').innerHTML=bpd.behaviours.map(b=>`<div class="bp-beh-item"><span class="bp-beh-arrow">→</span><span>${b}</span></div>`).join('');
+  document.getElementById('bpWatchout').innerHTML=bpd.watchout.map(w=>`<span class="wtag">${w}</span>`).join('');
+  document.getElementById('bpUpgrade').textContent=bpd.upgrade;
+
+  /* Quick wins */
+  document.getElementById('quickWins').innerHTML=wins.map((w,i)=>`
+    <div class="win-card">
+      <div class="win-num">${i+1}</div>
+      <div>
+        <div class="win-lbl">${w.label}</div>
+        <div class="win-text">${w.text}</div>
+        <div class="win-do">→ ${w.action}</div>
+      </div>
+    </div>`).join('');
+
+  /* Bridge */
+  document.getElementById('bridgeH').textContent='These quick wins are the start. Not the seal.';
   document.getElementById('bridgeP1').textContent=arch.bridge;
 
   /* PDF meta */
-  document.getElementById('pdf-name').textContent=state.firstName+' '+state.lastName;
-  document.getElementById('pdf-date').textContent=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('pdfName').textContent=state.firstName+' '+state.lastName;
+  document.getElementById('pdfDate').textContent=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
 }
+function animateBars(){if(!window._bars)return;['p','t','s','b'].forEach(k=>document.getElementById(k+'Bar').style.width=window._bars[k]+'%');}
 
-function animateBars(){
-  if(!window._bars)return;
-  document.getElementById('pBar').style.width=window._bars.p+'%';
-  document.getElementById('tBar').style.width=window._bars.t+'%';
-  document.getElementById('sBar').style.width=window._bars.s+'%';
-  document.getElementById('bBar').style.width=window._bars.b+'%';
+document.getElementById('commitSlider').addEventListener('input',function(){state.commit=+this.value;document.getElementById('commitVal').textContent=this.value;});
+
+/* ============================================================
+   TESTIMONIAL AUTO-SWIPE
+   ============================================================ */
+let testiIdx=0;const TESTI_COUNT=4;
+function goTesti(n){
+  document.querySelectorAll('.testi-slide').forEach((s,i)=>s.classList.toggle('active',i===n));
+  document.querySelectorAll('.tdot').forEach((d,i)=>d.classList.toggle('on',i===n));
+  testiIdx=n;
 }
-
-/* PDF download via browser print */
-function downloadReport(){
-  window.print();
-}
-
-/* Slider */
-document.getElementById('commitSlider').addEventListener('input',function(){
-  state.commit=+this.value;
-  document.getElementById('commitVal').textContent=this.value;
-});
+function nextTesti(){goTesti((testiIdx+1)%TESTI_COUNT);}
+setInterval(nextTesti,4000);
 </script>
 </body>
 </html>
