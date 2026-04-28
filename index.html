@@ -450,6 +450,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .bu-icon{font-size:24px;flex-shrink:0}
 .bu-title{font-size:13px;font-weight:800;color:var(--green);margin-bottom:2px}
 .bu-sub{font-size:12px;color:var(--muted)}
+.bu-desc{font-size:12px;color:var(--body);line-height:1.55;margin-top:6px;padding-top:6px;border-top:1px solid rgba(201,168,76,.2)}
 
 /* Final CTA */
 .cta-result{background:var(--green);border-radius:12px;padding:28px 22px;text-align:center;margin-bottom:24px}
@@ -1248,7 +1249,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
       <!-- Quick wins -->
       <div class="res-sep"><span class="res-sep-lbl">3 Things You Can Do This Week</span></div>
-      <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.65">Specific to your primary leak. No event needed to start here.</p>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.65">Three immediate actions based on your primary leak. Start this week.</p>
       <div id="quickWins"></div>
 
       <!-- MOBILE ONLY: PDF download sits here, after quick wins -->
@@ -1260,7 +1261,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         </div>
         <div class="bonus-unlocked" style="margin-bottom:20px">
           <div class="bu-icon">&#127881;</div>
-          <div><div class="bu-title">Bonus Unlocked</div><div class="bu-sub">7 Money Blueprints Cheatsheet ($47) sent to your inbox.</div></div>
+          <div style="flex:1;min-width:0">
+            <div class="bu-title">Bonus Unlocked, Check Your Email</div>
+            <div class="bu-sub">Your <strong>7 Money Blueprints Cheatsheet</strong> ($47) is on its way to your inbox.</div>
+            <div class="bu-desc" id="buDescMob"></div>
+          </div>
         </div>
       </div>
 
@@ -1345,9 +1350,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <!-- Bonus -->
       <div class="bonus-unlocked" style="margin-bottom:14px">
         <div class="bu-icon">&#127881;</div>
-        <div>
-          <div class="bu-title">Bonus Unlocked</div>
-          <div class="bu-sub">7 Money Blueprints Cheatsheet ($47) sent to your inbox.</div>
+        <div style="flex:1;min-width:0">
+          <div class="bu-title">Bonus Unlocked, Check Your Email</div>
+          <div class="bu-sub">Your <strong>7 Money Blueprints Cheatsheet</strong> ($47) is on its way to your inbox.</div>
+          <div class="bu-desc" id="buDesc"></div>
         </div>
       </div>
 
@@ -1600,6 +1606,20 @@ const QUICK_WINS={
 };
 
 /* ============================================================
+   BONUS CHEATSHEET DESCRIPTIONS — personalised per blueprint
+   Tells the person exactly how the cheatsheet helps THEM
+   ============================================================ */
+const BONUS_DESC={
+  worker:'Open Blueprint #1 in your cheatsheet: The Hard Worker. It shows exactly why your effort ethic has been creating an income ceiling instead of building leverage, and gives you the specific upgrade that shifts your identity from earning through exhaustion to earning through value.',
+  pleasure:'Open Blueprint #2 in your cheatsheet: The Pleasure Seeker. It reveals why every income increase gets spent before it compounds, and shows the one reframe that lets you enjoy life now while quietly building serious wealth at the same time.',
+  hoarder:'Open Blueprint #3 in your cheatsheet: The Saver. It explains why your protective instinct is keeping your money static instead of growing, and gives you the upgrade path from saving as safety to investing as strength.',
+  avoider:'Open Blueprint #4 in your cheatsheet: The Avoider. It reveals exactly why looking at your finances has felt more threatening than empowering, and shows the small first step that breaks the avoidance cycle permanently.',
+  resister:'Open Blueprint #5 in your cheatsheet: The Money Monk. It shows why your values have been creating a hidden income ceiling, and reveals how to separate who you are from what you believe about money so wealth and purpose can coexist.',
+  chaser:'Open Blueprint #6 in your cheatsheet: The Gambler. It exposes why the big win mentality keeps you starting over instead of compounding, and gives you the strategic reframe from chasing luck to building asymmetric advantage.',
+  worthy:'Open Blueprint #7 in your cheatsheet: The Idolizer. It reveals why financial milestones keep moving the moment you reach them, and shows how to build wealth from inner security instead of using it to fill an emotional gap.'
+};
+
+/* ============================================================
    RENDER RESULTS
    ============================================================ */
 function renderResults(){
@@ -1655,6 +1675,13 @@ function renderResults(){
   /* Bridge */
   document.getElementById('bridgeH').textContent='These quick wins are the start. Not the seal.';
   document.getElementById('bridgeP1').textContent=arch.bridge;
+
+  /* Bonus cheatsheet personalised description */
+  const bonusDesc=BONUS_DESC[bpKey]||'';
+  const bdEl=document.getElementById('buDesc');
+  const bdElMob=document.getElementById('buDescMob');
+  if(bdEl) bdEl.textContent=bonusDesc;
+  if(bdElMob) bdElMob.textContent=bonusDesc;
 
   /* PDF meta */
   const dateStr=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
@@ -2113,7 +2140,7 @@ body{font-family:'Inter',system-ui,sans-serif;font-size:10.5pt;line-height:1.65;
 </div>
 
 <div class="sec-lbl">3 Things You Can Do This Week</div>
-<p style="font-size:9pt;color:#666;margin-bottom:4mm">Specific to your primary leak. No event needed to start here.</p>
+<p style="font-size:9pt;color:#666;margin-bottom:4mm">Three immediate actions based on your primary leak. Start this week.</p>
 ${winsHTML}
 </div>
 
