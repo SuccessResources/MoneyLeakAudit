@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1832,7 +1833,7 @@ function goTesti(n){
 function nextTesti(){goTesti((testiIdx+1)%TESTI_COUNT);}
 setInterval(nextTesti,4000);
 
-/* Opens the personalised PDF report in a new tab via report.js */
+/* Downloads the personalised PDF report directly via report.js */
 function downloadReport(){
   const r=calc();
   const arch=ARCH[r.primary]||ARCH.blueprint;
@@ -1845,7 +1846,7 @@ function downloadReport(){
     '11-25':'11 to 25 person business','26-50':'26 to 50 person business',
     '51-100':'51 to 100 person business','100+':'100 person plus business'};
   const bMax=r.barMax||1;
-  MoneyLeakReport.print({
+  MoneyLeakReport.save({
     name,
     total:    fmtFull(r.total),
     pricing:  fmtFull(r.p),
