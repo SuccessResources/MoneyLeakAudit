@@ -446,19 +446,61 @@ document.fonts.ready.then(function(){
 
   } /* end build */
 
-  /* ── Public API ─────────────────────────────────────── */
+  /* ── Build HTML (autoprint flag controls the inline script) ── */
+  function buildHTML(data, autoprint){
+    /* Temporarily swap the auto-print script based on context */
+    const original = build(data);
+    if(autoprint) return original;
+    /* Strip the auto-print <script> block for iframe use */
+    return original.replace(/<script>[\s\S]*?document\.fonts\.ready[\s\S]*?<\/script>/,'');
+  }
+
+  /* ── NEW: print inside current page via hidden iframe ──────── */
+  function printInPage(data){
+    /* Remove any leftover iframe from a previous click */
+    const old = document.getElementById('_mmi_rpt');
+    if(old) old.remove();
+
+    const frame = document.createElement('iframe');
+    frame.id = '_mmi_rpt';
+    /* Off-screen, invisible — user never sees it */
+    frame.style.cssText = [
+      'position:fixed','top:-9999px','left:-9999px',
+      'width:210mm','height:297mm',
+      'border:none','opacity:0','pointer-events:none','z-index:-1'
+    ].join(';');
+    document.body.appendChild(frame);
+
+    const html = buildHTML(data, false); /* no auto-print inside iframe */
+    const doc  = frame.contentDocument || frame.contentWindow.document;
+    doc.open();
+    doc.write(html);
+    doc.close();
+
+    /* Wait for fonts + images to load, then trigger print dialog */
+    frame.addEventListener('load', function(){
+      frame.contentWindow.focus();
+      setTimeout(function(){
+        frame.contentWindow.print();
+        /* Clean up iframe after dialog closes (5s grace) */
+        setTimeout(function(){ frame.remove(); }, 5000);
+      }, 1200);
+    });
+  }
+
+  /* ── Open in new tab (kept as fallback) ─────────────────────── */
   function openReport(data){
     const html = build(data);
     const win  = window.open('', '_blank');
-    if(!win){
-      alert('Pop-ups are blocked. Please allow pop-ups for this site, then click Download Report again.');
-      return;
-    }
+    if(!win){ alert('Pop-ups are blocked. Please allow pop-ups for this site.'); return; }
     win.document.open();
     win.document.write(html);
     win.document.close();
   }
 
-  global.MoneyLeakReport = { open: openReport };
+  global.MoneyLeakReport = {
+    print: printInPage,   /* same-page — recommended */
+    open:  openReport     /* new tab   — fallback     */
+  };
 
 })(window);
