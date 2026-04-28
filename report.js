@@ -381,7 +381,7 @@ body{
 
     ${sl('3 Things You Can Do This Week')}
     <p style="font-size:8.5pt;color:#777;margin-bottom:3mm;flex-shrink:0">
-      Specific to your primary leak. No event needed to start here.
+      Three immediate actions based on your primary leak. Start this week.
     </p>
     ${ws}
 
