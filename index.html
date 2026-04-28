@@ -1845,7 +1845,7 @@ function downloadReport(){
     '11-25':'11 to 25 person business','26-50':'26 to 50 person business',
     '51-100':'51 to 100 person business','100+':'100 person plus business'};
   const bMax=r.barMax||1;
-  MoneyLeakReport.save({
+  MoneyLeakReport.print({
     name,
     total:    fmtFull(r.total),
     pricing:  fmtFull(r.p),
