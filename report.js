@@ -372,38 +372,43 @@ body{
 </div>
 
 
-<!-- ═══════════════════════════════════
-     PAGE 3 — 3 Quick Wins
-     ═══════════════════════════════════ -->
+<!-- ═══════════════════════════════════════
+     PAGE 3 — 3 Quick Wins + Complete Solution
+     ═══════════════════════════════════════ -->
 <div class="page">
   ${hdr(d.name)}
   <div class="pc">
 
     ${sl('3 Things You Can Do This Week')}
-    <p style="font-size:8.5pt;color:#777;margin-bottom:4mm;flex-shrink:0">
+    <p style="font-size:8.5pt;color:#777;margin-bottom:3mm;flex-shrink:0">
       Specific to your primary leak. No event needed to start here.
     </p>
     ${ws}
-
-  </div>
-  ${ftr(3)}
-</div>
-
-
-<!-- ═══════════════════════════════════
-     PAGE 4 — Complete Solution + Closing
-     ═══════════════════════════════════ -->
-<div class="page">
-  ${hdr(d.name)}
-  <div class="pc">
 
     ${sl('The Complete Solution')}
     <div class="brc">
       <div class="brc-h">These quick wins are the start. Not the seal.</div>
       <p class="brc-p">${h(d.archBridge)}</p>
       <p class="brc-p">Every leak has two layers. The outer layer is the habit: charging too little, working too many hours, missing metrics. The inner layer is the blueprint, the belief that keeps recreating the habit even after you know better. Fixing the outer without addressing the inner is why most people improve briefly, then reset.</p>
-      <p class="brc-p">The <strong>Millionaire Mind Hybrid</strong> addresses both in 3 days. Day 1 installs the financial systems framework. Days 2 and 3 do the deep blueprint work, identifying where the pattern formed, releasing it, and rewiring it permanently.</p>
     </div>
+
+  </div>
+  ${ftr(3)}
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 4 — MMI Image + What Changes in 3 Days
+     ══════════════════════════════════════════ -->
+<div class="page">
+  ${hdr(d.name)}
+  <div class="pc">
+
+    <img
+      src="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/69f059e55e8f9_mmo22-web.png"
+      alt="Millionaire Mind Intensive"
+      style="width:100%;border-radius:8px;display:block;flex-shrink:0;margin-bottom:4mm;object-fit:cover;max-height:52mm"
+    >
 
     ${sl('What Changes in 3 Days')}
     <div class="out-lbl">Millionaire Mind Hybrid Programme Outcomes</div>
