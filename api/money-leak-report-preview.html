@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Leak Audit Report — Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   SCREEN PREVIEW — mirrors exact print output
+   Open this file, hit Print → Save as PDF
+   ============================================================ */
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --green: #1c3829;
+  --gold:  #c9a84c;
+  --gold-l:#ddb84e;
+  --red:   #dc2626;
+  --ora:   #ea580c;
+  --yel:   #ca8a04;
+  --pur:   #7c3aed;
+  --grn:   #16a34a;
+  --body:  #222222;
+  --muted: #444444;
+  --border:#cccccc;
+}
+
+/* ── SCREEN WRAPPER ──────────────────────────────── */
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:10.5pt;
+  line-height:1.65;
+  color:var(--body);
+  background:#d8d8d8;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+/* Simulate A4 page on screen */
+.page{
+  background:#fff;
+  width:210mm;
+  min-height:297mm;
+  margin:12mm auto;
+  padding:28mm 16mm 22mm;
+  position:relative;
+  box-shadow:0 4px 32px rgba(0,0,0,.2);
+}
+
+/* ── FIXED HEADER (appears on every printed page) ── */
+@page{
+  size:A4;
+  margin:28mm 16mm 22mm 16mm;
+}
+
+.page-hdr{
+  position:fixed;
+  top:0; left:0; right:0;
+  height:24mm;
+  padding:5mm 16mm 3mm;
+  background:#fff;
+  border-bottom:2.5px solid var(--green);
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+.ph-brand{}
+.ph-title{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:13.5pt;
+  font-weight:900;
+  color:var(--green);
+  letter-spacing:-.01em;
+  margin-bottom:1.5mm;
+  display:block;
+}
+.ph-sub{
+  font-size:8.5pt;
+  color:#666;
+  letter-spacing:.02em;
+  display:block;
+}
+.ph-logo img{
+  height:22px;
+  display:block;
+  opacity:.55;
+  filter:grayscale(1);
+}
+
+/* ── FIXED FOOTER (appears on every printed page) ── */
+.page-ftr{
+  position:fixed;
+  bottom:0; left:0; right:0;
+  height:14mm;
+  padding:0 16mm;
+  background:#fff;
+  border-top:1px solid #ddd;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+.pf-copy{font-size:7.5pt;color:#888}
+.pf-page{
+  background:var(--green);
+  color:#fff;
+  font-size:7.5pt;
+  font-weight:700;
+  padding:2px 10px;
+  letter-spacing:.05em;
+  font-family:'Inter',sans-serif;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+/* ── PAGE BREAK ─────────────────────────────────── */
+.page-break{
+  page-break-before:always;
+  break-before:page;
+}
+
+/* ── SECTION LABEL ──────────────────────────────── */
+.sec-lbl{
+  font-size:8pt;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-weight:700;
+  color:#888;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:8mm 0 4mm;
+}
+.sec-lbl::before,.sec-lbl::after{content:'';flex:1;height:1px;background:#ddd}
+
+/* ── BIG NUMBER CARD ─────────────────────────────── */
+.number-card{
+  background:var(--green);
+  border-radius:10px;
+  padding:10mm 12mm;
+  text-align:center;
+  margin-bottom:6mm;
+  position:relative;
+  overflow:hidden;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+.number-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-l),var(--gold));
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.nc-lbl{
+  font-size:8pt;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:rgba(255,255,255,.6);
+  font-weight:700;
+  margin-bottom:4mm;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.nc-num{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:38pt;
+  font-weight:900;
+  color:var(--gold-l);
+  line-height:1;
+  letter-spacing:-.02em;
+  margin-bottom:3mm;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.nc-sub{
+  font-size:11pt;
+  color:rgba(255,255,255,.7);
+  margin-bottom:4mm;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.nc-note{
+  font-size:8pt;
+  color:rgba(255,255,255,.5);
+  background:rgba(255,255,255,.08);
+  border-radius:100px;
+  padding:3px 12px;
+  display:inline-block;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+
+/* ── ARCHETYPE CARD ──────────────────────────────── */
+.arch-card{
+  border:1.5px solid var(--gold);
+  border-radius:8px;
+  padding:6mm 8mm;
+  margin-bottom:5mm;
+  position:relative;
+  page-break-inside:avoid;
+}
+.arch-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--gold);border-radius:3px 3px 0 0;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.arch-eye{
+  font-size:8pt;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:700;color:var(--gold);margin-bottom:2mm;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.arch-name{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:16pt;font-weight:800;color:var(--green);margin-bottom:2.5mm;
+}
+.arch-desc{font-size:10pt;color:var(--body);line-height:1.65}
+
+/* ── BREAKDOWN BARS ──────────────────────────────── */
+.breakdown-card{
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:6mm 8mm;
+  margin-bottom:5mm;
+  page-break-inside:avoid;
+}
+.bcard-title{font-size:10pt;font-weight:800;color:var(--green);margin-bottom:4mm}
+.brow{margin-bottom:3.5mm}
+.brow:last-child{margin-bottom:0}
+.brow-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5mm}
+.bcat{font-size:9.5pt;font-weight:700;color:var(--body);display:flex;align-items:center;gap:5px}
+.bdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.bdot-r{background:var(--red)}.bdot-o{background:var(--ora)}
+.bdot-y{background:var(--yel)}.bdot-p{background:var(--pur)}
+.bamt{font-size:10pt;font-weight:800}
+.bamt-r{color:var(--red)}.bamt-o{color:var(--ora)}
+.bamt-y{color:var(--yel)}.bamt-p{color:var(--pur)}
+.bar-track{height:8px;background:#e8e3dc;border-radius:4px;overflow:hidden;
+           -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.bar-fill{height:100%;border-radius:4px;
+          -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.bf-r{background:var(--red)}.bf-o{background:var(--ora)}
+.bf-y{background:var(--yel)}.bf-p{background:var(--pur)}
+
+/* ── BLUEPRINT CARD ──────────────────────────────── */
+.bp-wrap{border-radius:8px;overflow:hidden;margin-bottom:5mm;page-break-inside:avoid}
+.bp-belief{
+  background:var(--green);padding:6mm 8mm;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.bp-belief-eye{font-size:7.5pt;text-transform:uppercase;letter-spacing:.14em;
+               font-weight:800;color:rgba(255,255,255,.55);margin-bottom:2.5mm;
+               -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.bp-belief-q{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:13pt;font-style:italic;
+  color:#fff;line-height:1.4;
+  border-left:3px solid var(--gold);padding-left:3mm;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.bp-block{padding:4mm 8mm;border:1px solid #ddd;border-top:none}
+.bp-block:last-child{border-radius:0 0 8px 8px}
+.bp-block-eye{font-size:7.5pt;text-transform:uppercase;letter-spacing:.12em;
+              font-weight:800;margin-bottom:2mm}
+.eye-gold{color:var(--gold);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.eye-grn{color:var(--grn);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.eye-red{color:var(--red);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.eye-dk{color:var(--green)}
+.bp-text{font-size:9.5pt;color:var(--body);line-height:1.65;font-style:italic}
+.bp-list{list-style:none;font-size:9.5pt;color:var(--body);display:grid;gap:1.5mm}
+.bp-list li::before{content:'→';color:var(--gold);margin-right:4px;font-weight:700;
+                    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.watch-tags{display:flex;flex-wrap:wrap;gap:4px}
+.wtag{
+  background:#fef2f2;border:1px solid #fecaca;
+  color:var(--red);font-size:8pt;font-weight:700;
+  padding:2px 8px;border-radius:100px;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.upgrade-block{
+  background:#f0fdf4;border:1px solid #bbf7d0;
+  padding:4mm 8mm;border-top:none;border-radius:0 0 8px 8px;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.upgrade-eye{font-size:7.5pt;text-transform:uppercase;letter-spacing:.12em;
+             font-weight:800;color:var(--grn);margin-bottom:2mm;
+             -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.upgrade-text{font-size:9.5pt;color:#15803d;line-height:1.65;font-weight:500;
+              -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+
+/* ── QUICK WIN CARDS ─────────────────────────────── */
+.win-card{
+  display:flex;gap:4mm;align-items:flex-start;
+  border:1px solid var(--border);border-radius:8px;
+  padding:5mm 6mm;margin-bottom:3mm;page-break-inside:avoid;
+}
+.win-num{
+  width:7mm;height:7mm;min-width:7mm;
+  border-radius:50%;
+  background:var(--green);color:var(--gold);
+  font-size:10pt;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:0.5mm;
+  font-family:'Playfair Display',serif;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.win-lbl{font-size:7.5pt;text-transform:uppercase;letter-spacing:.1em;
+         font-weight:800;color:var(--gold);margin-bottom:1.5mm;
+         -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.win-text{font-size:9.5pt;color:var(--body);line-height:1.6;margin-bottom:1.5mm}
+.win-do{font-size:8.5pt;color:var(--grn);font-weight:700;font-style:italic;
+        -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+
+/* ── BRIDGE CARD ─────────────────────────────────── */
+.bridge-card{
+  background:#f5f0e9;border:1px solid #ddd5c8;
+  border-radius:8px;padding:6mm 8mm;margin-bottom:4mm;page-break-inside:avoid;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.bridge-h{font-family:'Playfair Display',serif;font-size:12pt;font-weight:800;
+          color:var(--green);margin-bottom:3mm}
+.bridge-p{font-size:9.5pt;color:#333;line-height:1.75;margin-bottom:2.5mm}
+.bridge-p:last-child{margin-bottom:0}
+
+/* ── OUTCOMES ─────────────────────────────────────── */
+.outcomes-lbl{font-size:8pt;text-transform:uppercase;letter-spacing:.1em;
+              font-weight:700;color:#666;margin-bottom:3mm}
+.out-item{display:flex;gap:3mm;align-items:flex-start;
+          padding:2.5mm 0;border-bottom:1px solid #eee;font-size:9.5pt;color:var(--body)}
+.out-item:last-child{border-bottom:none}
+.out-chk{color:var(--grn);font-weight:800;flex-shrink:0;margin-top:0.5mm;
+         -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+
+/* ── SCREEN ONLY: print button ───────────────────── */
+.print-btn{
+  display:block;
+  position:fixed;top:12px;right:12px;
+  background:#1c3829;color:#fff;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:700;
+  padding:10px 20px;border-radius:6px;cursor:pointer;border:none;
+  z-index:9999;
+}
+@media print{
+  .print-btn{display:none!important}
+  body{background:#fff!important}
+  .page{
+    box-shadow:none!important;
+    margin:0!important;
+    width:100%!important;
+    padding:28mm 16mm 22mm!important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">⬇ Save as PDF</button>
+
+<!-- ============================================================
+     FIXED HEADER — appears on every printed page
+     ============================================================ -->
+<div class="page-hdr">
+  <div class="ph-brand">
+    <span class="ph-title">MONEY LEAK AUDIT REPORT</span>
+    <span class="ph-sub">Personalized for Jason Fan &nbsp;·&nbsp; Millionaire Mind Intensive &nbsp;·&nbsp; T. Harv Eker</span>
+  </div>
+  <div class="ph-logo">
+    <img src="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/ff96df6f1fde9_b0cbdd4d2f0ff-605c893fed0f4-sr-percent-20logo-percent-20white.png" alt="Success Resources">
+  </div>
+</div>
+
+<!-- ============================================================
+     FIXED FOOTER — appears on every printed page
+     ============================================================ -->
+<div class="page-ftr">
+  <span class="pf-copy">© 2026 Success Resources &nbsp;|&nbsp; Millionaire Mind Intensive</span>
+  <span class="pf-page">CONFIDENTIAL</span>
+</div>
+
+
+<!-- ============================================================
+     PAGE 1 — Number + Archetype + Bars
+     ============================================================ -->
+<div class="page">
+
+  <!-- Big Number -->
+  <div class="number-card">
+    <div class="nc-lbl">Your Estimated Annual Money Leak</div>
+    <div class="nc-num">S$234,000</div>
+    <div class="nc-sub">per year slipping through the cracks</div>
+    <div class="nc-note">3 identified leaks across your solopreneur business, calculated against your revenue tier</div>
+  </div>
+
+  <!-- Your Primary Leak Type -->
+  <div class="sec-lbl">Your Primary Leak Type</div>
+  <div class="arch-card">
+    <div class="arch-eye">Identified from your answers</div>
+    <div class="arch-name">The Underprizer</div>
+    <div class="arch-desc">Your audit shows your largest leak is in your pricing. You discount to close deals, you do work for free hoping it converts, and you consistently undercharge for the value you deliver. Every invoice you raise is smaller than it should be, not because the market will not pay more, but because a deeper pattern will not let you ask for it.</div>
+  </div>
+
+  <!-- Breakdown Bars -->
+  <div class="sec-lbl">Where Your Money Is Leaking</div>
+  <div class="breakdown-card">
+    <div class="bcard-title">Annual Cost by Category</div>
+
+    <div class="brow">
+      <div class="brow-top">
+        <span class="bcat"><span class="bdot bdot-r"></span>Pricing Leaks</span>
+        <span class="bamt bamt-r">S$98,000</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill bf-r" style="width:80%"></div></div>
+    </div>
+
+    <div class="brow">
+      <div class="brow-top">
+        <span class="bcat"><span class="bdot bdot-o"></span>Time Leaks</span>
+        <span class="bamt bamt-o">S$74,000</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill bf-o" style="width:60%"></div></div>
+    </div>
+
+    <div class="brow">
+      <div class="brow-top">
+        <span class="bcat"><span class="bdot bdot-y"></span>Systems Leaks</span>
+        <span class="bamt bamt-y">S$42,000</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill bf-y" style="width:35%"></div></div>
+    </div>
+
+    <div class="brow">
+      <div class="brow-top">
+        <span class="bcat"><span class="bdot bdot-p"></span>Blueprint Tax</span>
+        <span class="bamt bamt-p">S$20,000</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill bf-p" style="width:17%"></div></div>
+    </div>
+
+  </div>
+
+</div><!-- /page 1 -->
+
+
+<!-- ============================================================
+     PAGE 2 — Blueprint Deep-Dive
+     ============================================================ -->
+<div class="page page-break">
+
+  <!-- Blueprint Pattern -->
+  <div class="sec-lbl">Your Money Blueprint Pattern</div>
+
+  <div class="bp-wrap">
+
+    <div class="bp-belief">
+      <div class="bp-belief-eye">Your Money Blueprint &nbsp;·&nbsp; Core Belief</div>
+      <div class="bp-belief-q">"I must earn every cent through effort and sacrifice."</div>
+    </div>
+
+    <div class="bp-block">
+      <div class="bp-block-eye eye-gold">The Little Voice In Your Head</div>
+      <div class="bp-text">"If you are not exhausted, you are not trying hard enough. More hours equals more worth."</div>
+    </div>
+
+    <div class="bp-block">
+      <div class="bp-block-eye eye-dk">How It Shows Up In Your Business</div>
+      <ul class="bp-list">
+        <li>Works 60 to 80 hour weeks as a badge of honour</li>
+        <li>Feels guilty resting or taking time away from work</li>
+        <li>Resists delegation, "no one does it like me"</li>
+        <li>Equates busyness with productivity and personal worth</li>
+      </ul>
+    </div>
+
+    <div class="bp-block">
+      <div class="bp-block-eye eye-red">Watch Out For</div>
+      <div class="watch-tags">
+        <span class="wtag">Burnout</span>
+        <span class="wtag">Income ceiling</span>
+        <span class="wtag">No leverage</span>
+        <span class="wtag">Resentment</span>
+        <span class="wtag">Health decline</span>
+      </div>
+    </div>
+
+    <div class="upgrade-block">
+      <div class="upgrade-eye">The Upgrade</div>
+      <div class="upgrade-text">Shift from trading time for money to building systems and leverage. Your worth is not measured in hours, it is measured in the value you create. The moment you internalise this, everything about how you work changes.</div>
+    </div>
+
+  </div><!-- /bp-wrap -->
+
+  <!-- Quick Wins -->
+  <div class="sec-lbl">3 Things You Can Do This Week</div>
+  <p style="font-size:9pt;color:#666;margin-bottom:4mm">Specific to your primary leak. No event needed to start here.</p>
+
+  <div class="win-card">
+    <div class="win-num">1</div>
+    <div>
+      <div class="win-lbl">Calculate your real rate — today</div>
+      <div class="win-text">Take last month's total revenue and divide it by total hours worked. Write that number down. That is what you are currently charging per hour of your life. Then ask yourself: is that what you are worth?</div>
+      <div class="win-do">→ Do this before you close this page.</div>
+    </div>
+  </div>
+
+  <div class="win-card">
+    <div class="win-num">2</div>
+    <div>
+      <div class="win-lbl">Find your 20 percent raise</div>
+      <div class="win-text">Identify one service, product, or retainer you could increase by 20 percent without losing the right clients. Test it on your next three enquiries only and observe what happens.</div>
+      <div class="win-do">→ Your next proposal goes out at the new price.</div>
+    </div>
+  </div>
+
+  <div class="win-card">
+    <div class="win-num">3</div>
+    <div>
+      <div class="win-lbl">End the free work pattern</div>
+      <div class="win-text">Replace your next free consultation with a paid strategy session. Charge a modest fee and credit it toward the full engagement if they proceed. This one change filters out time-wasters and signals that your expertise has real value.</div>
+      <div class="win-do">→ Update your booking process this week.</div>
+    </div>
+  </div>
+
+</div><!-- /page 2 -->
+
+
+<!-- ============================================================
+     PAGE 3 — The Complete Solution
+     ============================================================ -->
+<div class="page page-break">
+
+  <div class="sec-lbl">The Complete Solution</div>
+
+  <div class="bridge-card">
+    <div class="bridge-h">These quick wins are the start. Not the seal.</div>
+    <p class="bridge-p">Your pricing leak is rarely fixed by learning how to negotiate. Most people try that and slide back within months. The pattern that keeps recreating the discount, the free work, the fear of raising rates, that is what needs to change first.</p>
+    <p class="bridge-p">Every leak has two layers. The outer layer is the habit: charging too little, working too many hours, missing metrics. The inner layer is the blueprint, the belief that keeps recreating the habit even after you know better. Fixing the outer without addressing the inner is why most people improve briefly, then reset.</p>
+    <p class="bridge-p">The <strong>Millionaire Mind Hybrid</strong> addresses both in 3 days. Day 1 installs the financial systems framework. Days 2 and 3 do the deep blueprint work, identifying where the pattern formed, releasing it, and rewiring it permanently.</p>
+  </div>
+
+  <!-- What changes in 3 days -->
+  <div class="sec-lbl">What Changes in 3 Days</div>
+  <div class="outcomes-lbl">Millionaire Mind Hybrid Programme Outcomes</div>
+
+  <div class="out-item"><span class="out-chk">✓</span><span><strong>Day 1:</strong> Complete money management system, 6 accounts set up and running, including your Financial Freedom Account</span></div>
+  <div class="out-item"><span class="out-chk">✓</span><span><strong>Day 2:</strong> Blueprint pattern identified at the root, where it formed, what it costs, and what it sounds like in real time</span></div>
+  <div class="out-item"><span class="out-chk">✓</span><span><strong>Day 3:</strong> Pattern released through a proven conditioning process used with 1.5 million graduates worldwide</span></div>
+  <div class="out-item"><span class="out-chk">✓</span><span>Personalised passive income plan and your specific Financial Freedom number</span></div>
+  <div class="out-item"><span class="out-chk">✓</span><span>Pricing and leverage frameworks specific to your business size and industry</span></div>
+
+  <!-- Closing note -->
+  <div style="margin-top:8mm;padding:6mm 8mm;border:1px solid #ddd5c8;border-radius:8px;background:#f5f0e9">
+    <div style="font-family:'Playfair Display',serif;font-size:11pt;font-weight:800;color:#1c3829;margin-bottom:2.5mm">Ready to seal these leaks permanently?</div>
+    <p style="font-size:9.5pt;color:#333;line-height:1.65;margin-bottom:3mm">You have seen the number. You know the blueprint. You have your first three steps. The question now is how fast you want to seal it, and whether you want to do it alone or with 23 years of proven methodology behind you.</p>
+    <div style="font-size:9.5pt;font-weight:700;color:#1c3829">Visit: millionairemindworld.com &nbsp;·&nbsp; Claim your spot at Millionaire Mind Hybrid</div>
+  </div>
+
+  <!-- Branding sign-off -->
+  <div style="margin-top:8mm;text-align:center;padding-top:5mm;border-top:1px solid #ddd">
+    <div style="font-family:'Playfair Display',serif;font-size:11pt;color:#1c3829;font-weight:700">Millionaire Mind Intensive</div>
+    <div style="font-size:8pt;color:#888;margin-top:1.5mm">T. Harv Eker &nbsp;·&nbsp; Success Resources &nbsp;·&nbsp; millionairemindworld.com</div>
+    <div style="font-size:8pt;color:#bbb;margin-top:1mm">10 million attendees &nbsp;·&nbsp; 30 countries &nbsp;·&nbsp; 23 years</div>
+  </div>
+
+</div><!-- /page 3 -->
+
+</body>
+</html>
