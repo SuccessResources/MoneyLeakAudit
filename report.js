@@ -548,18 +548,23 @@ document.fonts.ready.then(function(){
     document.body.appendChild(frame);
 
     const html = buildHTML(data, false); /* no auto-print inside iframe */
-    const doc  = frame.contentDocument || frame.contentWindow.document;
-    doc.open();
-    doc.write(html);
-    doc.close();
+
+    /* Use a blob: URL so Chrome does NOT inject the parent page URL
+       as a print header — this prevents blank pages on mobile       */
+    const blob    = new Blob([html], { type: 'text/html' });
+    const blobUrl = URL.createObjectURL(blob);
+    frame.src = blobUrl;
 
     /* Wait for fonts + images to load, then trigger print dialog */
     frame.addEventListener('load', function(){
       frame.contentWindow.focus();
       setTimeout(function(){
         frame.contentWindow.print();
-        /* Clean up iframe after dialog closes (5s grace) */
-        setTimeout(function(){ frame.remove(); }, 5000);
+        /* Clean up after dialog closes (5s grace) */
+        setTimeout(function(){
+          URL.revokeObjectURL(blobUrl);
+          frame.remove();
+        }, 5000);
       }, 1200);
     });
   }
