@@ -455,7 +455,83 @@ document.fonts.ready.then(function(){
     return original.replace(/<script>[\s\S]*?document\.fonts\.ready[\s\S]*?<\/script>/,'');
   }
 
-  /* ── NEW: print inside current page via hidden iframe ──────── */
+  /* ── SAVE: direct download via html2pdf.js (zero dialog) ───── */
+  function saveAsPDF(data){
+
+    function doSave(){
+      /* Parse the built HTML */
+      const raw     = build(data, false);
+      const parser  = new DOMParser();
+      const doc     = parser.parseFromString(raw, 'text/html');
+
+      /* Pull the CSS text out of the <style> tag */
+      const styleTag = doc.querySelector('style');
+      const cssText  = styleTag ? styleTag.textContent : '';
+
+      /* Remove toolbar + scripts from the pages we'll render */
+      doc.querySelectorAll('.bar, script').forEach(el => el.remove());
+
+      /* Inject CSS into <head> temporarily so html2canvas can see it */
+      const tmpStyle = document.createElement('style');
+      tmpStyle.id = '_rpt_css';
+      /* Add page-break rule outside @media so html2pdf respects it */
+      tmpStyle.textContent = cssText + '\n.page{page-break-after:always;break-after:page;}';
+      document.head.appendChild(tmpStyle);
+
+      /* Create off-screen container with the page divs */
+      const wrap = document.createElement('div');
+      wrap.id    = '_rpt_wrap';
+      wrap.style.cssText = [
+        'position:fixed','left:-300%','top:0',
+        'width:210mm','background:#fff',
+        'z-index:-9999','pointer-events:none'
+      ].join(';');
+      wrap.innerHTML = doc.body.innerHTML;
+      document.body.appendChild(wrap);
+
+      /* Clean up helper */
+      function cleanup(){ tmpStyle.remove(); wrap.remove(); }
+
+      /* Name the file */
+      const fname = 'Money-Leak-Audit-'
+        + (data.name || 'Report').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-')
+        + '.pdf';
+
+      html2pdf()
+        .set({
+          margin:     0,
+          filename:   fname,
+          image:      { type:'jpeg', quality:0.95 },
+          html2canvas:{ scale:2, useCORS:true, allowTaint:true, logging:false },
+          jsPDF:      { unit:'mm', format:'a4', orientation:'portrait' },
+          pagebreak:  { before:'.page', mode:['css','legacy'] }
+        })
+        .from(wrap)
+        .save()
+        .then(cleanup)
+        .catch(err => {
+          console.warn('html2pdf failed, falling back to print dialog:', err);
+          cleanup();
+          printInPage(data); /* fallback: iframe print */
+        });
+    }
+
+    /* Lazy-load html2pdf.js from CDN on first use */
+    if(typeof html2pdf !== 'undefined'){
+      doSave();
+    } else {
+      const s    = document.createElement('script');
+      s.src      = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+      s.onload   = doSave;
+      s.onerror  = function(){
+        console.warn('html2pdf CDN unavailable, falling back to print dialog');
+        printInPage(data);
+      };
+      document.head.appendChild(s);
+    }
+  }
+
+  /* ── PRINT: inside current page via hidden iframe ───────────── */
   function printInPage(data){
     /* Remove any leftover iframe from a previous click */
     const old = document.getElementById('_mmi_rpt');
@@ -499,8 +575,9 @@ document.fonts.ready.then(function(){
   }
 
   global.MoneyLeakReport = {
-    print: printInPage,   /* same-page — recommended */
-    open:  openReport     /* new tab   — fallback     */
+    save:  saveAsPDF,     /* zero dialog — direct download ✓ */
+    print: printInPage,   /* same-page print dialog          */
+    open:  openReport     /* new tab — fallback              */
   };
 
 })(window);
