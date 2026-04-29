@@ -64,7 +64,7 @@ a{color:var(--gold);text-decoration:none}
    ============================================================ */
 
 /* ════════════════════════════════════════════════════════════
-   HERO  —  2-column layout matching the mockup design
+   HERO ,  2-column layout matching the mockup design
    Left : badge + headline + bullets + CTA + trust bar
    Right: coffee image (top) + cheatsheet + bonus + warning (bottom)
    ════════════════════════════════════════════════════════════ */
@@ -103,7 +103,7 @@ a{color:var(--gold);text-decoration:none}
 .dark .ib-text{color:rgba(255,255,255,.9)}
 .ib-text strong{font-weight:700}
 
-/* Hero CTA — matches scarcity badge red #c53030 */
+/* Hero CTA, matches scarcity badge red #c53030 */
 .hero-cta-new{
   display:block;width:100%;
   background:#c53030;color:#fff;
@@ -133,7 +133,7 @@ a{color:var(--gold);text-decoration:none}
 .hero-coffee-img img{width:100%;height:100%;object-fit:cover;object-position:center 45%;display:block}
 
 /* Bottom grid: book + stacked cards */
-/* Redesigned cheatsheet bonus card — column layout */
+/* Redesigned cheatsheet bonus card, column layout */
 .cs-card{background:var(--cream);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
 .cs-top{display:flex;gap:12px;align-items:flex-start}
 .cs-img{width:80px;height:auto;flex-shrink:0;border-radius:6px;box-shadow:3px 5px 16px rgba(0,0,0,.15);display:block}
@@ -598,16 +598,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .cdc-hdr-icon{font-size:22px;flex-shrink:0}
 .cdc-hdr-text strong{display:block;font-size:13px;font-weight:800;color:#fff;margin-bottom:1px}
 .cdc-hdr-text span{font-size:10px;color:rgba(255,255,255,.55)}
-.cdc-body{padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
-.cdc-img{width:72px;flex-shrink:0;border-radius:6px;box-shadow:3px 4px 14px rgba(0,0,0,.15);display:block}
-.cdc-info{}
-.cdc-name{font-size:12.5px;font-weight:800;color:var(--green);line-height:1.35;margin-bottom:4px}
-.cdc-why{font-size:11.5px;color:var(--muted);line-height:1.55;margin-bottom:8px}
-.cdc-personalized{font-size:11.5px;color:var(--body);line-height:1.55;background:rgba(201,168,76,.08);border-left:3px solid var(--gold);padding:7px 10px;border-radius:0 5px 5px 0;margin-bottom:0}
-.cdc-footer{padding:12px 16px;border-top:1px solid rgba(201,168,76,.2);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.cdc-dl{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;padding:10px 18px;border-radius:7px;text-decoration:none;transition:background .12s;white-space:nowrap}
+/* Title row full-width */
+.cdc-title-row{padding:14px 16px 10px;border-bottom:1px solid rgba(201,168,76,.15)}
+.cdc-name{font-size:13px;font-weight:800;color:var(--green);line-height:1.35}
+/* Body: image left + personalized description fills right */
+.cdc-body{padding:12px 16px;display:flex;gap:14px;align-items:flex-start}
+.cdc-img{width:88px;flex-shrink:0;border-radius:6px;box-shadow:4px 5px 16px rgba(0,0,0,.16);display:block}
+.cdc-personalized{font-size:12px;color:var(--body);line-height:1.65;background:rgba(201,168,76,.06);border-left:3px solid var(--gold);padding:9px 12px;border-radius:0 6px 6px 0;flex:1;min-width:0}
+.cdc-footer{padding:12px 16px;border-top:1px solid rgba(201,168,76,.2);display:flex;align-items:center;gap:10px}
+.cdc-dl{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--green);color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;padding:11px 0;border-radius:7px;text-decoration:none;transition:background .12s;flex:1}
 .cdc-dl:hover{background:var(--green2)}
-.cdc-email{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;flex:1}
+.cdc-email{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;white-space:nowrap}
 
 /* Sidebar CTA card */
 .sb-cta{background:var(--green);border-radius:12px;padding:20px;margin-bottom:14px;text-align:center}
@@ -865,7 +866,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
               A <strong style="color:var(--body)">3-minute diagnostic</strong> that calculates your exact annual revenue leak across pricing, time, systems, and your money blueprint. Free, instant, personalised to your business.
             </p>
 
-            <!-- Simple deliverables — no box, just clean checks -->
+            <!-- Simple deliverables, no box, just clean checks -->
             <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:20px">
               <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--green)">
                 <span style="color:var(--grn);font-size:14px">✓</span> Your personalised annual loss figure
@@ -929,7 +930,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
               >
             </div>
 
-            <!-- Redesigned cheatsheet bonus card — unified, premium -->
+            <!-- Redesigned cheatsheet bonus card, unified, premium -->
             <div class="cs-card">
               <div class="cs-top">
                 <img
@@ -1042,7 +1043,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
     </div>
 
-    <!-- Dark pull-quote band — "The Real Difference" -->
+    <!-- Dark pull-quote band, "The Real Difference" -->
     <div class="cqb">
       <div class="wrap-wide">
         <div class="cqb-inner">
@@ -1050,7 +1051,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             <div class="cqb-tag">The Real Difference</div>
             <div class="cqb-quote">"Two business owners. Same revenue.<br><em>One builds wealth. One wonders where it went."</em></div>
             <div class="cqb-sub">It's not discipline. It's not intelligence. It's not even how hard you work. Across 23 years and 1.5 million graduates, the single biggest predictor of financial outcomes is the <strong>unconscious money pattern running in the background.</strong> The difference is always the leak.</div>
-            <!-- Fix 3: CTA inside the dark band — catches people at their emotional peak -->
+            <!-- Fix 3: CTA inside the dark band, catches people at their emotional peak -->
             <button onclick="startQuiz()" style="display:inline-flex;align-items:center;gap:8px;margin-top:24px;background:var(--gold);color:var(--green);font-family:'Inter',sans-serif;font-size:15px;font-weight:800;padding:14px 28px;border-radius:8px;border:none;cursor:pointer;transition:opacity .15s">
               Find Which Leak Is Costing You Most &nbsp;→
             </button>
@@ -1331,10 +1332,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
       <div class="field-lbl">How would you describe your profit consistency?</div>
       <div class="opt-grid" id="profitGrid">
-        <button class="opt" onclick="pick('profit','clear',this)"><span class="dot"></span>Highly predictable — clear margins, stable cash flow</button>
-        <button class="opt" onclick="pick('profit','fluctuates',this)"><span class="dot"></span>Somewhat predictable — fluctuates month to month</button>
-        <button class="opt" onclick="pick('profit','unclear',this)"><span class="dot"></span>Unclear — revenue comes in, but profit is inconsistent</button>
-        <button class="opt" onclick="pick('profit','none',this)"><span class="dot"></span>No visibility — I do not track profit closely</button>
+        <button class="opt" onclick="pick('profit','clear',this)"><span class="dot"></span>Highly predictable, clear margins, stable cash flow</button>
+        <button class="opt" onclick="pick('profit','fluctuates',this)"><span class="dot"></span>Somewhat predictable, fluctuates month to month</button>
+        <button class="opt" onclick="pick('profit','unclear',this)"><span class="dot"></span>Unclear, revenue comes in, but profit is inconsistent</button>
+        <button class="opt" onclick="pick('profit','none',this)"><span class="dot"></span>No visibility, I do not track profit closely</button>
       </div>
 
       <div class="nav-row">
@@ -1372,10 +1373,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div class="q-num">Q1</div>
         <div class="q-text">How often do you discount to close deals?</div>
         <div class="opt-grid">
-          <button class="opt" onclick="scoreQ('pricing',0,0,this)"><span class="dot"></span>Rarely — I hold firm on value-based pricing</button>
-          <button class="opt" onclick="scoreQ('pricing',0,1,this)"><span class="dot"></span>Occasionally — only when genuinely necessary</button>
-          <button class="opt" onclick="scoreQ('pricing',0,2,this)"><span class="dot"></span>Frequently — 10 to 30 percent discounts are common</button>
-          <button class="opt" onclick="scoreQ('pricing',0,3,this)"><span class="dot"></span>Almost always — price is my main closing tool</button>
+          <button class="opt" onclick="scoreQ('pricing',0,0,this)"><span class="dot"></span>Rarely, I hold firm on value-based pricing</button>
+          <button class="opt" onclick="scoreQ('pricing',0,1,this)"><span class="dot"></span>Occasionally, only when genuinely necessary</button>
+          <button class="opt" onclick="scoreQ('pricing',0,2,this)"><span class="dot"></span>Frequently, 10 to 30 percent discounts are common</button>
+          <button class="opt" onclick="scoreQ('pricing',0,3,this)"><span class="dot"></span>Almost always, price is my main closing tool</button>
         </div>
       </div>
 
@@ -1383,10 +1384,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div class="q-num">Q2</div>
         <div class="q-text">How confident are you in your pricing strategy?</div>
         <div class="opt-grid">
-          <button class="opt" onclick="scoreQ('pricing',1,0,this)"><span class="dot"></span>Very confident — clear value positioning and premium rates</button>
-          <button class="opt" onclick="scoreQ('pricing',1,1,this)"><span class="dot"></span>Somewhat confident — room for improvement</button>
-          <button class="opt" onclick="scoreQ('pricing',1,2,this)"><span class="dot"></span>Unsure — pricing feels inconsistent or reactive</button>
-          <button class="opt" onclick="scoreQ('pricing',1,3,this)"><span class="dot"></span>Not confident — I rely on guesswork or market pressure</button>
+          <button class="opt" onclick="scoreQ('pricing',1,0,this)"><span class="dot"></span>Very confident, clear value positioning and premium rates</button>
+          <button class="opt" onclick="scoreQ('pricing',1,1,this)"><span class="dot"></span>Somewhat confident, room for improvement</button>
+          <button class="opt" onclick="scoreQ('pricing',1,2,this)"><span class="dot"></span>Unsure, pricing feels inconsistent or reactive</button>
+          <button class="opt" onclick="scoreQ('pricing',1,3,this)"><span class="dot"></span>Not confident, I rely on guesswork or market pressure</button>
         </div>
       </div>
 
@@ -1394,10 +1395,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div class="q-num">Q3</div>
         <div class="q-text">How do you currently structure your pricing?</div>
         <div class="opt-grid">
-          <button class="opt" onclick="scoreQ('pricing',2,0,this)"><span class="dot"></span>Value-based — outcomes and results driven</button>
-          <button class="opt" onclick="scoreQ('pricing',2,1,this)"><span class="dot"></span>Hybrid — value plus time considerations</button>
-          <button class="opt" onclick="scoreQ('pricing',2,2,this)"><span class="dot"></span>Time-based — hourly or effort-based rates</button>
-          <button class="opt" onclick="scoreQ('pricing',2,3,this)"><span class="dot"></span>No structured model — I price reactively</button>
+          <button class="opt" onclick="scoreQ('pricing',2,0,this)"><span class="dot"></span>Value-based, outcomes and results driven</button>
+          <button class="opt" onclick="scoreQ('pricing',2,1,this)"><span class="dot"></span>Hybrid, value plus time considerations</button>
+          <button class="opt" onclick="scoreQ('pricing',2,2,this)"><span class="dot"></span>Time-based, hourly or effort-based rates</button>
+          <button class="opt" onclick="scoreQ('pricing',2,3,this)"><span class="dot"></span>No structured model, I price reactively</button>
         </div>
       </div>
 
@@ -1439,10 +1440,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div class="q-num">Q3</div>
         <div class="q-text">How dependent is your business on you personally?</div>
         <div class="opt-grid">
-          <button class="opt" onclick="scoreQ('time',2,0,this)"><span class="dot"></span>Low — team runs operations independently</button>
-          <button class="opt" onclick="scoreQ('time',2,1,this)"><span class="dot"></span>Moderate — some key decisions require me</button>
-          <button class="opt" onclick="scoreQ('time',2,2,this)"><span class="dot"></span>High — most things need my input or approval</button>
-          <button class="opt" onclick="scoreQ('time',2,3,this)"><span class="dot"></span>Total dependence — nothing moves without me</button>
+          <button class="opt" onclick="scoreQ('time',2,0,this)"><span class="dot"></span>Low, team runs operations independently</button>
+          <button class="opt" onclick="scoreQ('time',2,1,this)"><span class="dot"></span>Moderate, some key decisions require me</button>
+          <button class="opt" onclick="scoreQ('time',2,2,this)"><span class="dot"></span>High, most things need my input or approval</button>
+          <button class="opt" onclick="scoreQ('time',2,3,this)"><span class="dot"></span>Total dependence, nothing moves without me</button>
         </div>
       </div>
 
@@ -1462,10 +1463,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div class="q-num">Q1</div>
         <div class="q-text">How well do you track your financial performance?</div>
         <div class="opt-grid">
-          <button class="opt" onclick="scoreQ('systems',0,0,this)"><span class="dot"></span>Fully tracked — clear KPIs, dashboards, reviewed weekly</button>
-          <button class="opt" onclick="scoreQ('systems',0,1,this)"><span class="dot"></span>Partially tracked — some metrics monitored monthly</button>
-          <button class="opt" onclick="scoreQ('systems',0,2,this)"><span class="dot"></span>Occasionally reviewed — not consistent</button>
-          <button class="opt" onclick="scoreQ('systems',0,3,this)"><span class="dot"></span>Not tracked — I avoid looking at the numbers</button>
+          <button class="opt" onclick="scoreQ('systems',0,0,this)"><span class="dot"></span>Fully tracked, clear KPIs, dashboards, reviewed weekly</button>
+          <button class="opt" onclick="scoreQ('systems',0,1,this)"><span class="dot"></span>Partially tracked, some metrics monitored monthly</button>
+          <button class="opt" onclick="scoreQ('systems',0,2,this)"><span class="dot"></span>Occasionally reviewed, not consistent</button>
+          <button class="opt" onclick="scoreQ('systems',0,3,this)"><span class="dot"></span>Not tracked, I avoid looking at the numbers</button>
         </div>
       </div>
 
@@ -1473,10 +1474,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div class="q-num">Q2</div>
         <div class="q-text">How systemised is your business?</div>
         <div class="opt-grid">
-          <button class="opt" onclick="scoreQ('systems',1,0,this)"><span class="dot"></span>Highly systemised — SOPs, automation, repeatable processes</button>
-          <button class="opt" onclick="scoreQ('systems',1,1,this)"><span class="dot"></span>Moderately systemised — some structure in place</button>
-          <button class="opt" onclick="scoreQ('systems',1,2,this)"><span class="dot"></span>Low systemisation — mostly manual processes</button>
-          <button class="opt" onclick="scoreQ('systems',1,3,this)"><span class="dot"></span>No systems — everything is reactive</button>
+          <button class="opt" onclick="scoreQ('systems',1,0,this)"><span class="dot"></span>Highly systemised, SOPs, automation, repeatable processes</button>
+          <button class="opt" onclick="scoreQ('systems',1,1,this)"><span class="dot"></span>Moderately systemised, some structure in place</button>
+          <button class="opt" onclick="scoreQ('systems',1,2,this)"><span class="dot"></span>Low systemisation, mostly manual processes</button>
+          <button class="opt" onclick="scoreQ('systems',1,3,this)"><span class="dot"></span>No systems, everything is reactive</button>
         </div>
       </div>
 
@@ -1484,10 +1485,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div class="q-num">Q3</div>
         <div class="q-text">How scalable is your current operation?</div>
         <div class="opt-grid">
-          <button class="opt" onclick="scoreQ('systems',2,0,this)"><span class="dot"></span>Highly scalable — can grow without major structural changes</button>
-          <button class="opt" onclick="scoreQ('systems',2,1,this)"><span class="dot"></span>Somewhat scalable — needs improvement before scaling</button>
-          <button class="opt" onclick="scoreQ('systems',2,2,this)"><span class="dot"></span>Difficult to scale — requires heavy effort and rework</button>
-          <button class="opt" onclick="scoreQ('systems',2,3,this)"><span class="dot"></span>Not scalable — growth creates chaos</button>
+          <button class="opt" onclick="scoreQ('systems',2,0,this)"><span class="dot"></span>Highly scalable, can grow without major structural changes</button>
+          <button class="opt" onclick="scoreQ('systems',2,1,this)"><span class="dot"></span>Somewhat scalable, needs improvement before scaling</button>
+          <button class="opt" onclick="scoreQ('systems',2,2,this)"><span class="dot"></span>Difficult to scale, requires heavy effort and rework</button>
+          <button class="opt" onclick="scoreQ('systems',2,3,this)"><span class="dot"></span>Not scalable, growth creates chaos</button>
         </div>
       </div>
 
@@ -1698,8 +1699,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             <span class="cdc-hdr-icon">🎁</span>
             <div class="cdc-hdr-text">
               <strong>Your Free Cheatsheet Is Ready</strong>
-              <span>Included with your audit — valued at $47</span>
+              <span>Included with your audit, valued at $47</span>
             </div>
+          </div>
+          <div class="cdc-title-row">
+            <div class="cdc-name">The 7 Hidden Money Patterns That Keep You Working Hard But Not Getting Rich</div>
           </div>
           <div class="cdc-body">
             <img
@@ -1707,11 +1711,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
               src="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/69f1912ab07f8_square-mmo-ads.png"
               alt="The 7 Hidden Money Patterns Cheatsheet"
             >
-            <div class="cdc-info">
-              <div class="cdc-name">The 7 Hidden Money Patterns That Keep You Working Hard But Not Getting Rich</div>
-              <div class="cdc-why">Open Blueprint #<span id="bpNumMob">1</span> first — it explains exactly why your primary leak keeps happening.</div>
-              <div class="cdc-personalized" id="buDescMob"></div>
-            </div>
+            <div class="cdc-personalized" id="buDescMob">Open Blueprint #<span id="bpNumMob">1</span> in your cheatsheet for your specific pattern and the immediate action step to break it.</div>
           </div>
           <div class="cdc-footer">
             <a
@@ -1796,14 +1796,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         </div>
       </div>
 
-      <!-- Combined cheatsheet card — prominent, unified -->
+      <!-- Combined cheatsheet card, prominent, unified -->
       <div class="cdc">
         <div class="cdc-hdr">
           <span class="cdc-hdr-icon">🎁</span>
           <div class="cdc-hdr-text">
             <strong>Your Free Cheatsheet Is Ready</strong>
-            <span>Included with your audit — valued at $47</span>
+            <span>Included with your audit, valued at $47</span>
           </div>
+        </div>
+        <div class="cdc-title-row">
+          <div class="cdc-name">The 7 Hidden Money Patterns That Keep You Working Hard But Not Getting Rich</div>
         </div>
         <div class="cdc-body">
           <img
@@ -1811,11 +1814,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             src="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/69f1912ab07f8_square-mmo-ads.png"
             alt="The 7 Hidden Money Patterns Cheatsheet"
           >
-          <div class="cdc-info">
-            <div class="cdc-name">The 7 Hidden Money Patterns That Keep You Working Hard But Not Getting Rich</div>
-            <div class="cdc-why">Each pattern includes a key insight and immediate action step. Open Blueprint #<span id="bpNum">1</span> first — it explains exactly why your primary leak keeps happening.</div>
-            <div class="cdc-personalized" id="buDesc"></div>
-          </div>
+          <div class="cdc-personalized" id="buDesc">Open Blueprint #<span id="bpNum">1</span> in your cheatsheet for your specific pattern and the immediate action step to break it.</div>
         </div>
         <div class="cdc-footer">
           <a
@@ -1860,7 +1859,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 /* State */
 const state={
   size:null,rev:null,profit:null,industry:'other',goal:null,timeline:'asap',
-  /* Weighted scoring — 3 questions scored 0-3 (max 9 per category) */
+  /* Weighted scoring, 3 questions scored 0-3 (max 9 per category) */
   pricingQ:[null,null,null], pricingScore:0,
   timeQ:   [null,null,null], timeScore:0,
   systemsQ:[null,null,null], systemsScore:0,
@@ -1925,7 +1924,7 @@ function refreshBtns(){
   const s8=document.getElementById('s8Next');if(s8)s8.disabled=!(state.invest&&state.hold);
 }
 
-/* Weighted diagnostic scoring — called by premium question buttons */
+/* Weighted diagnostic scoring, called by premium question buttons */
 function scoreQ(cat, qIdx, score, el){
   /* Deselect siblings in same question group */
   el.closest('.opt-grid').querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
@@ -1963,7 +1962,7 @@ function calc(){
   const bases={solo:95000,'2-5':170000,'6-10':300000,'11-25':460000,'26-50':700000,'51-100':1000000,'100+':1350000,employee:70000};
   const revM={u50:.55,'50-100':.75,'100-250':1.0,'250-500':1.25,'500k-1m':1.5,'1m-5m':1.8,'5m+':2.3};
   const base=(bases[state.size]||120000)*(revM[state.rev]||1.0);
-  /* Use weighted scores (0-9) from premium questions — max 9 per category (3 Qs × 3 pts) */
+  /* Use weighted scores (0-9) from premium questions, max 9 per category (3 Qs × 3 pts) */
   const pScore=Math.max(0,state.pricingScore);
   const tScore=Math.max(0,state.timeScore);
   const sScore=Math.max(0,state.systemsScore);
@@ -2105,7 +2104,7 @@ const QUICK_WINS={
 };
 
 /* ============================================================
-   BONUS CHEATSHEET DESCRIPTIONS — personalised per blueprint
+   BONUS CHEATSHEET DESCRIPTIONS, personalised per blueprint
    Tells the person exactly how the cheatsheet helps THEM
    ============================================================ */
 const BONUS_DESC={
@@ -2315,7 +2314,7 @@ setTimeout(showToast, 4000);
 setInterval(showToast, 15000 + Math.random()*5000);
 
 /* ============================================================
-   RESULT PAGE TOASTS — MMI Hybrid signups
+   RESULT PAGE TOASTS, MMI Hybrid signups
    ============================================================ */
 const RESULT_TOASTS=[
   {init:'SL',name:'Sarah L.',loc:'Singapore',msg:'Just claimed her spot at Millionaire Mind Hybrid',ago:'just now'},
@@ -2451,7 +2450,7 @@ function buildReportHTML(d){
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Money Leak Audit Report — ${esc(name)}</title>
+<title>Money Leak Audit Report, ${esc(name)}</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
