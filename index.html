@@ -126,7 +126,33 @@ a{color:var(--gold);text-decoration:none}
 .mob-cs{display:none}
 @media(max-width:760px){
   .mob-cs{display:block;margin-top:18px}
+  /* Extra bottom padding so sticky bar doesn't cover content */
+  #landing{padding-bottom:72px}
 }
+
+/* ── Mobile sticky bottom — cheatsheet reminder ─────────────── */
+.sticky-cheatsheet{
+  display:none; /* desktop hidden */
+  position:fixed;
+  bottom:0;left:0;right:0;
+  background:var(--green);
+  padding:10px 16px;
+  z-index:800;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 -4px 20px rgba(0,0,0,.2);
+  transform:translateY(110%);
+  transition:transform .35s cubic-bezier(.34,1.3,.64,1);
+  border-top:2px solid var(--gold);
+}
+.sticky-cheatsheet.sc-show{transform:translateY(0)}
+@media(max-width:760px){.sticky-cheatsheet{display:flex}}
+.sc-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.sc-icon{font-size:22px;flex-shrink:0}
+.sc-text strong{display:block;font-size:13px;font-weight:800;color:#fff;line-height:1.2}
+.sc-text span{display:block;font-size:10.5px;color:rgba(255,255,255,.55);margin-top:1px}
+.sc-btn{background:var(--gold);color:var(--green);font-family:'Inter',sans-serif;font-size:13px;font-weight:800;padding:10px 18px;border-radius:7px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background .12s}
+.sc-btn:hover{background:var(--gold-l)}
 
 /* Coffee image top */
 .hero-coffee-img{border-radius:14px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 6px 28px rgba(28,56,41,.12)}
@@ -903,7 +929,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             </div>
 
             <!-- Mobile only: cheatsheet card shown below trust bar -->
-            <div class="mob-cs">
+            <div class="mob-cs" id="cheatsheet-anchor">
               <div class="cs-card">
                 <div class="cs-top">
                   <img
@@ -1240,6 +1266,18 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <a href="https://docs.google.com/document/d/1KRQtEB5kVMEXTPBv_0IJW4sFa11wmoqM3FqyJNyKtOw/edit?tab=t.0#heading=h.nnnowla2e0uw" target="_blank">Cookies Policy</a>
     </p>
     <p style="margin-top:6px">Copyright 2026 Success Resources. All Rights Reserved.</p>
+  </div>
+
+  <!-- Mobile sticky bottom — cheatsheet reminder (mobile only) -->
+  <div class="sticky-cheatsheet" id="stickyCheatsheet">
+    <div class="sc-left">
+      <span class="sc-icon">🎁</span>
+      <div class="sc-text">
+        <strong>Your Free Cheatsheet Is Ready</strong>
+        <span>The 7 Hidden Money Patterns — $47 value</span>
+      </div>
+    </div>
+    <button class="sc-btn" onclick="scrollToCheatsheet()">View It &nbsp;↓</button>
   </div>
 
 </div><!-- /landing -->
@@ -1912,7 +1950,12 @@ function show(id){
   }
   window.scrollTo(0,0);
 }
-function startQuiz(){show('quiz');go(1)}
+function startQuiz(){
+  show('quiz');go(1);
+  /* Hide sticky bar when quiz starts */
+  const bar=document.getElementById('stickyCheatsheet');
+  if(bar) bar.classList.remove('sc-show');
+}
 
 /* Step navigation */
 function go(n){
@@ -1981,10 +2024,120 @@ function toggle(el){
 /* Run analysis */
 function runAnalyze(){
   show('analyzing');
+  /* Send all data to Zapier (fires and forgets, never blocks the UI) */
+  sendToZapier();
   const ids=['as1','as2','as3','as4'];
   ids.forEach(id=>{const e=document.getElementById(id);e.classList.remove('on','done');e.querySelector('.a-icon').textContent=ids.indexOf(id)+1;});
   let i=0;
   (function tick(){if(i>0){const p=document.getElementById(ids[i-1]);p.classList.remove('on');p.classList.add('done');p.querySelector('.a-icon').textContent='✓';}if(i<ids.length){document.getElementById(ids[i]).classList.add('on');i++;setTimeout(tick,680);}else{setTimeout(()=>{renderResults();show('results');setTimeout(animateBars,400);},550);}})();
+}
+
+/* ============================================================
+   MOBILE STICKY CHEATSHEET BAR
+   Appears after scrolling 300px on landing page
+   ============================================================ */
+(function initStickyCheatsheet(){
+  const bar=document.getElementById('stickyCheatsheet');
+  if(!bar) return;
+  let lastY=0;
+  window.addEventListener('scroll',function(){
+    const landing=document.getElementById('landing');
+    /* Only show on landing page */
+    if(!landing||landing.classList.contains('hidden')){
+      bar.classList.remove('sc-show');return;
+    }
+    const y=window.scrollY;
+    /* Show after scrolling 300px down */
+    if(y>300) bar.classList.add('sc-show');
+    else      bar.classList.remove('sc-show');
+    lastY=y;
+  },{passive:true});
+})();
+
+function scrollToCheatsheet(){
+  const target=document.getElementById('cheatsheet-anchor');
+  if(target){
+    target.scrollIntoView({behavior:'smooth',block:'center'});
+    /* Briefly highlight the card */
+    setTimeout(()=>{
+      target.style.transition='box-shadow .3s';
+      target.style.boxShadow='0 0 0 3px var(--gold)';
+      setTimeout(()=>target.style.boxShadow='',1200);
+    },600);
+  }
+}
+
+/* ============================================================
+   ZAPIER WEBHOOK — sends all quiz data to Excel via Zap
+   https://hooks.zapier.com/hooks/catch/3673966/u7ipolm/
+   ============================================================ */
+function sendToZapier(){
+  const r=calc();
+  const sizeLabels={solo:'Solopreneur',employee:'Employee','2-5':'Small Team (2-5)','6-10':'Small Team (6-10)','11-25':'Growing (11-25)','26-50':'Growing (26-50)','51-100':'Established (51-100)','100+':'Enterprise (100+)'};
+  const revLabels={u50:'Under $300K','50-100':'$50K-$100K','100-250':'$100K-$250K','250-500':'$250K-$500K','500k-1m':'$500K-$1M','1m-5m':'$1M-$5M','5m+':'$5M+'};
+  const bpLabels={worker:'The Hard Worker',pleasure:'The Pleasure Seeker',hoarder:'The Saver',avoider:'The Avoider',resister:'The Money Monk',chaser:'The Gambler',worthy:'The Idolizer'};
+  const now=new Date();
+
+  const payload={
+    /* Contact */
+    first_name:       state.firstName,
+    last_name:        state.lastName,
+    email:            state.email,
+    phone:            state.phone,
+    submitted_at:     now.toISOString(),
+    submitted_date:   now.toLocaleDateString('en-GB'),
+    submitted_time:   now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),
+
+    /* Business profile */
+    business_stage:   sizeLabels[state.size]||state.size,
+    annual_revenue:   revLabels[state.rev]||state.rev,
+    profit_consistency: state.profit||'',
+    goal:             state.goal||'',
+    currency:         userCurrency.sym.trim(),
+
+    /* Diagnostic scores (0-9 each) */
+    pricing_score:    state.pricingScore,
+    time_score:       state.timeScore,
+    systems_score:    state.systemsScore,
+    commitment:       state.commit,
+
+    /* Individual question answers */
+    pricing_q1:       state.pricingQ[0],
+    pricing_q2:       state.pricingQ[1],
+    pricing_q3:       state.pricingQ[2],
+    time_q1:          state.timeQ[0],
+    time_q2:          state.timeQ[1],
+    time_q3:          state.timeQ[2],
+    systems_q1:       state.systemsQ[0],
+    systems_q2:       state.systemsQ[1],
+    systems_q3:       state.systemsQ[2],
+
+    /* Blueprint */
+    blueprint_pattern: bpLabels[state.bp]||state.bp,
+    worth_statement:   state.worth||'',
+    investment_history:state.invest||'',
+    holding_back:      state.hold||'',
+
+    /* Calculated results */
+    primary_leak_type: r.primary,
+    total_leak_usd:    r.total,
+    total_leak_local:  fmtFull(r.total),
+    pricing_leak_usd:  r.p,
+    time_leak_usd:     r.t,
+    systems_leak_usd:  r.s,
+    blueprint_tax_usd: r.b,
+    leak_pct_of_revenue: r.leakPct,
+
+    /* Source */
+    source_url:       window.location.href,
+    user_agent:       navigator.userAgent.substring(0,120)
+  };
+
+  fetch('https://hooks.zapier.com/hooks/catch/3673966/u7ipolm/',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
+  }).catch(()=>{}); /* silent fail, never blocks the user */
 }
 
 /* Calc */
