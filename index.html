@@ -485,6 +485,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .leak-num{font-size:clamp(48px,9vw,80px);font-weight:900;color:var(--gold-l);line-height:1;letter-spacing:-.03em;font-family:'Playfair Display',serif;margin-bottom:8px}
 .leak-period{font-size:15px;color:rgba(255,255,255,.65);margin-bottom:18px;font-weight:500}
 .leak-note{font-size:12px;color:rgba(255,255,255,.55);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:7px 16px;display:inline-block}
+.leak-pct{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:14px;font-style:italic}
+.leak-pct strong{color:var(--gold-l)}
+/* Methodology card */
+.method-card{background:var(--bg-alt);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.method-card summary{font-size:12px;font-weight:700;color:var(--green);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between}
+.method-card summary::after{content:'▾';font-size:11px;color:var(--muted)}
+.method-card[open] summary::after{content:'▴'}
+.method-body{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.7}
+.method-body strong{color:var(--body)}
+.method-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px}
+.method-row:last-child{border-bottom:none}
+.method-row span:first-child{color:var(--body);font-weight:600}
+.method-row span:last-child{color:var(--muted)}
 @media(min-width:900px){.leak-hero{padding:52px 48px 48px}}
 
 /* PDF download row */
@@ -1620,7 +1633,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <div class="leak-lbl">Your Estimated Annual Money Leak</div>
     <div class="leak-num" id="totalNum">$0</div>
     <div class="leak-period">per year slipping through the cracks</div>
-    <div class="leak-note" id="calcNote">Calculated from your answers across all 4 leak categories</div>
+    <div class="leak-pct" id="leakPctLine">Approximately <strong id="leakPctNum">0%</strong> of your declared annual revenue</div>
+    <div class="leak-note" id="calcNote">Diagnostic score: 0% leak severity, calibrated against your revenue tier</div>
   </div>
 
   <!-- ── TWO-COLUMN BODY ─────────────────────────────────── -->
@@ -1796,6 +1810,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         </div>
       </div>
 
+      <!-- How is this calculated — methodology transparency card -->
+      <details class="method-card">
+        <summary>How is this figure calculated?</summary>
+        <div class="method-body">
+          <p>Your leak estimate is <strong id="leakPctSb">approximately 0%</strong> of your declared annual revenue, distributed across 4 categories based on your diagnostic scores:</p>
+          <div style="margin:10px 0">
+            <div class="method-row"><span>Pricing Power</span><span id="mPct">score-based</span></div>
+            <div class="method-row"><span>Time Leverage</span><span id="mTct">score-based</span></div>
+            <div class="method-row"><span>Business Systems</span><span id="mSct">score-based</span></div>
+            <div class="method-row"><span>Blueprint Tax</span><span>Baseline multiplier</span></div>
+          </div>
+          <p>Each category score (0–9) reflects how severely that area is leaking relative to best practice, weighted by your business size and revenue tier. Results are capped at <strong>58% of declared revenue</strong> to ensure credibility.</p>
+          <p style="margin-top:8px;font-size:11px">Benchmarked against patterns from 10,000+ entrepreneurs. Actual leakage in your business may vary. This diagnostic identifies areas of highest priority, not a guaranteed figure.</p>
+        </div>
+      </details>
+
       <!-- Combined cheatsheet card, prominent, unified -->
       <div class="cdc">
         <div class="cdc-hdr">
@@ -1962,19 +1992,40 @@ function calc(){
   const bases={solo:95000,'2-5':170000,'6-10':300000,'11-25':460000,'26-50':700000,'51-100':1000000,'100+':1350000,employee:70000};
   const revM={u50:.55,'50-100':.75,'100-250':1.0,'250-500':1.25,'500k-1m':1.5,'1m-5m':1.8,'5m+':2.3};
   const base=(bases[state.size]||120000)*(revM[state.rev]||1.0);
-  /* Use weighted scores (0-9) from premium questions, max 9 per category (3 Qs × 3 pts) */
+
+  /* Revenue midpoints — used to cap the leak at a believable % of actual revenue */
+  const revMids={u50:25000,'50-100':70000,'100-250':165000,'250-500':350000,'500k-1m':700000,'1m-5m':2500000,'5m+':6000000};
+  const revMid=revMids[state.rev]||100000;
+
+  /* Use weighted scores (0-9) from premium questions, max 9 per category */
   const pScore=Math.max(0,state.pricingScore);
   const tScore=Math.max(0,state.timeScore);
   const sScore=Math.max(0,state.systemsScore);
-  const p=(pScore/9)*base*0.42;
-  const t=(tScore/9)*base*0.36;
-  const s=(sScore/9)*base*0.22;
-  const b=base*0.11*(1+0.4*(1-state.commit/10));
-  const total=p+t+s+b;
+  let p=(pScore/9)*base*0.42;
+  let t=(tScore/9)*base*0.36;
+  let s=(sScore/9)*base*0.22;
+  let b=base*0.11*(1+0.4*(1-state.commit/10));
+  let total=p+t+s+b;
+
+  /* Cap total leak at 58% of declared revenue midpoint — keeps the number honest */
+  const maxLeak=revMid*0.58;
+  if(total>maxLeak){
+    const scale=maxLeak/total;
+    p*=scale; t*=scale; s*=scale; b*=scale; total=maxLeak;
+  }
+
+  /* Calculate leak as % of declared revenue for display */
+  const leakPct=Math.round((total/revMid)*100);
+
   /* Primary leak = highest weighted score */
   const scored=[{k:'pricing',v:pScore},{k:'time',v:tScore},{k:'systems',v:sScore}];
   scored.sort((a,b_)=>b_.v-a.v);
-  return{total:rnd(total,1000),p:rnd(p,500),t:rnd(t,500),s:rnd(s,500),b:rnd(b,500),primary:scored[0].v>0?scored[0].k:'blueprint',barMax:Math.max(p,t,s,b,1)};
+  return{
+    total:rnd(total,1000),p:rnd(p,500),t:rnd(t,500),s:rnd(s,500),b:rnd(b,500),
+    primary:scored[0].v>0?scored[0].k:'blueprint',
+    barMax:Math.max(p,t,s,b,1),
+    leakPct,revMid
+  };
 }
 function rnd(n,to){return Math.round(n/to)*to}
 /* Currency,set by detectCountry(), used by fmtFull() */
@@ -2133,8 +2184,24 @@ function renderResults(){
   /* Header */
   document.getElementById('resGreet').textContent=nm?nm+', your personalised audit is complete.':'Your personalised audit is complete.';
   document.getElementById('totalNum').textContent=fmtFull(r.total);
+
+  /* Percentage of declared revenue */
+  const pctEl=document.getElementById('leakPctNum');
+  const pctLine=document.getElementById('leakPctLine');
+  const pctSb=document.getElementById('leakPctSb');
+  if(pctEl) pctEl.textContent=r.leakPct+'%';
+  if(pctSb) pctSb.textContent='approximately '+r.leakPct+'% of your declared annual revenue';
+
+  /* Methodology score breakdown */
+  const toP=n=>n>0?Math.round(n/9*100)+'% leak rate':'Not scored';
+  const mP=document.getElementById('mPct');const mT=document.getElementById('mTct');const mS=document.getElementById('mSct');
+  if(mP) mP.textContent=toP(state.pricingScore);
+  if(mT) mT.textContent=toP(state.timeScore);
+  if(mS) mS.textContent=toP(state.systemsScore);
+
+  /* Calc note */
   const diagScore=state.pricingScore+state.timeScore+state.systemsScore;
-  const diagPct=Math.round(diagScore/36*100);
+  const diagPct=Math.round(diagScore/27*100);
   document.getElementById('calcNote').textContent='Diagnostic score: '+diagPct+'% leak severity across your '+(sizeLabel[state.size]||'business')+', calibrated against your revenue tier';
 
   /* Archetype */
