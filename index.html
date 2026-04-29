@@ -675,8 +675,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
   /* Show mob-only bars (they're in the right place in the DOM) */
   .mob-only{display:block!important}
-  /* Hide mobile PDF/bonus inside mob-only (not needed in print) */
+  /* Hide mobile cheatsheet download + bonus in print */
   .mob-only .sb-pdf,
+  .mob-only a.sb-pdf,
   .mob-only .bonus-unlocked{display:none!important}
 
   /* ── SECTION SEPARATORS ─────────────────────────────────── */
@@ -1721,18 +1722,27 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.65">Three immediate actions based on your primary leak. Start this week.</p>
       <div id="quickWins"></div>
 
-      <!-- MOBILE ONLY: PDF download sits here, after quick wins -->
+      <!-- MOBILE ONLY: cheatsheet download sits here, after quick wins -->
       <div class="mob-only">
-        <div class="sb-pdf" onclick="downloadReport()" style="margin-bottom:10px">
-          <div class="sb-pdf-icon">&#128196;</div>
-          <div class="sb-pdf-text"><strong>Download PDF Report</strong><span>Your full audit, ready to save</span></div>
-          <button class="sb-pdf-btn">&#8681; Save</button>
-        </div>
+        <a
+          href="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/69f0c6239d589_7-money-blueprints.pdf"
+          target="_blank"
+          download="7-Money-Blueprints-Cheatsheet.pdf"
+          class="sb-pdf"
+          style="text-decoration:none;margin-bottom:10px;display:flex"
+        >
+          <div class="sb-pdf-icon">🎁</div>
+          <div class="sb-pdf-text">
+            <strong>Download Your Free Cheatsheet</strong>
+            <span>The 7 Hidden Money Patterns PDF</span>
+          </div>
+          <button class="sb-pdf-btn" style="pointer-events:none">&#8681; Get it</button>
+        </a>
         <div class="bonus-unlocked" style="margin-bottom:20px">
           <div class="bu-icon">&#127881;</div>
           <div style="flex:1;min-width:0">
-            <div class="bu-title">Bonus Unlocked, Check Your Email</div>
-            <div class="bu-sub">Your <strong>The 7 Hidden Money Patterns Cheatsheet</strong> ($47) is on its way to your inbox.</div>
+            <div class="bu-title">Also check your inbox</div>
+            <div class="bu-sub">We've sent your <strong>7 Money Blueprints Cheatsheet</strong> to your email too. Don't miss it.</div>
             <div class="bu-desc" id="buDescMob"></div>
           </div>
         </div>
@@ -1809,19 +1819,28 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         </div>
       </div>
 
-      <!-- PDF download -->
-      <div class="sb-pdf" onclick="downloadReport()">
-        <div class="sb-pdf-icon">&#128196;</div>
-        <div class="sb-pdf-text"><strong>Download PDF Report</strong><span>Your full audit, ready to save</span></div>
-        <button class="sb-pdf-btn">&#8681; Save</button>
-      </div>
+      <!-- Cheatsheet direct download -->
+      <a
+        href="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/69f0c6239d589_7-money-blueprints.pdf"
+        target="_blank"
+        download="7-Money-Blueprints-Cheatsheet.pdf"
+        class="sb-pdf"
+        style="text-decoration:none"
+      >
+        <div class="sb-pdf-icon">🎁</div>
+        <div class="sb-pdf-text">
+          <strong>Download Your Free Cheatsheet</strong>
+          <span>The 7 Hidden Money Patterns PDF</span>
+        </div>
+        <button class="sb-pdf-btn" style="pointer-events:none">&#8681; Get it</button>
+      </a>
 
       <!-- Bonus -->
       <div class="bonus-unlocked" style="margin-bottom:14px">
         <div class="bu-icon">&#127881;</div>
         <div style="flex:1;min-width:0">
-          <div class="bu-title">Bonus Unlocked, Check Your Email</div>
-          <div class="bu-sub">Your <strong>The 7 Hidden Money Patterns Cheatsheet</strong> ($47) is on its way to your inbox.</div>
+          <div class="bu-title">Also check your inbox</div>
+          <div class="bu-sub">We've sent your <strong>7 Money Blueprints Cheatsheet</strong> to your email too. Don't miss it.</div>
           <div class="bu-desc" id="buDesc"></div>
         </div>
       </div>
