@@ -654,9 +654,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .cdc-dl:hover{background:#a82828}
 .cdc-email{font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:5px}
 /* Pattern-matched testimonial inside cheatsheet card */
-.cdc-testi{background:rgba(28,56,41,.04);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:9px 11px;margin-top:10px;display:none}
-.cdc-testi-q{font-size:12px;color:var(--body);font-style:italic;line-height:1.65}
-.cdc-testi-a{font-size:11px;color:var(--muted);font-weight:700;margin-top:4px;font-style:normal}
+/* Testimonial sits BELOW the download button, inside the card */
+.cdc-testi{padding:12px 16px 14px;border-top:1px solid rgba(201,168,76,.18);display:none;background:rgba(28,56,41,.02)}
+.cdc-testi-q{font-size:12.5px;color:var(--body);font-style:italic;line-height:1.7;margin-bottom:7px}
+.cdc-testi-a{font-size:11px;color:var(--muted);font-weight:700;font-style:normal;display:flex;align-items:center;gap:7px}
+.cdc-testi-a::before{content:'';width:20px;height:1px;background:var(--border);display:inline-block;flex-shrink:0}
 
 /* Sidebar CTA card */
 .sb-cta{background:var(--green);border-radius:12px;padding:20px;margin-bottom:14px;text-align:center}
@@ -1762,10 +1764,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
               alt="The 7 Hidden Money Patterns Cheatsheet"
             >
             <div class="cdc-personalized" id="buDescMob">Open Blueprint #<span id="bpNumMob">1</span> in your cheatsheet for your specific pattern and the immediate action step to break it.</div>
-            <div class="cdc-testi" id="cdcTestiMob">
-              <div class="cdc-testi-q" id="cdcTestiQMob"></div>
-              <div class="cdc-testi-a" id="cdcTestiAMob"></div>
-            </div>
           </div>
           <div class="cdc-footer">
             <a
@@ -1775,6 +1773,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
               class="cdc-dl"
             >&#8681; Download Your Free Cheatsheet Now</a>
             <div class="cdc-email">📧 Also sent to your inbox</div>
+          </div>
+          <!-- Testimonial below button, inside the card -->
+          <div class="cdc-testi" id="cdcTestiMob">
+            <div class="cdc-testi-q" id="cdcTestiQMob"></div>
+            <div class="cdc-testi-a" id="cdcTestiAMob"></div>
           </div>
         </div>
       </div>
@@ -1885,10 +1888,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             alt="The 7 Hidden Money Patterns Cheatsheet"
           >
           <div class="cdc-personalized" id="buDesc">Open Blueprint #<span id="bpNum">1</span> in your cheatsheet for your specific pattern and the immediate action step to break it.</div>
-          <div class="cdc-testi" id="cdcTesti">
-            <div class="cdc-testi-q" id="cdcTestiQ"></div>
-            <div class="cdc-testi-a" id="cdcTestiA"></div>
-          </div>
         </div>
         <div class="cdc-footer">
           <a
@@ -1898,6 +1897,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             class="cdc-dl"
           >&#8681; Download Your Free Cheatsheet Now</a>
           <div class="cdc-email">📧 Also sent to your inbox</div>
+        </div>
+        <!-- Testimonial below the button, still inside the card -->
+        <div class="cdc-testi" id="cdcTesti">
+          <div class="cdc-testi-q" id="cdcTestiQ"></div>
+          <div class="cdc-testi-a" id="cdcTestiA"></div>
         </div>
       </div>
 
