@@ -1948,18 +1948,24 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 <script>
 /* State */
 /* ── UTM tracking — captured on page load ─────────────────── */
+/* Extracts only the VALUE after utm_source=, utm_medium= etc.  */
 const utm=(function(){
   const p=new URLSearchParams(window.location.search);
+  const get=k=>{const v=p.get(k);return v&&v.trim()?v.trim():''};
   return{
-    source:  p.get('utm_source')  ||'',
-    medium:  p.get('utm_medium')  ||'',
-    campaign:p.get('utm_campaign')||'',
-    content: p.get('utm_content') ||'',
-    term:    p.get('utm_term')    ||'',
-    referrer:document.referrer    ||'direct',
-    landing: window.location.href
+    source:   get('utm_source'),
+    medium:   get('utm_medium'),
+    campaign: get('utm_campaign'),
+    content:  get('utm_content'),
+    term:     get('utm_term'),
+    referrer: document.referrer||'direct',
+    landing:  window.location.origin+window.location.pathname  /* clean URL, no query string */
   };
 })();
+
+/* ── Country detection result (set by detectCountry below) ─── */
+let detectedCC='';       /* e.g. "MY" */
+let detectedCountry='';  /* e.g. "Malaysia" */
 
 const state={
   size:null,rev:null,profit:null,industry:'other',goal:null,timeline:'asap',
@@ -2188,17 +2194,17 @@ function sendToZapier(){
     blueprint_tax_usd: r.b,
     leak_pct_of_revenue: r.leakPct,
 
-    /* UTM tracking */
+    /* Geography */
+    country:      detectedCountry,
+    country_code: detectedCC,
+    /* UTM — values only, no keys */
     utm_source:   utm.source,
     utm_medium:   utm.medium,
     utm_campaign: utm.campaign,
     utm_content:  utm.content,
     utm_term:     utm.term,
     referrer:     utm.referrer,
-    landing_url:  utm.landing,
-    /* Source */
-    source_url:   window.location.href,
-    user_agent:   navigator.userAgent.substring(0,120)
+    landing_url:  utm.landing
   };
 
   /* Use application/x-www-form-urlencoded — no CORS preflight, most reliable for webhooks */
@@ -2559,7 +2565,12 @@ document.getElementById('commitSlider').addEventListener('input',function(){stat
   fetch('https://api.country.is/')
     .then(r=>r.json())
     .then(data=>{
-      const cc=data.country;
+      const cc=(data.country||'').toUpperCase();
+
+      /* 0. Store country for Zapier tracking */
+      detectedCC=cc;
+      const names={'SG':'Singapore','MY':'Malaysia','ID':'Indonesia','TH':'Thailand','TW':'Taiwan','HK':'Hong Kong','CN':'China','JP':'Japan','KR':'South Korea','PH':'Philippines','VN':'Vietnam','IN':'India','AU':'Australia','NZ':'New Zealand','GB':'United Kingdom','AE':'UAE','US':'United States','CA':'Canada','DE':'Germany','FR':'France'};
+      detectedCountry=names[cc]||cc;
 
       /* 1. Set phone prefix */
       const phone=phoneMap[cc];
