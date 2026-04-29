@@ -649,10 +649,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .cdc-body{padding:12px 16px;display:flex;gap:14px;align-items:flex-start}
 .cdc-img{width:88px;flex-shrink:0;border-radius:6px;box-shadow:4px 5px 16px rgba(0,0,0,.16);display:block}
 .cdc-personalized{font-size:12px;color:var(--body);line-height:1.65;background:rgba(201,168,76,.06);border-left:3px solid var(--gold);padding:9px 12px;border-radius:0 6px 6px 0;flex:1;min-width:0}
-.cdc-footer{padding:12px 16px;border-top:1px solid rgba(201,168,76,.2);display:flex;align-items:center;gap:10px}
-.cdc-dl{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--green);color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;padding:11px 0;border-radius:7px;text-decoration:none;transition:background .12s;flex:1}
-.cdc-dl:hover{background:var(--green2)}
-.cdc-email{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;white-space:nowrap}
+.cdc-footer{padding:14px 16px;border-top:1px solid rgba(201,168,76,.2);display:flex;flex-direction:column;gap:10px}
+.cdc-dl{display:flex;align-items:center;justify-content:center;gap:8px;background:#c53030;color:#fff;font-family:'Inter',sans-serif;font-size:15px;font-weight:800;padding:16px;border-radius:8px;text-decoration:none;transition:background .12s;width:100%;text-align:center}
+.cdc-dl:hover{background:#a82828}
+.cdc-email{font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:5px}
+/* Pattern-matched testimonial inside cheatsheet card */
+.cdc-testi{background:rgba(28,56,41,.04);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:9px 11px;margin-top:10px;display:none}
+.cdc-testi-q{font-size:12px;color:var(--body);font-style:italic;line-height:1.65}
+.cdc-testi-a{font-size:11px;color:var(--muted);font-weight:700;margin-top:4px;font-style:normal}
 
 /* Sidebar CTA card */
 .sb-cta{background:var(--green);border-radius:12px;padding:20px;margin-bottom:14px;text-align:center}
@@ -1758,6 +1762,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
               alt="The 7 Hidden Money Patterns Cheatsheet"
             >
             <div class="cdc-personalized" id="buDescMob">Open Blueprint #<span id="bpNumMob">1</span> in your cheatsheet for your specific pattern and the immediate action step to break it.</div>
+            <div class="cdc-testi" id="cdcTestiMob">
+              <div class="cdc-testi-q" id="cdcTestiQMob"></div>
+              <div class="cdc-testi-a" id="cdcTestiAMob"></div>
+            </div>
           </div>
           <div class="cdc-footer">
             <a
@@ -1765,7 +1773,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
               target="_blank"
               download="7-Money-Blueprints-Cheatsheet.pdf"
               class="cdc-dl"
-            >&#8681; Download PDF Now</a>
+            >&#8681; Download Your Free Cheatsheet Now</a>
             <div class="cdc-email">📧 Also sent to your inbox</div>
           </div>
         </div>
@@ -1877,6 +1885,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             alt="The 7 Hidden Money Patterns Cheatsheet"
           >
           <div class="cdc-personalized" id="buDesc">Open Blueprint #<span id="bpNum">1</span> in your cheatsheet for your specific pattern and the immediate action step to break it.</div>
+          <div class="cdc-testi" id="cdcTesti">
+            <div class="cdc-testi-q" id="cdcTestiQ"></div>
+            <div class="cdc-testi-a" id="cdcTestiA"></div>
+          </div>
         </div>
         <div class="cdc-footer">
           <a
@@ -1884,7 +1896,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             target="_blank"
             download="7-Money-Blueprints-Cheatsheet.pdf"
             class="cdc-dl"
-          >&#8681; Download PDF Now</a>
+          >&#8681; Download Your Free Cheatsheet Now</a>
           <div class="cdc-email">📧 Also sent to your inbox</div>
         </div>
       </div>
@@ -1931,6 +1943,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
      ============================================================ -->
 <script>
 /* State */
+/* ── UTM tracking — captured on page load ─────────────────── */
+const utm=(function(){
+  const p=new URLSearchParams(window.location.search);
+  return{
+    source:  p.get('utm_source')  ||'',
+    medium:  p.get('utm_medium')  ||'',
+    campaign:p.get('utm_campaign')||'',
+    content: p.get('utm_content') ||'',
+    term:    p.get('utm_term')    ||'',
+    referrer:document.referrer    ||'direct',
+    landing: window.location.href
+  };
+})();
+
 const state={
   size:null,rev:null,profit:null,industry:'other',goal:null,timeline:'asap',
   /* Weighted scoring, 3 questions scored 0-3 (max 9 per category) */
@@ -2158,9 +2184,17 @@ function sendToZapier(){
     blueprint_tax_usd: r.b,
     leak_pct_of_revenue: r.leakPct,
 
+    /* UTM tracking */
+    utm_source:   utm.source,
+    utm_medium:   utm.medium,
+    utm_campaign: utm.campaign,
+    utm_content:  utm.content,
+    utm_term:     utm.term,
+    referrer:     utm.referrer,
+    landing_url:  utm.landing,
     /* Source */
-    source_url:       window.location.href,
-    user_agent:       navigator.userAgent.substring(0,120)
+    source_url:   window.location.href,
+    user_agent:   navigator.userAgent.substring(0,120)
   };
 
   /* Use application/x-www-form-urlencoded — no CORS preflight, most reliable for webhooks */
@@ -2348,6 +2382,40 @@ const QUICK_WINS={
 };
 
 /* ============================================================
+   PATTERN-MATCHED TESTIMONIALS — Option C
+   ============================================================ */
+const CHEATSHEET_TESTI={
+  worker:{
+    q:'"I read Blueprint #1 three times. Each time I recognised another decision I had made from the same exhausting pattern. Two pages that reframed my entire business."',
+    a:'Marcus T., Agency Owner, Malaysia'
+  },
+  pleasure:{
+    q:'"Blueprint #2 showed me I had a spending pattern that reset every time my revenue went up. Recognised it immediately. Brutal and useful."',
+    a:'Rachel C., E-commerce Founder, Hong Kong'
+  },
+  hoarder:{
+    q:'"Blueprint #3 explained exactly why my bank account stayed full while my business stayed small. The upgrade section gave me one action I took the same week."',
+    a:'Priya M., Finance Professional, Singapore'
+  },
+  avoider:{
+    q:'"I already knew Blueprint #4 was mine before I finished the first paragraph. The part about avoidance being protection, not laziness, finally made it make sense."',
+    a:'Christine W., Consultant, Taiwan'
+  },
+  resister:{
+    q:'"Blueprint #5 was uncomfortable to read. It named the belief I had been hiding behind for 10 years. The upgrade at the bottom is the most important thing in the entire cheatsheet."',
+    a:'James W., Business Coach, Australia'
+  },
+  chaser:{
+    q:'"Blueprint #6 called me out completely. Crypto, new ideas, the next thing. Two pages to see the pattern. Two weeks to start changing it."',
+    a:'Ahmad M., Entrepreneur, Kuala Lumpur'
+  },
+  worthy:{
+    q:'"Blueprint #7 was hard to sit with. I have been building for the respect, not the freedom. Knowing that finally feels like something I can work with."',
+    a:'Sarah L., CEO, Singapore'
+  }
+};
+
+/* ============================================================
    BONUS CHEATSHEET DESCRIPTIONS, personalised per blueprint
    Tells the person exactly how the cheatsheet helps THEM
    ============================================================ */
@@ -2442,6 +2510,19 @@ function renderResults(){
   const bpNum=bpNumMap[bpKey]||1;
   ['buDesc','buDescMob'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=bonusDesc;});
   ['bpNum','bpNumMob'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=bpNum;});
+
+  /* Pattern-matched testimonial (Option C) */
+  const testi=CHEATSHEET_TESTI[bpKey];
+  if(testi){
+    [['cdcTestiQ','cdcTestiA','cdcTesti'],['cdcTestiQMob','cdcTestiAMob','cdcTestiMob']].forEach(([qId,aId,wId])=>{
+      const qEl=document.getElementById(qId);
+      const aEl=document.getElementById(aId);
+      const wEl=document.getElementById(wId);
+      if(qEl) qEl.textContent=testi.q;
+      if(aEl) aEl.textContent='— '+testi.a;
+      if(wEl) wEl.style.display='block';
+    });
+  }
 
   /* PDF meta */
   const dateStr=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
