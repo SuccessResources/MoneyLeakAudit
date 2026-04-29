@@ -122,12 +122,27 @@ a{color:var(--gold);text-decoration:none}
 .hero-right{display:flex;flex-direction:column;gap:12px}
 @media(max-width:760px){.hero-right{display:none}}
 
+/* ── Mobile cheatsheet (shown only on mobile, below the CTA) ── */
+.mob-cs{display:none}
+@media(max-width:760px){
+  .mob-cs{display:block;margin-top:18px}
+}
+
 /* Coffee image top */
-.hero-coffee-img{border-radius:14px;overflow:hidden;aspect-ratio:3/4;box-shadow:0 6px 28px rgba(28,56,41,.12);height:100%}
+.hero-coffee-img{border-radius:14px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 6px 28px rgba(28,56,41,.12)}
 .hero-coffee-img img{width:100%;height:100%;object-fit:cover;object-position:center 45%;display:block}
 
 /* Bottom grid: book + stacked cards */
-.hero-right-bottom{display:grid;grid-template-columns:88px 1fr;gap:10px;align-items:stretch}
+/* Redesigned cheatsheet bonus card — column layout */
+.cs-card{background:var(--cream);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.cs-top{display:flex;gap:12px;align-items:flex-start}
+.cs-img{width:80px;height:auto;flex-shrink:0;border-radius:6px;box-shadow:3px 5px 16px rgba(0,0,0,.15);display:block}
+.cs-body{flex:1;min-width:0}
+.cs-badge{font-size:10px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.cs-title{font-size:12.5px;font-weight:800;color:var(--green);line-height:1.4;margin-bottom:3px}
+.cs-sub{font-size:11px;color:var(--muted);font-style:italic;margin-bottom:10px}
+/* keep for fallback */
+.hero-right-bottom{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center}
 
 /* Cheatsheet book mockup */
 .cheatsheet-book{
@@ -821,19 +836,28 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
                ═══════════════════════════════════ -->
           <div class="hero-left">
 
+            <!-- Fix 1: badge → headline → interrupt (not interrupt above headline) -->
             <div class="attention-badge">⚠️ Attention Business Owners</div>
 
             <h1 class="hero-h1-new">Most Business Owners Are Losing 20–40% of Their Revenue Without Realising It</h1>
             <div class="headline-rule"></div>
 
-            <div class="info-bullet light">
-              <div class="ib-icon">🕐</div>
-              <p class="ib-text">This <strong>3-minute audit</strong> reveals exactly <strong>how much money</strong> your business is leaking every year, and where it's disappearing.</p>
-            </div>
+            <!-- Single clean sub-line replaces all the info bullets -->
+            <p style="font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:22px">
+              A <strong style="color:var(--body)">3-minute diagnostic</strong> that calculates your exact annual revenue leak across pricing, time, systems, and your money blueprint. Free, instant, personalised to your business.
+            </p>
 
-            <div class="info-bullet dark">
-              <div class="ib-icon">📊</div>
-              <p class="ib-text">Get your <strong>personalised annual loss figure</strong> based on your business size, revenue model, and habits.</p>
+            <!-- Simple deliverables — no box, just clean checks -->
+            <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:20px">
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--green)">
+                <span style="color:var(--grn);font-size:14px">✓</span> Your personalised annual loss figure
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--green)">
+                <span style="color:var(--grn);font-size:14px">✓</span> Your primary leak type identified
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--green)">
+                <span style="color:var(--grn);font-size:14px">✓</span> 3 specific actions you can take this week
+              </div>
             </div>
 
             <button class="hero-cta-new" onclick="startQuiz()">Calculate My Lost Revenue Now &nbsp;→</button>
@@ -841,9 +865,35 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             <div class="trust-bar">
               <span class="tb-item">✓ Free</span>
               <span class="tb-sep"></span>
-              <span class="tb-item">🕐 Takes 3 minutes</span>
+              <span class="tb-item">🕐 3 minutes</span>
               <span class="tb-sep"></span>
-              <span class="tb-item">⚡ Instant personalised result</span>
+              <span class="tb-item">⚡ Instant result</span>
+            </div>
+
+            <!-- Mobile only: cheatsheet card shown below trust bar -->
+            <div class="mob-cs">
+              <div class="cs-card">
+                <div class="cs-top">
+                  <img
+                    class="cs-img"
+                    src="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/69f1912ab07f8_square-mmo-ads.png"
+                    alt="The 7 Hidden Money Patterns Cheatsheet"
+                  >
+                  <div class="cs-body">
+                    <div class="cs-badge">🎁 Free Bonus</div>
+                    <div class="cs-title">The 7 Hidden Money Patterns That Keep You Working Hard But Not Getting Rich</div>
+                    <div class="cs-sub">With action steps to break each pattern</div>
+                  </div>
+                </div>
+                <div class="scarcity-block" style="margin:0">
+                  <div class="scarcity-header">
+                    <span>⏰</span><span>Only for first 100 submissions</span>
+                    <span class="scarcity-spots"><span id="spotsLeftMob">23</span> spots left</span>
+                  </div>
+                  <div class="scarcity-bar-wrap"><div class="scarcity-fill" id="scarcityFillMob" style="width:77%"></div></div>
+                  <div class="scarcity-detail"><span id="scarcityClaimedMob">77</span>/100 claimed &nbsp;·&nbsp; Filling fast</div>
+                </div>
+              </div>
             </div>
 
           </div><!-- /hero-left -->
@@ -853,14 +903,36 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
                ═══════════════════════════════════ -->
           <div class="hero-right">
 
-            <!-- Coffee image — fills full right column
-                 ★ Upload your green coffee cup photo to Kajabi Media Library
-                   then replace the src below with your CDN URL               -->
+            <!-- Coffee image -->
             <div class="hero-coffee-img">
               <img
-                src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=90"
+                src="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/69f1912ac317e_636e9e3f-9b3f-4af5-a2d9-6375c9d63536.png"
                 alt="3-minute business revenue diagnostic"
               >
+            </div>
+
+            <!-- Redesigned cheatsheet bonus card — unified, premium -->
+            <div class="cs-card">
+              <div class="cs-top">
+                <img
+                  class="cs-img"
+                  src="https://cch-files.edge.live.ds25.io/cch/v/a4e3489d-6bf3-48c8-affb-c268ba45a538/files/69f1912ab07f8_square-mmo-ads.png"
+                  alt="The 7 Hidden Money Patterns Cheatsheet"
+                >
+                <div class="cs-body">
+                  <div class="cs-badge">🎁 Free Bonus</div>
+                  <div class="cs-title">The 7 Hidden Money Patterns That Keep You Working Hard But Not Getting Rich</div>
+                  <div class="cs-sub">With action steps to break each pattern</div>
+                </div>
+              </div>
+              <div class="scarcity-block" style="margin:0">
+                <div class="scarcity-header">
+                  <span>⏰</span><span>Only for first 100 submissions</span>
+                  <span class="scarcity-spots"><span id="spotsLeft">23</span> spots left</span>
+                </div>
+                <div class="scarcity-bar-wrap"><div class="scarcity-fill" id="scarcityFill" style="width:77%"></div></div>
+                <div class="scarcity-detail"><span id="scarcityClaimed">77</span>/100 claimed &nbsp;·&nbsp; Filling fast</div>
+              </div>
             </div>
 
           </div><!-- /hero-right -->
@@ -960,6 +1032,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
             <div class="cqb-tag">The Real Difference</div>
             <div class="cqb-quote">"Two business owners. Same revenue.<br><em>One builds wealth. One wonders where it went."</em></div>
             <div class="cqb-sub">It's not discipline. It's not intelligence. It's not even how hard you work. Across 23 years and 1.5 million graduates, the single biggest predictor of financial outcomes is the <strong>unconscious money pattern running in the background.</strong> The difference is always the leak.</div>
+            <!-- Fix 3: CTA inside the dark band — catches people at their emotional peak -->
+            <button onclick="startQuiz()" style="display:inline-flex;align-items:center;gap:8px;margin-top:24px;background:var(--gold);color:var(--green);font-family:'Inter',sans-serif;font-size:15px;font-weight:800;padding:14px 28px;border-radius:8px;border:none;cursor:pointer;transition:opacity .15s">
+              Find Which Leak Is Costing You Most &nbsp;→
+            </button>
           </div>
           <div class="cqb-stats">
             <div><span class="cqb-num">1.5M+</span><span class="cqb-lbl">Graduates worldwide</span></div>
@@ -2182,14 +2258,10 @@ function localizeQuiz(){
   claimed = Math.min(claimed, 93);
 
   function update(n){
-    const el1=document.getElementById('scarcityClaimed');
-    const el2=document.getElementById('spotsLeft');
-    const el3=document.getElementById('scarcityFill');
-    const el4=document.getElementById('scarcityStep1'); /* Step 1 sync */
-    if(el1) el1.textContent=n;
-    if(el2) el2.textContent=100-n;
-    if(el3) el3.style.width=n+'%';
-    if(el4) el4.textContent=n;
+    ['scarcityClaimed','scarcityClaimedMob'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=n;});
+    ['spotsLeft','spotsLeftMob'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=100-n;});
+    ['scarcityFill','scarcityFillMob'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.width=n+'%';});
+    const el4=document.getElementById('scarcityStep1');if(el4)el4.textContent=n;
   }
 
   // Set initial value with a short delay so the bar animates in
