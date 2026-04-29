@@ -2163,11 +2163,21 @@ function sendToZapier(){
     user_agent:       navigator.userAgent.substring(0,120)
   };
 
+  /* Use application/x-www-form-urlencoded — no CORS preflight, most reliable for webhooks */
+  const params=new URLSearchParams();
+  Object.entries(payload).forEach(([k,v])=>params.append(k,v===null||v===undefined?'':String(v)));
+
   fetch('https://hooks.zapier.com/hooks/catch/3673966/u7ipolm/',{
     method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify(payload)
-  }).catch(()=>{}); /* silent fail, never blocks the user */
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:params.toString()
+  })
+  .then(r=>{
+    console.log('[Zapier] Webhook sent successfully, status:',r.status);
+  })
+  .catch(err=>{
+    console.warn('[Zapier] Webhook failed:',err);
+  });
 }
 
 /* Calc */
