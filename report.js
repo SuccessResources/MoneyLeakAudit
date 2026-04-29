@@ -421,12 +421,12 @@ body{
     <div class="cbox">
       <div class="cbox-h">Ready to seal these leaks permanently?</div>
       <p class="cbox-p">You have seen the number. You know the blueprint. You have your first three steps. The question now is how fast you want to seal it, and whether you want to do it alone or with 23 years of proven methodology behind you.</p>
-      <div class="cbox-l">Visit millionairemindworld.com &nbsp;&middot;&nbsp; Claim your spot at Millionaire Mind Hybrid</div>
+      <div class="cbox-l">Visit millionairemind.online/money &nbsp;&middot;&nbsp; Claim your spot at Millionaire Mind Hybrid</div>
     </div>
 
     <div class="so">
       <div class="so-h">Millionaire Mind Intensive</div>
-      <div class="so-s">T. Harv Eker &nbsp;&middot;&nbsp; Success Resources &nbsp;&middot;&nbsp; millionairemindworld.com</div>
+      <div class="so-s">T. Harv Eker &nbsp;&middot;&nbsp; Success Resources &nbsp;&middot;&nbsp; millionairemind.online/money</div>
       <div class="so-t">10 million attendees &nbsp;&middot;&nbsp; 30 countries &nbsp;&middot;&nbsp; 23 years</div>
     </div>
 
