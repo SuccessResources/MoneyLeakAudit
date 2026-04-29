@@ -2023,7 +2023,7 @@ function validateS1(){
   const fn=document.getElementById('fName').value.trim(),ln=document.getElementById('lName').value.trim(),em=document.getElementById('fEmail').value.trim();
   if(!fn||!ln||!em||!em.includes('@')){alert('Please fill in your first name, last name and a valid email address.');return;}
   state.firstName=fn;state.lastName=ln;state.email=em;
-  state.phone=document.getElementById('phoneCode').value+' '+document.getElementById('fPhone').value.trim();
+  state.phone=document.getElementById('phoneCode').value+document.getElementById('fPhone').value.trim();
   /* Wire CRM here: fetch('WEBHOOK',{method:'POST',body:JSON.stringify(state)}) */
   go(2);
 }
@@ -2194,9 +2194,17 @@ function sendToZapier(){
     blueprint_tax_usd: r.b,
     leak_pct_of_revenue: r.leakPct,
 
-    /* Geography */
-    country:      detectedCountry,
-    country_code: detectedCC,
+    /* Geography — use geolocation result, fall back to selected phone code */
+    country_code: (function(){
+      if(detectedCC) return detectedCC;
+      const phoneToCC={'+65':'SG','+60':'MY','+62':'ID','+66':'TH','+886':'TW',
+        '+852':'HK','+86':'CN','+81':'JP','+82':'KR','+63':'PH',
+        '+84':'VN','+91':'IN','+61':'AU','+64':'NZ','+44':'GB',
+        '+971':'AE','+1':'US','+49':'DE','+33':'FR'};
+      const pv=(document.getElementById('phoneCode')||{}).value||'';
+      return phoneToCC[pv]||'';
+    })(),
+    country: detectedCountry||detectedCC||'',
     /* UTM — values only, no keys */
     utm_source:   utm.source,
     utm_medium:   utm.medium,
